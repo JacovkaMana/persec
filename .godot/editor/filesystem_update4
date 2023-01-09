@@ -1,0 +1,6 @@
+res://Levels/game_level.tscn
+res://Scenes/UI.tscn
+res://Characters/NPS.tscn
+res://bullet.tscn
+res://Characters/NPSs.gd
+res://bullet.gd

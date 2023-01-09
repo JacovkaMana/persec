@@ -1,0 +1,25 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://c2mf3rnl1sf3q"]
+
+[ext_resource type="FontFile" uid="uid://elg45nre4hh7" path="res://Artwork/Fonts/Minecraftia-Regular.ttf" id="1_gb2wq"]
+[ext_resource type="FontFile" uid="uid://bv3p1twxqpx6p" path="res://Fonts/Minecraftia-Regular.ttf" id="1_ow8w3"]
+[ext_resource type="Texture2D" uid="uid://bowfprhvquwqo" path="res://Art/icon.png" id="2_qhdqw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5tkof"]
+
+[resource]
+default_font = ExtResource("1_gb2wq")
+/colors/blue = Color(0.0784314, 0.231373, 0.427451, 1)
+/colors/gray = Color(0.682353, 0.741176, 0.807843, 1)
+/constants/main = 2
+/font_sizes/main = 8
+/fonts/main = ExtResource("1_ow8w3")
+Label/colors/font_color = Color(0.333333, 0.392157, 0.490196, 1)
+Label/font_sizes/font_size = 8
+Label/fonts/font = ExtResource("1_ow8w3")
+TooltipLabel/colors/font_color = Color(0.333333, 0.392157, 0.490196, 1)
+TooltipLabel/font_sizes/font_size = 8
+TooltipLabel/icons/bg = ExtResource("2_qhdqw")
+TooltipPanel/base_type = &"AASD"
+TooltipPanel/colors/out = Color(0.388235, 0.133333, 0.196078, 1)
+TooltipPanel/font_sizes/dfg = 8
+TooltipPanel/styles/ASD = SubResource("StyleBoxEmpty_5tkof")
