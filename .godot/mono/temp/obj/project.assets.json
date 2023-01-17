@@ -92,11 +92,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "G:\\RL-TEST\\RoguelikeTest.csproj",
+      "projectUniqueName": "G:\\Persec\\RoguelikeTest.csproj",
       "projectName": "RoguelikeTest",
-      "projectPath": "G:\\RL-TEST\\RoguelikeTest.csproj",
+      "projectPath": "G:\\Persec\\RoguelikeTest.csproj",
       "packagesPath": "C:\\Users\\Jacov\\.nuget\\packages\\",
-      "outputPath": "G:\\RL-TEST\\.godot\\mono\\temp\\obj\\",
+      "outputPath": "G:\\Persec\\.godot\\mono\\temp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Users\\Jacov\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder",

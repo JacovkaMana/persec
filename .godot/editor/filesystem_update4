@@ -1,6 +1,7 @@
 res://Levels/game_level.tscn
-res://Scenes/UI.tscn
+res://Art/TileSets/dungeon.tres
 res://Characters/NPS.tscn
 res://bullet.tscn
-res://Characters/NPSs.gd
-res://bullet.gd
+res://Characters/player.tscn
+res://Scenes/UI.tscn
+res://Inventory/ItemButton.tscn

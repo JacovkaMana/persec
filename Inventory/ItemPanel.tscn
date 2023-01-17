@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://njg6hbyhmsuq"]
+
+[ext_resource type="Texture2D" uid="uid://uwo413opljiv" path="res://Art/UI/Border22_2.png" id="1_ux1fj"]
+[ext_resource type="Script" path="res://Scripts/UI_scripts/ItemSlotUI.gd" id="2_skksg"]
+[ext_resource type="Texture2D" uid="uid://mpbo6m8e0a1d" path="res://Art/UI/Item_Sword.png" id="3_bjo8y"]
+[ext_resource type="Texture2D" uid="uid://dh0n7nyhojqtb" path="res://Art/UI/Border22_Unused.png" id="4_mq5vh"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_36jid"]
+texture = ExtResource("1_ux1fj")
+region_rect = Rect2(0, 0, 22, 22)
+
+[node name="ItemPanel" type="Panel"]
+custom_minimum_size = Vector2i(22, 22)
+offset_right = 22.0
+offset_bottom = 22.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_36jid")
+script = ExtResource("2_skksg")
+
+[node name="Content" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ItemImage" type="TextureRect" parent="Content"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_bjo8y")
+
+[node name="InactiveBorder" type="TextureRect" parent="Content"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_mq5vh")

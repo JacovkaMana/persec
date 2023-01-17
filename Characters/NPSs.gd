@@ -19,7 +19,7 @@ var Projectiles: Node2D = null
 
 func _ready():
 	Projectiles = self.get_tree().get_root().get_node("game_level").find_child("Projectiles")
-	print(Projectiles)
+	#print(Projectiles)
 	
 	start_pos = self.position
 	
@@ -52,7 +52,7 @@ func _physics_process(_delta):
 func random_direction() -> void:
 	move_direction = Vector2(randi_range(-1,1), randi_range(-1,1))
 	last_direction_change = Time.get_ticks_msec()
-	print('random')
+	#print('random')
 	
 	var parent = self.get_parent()
 	var bullet = Bullet.instantiate()

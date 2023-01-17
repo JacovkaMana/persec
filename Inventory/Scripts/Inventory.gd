@@ -3,19 +3,16 @@ extends Resource
 
 
 signal moved_item_to_chest(item: Item, count: int)
-signal added_item(slot: InventoryItemSlotInfo, item: Item, count: int)
+signal added_item(item: Item)
+signal updated_item(item: Item)
 signal removed_item(slot: InventoryItemSlotInfo, item: Item, removed_count: int)
 signal equip_item_changed(slot_type: Enums.EEquipmentSlot, 
 		from_item_slot: InventoryItemSlotInfo, to_item_slot: InventoryItemSlotInfo)
 
 var _inventory: Array[Item]
 var _equipment: Dictionary = {
-	Enums.EEquipmentSlot.L_HAND_1: null,
-	Enums.EEquipmentSlot.L_HAND_2: null,
-	Enums.EEquipmentSlot.L_HAND_3: null,
-	Enums.EEquipmentSlot.R_HAND_1: null,
-	Enums.EEquipmentSlot.R_HAND_2: null,
-	Enums.EEquipmentSlot.R_HAND_3: null,
+	Enums.EEquipmentSlot.L_HAND: null,
+	Enums.EEquipmentSlot.R_HAND: null,
 	Enums.EEquipmentSlot.HELM: null,
 	Enums.EEquipmentSlot.ARMOR: null,
 	Enums.EEquipmentSlot.BOOTS: null,
@@ -31,20 +28,15 @@ var _equipment: Dictionary = {
 var _is_initialize: bool = false
 
 
-func add_item(item: Item, count: int)->InventoryItemSlotInfo:
-	#var item: Item = load(res_path) as Item
-	#if (item == null):
-	#	return null
-	
-	#var uid: int = ResourceLoader.get_resource_uid(res_path)
-	
-	#if item.is_stackable():
-	#	var stackable_item: BaseStackableItem = item
-	#	var slot: InventoryItemSlotInfo = _find_inventory_item_slot(uid)
+func add_item(item: Item, count: int = 1)->InventoryItemSlotInfo:
+
 	if (item.is_stackable() and item in _inventory):
 		_inventory[_inventory.find(item)].count += 1
+		emit_signal("updated_item", item)
 	else:
 		_inventory.append(item)
+		emit_signal("added_item", item)
+	
 	
 	return null
 	
@@ -60,66 +52,52 @@ func remove_item(item: Item, count: int)->bool:
 
 
 
-func set_equip_item(inventory_item_slot: InventoryItemSlotInfo)->bool:
-	if inventory_item_slot == null:
-		print("set_equip_item - Invalid InventoryItemSlotInfo!")
+func equip_item(item: Item)->bool:	
+	var item_type = item.get_item_type()
+	var slot_type = item.get_slot_type()[0]
+	print(slot_type)
+	
+	if slot_type not in _equipment.keys():
 		return false
 	
-	var item_type: Enums.EItemType = inventory_item_slot.get_item_info().get_item_type()
-	for slot_type in _equipment.keys():
-		if (item_type != get_item_type_by_slot_type(slot_type)):
-			continue
+	if _equipment[slot_type]:
+		var old_item = _equipment[slot_type]
+		add_item(old_item, 1)
 		
-		if (_equipment[slot_type] != null):
-			continue
-			
-		_equipment[slot_type] = inventory_item_slot
-		_equipment[slot_type].equipment_slot_type = slot_type
+	_equipment[slot_type] = item
 		
-		emit_signal("equip_item_changed", slot_type, null, _equipment[slot_type])
-		return true
-	
-	return false
-
-
-func set_equip_item_to_slot(inventory_item_slot: InventoryItemSlotInfo, 
-		equipment_slot: Enums.EEquipmentSlot)->bool:
-	if !_equipment.keys().has(equipment_slot):
-		print("set_equip_item_to_slot - Slot type ", equipment_slot, " is not found!")
-		return false
-	
-	var prev_slot: InventoryItemSlotInfo = _equipment[equipment_slot]
-	if prev_slot == inventory_item_slot:
-		print("set_equip_item_to_slot - This item \"", inventory_item_slot.get_item_info().ItemName, 
-				"\" was already added!")
-		return false
-	
-	if prev_slot != null:
-		clear_equip_slot(prev_slot.equipment_slot_type)
-	
-	if inventory_item_slot.equipment_slot_type != Enums.EEquipmentSlot.NONE:
-		clear_equip_slot(inventory_item_slot.equipment_slot_type)
-	
-	_equipment[equipment_slot] = inventory_item_slot
-	_equipment[equipment_slot].equipment_slot_type = equipment_slot
-		
-	emit_signal("equip_item_changed", equipment_slot, prev_slot, _equipment[equipment_slot])
+	emit_signal("equip_item_changed", slot_type, item)
 	return true
 
-
-func get_inventory_item_slot_by_element_type(equipment_slot: Enums.EEquipmentSlot)->InventoryItemSlotInfo:
-	if !_equipment.keys().has(equipment_slot):
-		print("get_inventory_item_slot_by_element_type - Slot type ", equipment_slot, " is not found!")
-		return null
+func unequip_slot(slot_type: Enums.EEquipmentSlot)->bool:	
 	
-	return _equipment[equipment_slot]
+	if _equipment[slot_type]:
+		var old_item = _equipment[slot_type]
+		add_item(old_item)
+		_equipment[slot_type] = null
+		emit_signal("equip_item_changed", slot_type, null)
+		return true
+		
+	else:
+		return false
+
+
 
 
 func get_equipments()->Dictionary:
 	return _equipment
 
 
+func get_equippments_slot(slot_type: Enums.EEquipmentSlot)->Dictionary:
+	return _equipment[slot_type]
+
+
+
 func get_inventory_items(item_type: Enums.EItemType)->Array: #[InventoryItemSlotInfo]:
+	return _inventory
+
+
+func get_inventory_items_by_type(item_type: Enums.EItemType)->Array: #[InventoryItemSlotInfo]:
 	var out: Array[Item]
 	for item in _inventory:
 		if item.get_item_type() == item_type:
@@ -127,55 +105,8 @@ func get_inventory_items(item_type: Enums.EItemType)->Array: #[InventoryItemSlot
 			out.append(item)
 	
 	return out
+	
 
-
-func clear_equip_slot(equipment_slot: Enums.EEquipmentSlot)->bool:
-	if !_equipment.keys().has(equipment_slot):
-		print("clear_equip_slot - Slot type ", equipment_slot, " is not found!")
-		return false
-		
-	var prev_slot: InventoryItemSlotInfo = _equipment[equipment_slot]
-	if (prev_slot == null):
-		print("clear_equip_slot - Slot already empty!")
-		return false
-	
-	prev_slot.equipment_slot_type = Enums.EEquipmentSlot.NONE
-	_equipment[equipment_slot] = null
-	
-	emit_signal("equip_item_changed", equipment_slot, prev_slot, null)
-	return true
-
-
-func get_item_type_by_slot_type(slot_type: Enums.EEquipmentSlot)->int: #Enums.EItemType:
-	if (slot_type == Enums.EEquipmentSlot.L_HAND_1 
-			or slot_type == Enums.EEquipmentSlot.L_HAND_2 
-			or slot_type == Enums.EEquipmentSlot.L_HAND_3 
-			or slot_type == Enums.EEquipmentSlot.R_HAND_1 
-			or slot_type == Enums.EEquipmentSlot.R_HAND_2 
-			or slot_type == Enums.EEquipmentSlot.R_HAND_3):
-		return Enums.EItemType.WEAPON
-	
-	if slot_type == Enums.EEquipmentSlot.HELM:
-		return Enums.EItemType.HELM
-	
-	if slot_type == Enums.EEquipmentSlot.ARMOR:
-		return Enums.EItemType.ARMOR
-	
-	if slot_type == Enums.EEquipmentSlot.BOOTS:
-		return Enums.EItemType.BOOTS
-	
-	if slot_type == Enums.EEquipmentSlot.AMULET:
-		return Enums.EItemType.AMULET
-	
-	if (slot_type == Enums.EEquipmentSlot.CONSUMABLE_1
-			or slot_type == Enums.EEquipmentSlot.CONSUMABLE_2
-			or slot_type == Enums.EEquipmentSlot.CONSUMABLE_3
-			or slot_type == Enums.EEquipmentSlot.CONSUMABLE_4
-			or slot_type == Enums.EEquipmentSlot.CONSUMABLE_5
-			or slot_type == Enums.EEquipmentSlot.CONSUMABLE_6):
-		return Enums.EItemType.CONSUMABLE
-	
-	return Enums.EItemType.ITEM
 
 
 

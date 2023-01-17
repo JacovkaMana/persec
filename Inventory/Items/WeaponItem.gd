@@ -22,10 +22,14 @@ extends BaseUndurableItem
 @export var dex_required: int
 @export var int_required: int
 
-
+func _init():
+	pass
 
 func get_item_type():
 	return Enums.EItemType.WEAPON
+	
+func get_slot_type():
+	return [Enums.EEquipmentSlot.R_HAND]
 
 func get_type_text()->String:
 	match self.weapon_type:

@@ -1,9 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://cioqlubmtphxd"]
+[gd_scene load_steps=5 format=3 uid="uid://cioqlubmtphxd"]
 
 [ext_resource type="Texture2D" uid="uid://6x7mcij135gd" path="res://icon.svg" id="1_xp260"]
 [ext_resource type="Script" path="res://bullet.gd" id="2_13um0"]
 
-[node name="Bullet" type="Sprite2D"]
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_eyvmk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m75mj"]
+size = Vector2(120, 120)
+
+[node name="Node2D" type="StaticBody2D"]
+z_index = 20
+collision_layer = 8
+collision_mask = 8
+physics_material_override = SubResource("PhysicsMaterial_eyvmk")
+script = ExtResource("2_13um0")
+
+[node name="Bullet" type="Sprite2D" parent="."]
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_xp260")
-script = ExtResource("2_13um0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.1, 0.1)
+shape = SubResource("RectangleShape2D_m75mj")
+debug_color = Color(0.890196, 0, 0.796078, 0.419608)

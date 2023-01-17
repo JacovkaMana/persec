@@ -9,11 +9,31 @@ extends CharacterBody2D
 
 func _ready():
 	update_animation_parameters(starting_direction)
+	
 	var test_item = WeaponItem.new()
-	inventory.add_item(test_item, 1)
-	inventory.add_item(test_item, 1)
-	print(inventory._inventory[0].count)
+	test_item.initialize(
+		'from player', 
+		'test'
+		)
+		
+	inventory.add_item(test_item)
+	inventory.add_item(test_item)
+	
+	var test_item_stackable = BaseStackableItem.new()
+	test_item_stackable.initialize(
+			'stackable item', 
+		'test'
+		)
+		
+	for i in range(5):
+		inventory.add_item(test_item_stackable)
+		
+
+
 	print(inventory.get_inventory_items(Enums.EItemType.WEAPON))
+	
+	inventory.equip_item(test_item)
+	print(inventory._equipment)
 
 func _physics_process(_delta):
 	var input_direction = Vector2(
@@ -25,7 +45,7 @@ func _physics_process(_delta):
 	move_and_slide()
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
-		print("I collided with ", collision)
+		#print("I collided with ", collision)
 	pick_new_state();
 
 func update_animation_parameters (move_input : Vector2):

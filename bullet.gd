@@ -1,4 +1,4 @@
-extends Sprite2D
+extends StaticBody2D
 
 var start_pos: Vector2
 var moving: bool = false
@@ -10,12 +10,21 @@ var direction: Vector2
 func _ready():
 	
 	start_pos = self.position
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if (moving):
-		position += direction * delta * move_speed
+		var collision_object = move_and_collide(direction*delta*move_speed)
+		if( is_instance_valid(collision_object)):
+			print(collision_object.get_collider())
+			#print(move_and_collide(direction*delta*move_speed))
+			self.queue_free()
+	
+	
+	#if( move_and_collide(direction*delta*move_speed):
+		#print('Collision 4')
 	
 func shoot(where: Vector2, speed:= 30):
 	moving = true

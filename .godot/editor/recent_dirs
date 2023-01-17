@@ -1,8 +1,9 @@
-res://
-res://Inventory
-res://Levels
-res://Scenes
+res://Art/UI/Styles
 res://Scripts/UI_scripts
 res://Art/UI
-res://Art/UI/Styles
+res://Art/TileSets
+res://Inventory
+res://
+res://Levels
+res://Scenes
 res://Fonts

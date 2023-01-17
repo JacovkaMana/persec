@@ -50,12 +50,8 @@ enum EItemEffectType {
 
 enum EEquipmentSlot {
 	NONE = 0,
-	L_HAND_1,
-	L_HAND_2,
-	L_HAND_3,
-	R_HAND_1,
-	R_HAND_2,
-	R_HAND_3,
+	L_HAND,
+	R_HAND,
 	HELM,
 	ARMOR,
 	BOOTS,
