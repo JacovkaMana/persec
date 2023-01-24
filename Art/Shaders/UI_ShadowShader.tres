@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cwiu31fr6bym"]
+
+[ext_resource type="Shader" path="res://Art/Shaders/UI_ShaderScript.gdshader" id="1_f8x3t"]
+[ext_resource type="Texture2D" uid="uid://cu3jr2f2r3xxu" path="res://Art/Shaders/noise_combined.png" id="2_gdo70"]
+
+[resource]
+shader = ExtResource("1_f8x3t")
+shader_parameter/alpha_color = null
+shader_parameter/main_color = Color(0.282353, 0.45098, 0.666667, 1)
+shader_parameter/noise_img = ExtResource("2_gdo70")
+shader_parameter/speed = 1.0

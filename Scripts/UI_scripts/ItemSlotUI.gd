@@ -20,6 +20,7 @@ func _on_gui_input(event):
 	#print('button down')
 	#print(event)
 	#print(event.is_pressed())
+	#print(event)
 	
 	if event is InputEventMouseButton:
 		if event.is_pressed():
@@ -37,7 +38,7 @@ func _on_gui_input(event):
 	
 	if event is InputEventMouseMotion and event.button_mask == 1:
 		follow_cursor(event.position)
-		#print(event)
+		
 		
 func on_left_click():
 	print("button leftclicked")

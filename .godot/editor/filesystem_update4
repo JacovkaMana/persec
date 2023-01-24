@@ -1,7 +1,12 @@
-res://Levels/game_level.tscn
+res://Scenes/UI.tscn
 res://Art/TileSets/dungeon.tres
-res://Characters/NPS.tscn
+res://Art/Shaders/SkillShader.tres
+res://Items/Data/ModifierScript.gd
+res://Inventory/Data/GlobalEnums.gd
+res://Levels/game_level.tscn
+res://Items/Scripts/WeaponItem.gd
 res://bullet.tscn
 res://Characters/player.tscn
-res://Scenes/UI.tscn
-res://Inventory/ItemButton.tscn
+res://Art/Shaders/UI_ShaderScript.gdshader
+res://Art/Shaders/UI_ShadowShader.tres
+res://Characters/player.gd

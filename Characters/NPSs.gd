@@ -18,6 +18,9 @@ var Projectiles: Node2D = null
 
 
 func _ready():
+	
+
+	
 	Projectiles = self.get_tree().get_root().get_node("game_level").find_child("Projectiles")
 	#print(Projectiles)
 	
@@ -50,15 +53,19 @@ func _physics_process(_delta):
 	#	select_new_direction()
 		
 func random_direction() -> void:
-	move_direction = Vector2(randi_range(-1,1), randi_range(-1,1))
+	#move_direction = Vector2(randi_range(-1,1), randi_range(-1,1))
 	last_direction_change = Time.get_ticks_msec()
 	#print('random')
 	
 	var parent = self.get_parent()
 	var bullet = Bullet.instantiate()
+	var bullet_rotation = Vector2(randi_range(-1,1), randi_range(-1,1))
 	bullet.global_position = self.global_position
+	bullet.rotation = bullet_rotation.angle() + PI/2
+	print(bullet_rotation.angle())
 	Projectiles.add_child(bullet)
-	bullet.shoot(Vector2(randi_range(-1,1), randi_range(-1,1)), randi_range(10,100))
+
+	bullet.shoot(bullet_rotation, randi_range(50,100))
 
 
 

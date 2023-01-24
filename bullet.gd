@@ -3,6 +3,8 @@ extends StaticBody2D
 var start_pos: Vector2
 var moving: bool = false
 var direction: Vector2
+@onready var animation_tree = $AnimationTree
+@onready var state_machine = animation_tree.get("parameters/playback")
 
 @export var move_speed : float = 30 
 @export var range: float
@@ -10,6 +12,7 @@ var direction: Vector2
 func _ready():
 	
 	start_pos = self.position
+	#print(animation_player)
 	
 
 
@@ -27,6 +30,7 @@ func _process(delta):
 		#print('Collision 4')
 	
 func shoot(where: Vector2, speed:= 30):
+	state_machine.travel("Start")
 	moving = true
 	direction = where
 	move_speed = speed

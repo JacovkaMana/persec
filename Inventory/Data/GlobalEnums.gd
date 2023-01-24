@@ -10,13 +10,29 @@ enum EWeaponSubtype {
 	FISTS,
 }
 
+enum ERarity {
+	Common,
+	Uncommon,
+	Rare,
+	Epic,
+	Legendary,
+	Unique,
+	Special,
+}
+
+
+
 enum EDamageType {
 	STANDARD = 0,
-	PIERCE,
-	STRIKE,
 	SLASH,
-	STANDARD_PIERCE,
-	SLASH_PIERCE,
+	PIERCE,
+	BLUNT,
+	COLD,
+	POSION,
+	ACID,
+	PSYCHIC,
+	FIRE,
+	FORCE,
 }
 
 enum EScalingValue {
@@ -62,4 +78,28 @@ enum EEquipmentSlot {
 	CONSUMABLE_4,
 	CONSUMABLE_5,
 	CONSUMABLE_6,
+}
+
+enum EStat {
+	NONE = 0,
+	STRENGTH,
+	DEXTERITY,
+	CONSTITUTION,
+	INTELLIGENCE,
+	PERCEPTION,
+}
+
+enum EModifierType {
+	NONE = 0,
+	Percent,
+	Flat,
+	Ability,
+}
+
+enum EModifierSubtype {
+	NONE = 0,
+	Damage,
+	Element,
+	Armor,
+	Hitpoints,	
 }

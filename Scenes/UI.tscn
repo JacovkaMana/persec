@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://2crh1bmgt20v"]
+[gd_scene load_steps=30 format=3 uid="uid://ck1iwrf8o4mfr"]
 
 [ext_resource type="Script" path="res://Scripts/UI_scripts/Character.gd" id="1_8tod6"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/UI.gd" id="1_cvjfy"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://1mactnwdbpu7" path="res://Art/UI/UI_Inventory.png" id="6_83gsj"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/InventoryUI.gd" id="7_0wyy8"]
 [ext_resource type="Texture2D" uid="uid://dh52y5x0l4e52" path="res://Art/UI/UI_InventoryMenuIcon.png" id="8_cb6qa"]
+[ext_resource type="Material" uid="uid://cwiu31fr6bym" path="res://Art/Shaders/UI_ShadowShader.tres" id="8_fara6"]
 [ext_resource type="PackedScene" uid="uid://b5x1xj36nl8hw" path="res://Inventory/ItemButton.tscn" id="9_f8cn7"]
 [ext_resource type="Texture2D" uid="uid://dqdo2t34wtnlt" path="res://Art/UI/Item_Shield.png" id="11_3kohk"]
 [ext_resource type="Texture2D" uid="uid://ccapmy3ecf4or" path="res://Art/UI/UI_ItemDesc.png" id="13_esgr1"]
@@ -87,6 +88,7 @@ pivot_offset = Vector2(154, 0)
 script = ExtResource("1_8tod6")
 
 [node name="Shadow" type="TextureRect" parent="UI/Character"]
+material = ExtResource("8_fara6")
 offset_left = -2.0
 offset_top = -2.0
 offset_right = 174.0

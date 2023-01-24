@@ -1,0 +1,19 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://cpcduwdx81ynj"]
+
+[ext_resource type="Shader" path="res://Art/Shaders/UI_ShaderScript.gdshader" id="1_ak5s4"]
+[ext_resource type="Texture2D" uid="uid://cu3jr2f2r3xxu" path="res://Art/Shaders/noise_combined.png" id="2_5bbhm"]
+
+[sub_resource type="Gradient" id="Gradient_x7rrw"]
+offsets = PackedFloat32Array(0.0339623, 0.54717, 0.973585, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0.0571429, 0.0571429, 0.0571429, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cqyxx"]
+gradient = SubResource("Gradient_x7rrw")
+
+[resource]
+shader = ExtResource("1_ak5s4")
+shader_parameter/alpha_color = null
+shader_parameter/gradient_tex = SubResource("GradientTexture2D_cqyxx")
+shader_parameter/main_color = Color(0.71, 0.321867, 0.142, 1)
+shader_parameter/noise_img = ExtResource("2_5bbhm")
+shader_parameter/speed = 1.0

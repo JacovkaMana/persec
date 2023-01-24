@@ -9,15 +9,30 @@
 config_version=5
 
 _global_script_classes=[{
+"base": "CharacterBody2D",
+"class": &"Actor",
+"language": &"GDScript",
+"path": "res://Characters/Actor.gd"
+}, {
 "base": "BaseUndurableItem",
 "class": &"ArmorItem",
 "language": &"GDScript",
-"path": "res://Inventory/Items/ArmorItem.gd"
+"path": "res://Items/Scripts/ArmorItem.gd"
+}, {
+"base": "BaseSkill",
+"class": &"AttackSkill",
+"language": &"GDScript",
+"path": "res://Skills/Scripts/AttackSkill.gd"
 }, {
 "base": "BaseStackableItem",
 "class": &"BaseConsumableItem",
 "language": &"GDScript",
-"path": "res://Inventory/Items/BaseConsumableItem.gd"
+"path": "res://Items/Scripts/BaseConsumableItem.gd"
+}, {
+"base": "Resource",
+"class": &"BaseSkill",
+"language": &"GDScript",
+"path": "res://Skills/Scripts/BaseSkill.gd"
 }, {
 "base": "TextureButton",
 "class": &"BaseSlotUI",
@@ -27,22 +42,22 @@ _global_script_classes=[{
 "base": "Item",
 "class": &"BaseStackableItem",
 "language": &"GDScript",
-"path": "res://Inventory/Items/BaseStackableItem.gd"
+"path": "res://Items/Scripts/BaseStackableItem.gd"
 }, {
 "base": "Item",
 "class": &"BaseUndurableItem",
 "language": &"GDScript",
-"path": "res://Inventory/Items/BaseUndurableItem.gd"
+"path": "res://Items/Scripts/BaseUndurableItem.gd"
 }, {
 "base": "ArmorItem",
 "class": &"BootsItem",
 "language": &"GDScript",
-"path": "res://Inventory/Items/BootsItem.gd"
+"path": "res://Items/Scripts/BootsItem.gd"
 }, {
 "base": "ArmorItem",
 "class": &"HelmItem",
 "language": &"GDScript",
-"path": "res://Inventory/Items/HelmItem.gd"
+"path": "res://Items/Scripts/HelmItem.gd"
 }, {
 "base": "Resource",
 "class": &"Inventory",
@@ -57,7 +72,7 @@ _global_script_classes=[{
 "base": "Resource",
 "class": &"Item",
 "language": &"GDScript",
-"path": "res://Inventory/Items/Item.gd"
+"path": "res://Items/Scripts/Item.gd"
 }, {
 "base": "Object",
 "class": &"ItemProperty",
@@ -74,29 +89,42 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://Scripts/UI_scripts/ItemSlotUI.gd"
 }, {
+"base": "Resource",
+"class": &"Modifier",
+"language": &"GDScript",
+"path": "res://Items/Data/ModifierScript.gd"
+}, {
 "base": "Item",
 "class": &"NoteItem",
 "language": &"GDScript",
-"path": "res://Inventory/Items/NoteItem.gd"
+"path": "res://Items/Scripts/NoteItem.gd"
 }, {
 "base": "BaseStackableItem",
 "class": &"OtherItem",
 "language": &"GDScript",
-"path": "res://Inventory/Items/OtherItem.gd"
+"path": "res://Items/Scripts/OtherItem.gd"
 }, {
-"base": "Resource",
-"class": &"Skill",
+"base": "Actor",
+"class": &"Player",
 "language": &"GDScript",
-"path": "res://Skills/SkillBase.gd"
+"path": "res://Characters/player.gd"
+}, {
+"base": "BaseSkill",
+"class": &"StatusSkill",
+"language": &"GDScript",
+"path": "res://Skills/Scripts/StatusSkill.gd"
 }, {
 "base": "BaseUndurableItem",
 "class": &"WeaponItem",
 "language": &"GDScript",
-"path": "res://Inventory/Items/WeaponItem.gd"
+"path": "res://Items/Scripts/WeaponItem.gd"
 }]
 _global_script_class_icons={
+"Actor": "",
 "ArmorItem": "",
+"AttackSkill": "",
 "BaseConsumableItem": "",
+"BaseSkill": "",
 "BaseSlotUI": "",
 "BaseStackableItem": "",
 "BaseUndurableItem": "",
@@ -108,9 +136,11 @@ _global_script_class_icons={
 "ItemProperty": "",
 "ItemSlotInfo": "",
 "ItemSlotUI": "",
+"Modifier": "",
 "NoteItem": "",
 "OtherItem": "",
-"Skill": "",
+"Player": "",
+"StatusSkill": "",
 "WeaponItem": ""
 }
 
@@ -124,6 +154,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 Enums="*res://Inventory/Data/GlobalEnums.gd"
+StackableItems="*res://Items/Stackable/Stackable_Items.gd"
+RandomStats="*res://Items/Data/RandomStats.gd"
 Ui="*res://Scenes/UI.tscn"
 
 [display]

@@ -25,6 +25,14 @@ var _equipment: Dictionary = {
 	Enums.EEquipmentSlot.CONSUMABLE_6: null,
 }
 
+var _stats = {
+	Enums.EStat.STRENGTH: null,
+	Enums.EStat.DEXTERITY: null,
+	Enums.EStat.CONSTITUTION: null,
+	Enums.EStat.INTELLIGENCE: null,
+	Enums.EStat.PERCEPTION: null,	
+}
+
 var _is_initialize: bool = false
 
 
@@ -41,6 +49,8 @@ func add_item(item: Item, count: int = 1)->InventoryItemSlotInfo:
 	return null
 	
 
+func is_initialized()->bool:
+	return _is_initialize
 
 func remove_item(item: Item, count: int)->bool:
 	

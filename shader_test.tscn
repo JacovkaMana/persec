@@ -1,0 +1,14 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Shader" path="res://Art/Shaders/new_shader.gdshader" id="1_thk13"]
+[ext_resource type="Texture2D" uid="uid://cu3jr2f2r3xxu" path="res://Art/Shaders/noise_combined.png" id="2_5st4j"]
+[ext_resource type="Texture2D" uid="uid://6x7mcij135gd" path="res://icon.svg" id="3_3w3dg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d15r7"]
+shader = ExtResource("1_thk13")
+shader_parameter/noise_img = ExtResource("2_5st4j")
+
+[node name="Node" type="Sprite2D"]
+texture_repeat = 1
+material = SubResource("ShaderMaterial_d15r7")
+texture = ExtResource("3_3w3dg")

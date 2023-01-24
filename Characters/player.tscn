@@ -235,6 +235,7 @@ states/Start/position = Vector2(303, 90)
 states/Walk/node = SubResource("AnimationNodeBlendSpace2D_skny6")
 states/Walk/position = Vector2(715, 100)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_pyc1v"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_6odnb"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_1wmkg")]
+graph_offset = Vector2(33, -25)
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_23g6o"]
 
@@ -264,5 +265,5 @@ tree_root = SubResource("AnimationNodeStateMachine_qswv1")
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource("AnimationNodeStateMachinePlayback_23g6o")
-parameters/Idle/blend_position = Vector2(0.162939, 0.0624454)
+parameters/Idle/blend_position = Vector2(-0.251314, -0.0624454)
 parameters/Walk/blend_position = Vector2(-0.230032, 0.00480354)

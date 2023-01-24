@@ -1,29 +1,29 @@
-extends CharacterBody2D
-
-@export var move_speed : float = 100 
-@export var starting_direction : Vector2 = Vector2(0, 1)
-@export var inventory: Inventory = Inventory.new()
-@onready var animation_tree = $AnimationTree
-@onready var state_machine = animation_tree.get("parameters/playback")
+extends Actor
+class_name Player
 
 
 func _ready():
-	update_animation_parameters(starting_direction)
-	
+	super()
 	var test_item = WeaponItem.new()
 	test_item.initialize(
-		'from player', 
-		'test'
-		)
+		'',
+		'from player',
+		null,
+		null,
+		30
+	)
 		
 	inventory.add_item(test_item)
 	inventory.add_item(test_item)
 	
-	var test_item_stackable = BaseStackableItem.new()
-	test_item_stackable.initialize(
-			'stackable item', 
-		'test'
-		)
+	if not  inventory.is_initialized():
+		for stat in inventory._stats.keys():
+			inventory._stats[stat] = 7
+		inventory._is_initialize = true
+		
+	print(inventory._stats)
+	var test_item_stackable = StackableItems.potions.small_potion
+
 		
 	for i in range(5):
 		inventory.add_item(test_item_stackable)
@@ -35,26 +35,10 @@ func _ready():
 	inventory.equip_item(test_item)
 	print(inventory._equipment)
 
+
 func _physics_process(_delta):
-	var input_direction = Vector2(
+	super(_delta)
+	move_direction = Vector2(
 		Input.get_action_strength("right") - Input.get_action_strength("left"),
 		Input.get_action_strength("down") -  Input.get_action_strength("up")
 )
-	update_animation_parameters(input_direction)
-	velocity = input_direction * move_speed 
-	move_and_slide()
-	for i in get_slide_collision_count():
-		var collision = get_slide_collision(i)
-		#print("I collided with ", collision)
-	pick_new_state();
-
-func update_animation_parameters (move_input : Vector2):
-	if (move_input != Vector2.ZERO):
-		animation_tree.set("parameters/Walk/blend_position",move_input)
-		animation_tree.set("parameters/Idle/blend_position",move_input)
-		
-func pick_new_state():
-	if (velocity != Vector2.ZERO):
-		state_machine.travel("Walk")
-	else:
-		state_machine.travel("Idle")
