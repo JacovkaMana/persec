@@ -14,20 +14,20 @@ func initialize(random: bool = true):
 	if (random):
 		
 		self.type = Enums.EModifierType.get(
-			Enums.EModifierType.keys()[randi() % Enums.EModifierType.size()]
+			Enums.EModifierType.keys()[1 + randi() % (Enums.EModifierType.size() - 1)]
 		)
 		
 		self.subtype = Enums.EModifierSubtype.get(
-			Enums.EModifierSubtype.keys()[randi() % Enums.EModifierSubtype.size()]
+			Enums.EModifierSubtype.keys()[1 + randi() % (Enums.EModifierSubtype.size() - 1)]
 		)
 		
 		if (type == Enums.EModifierType.Percent):
 			self.value = randi_range(0,100)
-			self.text = str(self.value) + '% INCREASED' + str(self.subtype)
+			self.text = str(self.value) + '% Increased ' + str(Enums.EModifierSubtype.keys()[self.subtype])
 		
 		if (type == Enums.EModifierType.Flat):
 			self.value = randi_range(0,15)
-			self.text = 'ADDS' + str(self.value) + str(self.subtype)
+			self.text = 'ADDS' + str(self.value) + str(Enums.EModifierSubtype.keys()[self.subtype])
 			
 		if (type == Enums.EModifierType.Ability):
 			self.value = 0

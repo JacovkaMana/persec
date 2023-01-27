@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cbmepsou60p58"]
+
+[ext_resource type="Shader" path="res://Art/Shaders/WindShaderScript.gdshader" id="1_lgxk4"]
+
+[resource]
+shader = ExtResource("1_lgxk4")
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.115
+shader_parameter/heightOffset = 0.714
+shader_parameter/interval = 3.5
+shader_parameter/main_color = Color(1, 1, 1, 1)
+shader_parameter/maxStrength = 0.507
+shader_parameter/minStrength = 0.438
+shader_parameter/mirror = null
+shader_parameter/offset = 0.0
+shader_parameter/speed = 10.0
+shader_parameter/strengthScale = 100.0

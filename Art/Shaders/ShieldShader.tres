@@ -1,0 +1,21 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://d1rup2825ejku"]
+
+[ext_resource type="Shader" path="res://Art/Shaders/ShieldShaderScript.gdshader" id="1_1hsfx"]
+[ext_resource type="Texture2D" uid="uid://cu3jr2f2r3xxu" path="res://Art/Shaders/noise_combined.png" id="2_gdo70"]
+
+[resource]
+shader = ExtResource("1_1hsfx")
+shader_parameter/attack_amplitude = 0.0
+shader_parameter/attack_angle = -3.846
+shader_parameter/attack_penetration = 0.82
+shader_parameter/attack_radius = 0.592
+shader_parameter/border_decay = 0.532
+shader_parameter/noise_amplitude = 0.89
+shader_parameter/noise_deformation = 100.0
+shader_parameter/noise_speed = 3.0
+shader_parameter/noise_texture = ExtResource("2_gdo70")
+shader_parameter/shield_saturation = Color(0.639216, 0.568627, 0.858824, 1)
+shader_parameter/shield_tint = Color(0.396078, 0.419608, 0.560784, 1)
+shader_parameter/wave_num = 17.0
+shader_parameter/wave_speed = 16.0
+shader_parameter/zoom_out = 1.0

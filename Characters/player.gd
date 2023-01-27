@@ -5,16 +5,17 @@ class_name Player
 func _ready():
 	super()
 	var test_item = WeaponItem.new()
-	test_item.initialize(
+	for i in range(5):
+		test_item = WeaponItem.new()
+		test_item.initialize(
 		'',
 		'from player',
 		null,
 		null,
 		30
-	)
-		
-	inventory.add_item(test_item)
-	inventory.add_item(test_item)
+		)
+		print(test_item.modifiers[0].text)
+		inventory.add_item(test_item)
 	
 	if not  inventory.is_initialized():
 		for stat in inventory._stats.keys():
@@ -42,3 +43,5 @@ func _physics_process(_delta):
 		Input.get_action_strength("right") - Input.get_action_strength("left"),
 		Input.get_action_strength("down") -  Input.get_action_strength("up")
 )
+
+	#print(get_viewport().get_mouse_position())
