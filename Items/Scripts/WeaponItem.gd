@@ -2,8 +2,8 @@ class_name WeaponItem
 extends BaseUndurableItem
 
 @export var level: int = 1
-@export var weapon_type: Enums.EWeaponSubtype = Enums.EWeaponSubtype.SWORD
-@export var damage_type: Enums.EDamageType = Enums.EDamageType.PIERCE
+@export var weapon_type: Enums.EWeaponSubtype = 0
+@export var damage_type: Enums.EDamageType = 0
 @export var stamina_cost: float = 1.0
 
 @export var damage_low: int = 0
@@ -13,8 +13,9 @@ extends BaseUndurableItem
 @export var modifiers: Array[Modifier] = []
 
 
-func initialize(name: String = '', description: String = '', rarity = null, type = null, damage: int = 0):
+func initialize(name: String = '', description: String = '', rarity = null, type = 0, damage: int = 0):
 	
+	sprite = preload("res://Art/Sprites/Weapon/Sword1.png")
 	
 	self.description = description
 	
@@ -22,7 +23,7 @@ func initialize(name: String = '', description: String = '', rarity = null, type
 		self.rarity = rarity
 	else: 
 		self.rarity = RandomStats.random_rarity()
-		
+
 	if (type):
 		self.weapon_type = type
 	else:

@@ -17,12 +17,13 @@ custom_minimum_size = Vector2i(22, 22)
 offset_right = 22.0
 offset_bottom = 22.0
 pivot_offset = Vector2(11, 11)
+mouse_filter = 1
 texture_normal = ExtResource("1_cw2si")
 texture_hover = ExtResource("2_ukx6c")
 script = ExtResource("3_wx2gw")
 
 [node name="Content" type="Control" parent="."]
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -31,6 +32,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="ItemImage" type="TextureRect" parent="Content"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -41,6 +43,7 @@ texture = ExtResource("4_yknfp")
 
 [node name="ItemCount" type="Label" parent="Content"]
 visible = false
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

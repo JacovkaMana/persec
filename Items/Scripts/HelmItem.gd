@@ -6,3 +6,10 @@ func get_item_type():
 
 func get_type_text()->String:
 		return "Helm"
+
+func get_slot_type():
+	return [Enums.EEquipmentSlot.HELM]
+	
+
+
+

@@ -21,4 +21,5 @@ func create_potion(name: String, description: String, rarity: int):
 		description,
 		rarity
 	)
+	potion.sprite = preload("res://Art/Sprites/Stackable/HealthPotion1.png")
 	return potion

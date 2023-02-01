@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://ck1iwrf8o4mfr"]
+[gd_scene load_steps=67 format=3 uid="uid://ck1iwrf8o4mfr"]
 
 [ext_resource type="Script" path="res://Scripts/UI_scripts/Character.gd" id="1_8tod6"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/UI.gd" id="1_cvjfy"]
@@ -14,10 +14,24 @@
 [ext_resource type="Script" path="res://Scripts/UI_scripts/InventoryUI.gd" id="7_0wyy8"]
 [ext_resource type="Texture2D" uid="uid://dh52y5x0l4e52" path="res://Art/UI/UI_InventoryMenuIcon.png" id="8_cb6qa"]
 [ext_resource type="Material" uid="uid://cwiu31fr6bym" path="res://Art/Shaders/UI_ShadowShader.tres" id="8_fara6"]
+[ext_resource type="Texture2D" uid="uid://ca0lfmfiallgi" path="res://Art/UI/MenuClose_Hover.png" id="8_h5i0i"]
 [ext_resource type="PackedScene" uid="uid://b5x1xj36nl8hw" path="res://Inventory/ItemButton.tscn" id="9_f8cn7"]
+[ext_resource type="Script" path="res://Scripts/UI_scripts/CloseButton.gd" id="9_lvtlu"]
 [ext_resource type="Texture2D" uid="uid://dqdo2t34wtnlt" path="res://Art/UI/Item_Shield.png" id="11_3kohk"]
+[ext_resource type="Texture2D" uid="uid://cxsmrfblvux75" path="res://Art/UI/Amulet.png" id="11_72ij6"]
+[ext_resource type="Script" path="res://Scripts/UI_scripts/CharacterMenuPanel.gd" id="11_usa2v"]
+[ext_resource type="Texture2D" uid="uid://bs3yn2n4cgxgk" path="res://Art/UI/Ring.png" id="12_k2607"]
+[ext_resource type="Texture2D" uid="uid://dw3xbfgh77pij" path="res://Art/UI/Item_Hover.png" id="12_teqho"]
+[ext_resource type="Texture2D" uid="uid://dcodbjst37jag" path="res://Art/UI/Misc.png" id="13_aduk8"]
 [ext_resource type="Texture2D" uid="uid://ccapmy3ecf4or" path="res://Art/UI/UI_ItemDesc.png" id="13_esgr1"]
+[ext_resource type="Texture2D" uid="uid://bw8r3ppeekyk5" path="res://Art/UI/Helmet.png" id="14_f3qx8"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/ItemDescPanel.gd" id="14_k6vq4"]
+[ext_resource type="Texture2D" uid="uid://bcrf2c3610tq7" path="res://Art/UI/Armor.png" id="15_58hf7"]
+[ext_resource type="Texture2D" uid="uid://i14ccwbjhcj6" path="res://Art/UI/Glove.png" id="16_rijxa"]
+[ext_resource type="Texture2D" uid="uid://bqfc0dywa7fnf" path="res://Art/UI/Boots.png" id="17_otl5j"]
+[ext_resource type="Texture2D" uid="uid://c37xj7g8aoq54" path="res://Art/UI/UI_ItemActionMenu.png" id="18_mog8i"]
+[ext_resource type="Texture2D" uid="uid://bdvj2eqeeqpw6" path="res://Art/UI/ItemAction_Hover.png" id="19_3pi6p"]
+[ext_resource type="Script" path="res://Scripts/UI_scripts/ItemAction.gd" id="20_nbmo2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_n77g3"]
 line_spacing = 0.0
@@ -25,6 +39,46 @@ font = ExtResource("5_ai818")
 font_size = 8
 font_color = Color(0.0784314, 0.231373, 0.427451, 1)
 shadow_size = 0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ojem5"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ojq34"]
+texture = ExtResource("8_h5i0i")
+region_rect = Rect2(0, 0, 11, 11)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_11eno"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sb5ce"]
+texture = ExtResource("11_72ij6")
+region_rect = Rect2(0, 0, 22, 22)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8jccc"]
+texture = ExtResource("12_k2607")
+region_rect = Rect2(0, 0, 22, 22)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e2cyl"]
+texture = ExtResource("12_k2607")
+region_rect = Rect2(0, 0, 22, 22)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_obnin"]
+texture = ExtResource("13_aduk8")
+region_rect = Rect2(0, 0, 22, 22)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dodc2"]
+texture = ExtResource("14_f3qx8")
+region_rect = Rect2(0, 0, 22, 22)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jl75u"]
+texture = ExtResource("15_58hf7")
+region_rect = Rect2(0, 0, 22, 22)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wh5vm"]
+texture = ExtResource("16_rijxa")
+region_rect = Rect2(0, 0, 22, 22)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5bfpp"]
+texture = ExtResource("17_otl5j")
+region_rect = Rect2(0, 0, 22, 22)
 
 [sub_resource type="LabelSettings" id="LabelSettings_ns7t6"]
 font = ExtResource("5_ai818")
@@ -62,7 +116,113 @@ font = ExtResource("5_ai818")
 font_size = 8
 font_color = Color(0, 0, 0, 1)
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_reb7f"]
+texture = ExtResource("18_mog8i")
+region_rect = Rect2(0, 0, 40, 24)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_705cy"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gnv88"]
+texture = ExtResource("19_3pi6p")
+region_rect = Rect2(0, 0, 40, 10)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2bg7p"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_peaqi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rf8ru"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5fpuk"]
+font = ExtResource("5_ai818")
+font_size = 8
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ngump"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vlg4b"]
+texture = ExtResource("19_3pi6p")
+region_rect = Rect2(0, 0, 40, 10)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vukj7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3e8yv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5cgrn"]
+
 [node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 15.0
+offset_top = 10.0
+offset_right = 48.0
+offset_bottom = 350.0
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+offset_right = 33.0
+offset_bottom = 44.0
+texture = ExtResource("5_mowgk")
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+offset_top = 48.0
+offset_right = 33.0
+offset_bottom = 92.0
+texture = ExtResource("5_mowgk")
+
+[node name="TextureRect3" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+offset_top = 96.0
+offset_right = 33.0
+offset_bottom = 140.0
+texture = ExtResource("5_mowgk")
+
+[node name="TextureRect4" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+offset_top = 144.0
+offset_right = 33.0
+offset_bottom = 188.0
+texture = ExtResource("5_mowgk")
+
+[node name="TextureRect5" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+offset_top = 192.0
+offset_right = 33.0
+offset_bottom = 236.0
+texture = ExtResource("5_mowgk")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+offset_left = 595.0
+offset_top = 10.0
+offset_right = 628.0
+offset_bottom = 355.0
+pivot_offset = Vector2(33, 0)
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer2"]
+layout_mode = 2
+offset_right = 33.0
+offset_bottom = 44.0
+texture = ExtResource("5_mowgk")
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer2"]
+layout_mode = 2
+offset_top = 48.0
+offset_right = 33.0
+offset_bottom = 92.0
+texture = ExtResource("5_mowgk")
+
+[node name="TextureRect3" type="TextureRect" parent="VBoxContainer2"]
+layout_mode = 2
+offset_top = 96.0
+offset_right = 33.0
+offset_bottom = 140.0
+texture = ExtResource("5_mowgk")
+
+[node name="TextureRect4" type="TextureRect" parent="VBoxContainer2"]
+layout_mode = 2
+offset_top = 144.0
+offset_right = 33.0
+offset_bottom = 188.0
+texture = ExtResource("5_mowgk")
 
 [node name="UI" type="Control" parent="."]
 clip_contents = true
@@ -134,6 +294,219 @@ offset_left = -13.0
 offset_bottom = 13.0
 grow_horizontal = 0
 tooltip_text = "Close"
+
+[node name="CharacterCloseButton" type="Button" parent="UI/Character"]
+layout_mode = 0
+offset_left = 164.0
+offset_top = 1.0
+offset_right = 175.0
+offset_bottom = 12.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ojem5")
+theme_override_styles/hover = SubResource("StyleBoxTexture_ojq34")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_11eno")
+script = ExtResource("9_lvtlu")
+
+[node name="LeftCharacterVBox" type="VBoxContainer" parent="UI/Character"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 67.0
+offset_right = 45.0
+offset_bottom = 170.0
+theme_override_constants/separation = 5
+
+[node name="AmuletPanel" type="Panel" parent="UI/Character/LeftCharacterVBox"]
+custom_minimum_size = Vector2i(22, 22)
+layout_mode = 2
+offset_right = 22.0
+offset_bottom = 22.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_sb5ce")
+
+[node name="HoverRect" type="TextureRect" parent="UI/Character/LeftCharacterVBox/AmuletPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_teqho")
+
+[node name="RingPanel1" type="Panel" parent="UI/Character/LeftCharacterVBox"]
+custom_minimum_size = Vector2i(22, 22)
+layout_mode = 2
+offset_top = 27.0
+offset_right = 22.0
+offset_bottom = 49.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_8jccc")
+
+[node name="HoverRect" type="TextureRect" parent="UI/Character/LeftCharacterVBox/RingPanel1"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_teqho")
+
+[node name="RingPanel2" type="Panel" parent="UI/Character/LeftCharacterVBox"]
+custom_minimum_size = Vector2i(22, 22)
+layout_mode = 2
+offset_top = 54.0
+offset_right = 22.0
+offset_bottom = 76.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_e2cyl")
+
+[node name="HoverRect" type="TextureRect" parent="UI/Character/LeftCharacterVBox/RingPanel2"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_teqho")
+
+[node name="MiscPanel" type="Panel" parent="UI/Character/LeftCharacterVBox"]
+custom_minimum_size = Vector2i(22, 22)
+layout_mode = 2
+offset_top = 81.0
+offset_right = 22.0
+offset_bottom = 103.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_obnin")
+
+[node name="HoverRect" type="TextureRect" parent="UI/Character/LeftCharacterVBox/MiscPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_teqho")
+
+[node name="RightCharacterVBox" type="VBoxContainer" parent="UI/Character"]
+layout_mode = 0
+offset_left = 131.0
+offset_top = 67.0
+offset_right = 153.0
+offset_bottom = 170.0
+theme_override_constants/separation = 5
+
+[node name="HelmPanel" type="Panel" parent="UI/Character/RightCharacterVBox"]
+custom_minimum_size = Vector2i(22, 22)
+layout_mode = 2
+offset_right = 22.0
+offset_bottom = 22.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_dodc2")
+
+[node name="HoverRect" type="TextureRect" parent="UI/Character/RightCharacterVBox/HelmPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_teqho")
+
+[node name="TorsoPanel" type="Panel" parent="UI/Character/RightCharacterVBox"]
+custom_minimum_size = Vector2i(22, 22)
+layout_mode = 2
+offset_top = 27.0
+offset_right = 22.0
+offset_bottom = 49.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_jl75u")
+
+[node name="HoverRect" type="TextureRect" parent="UI/Character/RightCharacterVBox/TorsoPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_teqho")
+
+[node name="PantsPanel" type="Panel" parent="UI/Character/RightCharacterVBox"]
+custom_minimum_size = Vector2i(22, 22)
+layout_mode = 2
+offset_top = 54.0
+offset_right = 22.0
+offset_bottom = 76.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_wh5vm")
+
+[node name="HoverRect" type="TextureRect" parent="UI/Character/RightCharacterVBox/PantsPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_teqho")
+
+[node name="BootsPanel" type="Panel" parent="UI/Character/RightCharacterVBox"]
+custom_minimum_size = Vector2i(22, 22)
+layout_mode = 2
+offset_top = 81.0
+offset_right = 22.0
+offset_bottom = 103.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_5bfpp")
+
+[node name="HoverRect" type="TextureRect" parent="UI/Character/RightCharacterVBox/BootsPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_teqho")
+
+[node name="LHandPanel" type="Panel" parent="UI/Character"]
+custom_minimum_size = Vector2i(18, 20)
+layout_mode = 0
+offset_left = 60.0
+offset_top = 176.0
+offset_right = 82.0
+offset_bottom = 196.0
+
+[node name="HoverRect" type="TextureRect" parent="UI/Character/LHandPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_teqho")
+
+[node name="RHandPanel" type="Panel" parent="UI/Character"]
+custom_minimum_size = Vector2i(18, 20)
+layout_mode = 0
+offset_left = 94.0
+offset_top = 176.0
+offset_right = 116.0
+offset_bottom = 196.0
+
+[node name="HoverRect" type="TextureRect" parent="UI/Character/RHandPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_teqho")
+
+[node name="CharacterPanel" type="Panel" parent="UI/Character"]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 68.0
+offset_right = 125.0
+offset_bottom = 169.0
+script = ExtResource("11_usa2v")
 
 [node name="Inventory" type="Control" parent="UI"]
 custom_minimum_size = Vector2i(176, 296)
@@ -230,7 +603,6 @@ mouse_filter = 2
 texture = ExtResource("11_3kohk")
 
 [node name="ItemCount" type="Label" parent="UI/Inventory/InventoryGrid/ItemButton/Content2"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -374,6 +746,118 @@ label_settings = SubResource("LabelSettings_wulp2")
 vertical_alignment = 1
 autowrap_mode = 3
 
+[node name="InventoryCloseButton" type="Button" parent="UI/Inventory"]
+layout_mode = 0
+offset_left = 164.0
+offset_top = 1.0
+offset_right = 175.0
+offset_bottom = 12.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ojem5")
+theme_override_styles/hover = SubResource("StyleBoxTexture_ojq34")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_11eno")
+script = ExtResource("9_lvtlu")
+
+[node name="ItemActionsPanel" type="Panel" parent="UI"]
+visible = false
+layout_mode = 0
+offset_left = 26.0
+offset_top = 58.0
+offset_right = 66.0
+offset_bottom = 82.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_reb7f")
+
+[node name="ItemActionsVBox" type="VBoxContainer" parent="UI/ItemActionsPanel"]
+layout_mode = 0
+offset_top = 1.0
+offset_right = 40.0
+offset_bottom = 41.0
+theme_override_constants/separation = 2
+
+[node name="UnequipButton" type="Button" parent="UI/ItemActionsPanel/ItemActionsVBox"]
+visible = false
+custom_minimum_size = Vector2i(20, 10)
+layout_mode = 2
+offset_right = 40.0
+offset_bottom = 10.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_705cy")
+theme_override_styles/hover = SubResource("StyleBoxTexture_gnv88")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_2bg7p")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_peaqi")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rf8ru")
+script = ExtResource("20_nbmo2")
+
+[node name="Label" type="Label" parent="UI/ItemActionsPanel/ItemActionsVBox/UnequipButton"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -7.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Unequip"
+label_settings = SubResource("LabelSettings_5fpuk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EquipButton" type="Button" parent="UI/ItemActionsPanel/ItemActionsVBox"]
+visible = false
+custom_minimum_size = Vector2i(20, 10)
+layout_mode = 2
+offset_right = 40.0
+offset_bottom = 10.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_705cy")
+theme_override_styles/hover = SubResource("StyleBoxTexture_gnv88")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_2bg7p")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_peaqi")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rf8ru")
+script = ExtResource("20_nbmo2")
+
+[node name="Label" type="Label" parent="UI/ItemActionsPanel/ItemActionsVBox/EquipButton"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -7.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Equip"
+label_settings = SubResource("LabelSettings_5fpuk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DeleteButton" type="Button" parent="UI/ItemActionsPanel/ItemActionsVBox"]
+visible = false
+custom_minimum_size = Vector2i(20, 10)
+layout_mode = 2
+offset_top = 12.0
+offset_right = 40.0
+offset_bottom = 22.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ngump")
+theme_override_styles/hover = SubResource("StyleBoxTexture_vlg4b")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vukj7")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_3e8yv")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_5cgrn")
+script = ExtResource("20_nbmo2")
+
+[node name="Label" type="Label" parent="UI/ItemActionsPanel/ItemActionsVBox/DeleteButton"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -7.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Delete"
+label_settings = SubResource("LabelSettings_5fpuk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="HUD" type="Control" parent="."]
 visible = false
 custom_minimum_size = Vector2i(640, 360)
@@ -485,77 +969,3 @@ grow_vertical = 2
 rotation = 0.785398
 pivot_offset = Vector2(11, 11)
 color = Color(0.0784314, 0.231373, 0.427451, 1)
-
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-offset_left = 15.0
-offset_top = 10.0
-offset_right = 48.0
-offset_bottom = 350.0
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
-layout_mode = 2
-offset_right = 33.0
-offset_bottom = 44.0
-texture = ExtResource("5_mowgk")
-
-[node name="TextureRect2" type="TextureRect" parent="VBoxContainer"]
-layout_mode = 2
-offset_top = 48.0
-offset_right = 33.0
-offset_bottom = 92.0
-texture = ExtResource("5_mowgk")
-
-[node name="TextureRect3" type="TextureRect" parent="VBoxContainer"]
-layout_mode = 2
-offset_top = 96.0
-offset_right = 33.0
-offset_bottom = 140.0
-texture = ExtResource("5_mowgk")
-
-[node name="TextureRect4" type="TextureRect" parent="VBoxContainer"]
-layout_mode = 2
-offset_top = 144.0
-offset_right = 33.0
-offset_bottom = 188.0
-texture = ExtResource("5_mowgk")
-
-[node name="TextureRect5" type="TextureRect" parent="VBoxContainer"]
-layout_mode = 2
-offset_top = 192.0
-offset_right = 33.0
-offset_bottom = 236.0
-texture = ExtResource("5_mowgk")
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="."]
-offset_left = 595.0
-offset_top = 10.0
-offset_right = 628.0
-offset_bottom = 355.0
-pivot_offset = Vector2(33, 0)
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer2"]
-layout_mode = 2
-offset_right = 33.0
-offset_bottom = 44.0
-texture = ExtResource("5_mowgk")
-
-[node name="TextureRect2" type="TextureRect" parent="VBoxContainer2"]
-layout_mode = 2
-offset_top = 48.0
-offset_right = 33.0
-offset_bottom = 92.0
-texture = ExtResource("5_mowgk")
-
-[node name="TextureRect3" type="TextureRect" parent="VBoxContainer2"]
-layout_mode = 2
-offset_top = 96.0
-offset_right = 33.0
-offset_bottom = 140.0
-texture = ExtResource("5_mowgk")
-
-[node name="TextureRect4" type="TextureRect" parent="VBoxContainer2"]
-layout_mode = 2
-offset_top = 144.0
-offset_right = 33.0
-offset_bottom = 188.0
-texture = ExtResource("5_mowgk")

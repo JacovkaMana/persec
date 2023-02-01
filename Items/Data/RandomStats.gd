@@ -39,7 +39,6 @@ func random_rarity():
 		if score >= rarity_chance:
 			rarity = Enums.ERarity.keys()[rarity_score]
 			rarity_chance += rarity_chances[rarity_score]
-	print(score, ' ', rarity)
 	return Enums.ERarity.get(rarity)
 
 

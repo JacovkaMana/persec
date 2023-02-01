@@ -11,18 +11,30 @@ func _ready():
 		'',
 		'from player',
 		null,
-		null,
+		0,
 		30
 		)
-		print(test_item.modifiers[0].text)
 		inventory.add_item(test_item)
+		
+	var test_armor = ArmorItem.new()
+	test_armor.initialize(
+		'Armor',
+		'From player',
+	)
+	inventory.add_item(test_armor)
+	
+	var test_boots = BootsItem.new()
+	test_boots.initialize(
+		'Boots',
+		'From player',
+	)
+	inventory.add_item(test_boots)
 	
 	if not  inventory.is_initialized():
 		for stat in inventory._stats.keys():
 			inventory._stats[stat] = 7
 		inventory._is_initialize = true
 		
-	print(inventory._stats)
 	var test_item_stackable = StackableItems.potions.small_potion
 
 		
@@ -31,10 +43,8 @@ func _ready():
 		
 
 
-	print(inventory.get_inventory_items(Enums.EItemType.WEAPON))
 	
 	inventory.equip_item(test_item)
-	print(inventory._equipment)
 
 
 func _physics_process(_delta):

@@ -3,7 +3,7 @@ extends Resource
 
 
 @export var name: String = "NOT"
-@export var icon: Texture2D
+@export var sprite: Texture2D = null
 @export var description: String = "INITIALIZED"
 @export var rarity: Enums.ERarity = Enums.ERarity.Common
 

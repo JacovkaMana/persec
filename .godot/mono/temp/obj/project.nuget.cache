@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "jTvnxTTYamMW6s2KsennRFVYAzu76eiuSjQYanND3I77CrIhFxk1eX9Mlw+SRgi65r4454ThBbPIsBmj0R/8yg==",
+  "dgSpecHash": "4wNqGGctFIWeg9slWPDuiPXgqQ6+Kk9iBRp9QeY4EkaQ+N1Xygfs0+qKseQ68gUt773hhZLNRK3Rmahy/ZJslw==",
   "success": true,
-  "projectFilePath": "G:\\persec-alpha\\RoguelikeTest.csproj",
+  "projectFilePath": "G:\\persec-ui-dev\\RoguelikeTest.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Jacov\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder\\godot.sourcegenerators\\4.0.0-beta.3\\godot.sourcegenerators.4.0.0-beta.3.nupkg.sha512",
     "C:\\Users\\Jacov\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder\\godotsharp\\4.0.0-beta.3\\godotsharp.4.0.0-beta.3.nupkg.sha512",
