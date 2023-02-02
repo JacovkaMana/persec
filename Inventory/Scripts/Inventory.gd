@@ -10,6 +10,7 @@ signal equip_item_changed(slot_type: Enums.EEquipmentSlot,
 		from_item_slot: InventoryItemSlotInfo, to_item_slot: InventoryItemSlotInfo)
 
 var _inventory: Array[Item]
+var _skills: Array[BaseSkill]
 var _equipment: Dictionary = {
 	Enums.EEquipmentSlot.L_HAND: null,
 	Enums.EEquipmentSlot.R_HAND: null,
@@ -127,6 +128,10 @@ func get_inventory_items_by_type(item_type: Enums.EItemType)->Array: #[Inventory
 			out.append(item)
 	
 	return out
+	
+
+func get_skills()->Array:
+	return _skills
 	
 
 

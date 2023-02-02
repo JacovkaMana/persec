@@ -20,19 +20,30 @@ enum ERarity {
 	Special,
 }
 
-
+enum EStatus {
+	STANDART = 0,
+	BURNING,
+}
 
 enum EDamageType {
 	STANDARD = 0,
 	SLASH,
 	PIERCE,
 	BLUNT,
-	COLD,
-	POSION,
-	ACID,
-	PSYCHIC,
 	FIRE,
-	FORCE,
+	ICE,
+	WIND,
+	EARTH,
+	LIGHTNING,
+	WATER,
+}
+
+enum ESkillType {
+	STANDARD = 0,
+	BLADE,
+	POLEARM,
+	BLUNT,
+	MAGIC,
 }
 
 enum EScalingValue {
