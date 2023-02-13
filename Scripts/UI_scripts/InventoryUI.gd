@@ -1,6 +1,5 @@
 extends Control
 
-signal update_equips(placement:String, slot: BaseSlotUI)
 
 @onready var CHARACTER_PANEL_DICT = {
 	Enums.EItemType.ITEM: [Vector2(23, 68), Vector2(41, 88), get_tree().get_root().find_child("MiscPanel", true, false)],
@@ -17,16 +16,18 @@ signal update_equips(placement:String, slot: BaseSlotUI)
 @onready var active_item_lclick: Item = null
 @onready var active_slot_rclick: BaseSlotUI = null
 @onready var actions_panel: Panel = get_tree().get_root().find_child("ItemActionsPanel", true, false)
+@onready var panel_hover = false
 var ItemPanel = preload('res://Inventory/ItemButton.tscn')
+var ItemShader = preload("res://Art/Shaders/Outline.gdshader")
 # !!!!! При закрытии закрывается ItemActionsPanel, если она над этой менюшкой!!!
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
 	#print('Player test node')
 	#print(player.inventory)
-	player.inventory.connect("added_item", _on_new_item)
-	player.inventory.connect("updated_item", _on_updated_item)
-	player.inventory.connect("removed_item", _delete_item)
+	player.data.inventory.connect("added_item", _on_new_item)
+	player.data.inventory.connect("updated_item", _on_updated_item)
+	player.data.inventory.connect("removed_item", _delete_item)
 	actions_panel\
 		.get_node("ItemActionsVBox")\
 		.get_node("EquipButton")\
@@ -62,6 +63,10 @@ func _on_new_item(new_item)->bool:
 	
 	newItemPanel.set_item(new_item)
 	newItemPanel.find_child("ItemImage").texture = new_item.sprite
+	#var mater = ShaderMaterial.new()
+	#mater.shader = ItemShader
+	#mater.set_shader_parameter('color',RandomStats.rarity_colors[new_item.rarity])
+	#newItemPanel.find_child("ItemImage").material = mater
 	if (new_item.is_stackable()):
 		newItemPanel.find_child("ItemCount").text = str(new_item.count)
 		newItemPanel.find_child("ItemCount").visible = true
@@ -80,7 +85,7 @@ func _delete_item(item, delete: bool = false)->bool:
 		if slot.item == item:
 			inventory_grid.remove_child(slot)
 			if (delete):
-				player.inventory.remove_item(item)
+				player.data.inventory.remove_item(item)
 			return true
 	return false
 
@@ -109,16 +114,15 @@ func _on_action_click(action: String):
 	if active_slot_rclick != null:
 		match action:
 			"Equip":
-				if player.inventory.equip_item(active_slot_rclick.item):
+				if player.data.inventory.equip_item(active_slot_rclick.item):
 					active_slot_rclick.disconnect("slot_mouse_lclick", _on_slot_mouse_lclick)
 					active_slot_rclick.disconnect("slot_mouse_rclick", _on_slot_mouse_rclick)
 					active_slot_rclick.disconnect("slot_mouse_release", _on_slot_mouse_release)
 					active_slot_rclick.disconnect("slot_mouse_move_check", _on_slot_mouse_move)
-					emit_signal("update_equips", "", active_slot_rclick)
 					desc_panel.visible = false
 					actions_panel.visible = false
 			"Delete":
-				_delete_item(active_slot_rclick, true)
+				_delete_item(active_slot_rclick.item, true)
 				active_slot_rclick = null
 				desc_panel.visible = false
 				actions_panel.visible = false
@@ -145,10 +149,15 @@ func _on_slot_mouse_move(slot_type):
 	if CHARACTER_PANEL_DICT[slot_type][0] < mouse_pos\
 	&& CHARACTER_PANEL_DICT[slot_type][1] > mouse_pos:
 		CHARACTER_PANEL_DICT[slot_type][2].get_child(0).visible = true
+		panel_hover = true
 	else:
 		CHARACTER_PANEL_DICT[slot_type][2].get_child(0).visible = false
+		panel_hover = false
 
 
 func _on_slot_mouse_release(slot: BaseSlotUI, start_position: Vector2):
-	print("mouse released")
+	if panel_hover:
+		print("released on panel, equip needed")
+	else:
+		slot.position = start_position
 

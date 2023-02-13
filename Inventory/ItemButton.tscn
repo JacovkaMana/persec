@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://b5x1xj36nl8hw"]
+[gd_scene load_steps=8 format=3 uid="uid://b5x1xj36nl8hw"]
 
-[ext_resource type="Texture2D" uid="uid://dh0n7nyhojqtb" path="res://Art/UI/Border22_Unused.png" id="1_cw2si"]
-[ext_resource type="Texture2D" uid="uid://uwo413opljiv" path="res://Art/UI/Border22_2.png" id="2_ukx6c"]
+[ext_resource type="Texture2D" uid="uid://m03kme2ly37o" path="res://Art/UI/Border22_1.png" id="1_5770b"]
+[ext_resource type="Texture2D" uid="uid://00mxkxg5m2l7" path="res://Art/UI/Border22_4.png" id="2_4m14t"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/ItemSlotUI.gd" id="3_wx2gw"]
+[ext_resource type="Texture2D" uid="uid://cvbi3j2ic3s22" path="res://Art/UI/Border22_3.png" id="4_68aug"]
 [ext_resource type="Texture2D" uid="uid://dqdo2t34wtnlt" path="res://Art/UI/Item_Shield.png" id="4_yknfp"]
 [ext_resource type="FontFile" uid="uid://bv3p1twxqpx6p" path="res://Fonts/Minecraftia-Regular.ttf" id="5_v44rv"]
 
@@ -18,8 +19,8 @@ offset_right = 22.0
 offset_bottom = 22.0
 pivot_offset = Vector2(11, 11)
 mouse_filter = 1
-texture_normal = ExtResource("1_cw2si")
-texture_hover = ExtResource("2_ukx6c")
+texture_normal = ExtResource("1_5770b")
+texture_hover = ExtResource("2_4m14t")
 script = ExtResource("3_wx2gw")
 
 [node name="Content" type="Control" parent="."]
@@ -30,6 +31,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="Content"]
+self_modulate = Color(1, 1, 1, 0.294118)
+offset_right = 22.0
+offset_bottom = 22.0
+texture = ExtResource("4_68aug")
 
 [node name="ItemImage" type="TextureRect" parent="Content"]
 anchors_preset = 15

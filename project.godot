@@ -54,6 +54,11 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://Items/Scripts/BootsItem.gd"
 }, {
+"base": "BaseSlotUI",
+"class": &"EquipSlotUI",
+"language": &"GDScript",
+"path": "res://Scripts/UI_scripts/EquipSlotUI.gd"
+}, {
 "base": "ArmorItem",
 "class": &"HelmItem",
 "language": &"GDScript",
@@ -109,6 +114,16 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://Characters/player.gd"
 }, {
+"base": "Resource",
+"class": &"PlayerData",
+"language": &"GDScript",
+"path": "res://Characters/PlayerData.gd"
+}, {
+"base": "Resource",
+"class": &"Skills",
+"language": &"GDScript",
+"path": "res://Skills/Skills.gd"
+}, {
 "base": "BaseSkill",
 "class": &"StatusSkill",
 "language": &"GDScript",
@@ -129,6 +144,7 @@ _global_script_class_icons={
 "BaseStackableItem": "",
 "BaseUndurableItem": "",
 "BootsItem": "",
+"EquipSlotUI": "",
 "HelmItem": "",
 "Inventory": "",
 "InventoryItemSlotInfo": "",
@@ -140,6 +156,8 @@ _global_script_class_icons={
 "NoteItem": "",
 "OtherItem": "",
 "Player": "",
+"PlayerData": "",
+"Skills": "",
 "StatusSkill": "",
 "WeaponItem": ""
 }
@@ -157,6 +175,7 @@ Enums="*res://Inventory/Data/GlobalEnums.gd"
 StackableItems="*res://Items/Stackable/Stackable_Items.gd"
 RandomStats="*res://Items/Data/RandomStats.gd"
 Ui="*res://Scenes/UI.tscn"
+GlobalSkills="*res://Skills/Data/GlobalSkills.gd"
 
 [display]
 
@@ -205,6 +224,26 @@ character={
 inventory={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":73,"unicode":0,"echo":false,"script":null)
+]
+}
+shoot={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"unicode":32,"echo":false,"script":null)
+]
+}
+skill1={
+"deadzone": 0.5,
+"events": [null, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":49,"unicode":0,"echo":false,"script":null)
+]
+}
+skill2={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":50,"unicode":50,"echo":false,"script":null)
+]
+}
+skill3={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":51,"unicode":51,"echo":false,"script":null)
 ]
 }
 

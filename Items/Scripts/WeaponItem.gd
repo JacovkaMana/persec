@@ -28,7 +28,7 @@ func initialize(name: String = '', description: String = '', rarity = null, type
 		self.weapon_type = type
 	else:
 		self.weapon_type = Enums.EWeaponSubtype.get(
-			Enums.EWeaponSubtype.keys()[randi() % Enums.EWeaponSubtype.size()]
+			Enums.EWeaponSubtype.keys()[randi() % (Enums.EWeaponSubtype.size() - 1) + 1]
 		)
 		
 	self.damage_type = RandomStats.weapon_damagetype[self.weapon_type]

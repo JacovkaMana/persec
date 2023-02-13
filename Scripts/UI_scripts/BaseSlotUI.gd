@@ -11,22 +11,28 @@ signal slot_mouse_exited(slot_index: BaseSlotUI)
 @onready var selector_icon: TextureRect = get_node("Content/SelectorTextureRect")
 @onready var inventory: Node2D = null
 @onready var item = null
+var actions = []
 
 
 var _slot_info: InventoryItemSlotInfo = null 
 
 func _ready()->void:
-	connect("mouse_entered", _on_mouse_entered)
-	connect("mouse_exited", _on_mouse_exited)
 	inventory = get_tree().get_root().get_node("Inventory")
 #	self.connect("slot_mouse_entered", self, "on_slot_mouse_entered")
 
-#	test item
-	#str(randi_range(0,100)
 	
 func set_item(slot_item: Item)->bool:
 	item = slot_item
+	self.self_modulate = RandomStats.rarity_colors[item.rarity]
 	return true
+	
+	
+func set_actions(new_actions: Array):
+	actions = new_actions
+
+
+func get_actions():
+	return actions
 
 
 #func start_drag():
@@ -39,8 +45,8 @@ func set_item(slot_item: Item)->bool:
 #	set_select(false)
 
 
-func set_select(value: bool):
-	selector_icon.visible = value
+#func set_select(value: bool):
+#	selector_icon.visible = value
 
 
 func update_ui(slot: InventoryItemSlotInfo)->void:
@@ -69,25 +75,3 @@ func get_item_slot_info()->InventoryItemSlotInfo:
 
 func is_empty()->bool:
 	return _slot_info == null
-
-
-func _on_mouse_entered():
-	emit_signal("slot_mouse_entered", self)
-
-
-func _on_mouse_exited():
-	emit_signal("slot_mouse_exited", self)
-
-#func _on_gui_input(event):
-	#print('button down')
-	#print(event)
-	#print(event.is_pressed())
-	
-#	if event is InputEventMouseButton:
-#		if event.button_index == 1 and event.is_pressed():
-#			print('Left_click')
-#			emit_signal('left_clicked')
-#		elif event.button_index == 1 and not event.is_pressed():
-#			print('Not Left Click')
-
-	

@@ -4,12 +4,13 @@ class_name Actor
 
 @export var move_speed : float = 100 
 @export var starting_direction : Vector2 = Vector2(0, 1)
-@export var inventory: Inventory = Inventory.new()
 @export var move_direction: Vector2 = Vector2(0,0)
 @onready var animation_tree = $AnimationTree
 @onready var state_machine = animation_tree.get("parameters/playback")
-
-
+@onready var Projectiles: Node2D = self.get_tree().get_root().get_node("game_level").find_child("Projectiles")
+const Bullet = preload("res://bullet.tscn")
+var data = PlayerData.new()
+var asd: ParticleProcessMaterial
 
 func _ready():
 	update_animation_parameters(starting_direction)
@@ -38,3 +39,32 @@ func _physics_process(_delta):
 		var collision = get_slide_collision(i)
 		#print("I collided with ", collision)
 	pick_new_state();
+	
+
+	
+func use_skill_id(id: int):
+	if id < data.skills.get_skills().size():
+		shoot_projectile(
+			data.skills.get_skill_id(id)
+		)
+	
+func shoot_projectile(skill: BaseSkill) -> void:
+	
+	var bullet = Bullet.instantiate()
+	var bullet_rotation = ( get_global_mouse_position() - self.global_position ).normalized()
+
+
+	Projectiles.add_child(bullet)
+	
+	
+	print(skill.name)
+	print(skill.projectile)
+	
+	
+	bullet.change_sprite(skill.projectile, skill)
+	
+
+		
+	bullet.global_position = self.global_position
+	bullet.rotation = bullet_rotation.angle() + PI/2
+	bullet.shoot(bullet_rotation, 100, true)

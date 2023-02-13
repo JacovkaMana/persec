@@ -1,11 +1,15 @@
-AnimatedSprite2D
-TextureRect
-Panel
+CPUParticles2D
+Node2D
 VBoxContainer
+TextureRect
 Label
+Control
+HBoxContainer
+Panel
+TextureButton
+AnimatedSprite2D
 Button
 AnimationPlayer
-Node2D
 Node
 Window
 CanvasLayer
@@ -24,7 +28,4 @@ CanvasModulate
 DirectionalLight2D
 MarginContainer
 GridContainer
-TextureButton
 ColorRect
-Control
-HBoxContainer

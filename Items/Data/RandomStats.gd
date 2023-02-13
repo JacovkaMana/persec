@@ -8,6 +8,26 @@ var rarity_chances: Dictionary = {
 	Enums.ERarity.Legendary : 2.5,	 
 }
 
+var rarity_colors: Dictionary = {
+	Enums.ERarity.Common : Color8(225,225,225),	 
+	Enums.ERarity.Uncommon : Color8(135,255,135),	 
+	Enums.ERarity.Rare : Color8(135,135,255),	 
+	Enums.ERarity.Epic : Color8(225,135,255),	 
+	Enums.ERarity.Legendary : Color8(255,225,135),	 
+}
+
+var type_colors: Dictionary = {
+	Enums.EDamageType.SLASH : Color8(225,225,225),
+	Enums.EDamageType.PIERCE : Color8(225,225,225),
+	Enums.EDamageType.BLUNT : Color8(225,225,225),
+	Enums.EDamageType.FIRE : Color8(255,70,70),
+	Enums.EDamageType.ICE : Color8(70,160,225),
+	Enums.EDamageType.WIND : Color8(225,225,255),
+	Enums.EDamageType.EARTH : Color8(70,255,70),
+	Enums.EDamageType.THUNDER : Color8(255,225,135),
+	Enums.EDamageType.WATER : Color8(135,135,255),
+}
+
 var weapon_damagetype: Dictionary= {
 	Enums.EWeaponSubtype.SWORD : Enums.EDamageType.SLASH,
 	Enums.EWeaponSubtype.AXE : Enums.EDamageType.SLASH,

@@ -6,11 +6,9 @@ signal moved_item_to_chest(item: Item, count: int)
 signal added_item(item: Item)
 signal updated_item(item: Item)
 signal removed_item(item: Item, delete: bool)
-signal equip_item_changed(slot_type: Enums.EEquipmentSlot, 
-		from_item_slot: InventoryItemSlotInfo, to_item_slot: InventoryItemSlotInfo)
+signal equip_item_changed(slot_type: Enums.EEquipmentSlot, item_slot)
 
 var _inventory: Array[Item]
-var _skills: Array[BaseSkill]
 var _equipment: Dictionary = {
 	Enums.EEquipmentSlot.L_HAND: null,
 	Enums.EEquipmentSlot.R_HAND: null,
@@ -30,13 +28,7 @@ var _equipment: Dictionary = {
 	Enums.EEquipmentSlot.CONSUMABLE_6: null,
 }
 
-var _stats: Dictionary = {
-	Enums.EStat.STRENGTH: null,
-	Enums.EStat.DEXTERITY: null,
-	Enums.EStat.CONSTITUTION: null,
-	Enums.EStat.INTELLIGENCE: null,
-	Enums.EStat.PERCEPTION: null,	
-}
+
 
 var _is_initialize: bool = false
 
@@ -91,6 +83,7 @@ func equip_item(item: Item)->bool:
 		
 	emit_signal("equip_item_changed", slot_type, item)
 	return true
+	
 
 func unequip_slot(slot_type: Enums.EEquipmentSlot)->bool:	
 	
@@ -103,7 +96,6 @@ func unequip_slot(slot_type: Enums.EEquipmentSlot)->bool:
 		
 	else:
 		return false
-
 
 
 
@@ -130,9 +122,6 @@ func get_inventory_items_by_type(item_type: Enums.EItemType)->Array: #[Inventory
 	return out
 	
 
-func get_skills()->Array:
-	return _skills
-	
 
 
 

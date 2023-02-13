@@ -1,6 +1,7 @@
 extends Node
 
 enum EWeaponSubtype {
+	NONE = 0,
 	SWORD,
 	AXE,
 	SPEAR,
@@ -11,6 +12,7 @@ enum EWeaponSubtype {
 }
 
 enum ERarity {
+	NONE = 0,
 	Common,
 	Uncommon,
 	Rare,
@@ -21,12 +23,12 @@ enum ERarity {
 }
 
 enum EStatus {
-	STANDART = 0,
+	NONE = 0,
 	BURNING,
 }
 
 enum EDamageType {
-	STANDARD = 0,
+	NONE = 0,
 	SLASH,
 	PIERCE,
 	BLUNT,
@@ -34,12 +36,12 @@ enum EDamageType {
 	ICE,
 	WIND,
 	EARTH,
-	LIGHTNING,
+	THUNDER,
 	WATER,
 }
 
 enum ESkillType {
-	STANDARD = 0,
+	NONE = 0,
 	BLADE,
 	POLEARM,
 	BLUNT,
@@ -47,7 +49,7 @@ enum ESkillType {
 }
 
 enum EScalingValue {
-	NO_SCALING = 0,
+	NONE = 0,
 	E,
 	D,
 	C,
@@ -57,6 +59,7 @@ enum EScalingValue {
 }
 
 enum EItemType {
+	NONE = 0,
 	ITEM,
 	WEAPON,
 	ARMOR,

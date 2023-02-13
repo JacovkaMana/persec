@@ -1,39 +1,26 @@
 class_name ItemSlotUI
 extends BaseSlotUI
 
-signal slot_mouse_lclick(slot_index: BaseSlotUI)
-signal slot_mouse_rclick(slot_index: BaseSlotUI)
-signal slot_mouse_release(slot_index: BaseSlotUI, start_position: Vector2)
+signal slot_mouse_lclick(slot: BaseSlotUI)
+signal slot_mouse_rclick(slot: BaseSlotUI)
+signal slot_mouse_release(slot: BaseSlotUI, start_position: Vector2)
 signal slot_mouse_move_check(slot_index)
 
 @onready var equipped_icon: TextureRect = get_node("Content/IsEquippedTextureRect")
 @onready var following: bool = false
 @onready var start_position = self.position
-var actions = ["Equip", "Delete"]
 
 func _ready()->void:
-	connect("gui_input", _on_gui_input)
 	super._ready()
+	connect("gui_input", _on_gui_input)
+	self.set_actions(["Equip", "Delete"])
 
 
-#func _process(delta):
-#	if (following):
-#		follow_cursor()
-
-
-func set_actions(new_actions: Array):
-	actions = new_actions
-
-
-func get_actions():
-	return actions
+func _process(delta):
+	pass
 
 
 func _on_gui_input(event):
-	#print('button down')
-	#print(event)
-	#print(event.is_pressed())
-	#print(event)
 	
 	if event is InputEventMouseButton:
 		if event.is_pressed():

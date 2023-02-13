@@ -35,9 +35,8 @@ func _ready():
 	# Set it as repeat
 	timer.set_one_shot(false)
 
-	# Connect its timeout signal to the function you want to repeat
-	#timer.connect("timeout", self, "random_direction")
-	timer.connect("timeout", random_direction)
+
+	#timer.connect("timeout", random_direction)  SHOOT PEOPLE
 
 	# Add to the tree as child of the current node
 	add_child(timer)
