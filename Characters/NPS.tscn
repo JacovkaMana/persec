@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://chku42sa88b0g"]
 
-[ext_resource type="Texture2D" uid="uid://b8akvltso30hi" path="res://Art/Sprite sheets/8-Directional Gameboy Character Template/loose sprites.png" id="1_tbwhi"]
+[ext_resource type="Texture2D" uid="uid://bgn8fb6jsnab6" path="res://Art/Character/Mage.png" id="2_7cmym"]
 [ext_resource type="Script" path="res://Characters/NPSs.gd" id="2_dirvx"]
 
 [sub_resource type="CSharpScript" id="CSharpScript_sdrb4"]
@@ -35,10 +35,10 @@ states/Start/position = Vector2(202, 108)
 script = ExtResource("2_dirvx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_tbwhi")
+texture = ExtResource("2_7cmym")
 flip_h = true
 hframes = 8
-vframes = 8
+vframes = 9
 script = SubResource("CSharpScript_sdrb4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -20,8 +20,7 @@ var test_color = preload("res://Art/Colors/Ice.tres")
 func _ready():
 	
 	start_pos = self.position
-	#particles
-	print(self)
+
 	
 
 
@@ -30,9 +29,13 @@ func _process(delta):
 	if (moving):
 		var collision_object = move_and_collide(direction*delta*move_speed)
 		if( is_instance_valid(collision_object)):
-			print(collision_object.get_collider())
+			if collision_object.get_collider().get_class() == 'CharacterBody2D':
+				collision_object.get_collider().take_damage(null, null)
+				self.queue_free()
+			elif collision_object.get_collider().get_class() == 'TileMap':
+				self.queue_free()
 			#print(move_and_collide(direction*delta*move_speed))
-			self.queue_free()
+			#self.queue_free()
 	
 	
 	#if( move_and_collide(direction*delta*move_speed):
