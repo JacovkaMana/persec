@@ -6,7 +6,7 @@ class_name Actor
 @export var starting_direction : Vector2 = Vector2(0, 1)
 @export var move_direction: Vector2 = Vector2(0,0)
 @onready var animation_tree = $AnimationTree
-@onready var label = $Label
+@onready var label = $HeadLabel
 @onready var state_machine = animation_tree.get("parameters/playback")
 @onready var Projectiles: Node2D = self.get_tree().get_root().get_node("game_level").find_child("Projectiles")
 const Bullet = preload("res://bullet.tscn")
@@ -14,6 +14,7 @@ var data = PlayerData.new()
 var asd: ParticleProcessMaterial
 @export var walking = true
 var last_move
+var head_timer
 
 func _ready():
 	update_animation_parameters(starting_direction)
@@ -58,7 +59,8 @@ func _physics_process(_delta):
 		#print("I collided with ", collision)
 	pick_new_state();
 	
-
+	if (head_timer):
+		label.text = "%.2f" % (head_timer.time_left)
 	
 func use_skill_id(id: int):
 	if id < data.skills.get_skills().size():
@@ -67,40 +69,45 @@ func use_skill_id(id: int):
 		)
 	
 func shoot_projectile(skill: BaseSkill) -> void:
-	
-	var bullet = Bullet.instantiate()
+	var proj = skill.projectile
+	var bullet = proj.instantiate()
 	var bullet_rotation = ( get_global_mouse_position() - self.global_position ).normalized()
 
-
-	Projectiles.add_child(bullet)
+	if (bullet.moving_projectile):
+		Projectiles.add_child(bullet)
+	else:
+		self.add_child(bullet)
 	
 	
 	print(skill.name)
 	
 	
-	bullet.change_sprite(skill.projectile, skill)
-	
-
-		
+	bullet.change_sprite(skill)		
 	bullet.global_position = self.global_position
 	bullet.rotation = bullet_rotation.angle() + PI/2
-	bullet.shoot(bullet_rotation, 100, true)
+	if (bullet.moving_projectile):
+		bullet.shoot(bullet_rotation, true)
+	else:
+		bullet.shoot(Vector2(0,0), true)
 	
 func take_damage(skill: BaseSkill, strength):
 	hitpoints -= 20
 	self.modulate = Color8(255,0,0,255)
 	
-	var invincible_timer = Timer.new()
-	label.text = '20'
-	label.visible = true
-
-
-	invincible_timer.set_wait_time(1)
-	invincible_timer.set_one_shot(true)
-	invincible_timer.connect("timeout", reset_after_hit)  
-	add_child(invincible_timer)
-	invincible_timer.start()
+	cooldown(1)
 
 func reset_after_hit():
 	self.modulate = Color8(255,255,255,255)
 	label.visible = false
+	head_timer = null
+
+func cooldown(time):
+	head_timer = Timer.new()
+	label.visible = true
+
+
+	head_timer.set_wait_time(time)
+	head_timer.set_one_shot(true)
+	head_timer.connect("timeout", reset_after_hit)  
+	add_child(head_timer)
+	head_timer.start()

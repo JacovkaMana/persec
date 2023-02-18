@@ -28,14 +28,16 @@ func _init():
 	skills['Slash'].name = 'Slash'
 	skills['Slash'].damage_type = Enums.EDamageType.SLASH
 	skills['Slash'].type = Enums.ESkillType.BLADE
+	skills['Slash'].projectile = load("res://PreRendered/Projectiles/Slash.tscn")
 	
 	skills['Fireball'] = AttackSkill.new()
 	skills['Fireball'].name = 'Fireball'
 	skills['Fireball'].damage_type = Enums.EDamageType.FIRE
 	skills['Fireball'].type = Enums.ESkillType.MAGIC
-	skills['Fireball'].projectile = preload("res://Art/Masks/Ball.png")
+	skills['Fireball'].projectile = load("res://PreRendered/Projectiles/Ball.tscn")
 	
 	skills['Ice Slash'] = AttackSkill.new()
 	skills['Ice Slash'].name = 'Ice Slash'
 	skills['Ice Slash'].type = Enums.ESkillType.MAGIC
 	skills['Ice Slash'].damage_type = Enums.EDamageType.ICE
+	skills['Ice Slash'].projectile = load("res://PreRendered/Projectiles/MovingSlash.tscn")

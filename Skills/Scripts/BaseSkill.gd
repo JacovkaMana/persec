@@ -4,7 +4,8 @@ extends Resource
 
 @export var name: String = "name"
 @export var icon: Texture2D = preload("res://Art/Skills/test.png")
-@export var projectile: Texture2D = preload("res://Art/Masks/test_mask.png")
+#@export var projectile: Texture2D = preload("res://Art/Masks/test_mask.png")
+@export var projectile = load("res://bullet.tscn")
 @export var description: String = "description"
 @export var type: Enums.ESkillType = Enums.ESkillType.NONE
 @export var base_cost: float = 0.0

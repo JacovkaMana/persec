@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bgn8fb6jsnab6" path="res://Art/Character/Mage.png" id="2_3wavm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1d5dn"]
-size = Vector2(34, 55)
+size = Vector2(29.75, 54.5)
 
 [sub_resource type="GDScript" id="GDScript_8slxo"]
 script/source = "extends CollisionShape2D
@@ -314,7 +314,7 @@ hframes = 8
 vframes = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 4)
+position = Vector2(-1, 4)
 shape = SubResource("RectangleShape2D_1d5dn")
 script = SubResource("GDScript_8slxo")
 
