@@ -12,27 +12,27 @@ _global_script_classes=[{
 "base": "CharacterBody2D",
 "class": &"Actor",
 "language": &"GDScript",
-"path": "res://Characters/Actor.gd"
+"path": "res://Scripts/Character_scripts/Actor.gd"
 }, {
 "base": "BaseUndurableItem",
 "class": &"ArmorItem",
 "language": &"GDScript",
-"path": "res://Items/Scripts/ArmorItem.gd"
+"path": "res://Scripts/Item_scripts/ArmorItem.gd"
 }, {
 "base": "BaseSkill",
 "class": &"AttackSkill",
 "language": &"GDScript",
-"path": "res://Skills/Scripts/AttackSkill.gd"
+"path": "res://Scripts/Skill_scripts/AttackSkill.gd"
 }, {
 "base": "BaseStackableItem",
 "class": &"BaseConsumableItem",
 "language": &"GDScript",
-"path": "res://Items/Scripts/BaseConsumableItem.gd"
+"path": "res://Scripts/Item_scripts/BaseConsumableItem.gd"
 }, {
 "base": "Resource",
 "class": &"BaseSkill",
 "language": &"GDScript",
-"path": "res://Skills/Scripts/BaseSkill.gd"
+"path": "res://Scripts/Skill_scripts/BaseSkill.gd"
 }, {
 "base": "TextureButton",
 "class": &"BaseSlotUI",
@@ -42,17 +42,17 @@ _global_script_classes=[{
 "base": "Item",
 "class": &"BaseStackableItem",
 "language": &"GDScript",
-"path": "res://Items/Scripts/BaseStackableItem.gd"
+"path": "res://Scripts/Item_scripts/BaseStackableItem.gd"
 }, {
 "base": "Item",
 "class": &"BaseUndurableItem",
 "language": &"GDScript",
-"path": "res://Items/Scripts/BaseUndurableItem.gd"
+"path": "res://Scripts/Item_scripts/BaseUndurableItem.gd"
 }, {
 "base": "ArmorItem",
 "class": &"BootsItem",
 "language": &"GDScript",
-"path": "res://Items/Scripts/BootsItem.gd"
+"path": "res://Scripts/Item_scripts/BootsItem.gd"
 }, {
 "base": "BaseSlotUI",
 "class": &"EquipSlotUI",
@@ -62,77 +62,82 @@ _global_script_classes=[{
 "base": "ArmorItem",
 "class": &"HelmItem",
 "language": &"GDScript",
-"path": "res://Items/Scripts/HelmItem.gd"
+"path": "res://Scripts/Item_scripts/HelmItem.gd"
 }, {
 "base": "Resource",
 "class": &"Inventory",
 "language": &"GDScript",
-"path": "res://Inventory/Scripts/Inventory.gd"
+"path": "res://Scripts/Inventory_scripts/Inventory.gd"
 }, {
 "base": "Object",
 "class": &"InventoryItemSlotInfo",
 "language": &"GDScript",
-"path": "res://Inventory/Data/InventoryItemSlotInfo.gd"
+"path": "res://Scripts/Inventory_scripts/InventoryItemSlotInfo.gd"
 }, {
 "base": "Resource",
 "class": &"Item",
 "language": &"GDScript",
-"path": "res://Items/Scripts/Item.gd"
+"path": "res://Scripts/Item_scripts/Item.gd"
 }, {
 "base": "Object",
 "class": &"ItemProperty",
 "language": &"GDScript",
-"path": "res://Inventory/Data/ItemProperty.gd"
+"path": "res://Scripts/Inventory_scripts/ItemProperty.gd"
 }, {
 "base": "Node",
 "class": &"ItemSlotInfo",
 "language": &"GDScript",
-"path": "res://Inventory/Data/ItemSlotInfo.gd"
+"path": "res://Scripts/Inventory_scripts/ItemSlotInfo.gd"
 }, {
 "base": "BaseSlotUI",
 "class": &"ItemSlotUI",
 "language": &"GDScript",
 "path": "res://Scripts/UI_scripts/ItemSlotUI.gd"
 }, {
+"base": "CharacterBody2D",
+"class": &"MeleeActor",
+"language": &"GDScript",
+"path": "res://Scripts/Character_scripts/MeleeActor.gd"
+}, {
 "base": "Resource",
 "class": &"Modifier",
 "language": &"GDScript",
-"path": "res://Items/Data/ModifierScript.gd"
+"path": "res://Scripts/Item_scripts/ModifierScript.gd"
 }, {
 "base": "Item",
 "class": &"NoteItem",
 "language": &"GDScript",
-"path": "res://Items/Scripts/NoteItem.gd"
+"path": "res://Scripts/Item_scripts/NoteItem.gd"
 }, {
 "base": "BaseStackableItem",
 "class": &"OtherItem",
 "language": &"GDScript",
-"path": "res://Items/Scripts/OtherItem.gd"
-}, {
-"base": "Actor",
-"class": &"Player",
-"language": &"GDScript",
-"path": "res://Characters/player.gd"
+"path": "res://Scripts/Item_scripts/OtherItem.gd"
 }, {
 "base": "Resource",
 "class": &"PlayerData",
 "language": &"GDScript",
-"path": "res://Characters/PlayerData.gd"
+"path": "res://Scripts/Character_scripts/PlayerData.gd"
+}, {
+"base": "Actor",
+"class": &"PlayerScript",
+"language": &"GDScript",
+"path": "res://Scripts/Character_scripts/player.gd"
 }, {
 "base": "Resource",
 "class": &"Skills",
 "language": &"GDScript",
-"path": "res://Skills/Skills.gd"
+"path": "res://Scripts/Skill_scripts/Skills.gd"
 }, {
 "base": "BaseSkill",
 "class": &"StatusSkill",
 "language": &"GDScript",
-"path": "res://Skills/Scripts/StatusSkill.gd"
+"path": "res://Scripts/Skill_scripts/StatusSkill.gd"
 }, {
 "base": "BaseUndurableItem",
 "class": &"WeaponItem",
 "language": &"GDScript",
-"path": "res://Items/Scripts/WeaponItem.gd"
+"path": "res://Scripts/Item_scripts/WeaponItem.gd"
 }]
 _global_script_class_icons={
 "Actor": "",
@@ -152,11 +157,12 @@ _global_script_class_icons={
 "ItemProperty": "",
 "ItemSlotInfo": "",
 "ItemSlotUI": "",
+"MeleeActor": "",
 "Modifier": "",
 "NoteItem": "",
 "OtherItem": "",
-"Player": "",
 "PlayerData": "",
+"PlayerScript": "",
 "Skills": "",
 "StatusSkill": "",
 "WeaponItem": ""
@@ -165,17 +171,16 @@ _global_script_class_icons={
 [application]
 
 config/name="RoguelikeTest"
-run/main_scene="res://Levels/game_level.tscn"
+run/main_scene="res://Scenes/SceneManager.tscn"
 config/features=PackedStringArray("4.0", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-Enums="*res://Inventory/Data/GlobalEnums.gd"
-StackableItems="*res://Items/Stackable/Stackable_Items.gd"
-RandomStats="*res://Items/Data/RandomStats.gd"
-Ui="*res://Scenes/UI.tscn"
-GlobalSkills="*res://Skills/Data/GlobalSkills.gd"
+Enums="*res://Scripts/Global/GlobalEnums.gd"
+RandomStats="*res://Scripts/Global/RandomStats.gd"
+StackableItems="*res://Scripts/Global/Stackable_Items.gd"
+GlobalSkills="*res://Scripts/Global/GlobalSkills.gd"
 
 [display]
 

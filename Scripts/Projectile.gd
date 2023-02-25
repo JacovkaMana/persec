@@ -10,6 +10,7 @@ var direction: Vector2
 @onready var texture_light: PointLight2D = $TextureLight
 @onready var light: PointLight2D = $PointLight
 
+
 #@onready var particles = $GPUParticles2D
 #@onready var state_machine = animation_tree.get("parameters/playback")
 
@@ -17,9 +18,13 @@ var direction: Vector2
 @export var range: float
 @export var moving_projectile: bool = false
 @export var animated: bool = false
+@export var projectile_owner = null
 
+var skill = null
 var collision_object = null
 var test_color = preload("res://Art/Colors/Ice.tres")
+
+@onready var SceneManager = self.get_tree().get_root().find_child("SceneManager", true, false)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
@@ -46,19 +51,25 @@ func _ready():
 func _physics_process(_delta):
 	if (moving):
 		collision_object = move_and_collide(direction*_delta*move_speed)
-		if( is_instance_valid(collision_object)):
+		
+		if( is_instance_valid(collision_object) and not collision_object.get_collider() == projectile_owner):
 			if collision_object.get_collider().get_class() == 'CharacterBody2D':
 				collision_object.get_collider().take_damage(null, null)
+				
+				if (not moving_projectile):
+					trigger_melee()
+					
 				self.queue_free()
 			elif collision_object.get_collider().get_class() == 'TileMap':
 				self.queue_free()
 
 	
 	
-func shoot(where: Vector2, animated: bool = false):
+func shoot(where: Vector2, animated: bool = false, who = null):
 	#state_machine.travel("Start")
 	moving = true
 	direction = where.normalized()
+	projectile_owner = who
 
 		
 	if (not animated):
@@ -96,3 +107,8 @@ func change_sprite(skill: BaseSkill):
 func delete(anim_name):
 	print('delete triggered')
 	self.queue_free()
+
+func trigger_melee():
+	SceneManager.add_melee()
+	
+	

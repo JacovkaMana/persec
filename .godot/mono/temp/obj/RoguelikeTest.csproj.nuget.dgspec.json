@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "G:\\persec-ui-dev\\RoguelikeTest.csproj": {}
+    "G:\\persec-main\\RoguelikeTest.csproj": {}
   },
   "projects": {
-    "G:\\persec-ui-dev\\RoguelikeTest.csproj": {
+    "G:\\persec-main\\RoguelikeTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\persec-ui-dev\\RoguelikeTest.csproj",
+        "projectUniqueName": "G:\\persec-main\\RoguelikeTest.csproj",
         "projectName": "RoguelikeTest",
-        "projectPath": "G:\\persec-ui-dev\\RoguelikeTest.csproj",
+        "projectPath": "G:\\persec-main\\RoguelikeTest.csproj",
         "packagesPath": "C:\\Users\\Jacov\\.nuget\\packages\\",
-        "outputPath": "G:\\persec-ui-dev\\.godot\\mono\\temp\\obj\\",
+        "outputPath": "G:\\persec-main\\.godot\\mono\\temp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Users\\Jacov\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder",

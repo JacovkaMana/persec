@@ -14,7 +14,7 @@ extends Control
 	Enums.EEquipmentSlot.ACCESSORY_1: $LeftCharacterVBox/RingPanel1,
 	Enums.EEquipmentSlot.ACCESSORY_2: $LeftCharacterVBox/RingPanel2,
 }
-var EquipButton = preload('res://Inventory/EquipButton.tscn')
+var EquipButton = preload("res://Scenes/Inventory/EquipButton.tscn")
 var node
 var active_slot_rclick: BaseSlotUI = null
 var active_item_lclick: Item = null

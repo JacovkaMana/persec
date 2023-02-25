@@ -1,0 +1,152 @@
+[gd_scene load_steps=11 format=3 uid="uid://ds3vau6cpwq73"]
+
+[ext_resource type="Script" path="res://Scripts/Torch.gd" id="1_xqod5"]
+[ext_resource type="Texture2D" uid="uid://l72iu1ipn60t" path="res://Art/UI/HugeProbe.png" id="2_xjkaq"]
+[ext_resource type="Texture2D" uid="uid://bawwpex4hyeh4" path="res://Art/Textures/64/alpha/spotlight_1.png" id="3_nln8m"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gra52"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_i82tn"]
+offsets = PackedFloat32Array(0.00809717, 0.558704, 0.995951)
+colors = PackedColorArray(1, 0.513726, 0, 1, 1, 0, 0, 1, 0.1, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7rwlc"]
+gradient = SubResource("Gradient_i82tn")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cuvte"]
+lifetime_randomness = 0.58
+emission_shape = 1
+emission_sphere_radius = 3.0
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 0.0
+gravity = Vector3(0, -1, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+linear_accel_min = 1.0
+linear_accel_max = 1.0
+tangential_accel_min = -1.0
+tangential_accel_max = 1.0
+scale_min = 0.2
+scale_max = 0.2
+color_ramp = SubResource("GradientTexture1D_7rwlc")
+hue_variation_min = -0.02
+hue_variation_max = 0.05
+turbulence_noise_strength = 0.73
+turbulence_noise_scale = 7.44
+turbulence_noise_speed = Vector3(0.5, 1, 0)
+turbulence_noise_speed_random = 0.54
+turbulence_influence_max = 0.17
+
+[sub_resource type="Animation" id="Animation_clro7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D:texture_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PointLight2D:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.78]
+}
+
+[sub_resource type="Animation" id="Animation_eln0u"]
+resource_name = "torch_loop"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D:texture_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.1, 0.2, 0.6, 1, 1.5, 2),
+"transitions": PackedFloat32Array(0.965936, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.3, 0.27, 0.3, 0.3, 0.27, 0.3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PointLight2D:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-0.1, 0.2, 0.6, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [2.78, 2.4, 2.78, 2.78, 2.3, 2.78]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fuq6g"]
+_data = {
+"RESET": SubResource("Animation_clro7"),
+"torch_loop": SubResource("Animation_eln0u")
+}
+
+[node name="Torch" type="Node2D"]
+position = Vector2(-144, -109)
+script = ExtResource("1_xqod5")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+z_index = 3
+color = Color(0.607843, 0.133333, 0.0431373, 1)
+energy = 2.78
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+shadow_filter_smooth = 44.0
+shadow_item_cull_mask = 3
+texture = ExtResource("2_xjkaq")
+texture_scale = 0.3
+height = 1.0
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+z_index = 3
+color = Color(0.607843, 0.133333, 0.0431373, 1)
+energy = 1.65
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+shadow_filter_smooth = 44.0
+shadow_item_cull_mask = 3
+texture = ExtResource("2_xjkaq")
+texture_scale = 0.5
+height = 1.0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_gra52")
+amount = 50
+lifetime = 2.5
+visibility_rect = Rect2(-237.326, -272.462, 472.127, 498.424)
+trail_length_secs = 5.07
+trail_sections = 12
+trail_section_subdivisions = 6
+process_material = SubResource("ParticleProcessMaterial_cuvte")
+texture = ExtResource("3_nln8m")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+reset_on_save = false
+playback_speed = 1.5
+libraries = {
+"": SubResource("AnimationLibrary_fuq6g")
+}

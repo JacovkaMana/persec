@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=3 uid="uid://dbksnam8cuw3o"]
+[gd_scene load_steps=76 format=3 uid="uid://dbksnam8cuw3o"]
 
 [ext_resource type="Script" path="res://Scripts/UI_scripts/CharacterUI.gd" id="1_8tod6"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/UI.gd" id="1_cvjfy"]
@@ -17,16 +17,15 @@
 [ext_resource type="Texture2D" uid="uid://dh52y5x0l4e52" path="res://Art/UI/UI_InventoryMenuIcon.png" id="8_cb6qa"]
 [ext_resource type="Material" uid="uid://cwiu31fr6bym" path="res://Art/Shaders/UI_ShadowShader.tres" id="8_fara6"]
 [ext_resource type="Texture2D" uid="uid://ca0lfmfiallgi" path="res://Art/UI/MenuClose_Hover.png" id="8_h5i0i"]
-[ext_resource type="PackedScene" uid="uid://b5x1xj36nl8hw" path="res://Inventory/ItemButton.tscn" id="9_f8cn7"]
+[ext_resource type="PackedScene" uid="uid://b5x1xj36nl8hw" path="res://Scenes/Inventory/ItemButton.tscn" id="9_f8cn7"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/CloseButton.gd" id="9_lvtlu"]
-[ext_resource type="Texture2D" uid="uid://dqdo2t34wtnlt" path="res://Art/UI/Item_Shield.png" id="11_3kohk"]
 [ext_resource type="Texture2D" uid="uid://cxsmrfblvux75" path="res://Art/UI/Amulet.png" id="11_72ij6"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/CharacterMenuPanel.gd" id="11_usa2v"]
 [ext_resource type="Texture2D" uid="uid://bs3yn2n4cgxgk" path="res://Art/UI/Ring.png" id="12_k2607"]
 [ext_resource type="Texture2D" uid="uid://dw3xbfgh77pij" path="res://Art/UI/Item_Hover.png" id="12_teqho"]
 [ext_resource type="Texture2D" uid="uid://dcodbjst37jag" path="res://Art/UI/Misc.png" id="13_aduk8"]
 [ext_resource type="Texture2D" uid="uid://ccapmy3ecf4or" path="res://Art/UI/UI_ItemDesc.png" id="13_esgr1"]
-[ext_resource type="PackedScene" uid="uid://cekpuyet8xdyi" path="res://Inventory/EquipButton.tscn" id="13_i4h7w"]
+[ext_resource type="PackedScene" uid="uid://cekpuyet8xdyi" path="res://Scenes/Inventory/EquipButton.tscn" id="13_i4h7w"]
 [ext_resource type="Texture2D" uid="uid://bw8r3ppeekyk5" path="res://Art/UI/Helmet.png" id="14_f3qx8"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/ItemDescPanel.gd" id="14_k6vq4"]
 [ext_resource type="Texture2D" uid="uid://bcrf2c3610tq7" path="res://Art/UI/Armor.png" id="15_58hf7"]
@@ -121,12 +120,6 @@ font = ExtResource("5_ai818")
 font_size = 8
 font_color = Color(0, 0, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_ns7t6"]
-font = ExtResource("5_ai818")
-font_size = 8
-outline_color = Color(0.921569, 0.854902, 0.894118, 1)
-shadow_offset = Vector2(0, 0)
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_to568"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e4ms3"]
@@ -174,6 +167,7 @@ region_rect = Rect2(0, 0, 40, 10)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5cgrn"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
+layer = 3
 
 [node name="HUD" type="Control" parent="."]
 custom_minimum_size = Vector2i(640, 360)
@@ -783,6 +777,7 @@ offset_bottom = 188.0
 texture = ExtResource("5_mowgk")
 
 [node name="UI" type="Control" parent="."]
+visible = false
 clip_contents = true
 custom_minimum_size = Vector2i(640, 360)
 layout_mode = 3
@@ -1169,34 +1164,6 @@ theme_override_constants/v_separation = 3
 columns = 5
 
 [node name="ItemButton" parent="UI/Inventory/InventoryGrid" instance=ExtResource("9_f8cn7")]
-
-[node name="Content2" type="Control" parent="UI/Inventory/InventoryGrid/ItemButton"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="ItemImage" type="TextureRect" parent="UI/Inventory/InventoryGrid/ItemButton/Content2"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("11_3kohk")
-
-[node name="ItemCount" type="Label" parent="UI/Inventory/InventoryGrid/ItemButton/Content2"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "2"
-label_settings = SubResource("LabelSettings_ns7t6")
-horizontal_alignment = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/Inventory"]
 offset_left = 35.0

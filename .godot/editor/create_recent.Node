@@ -1,3 +1,10 @@
+TextureRect
+Label
+Control
+Sprite2D
+Node2D
+CanvasLayer
+Camera2D
 Timer
 AnimationPlayer
 CollisionShape2D
@@ -5,21 +12,15 @@ CollisionPolygon2D
 AnimatedSprite2D
 StaticBody2D
 PointLight2D
-Sprite2D
-Label
 AnimationTree
 CPUParticles2D
-Node2D
 VBoxContainer
-TextureRect
-Control
 HBoxContainer
 Panel
 TextureButton
 Button
 Node
 Window
-CanvasLayer
 RigidBody2D
 GPUParticles2D
 WorldEnvironment
@@ -29,4 +30,3 @@ CanvasModulate
 DirectionalLight2D
 MarginContainer
 GridContainer
-ColorRect

@@ -1,0 +1,240 @@
+[gd_scene load_steps=25 format=3 uid="uid://dc3q57hqxvib5"]
+
+[ext_resource type="Script" path="res://Scripts/bullet.gd" id="1_u3jb0"]
+[ext_resource type="Material" uid="uid://btonot8le8v5q" path="res://Art/Shaders/SkillShader.tres" id="2_7kl2l"]
+[ext_resource type="Texture2D" uid="uid://c35jevunk55x" path="res://Art/Masks/test_mask.png" id="3_u3ne0"]
+[ext_resource type="Texture2D" uid="uid://l72iu1ipn60t" path="res://Art/UI/HugeProbe.png" id="4_lk8pi"]
+[ext_resource type="Texture2D" uid="uid://bmw2s4ps8kfm8" path="res://Art/Textures/particle_examples/floaty_32.png" id="5_s7a2h"]
+[ext_resource type="Gradient" uid="uid://byrjue6dmtgmk" path="res://Art/Colors/Fire.tres" id="6_ap1n4"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_eyvmk"]
+
+[sub_resource type="Animation" id="Animation_f001w"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bullet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_qejfo"]
+resource_name = "end"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bullet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_apneo"]
+resource_name = "middle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bullet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_jb0t4"]
+resource_name = "test_anim"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bullet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qhvwb"]
+_data = {
+"RESET": SubResource("Animation_f001w"),
+"end": SubResource("Animation_qejfo"),
+"middle": SubResource("Animation_apneo"),
+"test_anim": SubResource("Animation_jb0t4")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_50mwj"]
+animation = &"end"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yswop"]
+animation = &"middle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rinrx"]
+animation = &"test_anim"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pe62y"]
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6051m"]
+xfade_time = 1.0
+switch_mode = 1
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ya11d"]
+states/end/node = SubResource("AnimationNodeAnimation_50mwj")
+states/end/position = Vector2(484, 195)
+states/middle/node = SubResource("AnimationNodeAnimation_yswop")
+states/middle/position = Vector2(541, 100)
+states/test_anim/node = SubResource("AnimationNodeAnimation_rinrx")
+states/test_anim/position = Vector2(383, 100)
+transitions = ["Start", "test_anim", SubResource("AnimationNodeStateMachineTransition_pe62y"), "middle", "end", SubResource("AnimationNodeStateMachineTransition_6051m")]
+graph_offset = Vector2(-56, 32)
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_srtgj"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_j0ma4"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 7
+particles_anim_v_frames = 7
+particles_anim_loop = false
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5gx52"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 7
+particles_anim_v_frames = 7
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_d4mi7"]
+offsets = PackedFloat32Array(0, 0.502024, 0.8583)
+colors = PackedColorArray(0.88, 0.438973, 0.0264, 1, 0.741176, 0.0470588, 0, 1, 0.33, 0.136675, 0.0165, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ms604"]
+gradient = SubResource("Gradient_d4mi7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_d8hob"]
+emission_shape = 4
+emission_point_count = 645
+particle_flag_disable_z = true
+direction = Vector3(0, 1, 0)
+spread = 0.0
+gravity = Vector3(0, 10, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+color_ramp = SubResource("GradientTexture1D_ms604")
+hue_variation_min = -0.1
+hue_variation_max = 0.1
+turbulence_enabled = true
+turbulence_noise_scale = 7.0
+turbulence_noise_speed = Vector3(0.4, 1, 0.4)
+turbulence_noise_speed_random = 0.24
+turbulence_influence_min = 1.0
+turbulence_influence_max = 1.0
+
+[node name="Node2D" type="StaticBody2D"]
+z_index = 20
+collision_layer = 0
+collision_mask = 8
+physics_material_override = SubResource("PhysicsMaterial_eyvmk")
+script = ExtResource("1_u3jb0")
+
+[node name="Bullet" type="Sprite2D" parent="."]
+material = ExtResource("2_7kl2l")
+z_index = 3
+z_as_relative = false
+texture = ExtResource("3_u3ne0")
+
+[node name="TextureLight" type="PointLight2D" parent="."]
+light_mask = 3
+color = Color(0.984314, 0.380392, 0.0862745, 1)
+energy = 2.65
+blend_mode = 2
+range_item_cull_mask = 3
+shadow_color = Color(0, 0, 0, 1)
+shadow_filter_smooth = 44.0
+shadow_item_cull_mask = 3
+texture = ExtResource("3_u3ne0")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-1, -16)
+color = Color(0.984314, 0.380392, 0.0862745, 1)
+energy = 0.35
+range_item_cull_mask = 3
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+shadow_filter_smooth = 44.0
+shadow_item_cull_mask = 3
+texture = ExtResource("4_lk8pi")
+texture_scale = 0.42
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+reset_on_save = false
+libraries = {
+"": SubResource("AnimationLibrary_qhvwb")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_ya11d")
+anim_player = NodePath("../AnimationPlayer")
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_srtgj")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(9, -34.9, 9, -33.6, 21, -27.6, 21, -26.4, 27, -20.4, 27, -18.3, 31, -12.3, 31, -8, 32.3, -3, 27, -3, 27, -6.6, 19.6, -15, 17.6, -15, 14.6, -18, 11.8, -18, 4.8, -21, -7, -21, -7, -20.2, -17, -18.2, -17, -17.3, -22, -15.3, -22, -14.5, -28, -9.5, -28, -7.4, -30, -6.4, -30, -3.8, -31.3, 0, -32.6, 0, -33.8, 1.2, -35, 0.700001, -35, -13, -33.6, -13, -27.6, -25, -26.4, -25, -20.4, -31, -18.3, -31, -12.3, -35, -9, -35, -9, -36.1)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_j0ma4")
+position = Vector2(-50, -50)
+amount = 100
+lifetime = 0.5
+preprocess = 0.1
+fixed_fps = 30
+texture = ExtResource("5_s7a2h")
+emission_shape = 4
+emission_points = PackedVector2Array()
+emission_colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+direction = Vector2(0, 1)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+color_ramp = ExtResource("6_ap1n4")
+hue_variation_min = -0.1
+hue_variation_max = 0.1
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+visible = false
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_5gx52")
+position = Vector2(0, -16)
+z_index = 3
+z_as_relative = false
+amount = 200
+lifetime = 0.5
+preprocess = 0.1
+interpolate = false
+visibility_rect = Rect2(-215.675, -255.845, 528.594, 522.844)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_d8hob")
+texture = ExtResource("5_s7a2h")

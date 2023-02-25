@@ -17,8 +17,7 @@ extends Control
 @onready var active_slot_rclick: BaseSlotUI = null
 @onready var actions_panel: Panel = get_tree().get_root().find_child("ItemActionsPanel", true, false)
 @onready var panel_hover = false
-var ItemPanel = preload('res://Inventory/ItemButton.tscn')
-var ItemShader = preload("res://Art/Shaders/Outline.gdshader")
+var ItemButton = preload("res://Scenes/Inventory/ItemButton.tscn")
 # !!!!! При закрытии закрывается ItemActionsPanel, если она над этой менюшкой!!!
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -57,26 +56,26 @@ func _ready():
 func _on_new_item(new_item)->bool:
 	#print(new_item)
 	
-	var newItemPanel = ItemPanel.instantiate()
+	var newItemButton = ItemButton.instantiate()
 	
-	inventory_grid.add_child(newItemPanel)
+	inventory_grid.add_child(newItemButton)
 	
-	newItemPanel.set_item(new_item)
-	newItemPanel.find_child("ItemImage").texture = new_item.sprite
+	newItemButton.set_item(new_item)
+	newItemButton.find_child("ItemImage").texture = new_item.sprite
 	#var mater = ShaderMaterial.new()
 	#mater.shader = ItemShader
 	#mater.set_shader_parameter('color',RandomStats.rarity_colors[new_item.rarity])
-	#newItemPanel.find_child("ItemImage").material = mater
+	#newItemButton.find_child("ItemImage").material = mater
 	if (new_item.is_stackable()):
-		newItemPanel.find_child("ItemCount").text = str(new_item.count)
-		newItemPanel.find_child("ItemCount").visible = true
+		newItemButton.find_child("ItemCount").text = str(new_item.count)
+		newItemButton.find_child("ItemCount").visible = true
 		
 		
 	
-	newItemPanel.connect("slot_mouse_lclick", _on_slot_mouse_lclick)
-	newItemPanel.connect("slot_mouse_rclick", _on_slot_mouse_rclick)
-	newItemPanel.connect("slot_mouse_release", _on_slot_mouse_release)
-	newItemPanel.connect("slot_mouse_move_check", _on_slot_mouse_move)
+	newItemButton.connect("slot_mouse_lclick", _on_slot_mouse_lclick)
+	newItemButton.connect("slot_mouse_rclick", _on_slot_mouse_rclick)
+	newItemButton.connect("slot_mouse_release", _on_slot_mouse_release)
+	newItemButton.connect("slot_mouse_move_check", _on_slot_mouse_move)
 	
 	return true
 	
