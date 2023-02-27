@@ -1,5 +1,13 @@
 extends Node
 
+enum ECharacterState {
+	NONE = 0,
+	IDLE,
+	ROAMING,
+	SEARCHING,
+	FIGHTING,
+}
+
 enum EWeaponSubtype {
 	NONE = 0,
 	SWORD,

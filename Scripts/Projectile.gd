@@ -80,7 +80,8 @@ func change_sprite(skill: BaseSkill):
 	#to = skill.projectile
 #	sprite.set_texture(to)
 #	texture_light.set_texture(to)
-	texture_light.color = RandomStats.type_colors[skill.damage_type]
+	texture_light.color = RandomStats.type_colors[skill.damage_type] # too many lights
+	sprite.self_modulate = RandomStats.type_colors[skill.damage_type]
 	light.color = RandomStats.type_colors[skill.damage_type]
 	
 	if (skill.type == Enums.ESkillType.MAGIC):

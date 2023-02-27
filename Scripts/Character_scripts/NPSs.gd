@@ -1,16 +1,23 @@
 extends Actor
 
-enum NPS_STATE { IDLE, WALK }
+
   
 @export var walk_radius: float = 50
 var last_direction_change: float = 0
+@onready var raycast: ShapeCast2D = $RayCast
+@onready var path: Path2D = $Path2D
+@onready var path_follow: PathFollow2D = $Path2D/PathFollow2D
+@onready var path_player = $PathPlayer
+@onready var vision: Area2D = $Vision
+@onready var player = get_tree().get_root().find_child("Player", true, false)
 
-
-var current_state : NPS_STATE = NPS_STATE.IDLE
+var current_state : Enums.ECharacterState = Enums.ECharacterState.ROAMING
 var start_pos: Vector2 = Vector2.ZERO
 
 
 var select_material = preload("res://Art/Shaders/HighlightShader.tres")
+
+
 
 
 func _ready():
@@ -21,26 +28,44 @@ func _ready():
 
 	start_pos = self.position
 	
-	# Create a timer node
 	var timer = Timer.new()
-
-	# Set timer interval
 	timer.set_wait_time(5)
-
-	# Set it as repeat
 	timer.set_one_shot(false)
-
-
-	#timer.connect("timeout", random_direction)  SHOOT PEOPLE
-
-	# Add to the tree as child of the current node
 	add_child(timer)
-
 	timer.start()
 	
+	if (not self.get_collision_mask_value(7)):
+		self.set_collision_mask_value(7, true)
+		collision = move_and_collide(Vector2(0,0))
+		print(collision)
+		
+	vision.connect("body_entered", _on_vision_enter) 
+	vision.connect("body_exited", _on_vision_exit) 
 
+	#move_direction = Vector2(1,0)
+	
 func _physics_process(_delta):
 	super(_delta)
+	
+	match (current_state):
+		Enums.ECharacterState.IDLE:
+			pass
+		Enums.ECharacterState.ROAMING:
+			if(current_zone):
+				if (current_zone.follow_position - self.global_position).length() < 2.0:
+					move_speed = 0
+				else:
+					move_direction = (current_zone.follow_position - self.global_position).normalized()
+					move_speed = 70
+		Enums.ECharacterState.FIGHTING:
+			pass
+		Enums.ECharacterState.SEARCHING:
+			pass
+
+
+
+	
+	vision.rotation = move_direction.angle() + PI
 	
 func random_direction() -> void:
 	#move_direction = Vector2(randi_range(-1,1), randi_range(-1,1))
@@ -74,3 +99,33 @@ func _on_mouse_entered():
 	
 func _on_mouse_exited():
 	sprite.material = null
+	
+	
+func set_zone(to : Area2D):
+	current_zone = to
+	print('nps at ' + str(current_zone))
+	
+func _on_vision_enter(who):
+	if (who == player):
+		label.text = "!"
+		label.visible = true
+		
+func _on_vision_exit(who):
+	if (who == player):
+		label.text = "?"
+		label_timer(3)
+		
+func label_timer(time):
+	
+	var _timer = Timer.new()
+	label.visible = true
+
+
+	_timer.set_wait_time(time)
+	_timer.set_one_shot(true)
+	_timer.connect("timeout", _hide_label)  
+	add_child(_timer)
+	_timer.start()
+	
+func _hide_label():
+	label.visible = false

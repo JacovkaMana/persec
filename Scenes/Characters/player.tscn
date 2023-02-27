@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dsyukixpu7tpu"]
+[gd_scene load_steps=24 format=3 uid="uid://dsyukixpu7tpu"]
 
 [ext_resource type="Script" path="res://Scripts/Character_scripts/player.gd" id="1_odqex"]
 [ext_resource type="Texture2D" uid="uid://bgn8fb6jsnab6" path="res://Art/Character/Mage.png" id="2_ar4bo"]
@@ -217,13 +217,47 @@ tracks/0/keys = {
 "values": [16]
 }
 
+[sub_resource type="Animation" id="Animation_p7v52"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 8]
+}
+
+[sub_resource type="Animation" id="Animation_4odfm"]
+resource_name = "walk"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.33, 0.66),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [16, 17, 18]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4n55a"]
 _data = {
 "RESET": SubResource("Animation_sc2ca"),
+"idle": SubResource("Animation_p7v52"),
 "idle_bot": SubResource("Animation_cofs0"),
 "idle_left": SubResource("Animation_0oeqd"),
 "idle_right": SubResource("Animation_huj8g"),
 "idle_up": SubResource("Animation_t5yjv"),
+"walk": SubResource("Animation_4odfm"),
 "walk_bot(1)": SubResource("Animation_u1rx1"),
 "walk_left ": SubResource("Animation_ywrwn"),
 "walk_right  (copy)": SubResource("Animation_sruvb"),
@@ -231,39 +265,12 @@ _data = {
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_j1hni"]
-animation = &"idle_bot"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ko01i"]
-animation = &"idle_left"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gujh5"]
-animation = &"idle_right"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_j023q"]
-animation = &"idle_up"
+animation = &"idle"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5155w"]
-animation = &"walk_bot(1)"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fpycy"]
-animation = &"walk_left "
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_l4g0v"]
-animation = &"walk_right  (copy)"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nvusv"]
-animation = &"walk_up"
+animation = &"walk"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vxag0"]
-advance_expression = "walking"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3ftco"]
-advance_expression = "walking"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_csvvo"]
-advance_expression = "walking"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1a4fs"]
 advance_expression = "walking"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kydoa"]
@@ -272,34 +279,13 @@ auto_advance = true
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ap8e0"]
 advance_expression = "not walking"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_slsrr"]
-advance_expression = "not walking"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5yyy4"]
-advance_expression = "not walking"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2tfja"]
-advance_expression = "not walking"
-
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_sldfk"]
 states/Start/position = Vector2(202, 100)
-states/idle_down/node = SubResource("AnimationNodeAnimation_j1hni")
-states/idle_down/position = Vector2(486, 44)
-states/idle_left/node = SubResource("AnimationNodeAnimation_ko01i")
-states/idle_left/position = Vector2(486, 100)
-states/idle_right/node = SubResource("AnimationNodeAnimation_gujh5")
-states/idle_right/position = Vector2(486, 152)
-states/idle_up/node = SubResource("AnimationNodeAnimation_j023q")
-states/idle_up/position = Vector2(486, 200)
-states/walk_bot(1)/node = SubResource("AnimationNodeAnimation_5155w")
-states/walk_bot(1)/position = Vector2(656, 44)
-"states/walk_left /node" = SubResource("AnimationNodeAnimation_fpycy")
-"states/walk_left /position" = Vector2(656, 100)
-"states/walk_right /node" = SubResource("AnimationNodeAnimation_l4g0v")
-"states/walk_right /position" = Vector2(656, 152)
-states/walk_up/node = SubResource("AnimationNodeAnimation_nvusv")
-states/walk_up/position = Vector2(648, 200)
-transitions = ["idle_down", "walk_bot(1)", SubResource("AnimationNodeStateMachineTransition_vxag0"), "idle_left", "walk_left ", SubResource("AnimationNodeStateMachineTransition_3ftco"), "idle_right", "walk_right ", SubResource("AnimationNodeStateMachineTransition_csvvo"), "idle_up", "walk_up", SubResource("AnimationNodeStateMachineTransition_1a4fs"), "Start", "idle_down", SubResource("AnimationNodeStateMachineTransition_kydoa"), "walk_bot(1)", "idle_down", SubResource("AnimationNodeStateMachineTransition_ap8e0"), "walk_left ", "idle_left", SubResource("AnimationNodeStateMachineTransition_slsrr"), "walk_right ", "idle_right", SubResource("AnimationNodeStateMachineTransition_5yyy4"), "walk_up", "idle_up", SubResource("AnimationNodeStateMachineTransition_2tfja")]
+states/idle/node = SubResource("AnimationNodeAnimation_j1hni")
+states/idle/position = Vector2(486, 44)
+states/walk/node = SubResource("AnimationNodeAnimation_5155w")
+states/walk/position = Vector2(656, 44)
+transitions = ["idle", "walk", SubResource("AnimationNodeStateMachineTransition_vxag0"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_kydoa"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_ap8e0")]
 graph_offset = Vector2(-1, -17.8703)
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_x8nle"]
@@ -312,6 +298,7 @@ script = ExtResource("1_odqex")
 texture = ExtResource("2_ar4bo")
 hframes = 8
 vframes = 9
+frame = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 4)

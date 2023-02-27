@@ -74,3 +74,7 @@ func _input(event):
 	if event.is_action_pressed("skill3"):
 		use_skill_id(2)
 			
+
+func set_zone(to):
+	current_zone = to
+	print('player in ' + str(to))

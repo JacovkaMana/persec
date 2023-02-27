@@ -6,20 +6,21 @@ class_name Actor
 @export var move_direction: Vector2 = Vector2(0,0)
 @onready var animation_tree = $AnimationTree
 @onready var label = $HeadLabel
-@onready var sprite = $Sprite
+@onready var sprite: Sprite2D = $Sprite
 @onready var state_machine = animation_tree.get("parameters/playback")
 @onready var Projectiles: Node2D = self.get_tree().get_root().find_child("Projectiles", true, false)
 var data = PlayerData.new()
 var asd: ParticleProcessMaterial
-@export var walking = true
+@export var walking = false
 var last_move
 var head_timer
+var collision
+var current_zone : Area2D
 
 func _ready():
 	update_animation_parameters(starting_direction)
 	state_machine.travel("Start")
 	#state_machine.travel("idle_bot")
-
 
 
 func update_animation_parameters (move_input : Vector2):
@@ -28,30 +29,32 @@ func update_animation_parameters (move_input : Vector2):
 		#animation_tree.set("parameters/Walk/blend_position",move_input)
 		#animation_tree.set("parameters/Idle/blend_position",move_input)
 		#pass
-	if (last_move != move_input):
-		match (move_input):
-			Vector2.LEFT:
-				state_machine.travel("idle_left")
-			Vector2.RIGHT:
-				state_machine.travel("idle_right")
-			Vector2.UP:
-				state_machine.travel("idle_up")
-			Vector2.DOWN:
-				state_machine.travel("idle_down")
-		last_move = move_input
 		
-func pick_new_state():
-	walking = velocity != Vector2.ZERO
+#	if (last_move != move_input):
+#		match (move_input):
+#			Vector2.LEFT:
+#				state_machine.travel("idle_left")
+#			Vector2.RIGHT:
+#				state_machine.travel("idle_right")
+#			Vector2.UP:
+#				state_machine.travel("idle_up")
+#			Vector2.DOWN:
+#				state_machine.travel("idle_down")
+#		last_move = move_input
+
+	if move_input.x < 0:
+		sprite.flip_h = true
+	elif move_input.x > 0:
+		sprite.flip_h = false
+
 	
 func _physics_process(_delta):
 	update_animation_parameters(move_direction)
 	velocity = move_direction * move_speed * _delta
 	#move_and_slide()
-	move_and_collide(velocity)
-	for i in get_slide_collision_count():
-		var collision = get_slide_collision(i)
-		#print("I collided with ", collision)
-	pick_new_state();
+	collision = move_and_collide(velocity)
+
+	walking = velocity != Vector2.ZERO
 	
 	if (head_timer):
 		label.text = "%.2f" % (head_timer.time_left)
@@ -107,3 +110,7 @@ func cooldown(time):
 	head_timer.connect("timeout", reset_after_hit)  
 	add_child(head_timer)
 	head_timer.start()
+	
+
+func set_zone(to):
+	current_zone = to

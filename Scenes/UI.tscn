@@ -777,7 +777,6 @@ offset_bottom = 188.0
 texture = ExtResource("5_mowgk")
 
 [node name="UI" type="Control" parent="."]
-visible = false
 clip_contents = true
 custom_minimum_size = Vector2i(640, 360)
 layout_mode = 3
@@ -788,6 +787,7 @@ mouse_filter = 1
 script = ExtResource("1_cvjfy")
 
 [node name="Character" type="Control" parent="UI"]
+visible = false
 custom_minimum_size = Vector2i(176, 296)
 layout_mode = 3
 anchors_preset = 4
@@ -1097,6 +1097,7 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="Inventory" type="Control" parent="UI"]
+visible = false
 custom_minimum_size = Vector2i(176, 296)
 layout_mode = 3
 anchors_preset = 6

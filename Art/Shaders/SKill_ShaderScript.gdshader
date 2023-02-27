@@ -25,5 +25,5 @@ void fragment() {
 	//COLOR.rgb = new_color;
 	COLOR.rbg = main_color.rbg;
 	//COLOR.a = texture( TEXTURE, UV).a;
-	COLOR.a = clamp(new_alpha * gradient * 10.0 * texture( TEXTURE, UV).a, 0.0, 1.0);
+	COLOR.a = clamp(new_alpha * 15.0 * texture( TEXTURE, UV).a, 0.0, 1.0);
 }
