@@ -104,6 +104,7 @@ enum EEquipmentSlot {
 	CONSUMABLE_4,
 	CONSUMABLE_5,
 	CONSUMABLE_6,
+	CHARACTER
 }
 
 enum EStat {

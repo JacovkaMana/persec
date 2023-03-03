@@ -16,9 +16,9 @@ dest_files=["res://.godot/imported/effect_4.png-0ad24d6442b5f3f975f0e69ef6ac7048
 [params]
 
 compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=false

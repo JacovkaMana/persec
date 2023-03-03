@@ -16,9 +16,9 @@ dest_files=["res://.godot/imported/treasure_chests_32x32.png-51d8ff7de5bcbcfedde
 [params]
 
 compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=2
-compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=false

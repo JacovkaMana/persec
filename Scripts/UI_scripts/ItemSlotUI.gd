@@ -3,21 +3,43 @@ extends BaseSlotUI
 
 signal slot_mouse_lclick(slot: BaseSlotUI)
 signal slot_mouse_rclick(slot: BaseSlotUI)
-signal slot_mouse_release(slot: BaseSlotUI, start_position: Vector2)
 signal slot_mouse_move_check(slot_index)
 
 @onready var equipped_icon: TextureRect = get_node("Content/IsEquippedTextureRect")
 @onready var following: bool = false
 @onready var start_position = self.position
+@onready var area2d = $Area2D
+@onready var player = get_tree().get_root().find_child("Player", true, false)
+var type:Enums.EEquipmentSlot = Enums.EEquipmentSlot.NONE;
+var slot_entered: Area2D = null
 
 func _ready()->void:
 	super._ready()
+	area2d.connect("area_entered", _on_area_entered)
+	area2d.connect("area_exited", _on_area_exited)
+	#area2d.connect("mouse_exited", _on_me)
 	connect("gui_input", _on_gui_input)
 	self.set_actions(["Equip", "Delete"])
 
 
 func _process(delta):
 	pass
+
+
+func _on_area_entered(area:Area2D)->void:
+	if area.get_parent() and \
+	(area.get_parent().type == self.item.get_slot_type()[0] \
+	or area.get_parent().type == Enums.EEquipmentSlot.CHARACTER):
+		if slot_entered:
+			slot_entered.get_parent().get_parent().get_node("HoverRect").visible = false
+		slot_entered = area
+		slot_entered.get_parent().get_parent().get_node("HoverRect").visible = true
+	
+func _on_area_exited(area:Area2D)->void:
+	if slot_entered and area == slot_entered:
+		slot_entered.get_parent().get_parent().get_node("HoverRect").visible = false
+		slot_entered = null
+		
 
 
 func _on_gui_input(event):
@@ -56,8 +78,11 @@ func follow_cursor(cursor):
 	
 	
 func on_left_release():
+	#Возможно тут проверка на то, правильный ли тип слота
+	if slot_entered:
+		player.data.inventory.equip_item(self.item)
 	if following:
-		emit_signal("slot_mouse_release", self, start_position)
+		reset_position()
 		following = false
 	
 	

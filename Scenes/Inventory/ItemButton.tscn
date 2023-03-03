@@ -4,8 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://00mxkxg5m2l7" path="res://Art/UI/Border22_4.png" id="2_4m14t"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/ItemSlotUI.gd" id="3_wx2gw"]
 [ext_resource type="Texture2D" uid="uid://cvbi3j2ic3s22" path="res://Art/UI/Border22_3.png" id="4_68aug"]
-[ext_resource type="Texture2D" uid="uid://dqdo2t34wtnlt" path="res://Art/UI/Item_Shield.png" id="4_yknfp"]
 [ext_resource type="FontFile" uid="uid://bv3p1twxqpx6p" path="res://Fonts/Minecraftia-Regular.ttf" id="5_v44rv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4fqqm"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_svpn0"]
 font = ExtResource("5_v44rv")
@@ -14,7 +15,7 @@ outline_color = Color(0.921569, 0.854902, 0.894118, 1)
 shadow_offset = Vector2(0, 0)
 
 [node name="ItemButton" type="TextureButton"]
-custom_minimum_size = Vector2i(22, 22)
+custom_minimum_size = Vector2(22, 22)
 offset_right = 22.0
 offset_bottom = 22.0
 pivot_offset = Vector2(11, 11)
@@ -23,8 +24,14 @@ texture_normal = ExtResource("1_5770b")
 texture_hover = ExtResource("2_4m14t")
 script = ExtResource("3_wx2gw")
 
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(11, 11)
+shape = SubResource("RectangleShape2D_4fqqm")
+
 [node name="Content" type="Control" parent="."]
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -34,22 +41,22 @@ mouse_filter = 2
 
 [node name="TextureRect" type="TextureRect" parent="Content"]
 self_modulate = Color(1, 1, 1, 0.294118)
+layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("4_68aug")
 
 [node name="ItemImage" type="TextureRect" parent="Content"]
-anchors_preset = 15
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("4_yknfp")
 
 [node name="ItemCount" type="Label" parent="Content"]
 visible = false
-anchors_preset = 15
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2

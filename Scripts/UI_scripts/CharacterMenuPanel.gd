@@ -1,6 +1,6 @@
 extends Panel
 
-
+@export var type:Enums.EEquipmentSlot;
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	connect("mouse_entered", _on_mouse_entered)
@@ -18,4 +18,5 @@ func _on_mouse_entered():
 	
 	
 func _on_gui_input(event):
-	print("gui input")
+	pass
+	#print("gui input")

@@ -1,14 +1,11 @@
-extends Control
+extends Panel
 
-
+@export var type:Enums.EEquipmentSlot;
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var templ = load("res://Inventory/item_container.tscn")
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
-
-

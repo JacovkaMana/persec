@@ -6,7 +6,7 @@ extends Node2D
 func _ready():
 	#var idle = anim.get_animation('torch_loop')
 	#idle.set_loop(true)
-	anim.playback_speed =  (randi() % 11) / 10 + 0.5 
+	anim.speed_scale =  (randi() % 11) / 10 + 0.5 
 	anim.play('torch_loop')
 
 

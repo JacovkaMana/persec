@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "G:\\persec-main\\RoguelikeTest.csproj": {}
+    "G:\\persec-ui-dev\\RoguelikeTest.csproj": {}
   },
   "projects": {
-    "G:\\persec-main\\RoguelikeTest.csproj": {
+    "G:\\persec-ui-dev\\RoguelikeTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\persec-main\\RoguelikeTest.csproj",
+        "projectUniqueName": "G:\\persec-ui-dev\\RoguelikeTest.csproj",
         "projectName": "RoguelikeTest",
-        "projectPath": "G:\\persec-main\\RoguelikeTest.csproj",
+        "projectPath": "G:\\persec-ui-dev\\RoguelikeTest.csproj",
         "packagesPath": "C:\\Users\\Jacov\\.nuget\\packages\\",
-        "outputPath": "G:\\persec-main\\.godot\\mono\\temp\\obj\\",
+        "outputPath": "G:\\persec-ui-dev\\.godot\\mono\\temp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Users\\Jacov\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder",
@@ -47,15 +47,15 @@
           "dependencies": {
             "Godot.SourceGenerators": {
               "target": "Package",
-              "version": "[4.0.0-beta.3, )"
+              "version": "[4.0.0, )"
             },
             "GodotSharp": {
               "target": "Package",
-              "version": "[4.0.0-beta.3, )"
+              "version": "[4.0.0, )"
             },
             "GodotSharpEditor": {
               "target": "Package",
-              "version": "[4.0.0-beta.3, )"
+              "version": "[4.0.0, )"
             }
           },
           "imports": [

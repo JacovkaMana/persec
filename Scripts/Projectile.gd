@@ -18,7 +18,7 @@ var direction: Vector2
 @export var range: float
 @export var moving_projectile: bool = false
 @export var animated: bool = false
-@export var projectile_owner = null
+var projectile_owner = null
 
 var skill = null
 var collision_object = null

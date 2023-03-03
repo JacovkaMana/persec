@@ -1,16 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://cekpuyet8xdyi"]
+[gd_scene load_steps=5 format=3 uid="uid://cekpuyet8xdyi"]
 
 [ext_resource type="Texture2D" uid="uid://dh0n7nyhojqtb" path="res://Art/UI/Border22_Unused.png" id="1_fhuh2"]
 [ext_resource type="Texture2D" uid="uid://uwo413opljiv" path="res://Art/UI/Border22_2.png" id="2_fsx4l"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/EquipSlotUI.gd" id="3_8wsha"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_thfi8"]
+size = Vector2(22, 21)
 
 [node name="EquipButton" type="TextureButton"]
 texture_normal = ExtResource("1_fhuh2")
 texture_hover = ExtResource("2_fsx4l")
 script = ExtResource("3_8wsha")
 
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(11, 11.5)
+shape = SubResource("RectangleShape2D_thfi8")
+
 [node name="Content" type="Control" parent="."]
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -19,7 +28,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="ItemImage" type="TextureRect" parent="Content"]
-anchors_preset = 15
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2

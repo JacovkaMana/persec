@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://dbksnam8cuw3o"]
+[gd_scene load_steps=78 format=3 uid="uid://dbksnam8cuw3o"]
 
 [ext_resource type="Script" path="res://Scripts/UI_scripts/CharacterUI.gd" id="1_8tod6"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/UI.gd" id="1_cvjfy"]
@@ -17,10 +17,8 @@
 [ext_resource type="Texture2D" uid="uid://dh52y5x0l4e52" path="res://Art/UI/UI_InventoryMenuIcon.png" id="8_cb6qa"]
 [ext_resource type="Material" uid="uid://cwiu31fr6bym" path="res://Art/Shaders/UI_ShadowShader.tres" id="8_fara6"]
 [ext_resource type="Texture2D" uid="uid://ca0lfmfiallgi" path="res://Art/UI/MenuClose_Hover.png" id="8_h5i0i"]
-[ext_resource type="PackedScene" uid="uid://b5x1xj36nl8hw" path="res://Scenes/Inventory/ItemButton.tscn" id="9_f8cn7"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/CloseButton.gd" id="9_lvtlu"]
 [ext_resource type="Texture2D" uid="uid://cxsmrfblvux75" path="res://Art/UI/Amulet.png" id="11_72ij6"]
-[ext_resource type="Script" path="res://Scripts/UI_scripts/CharacterMenuPanel.gd" id="11_usa2v"]
 [ext_resource type="Texture2D" uid="uid://bs3yn2n4cgxgk" path="res://Art/UI/Ring.png" id="12_k2607"]
 [ext_resource type="Texture2D" uid="uid://dw3xbfgh77pij" path="res://Art/UI/Item_Hover.png" id="12_teqho"]
 [ext_resource type="Texture2D" uid="uid://dcodbjst37jag" path="res://Art/UI/Misc.png" id="13_aduk8"]
@@ -37,6 +35,8 @@
 [ext_resource type="Texture2D" uid="uid://5f3t2ue0hkna" path="res://Art/UI/WeaponShield.png" id="19_x824n"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/ItemAction.gd" id="20_nbmo2"]
 [ext_resource type="Texture2D" uid="uid://ta1fnun00pmm" path="res://Art/UI/UI_ShadowFull.png" id="28_s3eqt"]
+[ext_resource type="Texture2D" uid="uid://bvm648ct7g0co" path="res://Art/UI/Character.png" id="28_ws067"]
+[ext_resource type="Script" path="res://Scripts/UI_scripts/CoverPanel.gd" id="29_5vimk"]
 [ext_resource type="Texture2D" uid="uid://cpp7ou6piu4r0" path="res://Art/UI/SkillSlot.png" id="34_f6u2n"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_u8o8f"]
@@ -104,6 +104,13 @@ region_rect = Rect2(0, 0, 22, 22)
 texture = ExtResource("19_aroqj")
 region_rect = Rect2(0, 0, 22, 22)
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0uvwy"]
+texture = ExtResource("28_ws067")
+region_rect = Rect2(-5, -5, 44, 66)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_thfi8"]
+size = Vector2(73, 101)
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dk08e"]
 texture = ExtResource("13_esgr1")
 region_rect = Rect2(0, 0, 80, 100)
@@ -170,7 +177,7 @@ region_rect = Rect2(0, 0, 40, 10)
 layer = 3
 
 [node name="HUD" type="Control" parent="."]
-custom_minimum_size = Vector2i(640, 360)
+custom_minimum_size = Vector2(640, 360)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 640.0
@@ -178,6 +185,7 @@ offset_bottom = 360.0
 mouse_filter = 1
 
 [node name="StaminaContainer" type="HBoxContainer" parent="HUD"]
+layout_mode = 0
 offset_left = 259.0
 offset_top = 295.0
 offset_right = 380.0
@@ -185,18 +193,15 @@ offset_bottom = 303.0
 alignment = 1
 
 [node name="StaminaBlock_1" type="TextureRect" parent="HUD/StaminaContainer"]
-offset_left = 43.0
-offset_right = 58.0
-offset_bottom = 8.0
+layout_mode = 2
 texture = ExtResource("4_v6vyg")
 
 [node name="StaminaBlock_2" type="TextureRect" parent="HUD/StaminaContainer"]
-offset_left = 62.0
-offset_right = 77.0
-offset_bottom = 8.0
+layout_mode = 2
 texture = ExtResource("4_v6vyg")
 
 [node name="ItemsContainer" type="HBoxContainer" parent="HUD"]
+layout_mode = 0
 offset_left = 260.0
 offset_top = 306.0
 offset_right = 381.0
@@ -204,17 +209,13 @@ offset_bottom = 351.0
 alignment = 1
 
 [node name="Control" type="Control" parent="HUD/ItemsContainer"]
-custom_minimum_size = Vector2i(32, 32)
-layout_mode = 3
-anchors_preset = 0
-offset_left = 44.0
-offset_top = 6.0
-offset_right = 76.0
-offset_bottom = 38.0
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="TextureRect2" type="TextureRect" parent="HUD/ItemsContainer/Control"]
+layout_mode = 0
 offset_top = -1.0
 offset_right = 30.0
 offset_bottom = 29.0
@@ -222,13 +223,14 @@ texture = ExtResource("34_f6u2n")
 
 [node name="TextureRect" type="TextureRect" parent="HUD/ItemsContainer/Control"]
 modulate = Color(0.0784314, 0.231373, 0.427451, 1)
+layout_mode = 0
 offset_right = 30.0
 offset_bottom = 30.0
 texture = ExtResource("34_f6u2n")
 
 [node name="SkillsMenu" type="Control" parent="HUD"]
 visible = false
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -239,6 +241,7 @@ grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="HUD/SkillsMenu"]
 self_modulate = Color(1, 1, 1, 0.607843)
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -253,6 +256,7 @@ grow_vertical = 2
 texture = ExtResource("3_ik2u5")
 
 [node name="TextureRect2" type="TextureRect" parent="HUD/SkillsMenu"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -267,146 +271,134 @@ grow_vertical = 2
 texture = ExtResource("4_wsh4e")
 
 [node name="SkillTypeContainer" type="VBoxContainer" parent="HUD/SkillsMenu"]
+layout_mode = 0
 offset_left = -84.0
 offset_top = -102.0
 offset_right = 84.0
 offset_bottom = 114.0
 
 [node name="SkillType" type="Control" parent="HUD/SkillsMenu/SkillTypeContainer"]
-custom_minimum_size = Vector2i(168, 33)
-layout_mode = 3
-anchors_preset = 0
-offset_right = 168.0
-offset_bottom = 33.0
+custom_minimum_size = Vector2(168, 33)
+layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType"]
-custom_minimum_size = Vector2i(168, 22)
+custom_minimum_size = Vector2(168, 22)
+layout_mode = 0
 offset_top = 11.0
 offset_right = 168.0
 offset_bottom = 33.0
 alignment = 1
 
 [node name="Skill" type="Control" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer"]
-custom_minimum_size = Vector2i(22, 22)
-layout_mode = 3
-anchors_preset = 0
-offset_left = 8.0
-offset_right = 30.0
-offset_bottom = 22.0
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
 size_flags_vertical = 8
 
 [node name="TextureRect" type="TextureRect" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer/Skill"]
+layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("4_queiq")
 
 [node name="TextureRect2" type="TextureRect" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer/Skill"]
 self_modulate = Color(1, 1, 1, 0.607843)
+layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("5_e6gov")
 
 [node name="Skill2" type="Control" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer"]
-custom_minimum_size = Vector2i(22, 22)
-layout_mode = 3
-anchors_preset = 0
-offset_left = 34.0
-offset_right = 56.0
-offset_bottom = 22.0
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
 size_flags_vertical = 8
 
 [node name="TextureRect" type="TextureRect" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer/Skill2"]
+layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("4_queiq")
 
 [node name="TextureRect2" type="TextureRect" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer/Skill2"]
 self_modulate = Color(1, 1, 1, 0.607843)
+layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("5_e6gov")
 
 [node name="Skill3" type="Control" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer"]
-custom_minimum_size = Vector2i(22, 22)
-layout_mode = 3
-anchors_preset = 0
-offset_left = 60.0
-offset_right = 82.0
-offset_bottom = 22.0
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
 size_flags_vertical = 8
 
 [node name="TextureRect" type="TextureRect" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer/Skill3"]
+layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("4_queiq")
 
 [node name="TextureRect2" type="TextureRect" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer/Skill3"]
 self_modulate = Color(1, 1, 1, 0.607843)
+layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("5_e6gov")
 
 [node name="Skill4" type="Control" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer"]
-custom_minimum_size = Vector2i(22, 22)
-layout_mode = 3
-anchors_preset = 0
-offset_left = 86.0
-offset_right = 108.0
-offset_bottom = 22.0
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
 size_flags_vertical = 8
 
 [node name="TextureRect" type="TextureRect" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer/Skill4"]
+layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("4_queiq")
 
 [node name="TextureRect2" type="TextureRect" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer/Skill4"]
 self_modulate = Color(1, 1, 1, 0.607843)
+layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("5_e6gov")
 
 [node name="Skill5" type="Control" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer"]
-custom_minimum_size = Vector2i(22, 22)
-layout_mode = 3
-anchors_preset = 0
-offset_left = 112.0
-offset_right = 134.0
-offset_bottom = 22.0
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
 size_flags_vertical = 8
 
 [node name="TextureRect" type="TextureRect" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer/Skill5"]
+layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("4_queiq")
 
 [node name="TextureRect2" type="TextureRect" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer/Skill5"]
 self_modulate = Color(1, 1, 1, 0.607843)
+layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("5_e6gov")
 
 [node name="Skill6" type="Control" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer"]
-custom_minimum_size = Vector2i(22, 22)
-layout_mode = 3
-anchors_preset = 0
-offset_left = 138.0
-offset_right = 160.0
-offset_bottom = 22.0
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
 size_flags_vertical = 8
 
 [node name="TextureRect" type="TextureRect" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer/Skill6"]
+layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("4_queiq")
 
 [node name="TextureRect2" type="TextureRect" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer/Skill6"]
 self_modulate = Color(1, 1, 1, 0.607843)
+layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("5_e6gov")
 
 [node name="Label" type="Label" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType"]
+layout_mode = 0
 offset_left = 16.0
 offset_right = 142.0
 offset_bottom = 17.0
@@ -415,141 +407,127 @@ text = "Sword"
 label_settings = SubResource("LabelSettings_u8o8f")
 
 [node name="SkillType2" type="Control" parent="HUD/SkillsMenu/SkillTypeContainer"]
-custom_minimum_size = Vector2i(168, 33)
-layout_mode = 3
-anchors_preset = 0
-offset_top = 37.0
-offset_right = 168.0
-offset_bottom = 70.0
+custom_minimum_size = Vector2(168, 33)
+layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType2"]
-custom_minimum_size = Vector2i(168, 22)
+custom_minimum_size = Vector2(168, 22)
+layout_mode = 0
 offset_top = 11.0
 offset_right = 168.0
 offset_bottom = 33.0
 alignment = 1
 
 [node name="Skill" type="Control" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer"]
-custom_minimum_size = Vector2i(22, 22)
-layout_mode = 3
-anchors_preset = 0
-offset_left = 8.0
-offset_right = 30.0
-offset_bottom = 22.0
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
 size_flags_vertical = 8
 
 [node name="TextureRect" type="TextureRect" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer/Skill"]
+layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("4_queiq")
 
 [node name="TextureRect2" type="TextureRect" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer/Skill"]
 self_modulate = Color(1, 1, 1, 0.607843)
+layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("5_e6gov")
 
 [node name="Skill2" type="Control" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer"]
-custom_minimum_size = Vector2i(22, 22)
-layout_mode = 3
-anchors_preset = 0
-offset_left = 34.0
-offset_right = 56.0
-offset_bottom = 22.0
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
 size_flags_vertical = 8
 
 [node name="TextureRect" type="TextureRect" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer/Skill2"]
+layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("4_queiq")
 
 [node name="TextureRect2" type="TextureRect" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer/Skill2"]
 self_modulate = Color(1, 1, 1, 0.607843)
+layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("5_e6gov")
 
 [node name="Skill3" type="Control" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer"]
-custom_minimum_size = Vector2i(22, 22)
-layout_mode = 3
-anchors_preset = 0
-offset_left = 60.0
-offset_right = 82.0
-offset_bottom = 22.0
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
 size_flags_vertical = 8
 
 [node name="TextureRect" type="TextureRect" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer/Skill3"]
+layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("4_queiq")
 
 [node name="TextureRect2" type="TextureRect" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer/Skill3"]
 self_modulate = Color(1, 1, 1, 0.607843)
+layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("5_e6gov")
 
 [node name="Skill4" type="Control" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer"]
-custom_minimum_size = Vector2i(22, 22)
-layout_mode = 3
-anchors_preset = 0
-offset_left = 86.0
-offset_right = 108.0
-offset_bottom = 22.0
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
 size_flags_vertical = 8
 
 [node name="TextureRect" type="TextureRect" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer/Skill4"]
+layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("4_queiq")
 
 [node name="TextureRect2" type="TextureRect" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer/Skill4"]
 self_modulate = Color(1, 1, 1, 0.607843)
+layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("5_e6gov")
 
 [node name="Skill5" type="Control" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer"]
-custom_minimum_size = Vector2i(22, 22)
-layout_mode = 3
-anchors_preset = 0
-offset_left = 112.0
-offset_right = 134.0
-offset_bottom = 22.0
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
 size_flags_vertical = 8
 
 [node name="TextureRect" type="TextureRect" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer/Skill5"]
+layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("4_queiq")
 
 [node name="TextureRect2" type="TextureRect" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer/Skill5"]
 self_modulate = Color(1, 1, 1, 0.607843)
+layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("5_e6gov")
 
 [node name="Skill6" type="Control" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer"]
-custom_minimum_size = Vector2i(22, 22)
-layout_mode = 3
-anchors_preset = 0
-offset_left = 138.0
-offset_right = 160.0
-offset_bottom = 22.0
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
 size_flags_vertical = 8
 
 [node name="TextureRect" type="TextureRect" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer/Skill6"]
+layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("4_queiq")
 
 [node name="TextureRect2" type="TextureRect" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer/Skill6"]
 self_modulate = Color(1, 1, 1, 0.607843)
+layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("5_e6gov")
 
 [node name="Label" type="Label" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType2"]
+layout_mode = 0
 offset_left = 16.0
 offset_right = 142.0
 offset_bottom = 17.0
@@ -558,141 +536,127 @@ text = "Sword"
 label_settings = SubResource("LabelSettings_u8o8f")
 
 [node name="SkillType3" type="Control" parent="HUD/SkillsMenu/SkillTypeContainer"]
-custom_minimum_size = Vector2i(168, 33)
-layout_mode = 3
-anchors_preset = 0
-offset_top = 74.0
-offset_right = 168.0
-offset_bottom = 107.0
+custom_minimum_size = Vector2(168, 33)
+layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType3"]
-custom_minimum_size = Vector2i(168, 22)
+custom_minimum_size = Vector2(168, 22)
+layout_mode = 0
 offset_top = 11.0
 offset_right = 168.0
 offset_bottom = 33.0
 alignment = 1
 
 [node name="Skill" type="Control" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer"]
-custom_minimum_size = Vector2i(22, 22)
-layout_mode = 3
-anchors_preset = 0
-offset_left = 8.0
-offset_right = 30.0
-offset_bottom = 22.0
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
 size_flags_vertical = 8
 
 [node name="TextureRect" type="TextureRect" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer/Skill"]
+layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("4_queiq")
 
 [node name="TextureRect2" type="TextureRect" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer/Skill"]
 self_modulate = Color(1, 1, 1, 0.607843)
+layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("5_e6gov")
 
 [node name="Skill2" type="Control" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer"]
-custom_minimum_size = Vector2i(22, 22)
-layout_mode = 3
-anchors_preset = 0
-offset_left = 34.0
-offset_right = 56.0
-offset_bottom = 22.0
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
 size_flags_vertical = 8
 
 [node name="TextureRect" type="TextureRect" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer/Skill2"]
+layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("4_queiq")
 
 [node name="TextureRect2" type="TextureRect" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer/Skill2"]
 self_modulate = Color(1, 1, 1, 0.607843)
+layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("5_e6gov")
 
 [node name="Skill3" type="Control" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer"]
-custom_minimum_size = Vector2i(22, 22)
-layout_mode = 3
-anchors_preset = 0
-offset_left = 60.0
-offset_right = 82.0
-offset_bottom = 22.0
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
 size_flags_vertical = 8
 
 [node name="TextureRect" type="TextureRect" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer/Skill3"]
+layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("4_queiq")
 
 [node name="TextureRect2" type="TextureRect" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer/Skill3"]
 self_modulate = Color(1, 1, 1, 0.607843)
+layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("5_e6gov")
 
 [node name="Skill4" type="Control" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer"]
-custom_minimum_size = Vector2i(22, 22)
-layout_mode = 3
-anchors_preset = 0
-offset_left = 86.0
-offset_right = 108.0
-offset_bottom = 22.0
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
 size_flags_vertical = 8
 
 [node name="TextureRect" type="TextureRect" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer/Skill4"]
+layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("4_queiq")
 
 [node name="TextureRect2" type="TextureRect" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer/Skill4"]
 self_modulate = Color(1, 1, 1, 0.607843)
+layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("5_e6gov")
 
 [node name="Skill5" type="Control" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer"]
-custom_minimum_size = Vector2i(22, 22)
-layout_mode = 3
-anchors_preset = 0
-offset_left = 112.0
-offset_right = 134.0
-offset_bottom = 22.0
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
 size_flags_vertical = 8
 
 [node name="TextureRect" type="TextureRect" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer/Skill5"]
+layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("4_queiq")
 
 [node name="TextureRect2" type="TextureRect" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer/Skill5"]
 self_modulate = Color(1, 1, 1, 0.607843)
+layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("5_e6gov")
 
 [node name="Skill6" type="Control" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer"]
-custom_minimum_size = Vector2i(22, 22)
-layout_mode = 3
-anchors_preset = 0
-offset_left = 138.0
-offset_right = 160.0
-offset_bottom = 22.0
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
 size_flags_vertical = 8
 
 [node name="TextureRect" type="TextureRect" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer/Skill6"]
+layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("4_queiq")
 
 [node name="TextureRect2" type="TextureRect" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer/Skill6"]
 self_modulate = Color(1, 1, 1, 0.607843)
+layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("5_e6gov")
 
 [node name="Label" type="Label" parent="HUD/SkillsMenu/SkillTypeContainer/SkillType3"]
+layout_mode = 0
 offset_left = 16.0
 offset_right = 142.0
 offset_bottom = 17.0
@@ -701,6 +665,7 @@ text = "Sword"
 label_settings = SubResource("LabelSettings_u8o8f")
 
 [node name="Label" type="Label" parent="HUD/SkillsMenu"]
+layout_mode = 0
 offset_left = -88.0
 offset_top = -131.0
 offset_right = 88.0
@@ -718,32 +683,23 @@ offset_right = 48.0
 offset_bottom = 350.0
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
-offset_right = 33.0
-offset_bottom = 44.0
+layout_mode = 2
 texture = ExtResource("5_mowgk")
 
 [node name="TextureRect2" type="TextureRect" parent="VBoxContainer"]
-offset_top = 48.0
-offset_right = 33.0
-offset_bottom = 92.0
+layout_mode = 2
 texture = ExtResource("5_mowgk")
 
 [node name="TextureRect3" type="TextureRect" parent="VBoxContainer"]
-offset_top = 96.0
-offset_right = 33.0
-offset_bottom = 140.0
+layout_mode = 2
 texture = ExtResource("5_mowgk")
 
 [node name="TextureRect4" type="TextureRect" parent="VBoxContainer"]
-offset_top = 144.0
-offset_right = 33.0
-offset_bottom = 188.0
+layout_mode = 2
 texture = ExtResource("5_mowgk")
 
 [node name="TextureRect5" type="TextureRect" parent="VBoxContainer"]
-offset_top = 192.0
-offset_right = 33.0
-offset_bottom = 236.0
+layout_mode = 2
 texture = ExtResource("5_mowgk")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
@@ -754,31 +710,24 @@ offset_bottom = 355.0
 pivot_offset = Vector2(33, 0)
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer2"]
-offset_right = 33.0
-offset_bottom = 44.0
+layout_mode = 2
 texture = ExtResource("5_mowgk")
 
 [node name="TextureRect2" type="TextureRect" parent="VBoxContainer2"]
-offset_top = 48.0
-offset_right = 33.0
-offset_bottom = 92.0
+layout_mode = 2
 texture = ExtResource("5_mowgk")
 
 [node name="TextureRect3" type="TextureRect" parent="VBoxContainer2"]
-offset_top = 96.0
-offset_right = 33.0
-offset_bottom = 140.0
+layout_mode = 2
 texture = ExtResource("5_mowgk")
 
 [node name="TextureRect4" type="TextureRect" parent="VBoxContainer2"]
-offset_top = 144.0
-offset_right = 33.0
-offset_bottom = 188.0
+layout_mode = 2
 texture = ExtResource("5_mowgk")
 
 [node name="UI" type="Control" parent="."]
 clip_contents = true
-custom_minimum_size = Vector2i(640, 360)
+custom_minimum_size = Vector2(640, 360)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -787,9 +736,8 @@ mouse_filter = 1
 script = ExtResource("1_cvjfy")
 
 [node name="Character" type="Control" parent="UI"]
-visible = false
-custom_minimum_size = Vector2i(176, 296)
-layout_mode = 3
+custom_minimum_size = Vector2(176, 296)
+layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
@@ -803,6 +751,7 @@ script = ExtResource("1_8tod6")
 
 [node name="Shadow" type="TextureRect" parent="UI/Character"]
 material = ExtResource("8_fara6")
+layout_mode = 0
 offset_left = -2.0
 offset_top = -2.0
 offset_right = 174.0
@@ -810,30 +759,33 @@ offset_bottom = 294.0
 texture = ExtResource("2_uxwkt")
 
 [node name="Background" type="TextureRect" parent="UI/Character"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("3_5tfiq")
 
 [node name="Plates" type="TextureRect" parent="UI/Character"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("4_xrr7e")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/Character"]
+layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 15.0
 grow_horizontal = 2
 
 [node name="Label" type="Label" parent="UI/Character/MarginContainer"]
-offset_right = 176.0
-offset_bottom = 14.0
+layout_mode = 2
 size_flags_vertical = 0
 text = "Character"
 label_settings = SubResource("LabelSettings_n77g3")
 horizontal_alignment = 1
 
 [node name="TextureButton" type="TextureButton" parent="UI/Character"]
+layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -843,6 +795,7 @@ grow_horizontal = 0
 tooltip_text = "Close"
 
 [node name="CharacterCloseButton" type="Button" parent="UI/Character"]
+layout_mode = 0
 offset_left = 164.0
 offset_top = 1.0
 offset_right = 175.0
@@ -853,6 +806,7 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_11eno")
 script = ExtResource("9_lvtlu")
 
 [node name="LeftCharacterVBox" type="VBoxContainer" parent="UI/Character"]
+layout_mode = 0
 offset_left = 23.0
 offset_top = 67.0
 offset_right = 45.0
@@ -860,13 +814,13 @@ offset_bottom = 170.0
 theme_override_constants/separation = 5
 
 [node name="AmuletPanel" type="Panel" parent="UI/Character/LeftCharacterVBox"]
-custom_minimum_size = Vector2i(22, 22)
-offset_right = 22.0
-offset_bottom = 22.0
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_sb5ce")
 
 [node name="HoverRect" type="TextureRect" parent="UI/Character/LeftCharacterVBox/AmuletPanel"]
 visible = false
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -876,16 +830,26 @@ texture = ExtResource("12_teqho")
 
 [node name="EquipButton" parent="UI/Character/LeftCharacterVBox/AmuletPanel" instance=ExtResource("13_i4h7w")]
 visible = false
+layout_mode = 0
+type = 7
+
+[node name="Area2D" parent="UI/Character/LeftCharacterVBox/AmuletPanel/EquipButton" index="0"]
+visible = false
+
+[node name="ItemImage" parent="UI/Character/LeftCharacterVBox/AmuletPanel/EquipButton/Content" index="0"]
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="RingPanel1" type="Panel" parent="UI/Character/LeftCharacterVBox"]
-custom_minimum_size = Vector2i(22, 22)
-offset_top = 27.0
-offset_right = 22.0
-offset_bottom = 49.0
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_8jccc")
 
 [node name="HoverRect" type="TextureRect" parent="UI/Character/LeftCharacterVBox/RingPanel1"]
 visible = false
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -895,16 +859,26 @@ texture = ExtResource("12_teqho")
 
 [node name="EquipButton" parent="UI/Character/LeftCharacterVBox/RingPanel1" instance=ExtResource("13_i4h7w")]
 visible = false
+layout_mode = 0
+type = 8
+
+[node name="Area2D" parent="UI/Character/LeftCharacterVBox/RingPanel1/EquipButton" index="0"]
+visible = false
+
+[node name="ItemImage" parent="UI/Character/LeftCharacterVBox/RingPanel1/EquipButton/Content" index="0"]
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="RingPanel2" type="Panel" parent="UI/Character/LeftCharacterVBox"]
-custom_minimum_size = Vector2i(22, 22)
-offset_top = 54.0
-offset_right = 22.0
-offset_bottom = 76.0
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_e2cyl")
 
 [node name="HoverRect" type="TextureRect" parent="UI/Character/LeftCharacterVBox/RingPanel2"]
 visible = false
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -914,16 +888,26 @@ texture = ExtResource("12_teqho")
 
 [node name="EquipButton" parent="UI/Character/LeftCharacterVBox/RingPanel2" instance=ExtResource("13_i4h7w")]
 visible = false
+layout_mode = 0
+type = 9
+
+[node name="Area2D" parent="UI/Character/LeftCharacterVBox/RingPanel2/EquipButton" index="0"]
+visible = false
+
+[node name="ItemImage" parent="UI/Character/LeftCharacterVBox/RingPanel2/EquipButton/Content" index="0"]
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="MiscPanel" type="Panel" parent="UI/Character/LeftCharacterVBox"]
-custom_minimum_size = Vector2i(22, 22)
-offset_top = 81.0
-offset_right = 22.0
-offset_bottom = 103.0
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_obnin")
 
 [node name="HoverRect" type="TextureRect" parent="UI/Character/LeftCharacterVBox/MiscPanel"]
 visible = false
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -933,8 +917,20 @@ texture = ExtResource("12_teqho")
 
 [node name="EquipButton" parent="UI/Character/LeftCharacterVBox/MiscPanel" instance=ExtResource("13_i4h7w")]
 visible = false
+layout_mode = 0
+type = 10
+
+[node name="Area2D" parent="UI/Character/LeftCharacterVBox/MiscPanel/EquipButton" index="0"]
+visible = false
+
+[node name="ItemImage" parent="UI/Character/LeftCharacterVBox/MiscPanel/EquipButton/Content" index="0"]
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="RightCharacterVBox" type="VBoxContainer" parent="UI/Character"]
+layout_mode = 0
 offset_left = 131.0
 offset_top = 67.0
 offset_right = 153.0
@@ -942,13 +938,13 @@ offset_bottom = 170.0
 theme_override_constants/separation = 5
 
 [node name="HelmPanel" type="Panel" parent="UI/Character/RightCharacterVBox"]
-custom_minimum_size = Vector2i(22, 22)
-offset_right = 22.0
-offset_bottom = 22.0
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_dodc2")
 
 [node name="HoverRect" type="TextureRect" parent="UI/Character/RightCharacterVBox/HelmPanel"]
 visible = false
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -958,16 +954,26 @@ texture = ExtResource("12_teqho")
 
 [node name="EquipButton" parent="UI/Character/RightCharacterVBox/HelmPanel" instance=ExtResource("13_i4h7w")]
 visible = false
+layout_mode = 0
+type = 3
+
+[node name="Area2D" parent="UI/Character/RightCharacterVBox/HelmPanel/EquipButton" index="0"]
+visible = false
+
+[node name="ItemImage" parent="UI/Character/RightCharacterVBox/HelmPanel/EquipButton/Content" index="0"]
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="TorsoPanel" type="Panel" parent="UI/Character/RightCharacterVBox"]
-custom_minimum_size = Vector2i(22, 22)
-offset_top = 27.0
-offset_right = 22.0
-offset_bottom = 49.0
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_jl75u")
 
 [node name="HoverRect" type="TextureRect" parent="UI/Character/RightCharacterVBox/TorsoPanel"]
 visible = false
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -977,16 +983,26 @@ texture = ExtResource("12_teqho")
 
 [node name="EquipButton" parent="UI/Character/RightCharacterVBox/TorsoPanel" instance=ExtResource("13_i4h7w")]
 visible = false
+layout_mode = 0
+type = 4
+
+[node name="Area2D" parent="UI/Character/RightCharacterVBox/TorsoPanel/EquipButton" index="0"]
+visible = false
+
+[node name="ItemImage" parent="UI/Character/RightCharacterVBox/TorsoPanel/EquipButton/Content" index="0"]
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="PantsPanel" type="Panel" parent="UI/Character/RightCharacterVBox"]
-custom_minimum_size = Vector2i(22, 22)
-offset_top = 54.0
-offset_right = 22.0
-offset_bottom = 76.0
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_wh5vm")
 
 [node name="HoverRect" type="TextureRect" parent="UI/Character/RightCharacterVBox/PantsPanel"]
 visible = false
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -996,16 +1012,26 @@ texture = ExtResource("12_teqho")
 
 [node name="EquipButton" parent="UI/Character/RightCharacterVBox/PantsPanel" instance=ExtResource("13_i4h7w")]
 visible = false
+layout_mode = 0
+type = 5
+
+[node name="Area2D" parent="UI/Character/RightCharacterVBox/PantsPanel/EquipButton" index="0"]
+visible = false
+
+[node name="ItemImage" parent="UI/Character/RightCharacterVBox/PantsPanel/EquipButton/Content" index="0"]
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="BootsPanel" type="Panel" parent="UI/Character/RightCharacterVBox"]
-custom_minimum_size = Vector2i(22, 22)
-offset_top = 81.0
-offset_right = 22.0
-offset_bottom = 103.0
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_5bfpp")
 
 [node name="HoverRect" type="TextureRect" parent="UI/Character/RightCharacterVBox/BootsPanel"]
 visible = false
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1015,9 +1041,21 @@ texture = ExtResource("12_teqho")
 
 [node name="EquipButton" parent="UI/Character/RightCharacterVBox/BootsPanel" instance=ExtResource("13_i4h7w")]
 visible = false
+layout_mode = 0
+type = 6
+
+[node name="Area2D" parent="UI/Character/RightCharacterVBox/BootsPanel/EquipButton" index="0"]
+visible = false
+
+[node name="ItemImage" parent="UI/Character/RightCharacterVBox/BootsPanel/EquipButton/Content" index="0"]
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="LHandPanel" type="Panel" parent="UI/Character"]
-custom_minimum_size = Vector2i(22, 22)
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
 offset_left = 60.0
 offset_top = 175.0
 offset_right = 82.0
@@ -1026,6 +1064,7 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_vxj55")
 
 [node name="HoverRect" type="TextureRect" parent="UI/Character/LHandPanel"]
 visible = false
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1035,9 +1074,21 @@ texture = ExtResource("12_teqho")
 
 [node name="EquipButton" parent="UI/Character/LHandPanel" instance=ExtResource("13_i4h7w")]
 visible = false
+layout_mode = 0
+type = 1
+
+[node name="Area2D" parent="UI/Character/LHandPanel/EquipButton" index="0"]
+visible = false
+
+[node name="ItemImage" parent="UI/Character/LHandPanel/EquipButton/Content" index="0"]
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="RHandPanel" type="Panel" parent="UI/Character"]
-custom_minimum_size = Vector2i(22, 22)
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
 offset_left = 94.0
 offset_top = 175.0
 offset_right = 116.0
@@ -1046,6 +1097,7 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_pjirn")
 
 [node name="HoverRect" type="TextureRect" parent="UI/Character/RHandPanel"]
 visible = false
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1055,16 +1107,53 @@ texture = ExtResource("12_teqho")
 
 [node name="EquipButton" parent="UI/Character/RHandPanel" instance=ExtResource("13_i4h7w")]
 visible = false
+layout_mode = 0
+type = 2
+
+[node name="Area2D" parent="UI/Character/RHandPanel/EquipButton" index="0"]
+visible = false
+
+[node name="ItemImage" parent="UI/Character/RHandPanel/EquipButton/Content" index="0"]
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="CharacterPanel" type="Panel" parent="UI/Character"]
+layout_mode = 0
 offset_left = 51.0
 offset_top = 68.0
 offset_right = 125.0
 offset_bottom = 169.0
-script = ExtResource("11_usa2v")
+theme_override_styles/panel = SubResource("StyleBoxTexture_0uvwy")
+
+[node name="HoverRect" type="TextureRect" parent="UI/Character/CharacterPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_teqho")
+
+[node name="CoverPanel" type="Panel" parent="UI/Character/CharacterPanel"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("29_5vimk")
+type = 17
+
+[node name="Area2D" type="Area2D" parent="UI/Character/CharacterPanel/CoverPanel"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Character/CharacterPanel/CoverPanel/Area2D"]
+position = Vector2(37.5, 50.5)
+shape = SubResource("RectangleShape2D_thfi8")
 
 [node name="ItemDescPanel" type="Panel" parent="UI/Character"]
 visible = false
+layout_mode = 0
 offset_left = 180.0
 offset_top = 33.0
 offset_right = 260.0
@@ -1073,6 +1162,7 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_dk08e")
 script = ExtResource("14_k6vq4")
 
 [node name="NameLabel" type="Label" parent="UI/Character/ItemDescPanel"]
+layout_mode = 0
 offset_left = 8.0
 offset_top = 3.0
 offset_right = 71.0
@@ -1085,6 +1175,7 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="DescLabel" type="Label" parent="UI/Character/ItemDescPanel"]
+layout_mode = 0
 offset_left = 8.0
 offset_top = 35.0
 offset_right = 71.0
@@ -1097,9 +1188,8 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="Inventory" type="Control" parent="UI"]
-visible = false
-custom_minimum_size = Vector2i(176, 296)
-layout_mode = 3
+custom_minimum_size = Vector2(176, 296)
+layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
@@ -1115,6 +1205,7 @@ script = ExtResource("7_0wyy8")
 
 [node name="Shadow" type="TextureRect" parent="UI/Inventory"]
 material = ExtResource("8_fara6")
+layout_mode = 0
 offset_left = 2.0
 offset_top = -2.0
 offset_right = 178.0
@@ -1123,30 +1214,33 @@ texture = ExtResource("28_s3eqt")
 
 [node name="Background" type="TextureRect" parent="UI/Inventory"]
 modulate = Color(1, 1, 1, 0.392157)
+layout_mode = 0
 offset_right = 176.0
 offset_bottom = 296.0
 texture = ExtResource("3_5tfiq")
 
 [node name="Plates" type="TextureRect" parent="UI/Inventory"]
+layout_mode = 0
 offset_right = 176.0
 offset_bottom = 296.0
 texture = ExtResource("6_83gsj")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/Inventory"]
+layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 15.0
 grow_horizontal = 2
 
 [node name="Label" type="Label" parent="UI/Inventory/MarginContainer"]
-offset_right = 176.0
-offset_bottom = 14.0
+layout_mode = 2
 size_flags_vertical = 0
 text = "Inventory"
 label_settings = SubResource("LabelSettings_n77g3")
 horizontal_alignment = 1
 
 [node name="TextureButton" type="TextureButton" parent="UI/Inventory"]
+layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -1156,6 +1250,7 @@ grow_horizontal = 0
 tooltip_text = "Close"
 
 [node name="InventoryGrid" type="GridContainer" parent="UI/Inventory"]
+layout_mode = 0
 offset_left = 5.0
 offset_top = 37.0
 offset_right = 165.0
@@ -1164,9 +1259,8 @@ theme_override_constants/h_separation = 3
 theme_override_constants/v_separation = 3
 columns = 5
 
-[node name="ItemButton" parent="UI/Inventory/InventoryGrid" instance=ExtResource("9_f8cn7")]
-
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/Inventory"]
+layout_mode = 0
 offset_left = 35.0
 offset_top = 15.0
 offset_right = 140.0
@@ -1174,9 +1268,8 @@ offset_bottom = 30.0
 theme_override_constants/separation = 3
 
 [node name="Button" type="Button" parent="UI/Inventory/HBoxContainer"]
-custom_minimum_size = Vector2i(15, 15)
-offset_right = 15.0
-offset_bottom = 15.0
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_to568")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_e4ms3")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_jtoyy")
@@ -1188,10 +1281,8 @@ action_mode = 0
 button_group = SubResource("ButtonGroup_bge57")
 
 [node name="Button2" type="Button" parent="UI/Inventory/HBoxContainer"]
-custom_minimum_size = Vector2i(15, 15)
-offset_left = 18.0
-offset_right = 33.0
-offset_bottom = 15.0
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_to568")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_e4ms3")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_jtoyy")
@@ -1202,10 +1293,8 @@ action_mode = 0
 button_group = SubResource("ButtonGroup_bge57")
 
 [node name="Button3" type="Button" parent="UI/Inventory/HBoxContainer"]
-custom_minimum_size = Vector2i(15, 15)
-offset_left = 36.0
-offset_right = 51.0
-offset_bottom = 15.0
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_to568")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_e4ms3")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_jtoyy")
@@ -1216,10 +1305,8 @@ action_mode = 0
 button_group = SubResource("ButtonGroup_bge57")
 
 [node name="Button4" type="Button" parent="UI/Inventory/HBoxContainer"]
-custom_minimum_size = Vector2i(15, 15)
-offset_left = 54.0
-offset_right = 69.0
-offset_bottom = 15.0
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_to568")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_e4ms3")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_jtoyy")
@@ -1230,10 +1317,8 @@ action_mode = 0
 button_group = SubResource("ButtonGroup_bge57")
 
 [node name="Button5" type="Button" parent="UI/Inventory/HBoxContainer"]
-custom_minimum_size = Vector2i(15, 15)
-offset_left = 72.0
-offset_right = 87.0
-offset_bottom = 15.0
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_to568")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_e4ms3")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_jtoyy")
@@ -1244,10 +1329,8 @@ action_mode = 0
 button_group = SubResource("ButtonGroup_bge57")
 
 [node name="Button6" type="Button" parent="UI/Inventory/HBoxContainer"]
-custom_minimum_size = Vector2i(15, 15)
-offset_left = 90.0
-offset_right = 105.0
-offset_bottom = 15.0
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_to568")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_e4ms3")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_jtoyy")
@@ -1259,6 +1342,7 @@ button_group = SubResource("ButtonGroup_bge57")
 
 [node name="ItemDescPanel" type="Panel" parent="UI/Inventory"]
 visible = false
+layout_mode = 0
 offset_left = -84.0
 offset_top = 32.0
 offset_right = -4.0
@@ -1267,6 +1351,7 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_dk08e")
 script = ExtResource("14_k6vq4")
 
 [node name="NameLabel" type="Label" parent="UI/Inventory/ItemDescPanel"]
+layout_mode = 0
 offset_left = 8.0
 offset_top = 3.0
 offset_right = 71.0
@@ -1279,6 +1364,7 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="DescLabel" type="Label" parent="UI/Inventory/ItemDescPanel"]
+layout_mode = 0
 offset_left = 8.0
 offset_top = 35.0
 offset_right = 71.0
@@ -1291,6 +1377,7 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="InventoryCloseButton" type="Button" parent="UI/Inventory"]
+layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -1306,6 +1393,7 @@ script = ExtResource("9_lvtlu")
 
 [node name="ItemActionsPanel" type="Panel" parent="UI"]
 visible = false
+layout_mode = 0
 offset_left = 26.0
 offset_top = 58.0
 offset_right = 74.0
@@ -1313,6 +1401,7 @@ offset_bottom = 82.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_reb7f")
 
 [node name="ItemActionsVBox" type="VBoxContainer" parent="UI/ItemActionsPanel"]
+layout_mode = 0
 offset_top = 1.0
 offset_right = 48.0
 offset_bottom = 41.0
@@ -1320,9 +1409,8 @@ theme_override_constants/separation = 2
 
 [node name="UnequipButton" type="Button" parent="UI/ItemActionsPanel/ItemActionsVBox"]
 visible = false
-custom_minimum_size = Vector2i(20, 10)
-offset_right = 48.0
-offset_bottom = 10.0
+custom_minimum_size = Vector2(20, 10)
+layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_705cy")
 theme_override_styles/hover = SubResource("StyleBoxTexture_gnv88")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_2bg7p")
@@ -1331,6 +1419,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_rf8ru")
 script = ExtResource("20_nbmo2")
 
 [node name="Label" type="Label" parent="UI/ItemActionsPanel/ItemActionsVBox/UnequipButton"]
+layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
@@ -1346,10 +1435,8 @@ vertical_alignment = 1
 
 [node name="EquipButton" type="Button" parent="UI/ItemActionsPanel/ItemActionsVBox"]
 visible = false
-custom_minimum_size = Vector2i(20, 10)
-offset_top = 12.0
-offset_right = 48.0
-offset_bottom = 22.0
+custom_minimum_size = Vector2(20, 10)
+layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_705cy")
 theme_override_styles/hover = SubResource("StyleBoxTexture_gnv88")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_2bg7p")
@@ -1358,6 +1445,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_rf8ru")
 script = ExtResource("20_nbmo2")
 
 [node name="Label" type="Label" parent="UI/ItemActionsPanel/ItemActionsVBox/EquipButton"]
+layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
@@ -1373,10 +1461,8 @@ vertical_alignment = 1
 
 [node name="DeleteButton" type="Button" parent="UI/ItemActionsPanel/ItemActionsVBox"]
 visible = false
-custom_minimum_size = Vector2i(20, 10)
-offset_top = 24.0
-offset_right = 48.0
-offset_bottom = 34.0
+custom_minimum_size = Vector2(20, 10)
+layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ngump")
 theme_override_styles/hover = SubResource("StyleBoxTexture_vlg4b")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_vukj7")
@@ -1385,6 +1471,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_5cgrn")
 script = ExtResource("20_nbmo2")
 
 [node name="Label" type="Label" parent="UI/ItemActionsPanel/ItemActionsVBox/DeleteButton"]
+layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0

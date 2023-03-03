@@ -8,171 +8,11 @@
 
 config_version=5
 
-_global_script_classes=[{
-"base": "CharacterBody2D",
-"class": &"Actor",
-"language": &"GDScript",
-"path": "res://Scripts/Character_scripts/Actor.gd"
-}, {
-"base": "BaseUndurableItem",
-"class": &"ArmorItem",
-"language": &"GDScript",
-"path": "res://Scripts/Item_scripts/ArmorItem.gd"
-}, {
-"base": "BaseSkill",
-"class": &"AttackSkill",
-"language": &"GDScript",
-"path": "res://Scripts/Skill_scripts/AttackSkill.gd"
-}, {
-"base": "BaseStackableItem",
-"class": &"BaseConsumableItem",
-"language": &"GDScript",
-"path": "res://Scripts/Item_scripts/BaseConsumableItem.gd"
-}, {
-"base": "Resource",
-"class": &"BaseSkill",
-"language": &"GDScript",
-"path": "res://Scripts/Skill_scripts/BaseSkill.gd"
-}, {
-"base": "TextureButton",
-"class": &"BaseSlotUI",
-"language": &"GDScript",
-"path": "res://Scripts/UI_scripts/BaseSlotUI.gd"
-}, {
-"base": "Item",
-"class": &"BaseStackableItem",
-"language": &"GDScript",
-"path": "res://Scripts/Item_scripts/BaseStackableItem.gd"
-}, {
-"base": "Item",
-"class": &"BaseUndurableItem",
-"language": &"GDScript",
-"path": "res://Scripts/Item_scripts/BaseUndurableItem.gd"
-}, {
-"base": "ArmorItem",
-"class": &"BootsItem",
-"language": &"GDScript",
-"path": "res://Scripts/Item_scripts/BootsItem.gd"
-}, {
-"base": "BaseSlotUI",
-"class": &"EquipSlotUI",
-"language": &"GDScript",
-"path": "res://Scripts/UI_scripts/EquipSlotUI.gd"
-}, {
-"base": "ArmorItem",
-"class": &"HelmItem",
-"language": &"GDScript",
-"path": "res://Scripts/Item_scripts/HelmItem.gd"
-}, {
-"base": "Resource",
-"class": &"Inventory",
-"language": &"GDScript",
-"path": "res://Scripts/Inventory_scripts/Inventory.gd"
-}, {
-"base": "Object",
-"class": &"InventoryItemSlotInfo",
-"language": &"GDScript",
-"path": "res://Scripts/Inventory_scripts/InventoryItemSlotInfo.gd"
-}, {
-"base": "Resource",
-"class": &"Item",
-"language": &"GDScript",
-"path": "res://Scripts/Item_scripts/Item.gd"
-}, {
-"base": "Object",
-"class": &"ItemProperty",
-"language": &"GDScript",
-"path": "res://Scripts/Inventory_scripts/ItemProperty.gd"
-}, {
-"base": "Node",
-"class": &"ItemSlotInfo",
-"language": &"GDScript",
-"path": "res://Scripts/Inventory_scripts/ItemSlotInfo.gd"
-}, {
-"base": "BaseSlotUI",
-"class": &"ItemSlotUI",
-"language": &"GDScript",
-"path": "res://Scripts/UI_scripts/ItemSlotUI.gd"
-}, {
-"base": "CharacterBody2D",
-"class": &"MeleeActor",
-"language": &"GDScript",
-"path": "res://Scripts/Character_scripts/MeleeActor.gd"
-}, {
-"base": "Resource",
-"class": &"Modifier",
-"language": &"GDScript",
-"path": "res://Scripts/Item_scripts/ModifierScript.gd"
-}, {
-"base": "Item",
-"class": &"NoteItem",
-"language": &"GDScript",
-"path": "res://Scripts/Item_scripts/NoteItem.gd"
-}, {
-"base": "BaseStackableItem",
-"class": &"OtherItem",
-"language": &"GDScript",
-"path": "res://Scripts/Item_scripts/OtherItem.gd"
-}, {
-"base": "Resource",
-"class": &"PlayerData",
-"language": &"GDScript",
-"path": "res://Scripts/Character_scripts/PlayerData.gd"
-}, {
-"base": "Actor",
-"class": &"PlayerScript",
-"language": &"GDScript",
-"path": "res://Scripts/Character_scripts/player.gd"
-}, {
-"base": "Resource",
-"class": &"Skills",
-"language": &"GDScript",
-"path": "res://Scripts/Skill_scripts/Skills.gd"
-}, {
-"base": "BaseSkill",
-"class": &"StatusSkill",
-"language": &"GDScript",
-"path": "res://Scripts/Skill_scripts/StatusSkill.gd"
-}, {
-"base": "BaseUndurableItem",
-"class": &"WeaponItem",
-"language": &"GDScript",
-"path": "res://Scripts/Item_scripts/WeaponItem.gd"
-}]
-_global_script_class_icons={
-"Actor": "",
-"ArmorItem": "",
-"AttackSkill": "",
-"BaseConsumableItem": "",
-"BaseSkill": "",
-"BaseSlotUI": "",
-"BaseStackableItem": "",
-"BaseUndurableItem": "",
-"BootsItem": "",
-"EquipSlotUI": "",
-"HelmItem": "",
-"Inventory": "",
-"InventoryItemSlotInfo": "",
-"Item": "",
-"ItemProperty": "",
-"ItemSlotInfo": "",
-"ItemSlotUI": "",
-"MeleeActor": "",
-"Modifier": "",
-"NoteItem": "",
-"OtherItem": "",
-"PlayerData": "",
-"PlayerScript": "",
-"Skills": "",
-"StatusSkill": "",
-"WeaponItem": ""
-}
-
 [application]
 
 config/name="RoguelikeTest"
 run/main_scene="res://Scenes/SceneManager.tscn"
-config/features=PackedStringArray("4.0", "C#", "Forward Plus")
+config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
@@ -201,52 +41,52 @@ project/assembly_name="RoguelikeTest"
 
 left={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":65,"unicode":0,"echo":false,"script":null)
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":65,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
 up={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":87,"unicode":0,"echo":false,"script":null)
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":87,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
 right={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":68,"unicode":0,"echo":false,"script":null)
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":68,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
 down={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":83,"unicode":115,"echo":false,"script":null)
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":83,"key_label":0,"unicode":115,"echo":false,"script":null)
 ]
 }
 character={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":67,"unicode":0,"echo":false,"script":null)
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":67,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
 inventory={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":73,"unicode":0,"echo":false,"script":null)
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":73,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
 shoot={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"unicode":32,"echo":false,"script":null)
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"key_label":0,"unicode":32,"echo":false,"script":null)
 ]
 }
 skill1={
 "deadzone": 0.5,
-"events": [null, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":49,"unicode":0,"echo":false,"script":null)
+"events": [null, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":49,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
 skill2={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":50,"unicode":50,"echo":false,"script":null)
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":50,"key_label":0,"unicode":50,"echo":false,"script":null)
 ]
 }
 skill3={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":51,"unicode":51,"echo":false,"script":null)
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":51,"key_label":0,"unicode":51,"echo":false,"script":null)
 ]
 }
 

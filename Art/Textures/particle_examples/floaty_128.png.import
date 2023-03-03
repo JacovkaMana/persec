@@ -16,9 +16,9 @@ dest_files=["res://.godot/imported/floaty_128.png-04c0d54e262fec434ae1c8d1955f29
 [params]
 
 compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=false

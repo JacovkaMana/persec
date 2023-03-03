@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "1D01L0bJ3VZLHmHHsWekzDBgFrdUqYO5puDLnx0USRRGGKtlhHBxisB9+taGiv8EvrPUpdvLfsOCP4PeitzaFw==",
+  "dgSpecHash": "s8JM+iX7e9QphleVk0J/wCP9x3q7VJtUcxybDlu4ckA9b2SJ7NS8LHjrIGCmuwz6BVPO2mjqXFJCjbicL0VfBQ==",
   "success": true,
-  "projectFilePath": "G:\\persec-main\\RoguelikeTest.csproj",
+  "projectFilePath": "G:\\persec-ui-dev\\RoguelikeTest.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Jacov\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder\\godot.sourcegenerators\\4.0.0-beta.3\\godot.sourcegenerators.4.0.0-beta.3.nupkg.sha512",
-    "C:\\Users\\Jacov\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder\\godotsharp\\4.0.0-beta.3\\godotsharp.4.0.0-beta.3.nupkg.sha512",
-    "C:\\Users\\Jacov\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder\\godotsharpeditor\\4.0.0-beta.3\\godotsharpeditor.4.0.0-beta.3.nupkg.sha512"
+    "C:\\Users\\Jacov\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder\\godot.sourcegenerators\\4.0.0\\godot.sourcegenerators.4.0.0.nupkg.sha512",
+    "C:\\Users\\Jacov\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder\\godotsharp\\4.0.0\\godotsharp.4.0.0.nupkg.sha512",
+    "C:\\Users\\Jacov\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder\\godotsharpeditor\\4.0.0\\godotsharpeditor.4.0.0.nupkg.sha512"
   ],
   "logs": []
 }

@@ -15,7 +15,6 @@ extends Control
 	Enums.EEquipmentSlot.ACCESSORY_2: $LeftCharacterVBox/RingPanel2,
 }
 var EquipButton = preload("res://Scenes/Inventory/EquipButton.tscn")
-var node
 var active_slot_rclick: BaseSlotUI = null
 var active_item_lclick: Item = null
 # Called when the node enters the scene tree for the first time.
@@ -63,7 +62,7 @@ func _on_update_request(slot_type: Enums.EEquipmentSlot, item_slot):
 			if equipments[equipment]:
 				panel_button.get_node("Content").get_node("ItemImage").texture = equipments[equipment].sprite
 				panel_button.set_item(equipments[equipment])
-				panel_button.slot_type = equipment
+				#panel_button.slot_type = equipment
 				panel_button.visible = true
 			else:
 				panel_button.item = null
@@ -95,7 +94,7 @@ func _on_equip_mouse_lclick(slot: BaseSlotUI):
 		desc_panel.visible = true
 	else:
 		desc_panel.visible = false
-		desc_panel.position = Vector2(100,32)
+		desc_panel.position = Vector2(180,32)
 	
 
 func _on_action_click(action: String):
@@ -103,10 +102,9 @@ func _on_action_click(action: String):
 	if active_slot_rclick != null:
 		match action:
 			"Unequip":
-				if player.data.inventory.unequip_slot(active_slot_rclick.slot_type):
+				if player.data.inventory.unequip_slot(active_slot_rclick.type):
 					desc_panel.visible = false
 					actions_panel.visible = false
-					_on_update_request(active_slot_rclick.slot_type, null)	
 #			"Delete":
 #				_delete_item(active_slot_rclick, true)
 #				active_slot_rclick = null

@@ -13,10 +13,11 @@ var melee_scene = null
 func _ready():
 	
 	next_scene = next_level_resource.instantiate()
-	self.add_child(next_scene)	
+	self.add_child(next_scene)
 	
 	ui_scene = ui.instantiate()
 	self.add_child(ui_scene)
+		
 	
 
 

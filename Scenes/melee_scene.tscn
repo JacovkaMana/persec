@@ -30,13 +30,13 @@ font_size = 8
 layer = 2
 
 [node name="Control" type="Control" parent="."]
-custom_minimum_size = Vector2i(640, 360)
+custom_minimum_size = Vector2(640, 360)
 layout_mode = 3
 anchors_preset = 0
 
 [node name="TextureRect" type="TextureRect" parent="Control"]
 visible = false
-anchors_preset = 15
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -44,8 +44,8 @@ grow_vertical = 2
 texture = ExtResource("1_nfp84")
 
 [node name="TextureRect2" type="TextureRect" parent="Control"]
-custom_minimum_size = Vector2i(640, 360)
-anchors_preset = 7
+custom_minimum_size = Vector2(640, 360)
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -60,7 +60,7 @@ texture = SubResource("GradientTexture1D_8mwvv")
 [node name="TextureRect3" type="TextureRect" parent="Control"]
 visible = false
 material = ExtResource("2_jwuwn")
-anchors_preset = 5
+layout_mode = 0
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -320.0
@@ -70,8 +70,8 @@ grow_horizontal = 2
 texture = SubResource("GradientTexture2D_vpx4i")
 
 [node name="Player" type="Control" parent="Control"]
-custom_minimum_size = Vector2i(32, 64)
-layout_mode = 3
+custom_minimum_size = Vector2(32, 64)
+layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -86,7 +86,7 @@ pivot_offset = Vector2(16, 32)
 
 [node name="TextureRect" type="TextureRect" parent="Control/Player"]
 self_modulate = Color(0.282353, 0.45098, 0.666667, 1)
-anchors_preset = 8
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -106,6 +106,7 @@ hframes = 8
 vframes = 9
 
 [node name="Label" type="Label" parent="Control/Player"]
+layout_mode = 0
 offset_left = -13.5
 offset_top = -36.0
 offset_right = 26.5
@@ -123,7 +124,7 @@ offset_bottom = 138.0
 
 [node name="TextureRect" type="TextureRect" parent="Control/Enemy"]
 self_modulate = Color(0.282353, 0.45098, 0.666667, 1)
-anchors_preset = 8
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -143,6 +144,7 @@ hframes = 8
 vframes = 9
 
 [node name="Label" type="Label" parent="Control/Enemy"]
+layout_mode = 0
 offset_left = -11.5
 offset_top = -36.5
 offset_right = 28.5
