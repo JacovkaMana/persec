@@ -13,19 +13,19 @@ extends BaseUndurableItem
 func get_type_text()->String:
 		return "Armor"
 
-func initialize(name: String = '', description: String = '', rarity = null):
+func initialize(_name: String = '', _description: String = '', _rarity = null):
 	
 	sprite = preload("res://Art/Sprites/Armor/Armor1.png")
 	
-	self.description = description
+	self.description = _description
 	
-	if (rarity):
-		self.rarity = rarity
+	if (_rarity):
+		self.rarity = _rarity
 	else: 
 		self.rarity = RandomStats.random_rarity()
 
-	if (name):
-		self.name = name
+	if (_name):
+		self.name = _name
 	else:
 		self.name = 'Arrmor'
 
@@ -40,4 +40,6 @@ func get_item_type():
 func get_slot_type():
 	return [Enums.EEquipmentSlot.ARMOR]
 
+func is_equipable()->bool:
+	return true
 

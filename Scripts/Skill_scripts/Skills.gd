@@ -10,7 +10,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 func get_skills():
@@ -19,7 +19,7 @@ func get_skills():
 func get_skill_id(id: int):
 	return _skills[id]
 
-func get_skill_name(name: String):
+func get_skill_name(_name: String):
 	return 'test'
 	
 func add_skill(skill: BaseSkill):

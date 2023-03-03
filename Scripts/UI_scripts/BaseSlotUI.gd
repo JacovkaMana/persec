@@ -5,19 +5,19 @@ extends TextureButton
 signal slot_mouse_entered(slot_index: BaseSlotUI)
 signal slot_mouse_exited(slot_index: BaseSlotUI)
 
-@onready var content: Control = get_node("Content")
-@onready var count_label: Label = get_node("Content/CountLabel")
-@onready var item_icon: TextureRect = get_node("Content/ItemTextureRect")
-@onready var selector_icon: TextureRect = get_node("Content/SelectorTextureRect")
-@onready var inventory: Node2D = null
-@onready var item = null
+@export var item: Item = null
+
+@onready var content: Control = $Content
+@onready var item_icon: TextureRect = null
+@onready var selector_icon: TextureRect = null
+@onready var inventory = null
 var actions = []
 
 
 var _slot_info: InventoryItemSlotInfo = null 
 
 func _ready()->void:
-	inventory = get_tree().get_root().get_node("Inventory")
+	inventory = get_tree().get_root().find_child("Inventory", true, false)
 #	self.connect("slot_mouse_entered", self, "on_slot_mouse_entered")
 
 	
@@ -49,24 +49,24 @@ func get_actions():
 #	selector_icon.visible = value
 
 
-func update_ui(slot: InventoryItemSlotInfo)->void:
-	if (slot == null):
-		_slot_info = null
-		content.visible = false
-		selector_icon.visible = false
-		return
-	
-	_slot_info = slot
-	content.visible = true
-	
-	var item_info: Item = _slot_info.get_item_info()
-	item_icon.texture = item_info.icon
-	
-	if (item_info.is_stackable()):
-		count_label.visible = true
-		count_label.text = str(_slot_info.count)
-	else:
-		count_label.visible = false
+#func update_ui(slot: InventoryItemSlotInfo)->void:
+#	if (slot == null):
+#		_slot_info = null
+#		content.visible = false
+#		selector_icon.visible = false
+#		return
+#
+#	_slot_info = slot
+#	content.visible = true
+#
+#	var item_info: Item = _slot_info.get_item_info()
+#	item_icon.texture = item_info.icon
+#
+#	if (item_info.is_stackable()):
+#		count_label.visible = true
+#		count_label.text = str(_slot_info.count)
+#	else:
+#		count_label.visible = false
 
 
 func get_item_slot_info()->InventoryItemSlotInfo:

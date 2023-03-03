@@ -14,16 +14,16 @@ extends Resource
 
 
 
-func initialize(name: String = '', description: String = '', rarity = null):
+func initialize(_name: String = '', _description: String = '', _rarity = null):
 	
-	if(name):
-		self.name = name
+	if(_name):
+		self.name = _name
 		
-	if(description):
-		self.description = description
+	if(_description):
+		self.description = _description
 	
-	if(rarity):
-		self.rarity = rarity
+	if(_rarity):
+		self.rarity = _rarity
 	
 func is_stackable()->bool:
 	return false
@@ -41,6 +41,11 @@ func get_type_text()->String:
 func get_common_properties()->Array: #[ItemProperty]:
 	return []
 
+func is_equipable()->bool:
+	return false
 
-func randomize()->bool:
+func _randomize()->bool:
 	return true
+	
+
+

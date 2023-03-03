@@ -4,10 +4,10 @@ extends Actor
   
 @export var walk_radius: float = 50
 var last_direction_change: float = 0
-@onready var raycast: ShapeCast2D = $RayCast
-@onready var path: Path2D = $Path2D
-@onready var path_follow: PathFollow2D = $Path2D/PathFollow2D
-@onready var path_player = $PathPlayer
+#@onready var raycast: ShapeCast2D = $RayCast
+#@onready var path: Path2D = $Path2D
+#@onready var path_follow: PathFollow2D = $Path2D/PathFollow2D
+#@onready var path_player = $PathPlayer
 @onready var vision: Area2D = $Vision
 @onready var player = get_tree().get_root().find_child("Player", true, false)
 

@@ -6,10 +6,10 @@ extends Node2D
 func _ready():
 	#var idle = anim.get_animation('torch_loop')
 	#idle.set_loop(true)
-	anim.speed_scale =  (randi() % 11) / 10 + 0.5 
+	anim.speed_scale =  (randi() % 11) / 10.0 + 0.5 
 	anim.play('torch_loop')
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass

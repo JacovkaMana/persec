@@ -36,7 +36,7 @@ func _ready():
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	#print(get_viewport())
 #	player.inventory.connect("added_item", _on_new_item)
 #	player.inventory.connect("updated_item", _on_updated_item)
@@ -54,7 +54,7 @@ func _process(delta):
 #	return false
 
 
-func _on_update_request(slot_type: Enums.EEquipmentSlot, item_slot):
+func _on_update_request(_slot_type: Enums.EEquipmentSlot, _item_slot):
 	var equipments = player.data.inventory.get_equipments()
 	for equipment in equipments:
 		if equipment in PLACEMENT_DICT:

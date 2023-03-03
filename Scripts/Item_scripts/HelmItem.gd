@@ -11,5 +11,8 @@ func get_slot_type():
 	return [Enums.EEquipmentSlot.HELM]
 	
 
+func is_equipable()->bool:
+	return true
+
 
 

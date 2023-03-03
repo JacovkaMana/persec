@@ -1,5 +1,5 @@
 shader_type canvas_item;
-
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
 uniform float strength: hint_range(0.0, 0.1, 0.001) = 0.08;
 uniform vec2 center = vec2(0.5, 0.5);
 uniform float radius: hint_range(0.0, 1.0, 0.001) = 0.25;

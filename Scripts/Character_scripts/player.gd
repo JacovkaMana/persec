@@ -1,6 +1,8 @@
 extends Actor
 class_name PlayerScript
 
+signal dropped_inventory_opened(item_array: Array[Item])
+
 var invincible_timer = null
 
 func _ready():
@@ -53,6 +55,8 @@ func _ready():
 	print(data.skills.get_skills())
 
 
+
+
 	cooldown(20)
 
 func _physics_process(_delta):
@@ -78,3 +82,6 @@ func _input(event):
 func set_zone(to):
 	current_zone = to
 	print('player in ' + str(to))
+	
+func _on_chest_open(chest):
+	emit_signal("dropped_inventory_opened", chest.chest_inventory)

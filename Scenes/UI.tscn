@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=3 uid="uid://dbksnam8cuw3o"]
+[gd_scene load_steps=80 format=3 uid="uid://dbksnam8cuw3o"]
 
 [ext_resource type="Script" path="res://Scripts/UI_scripts/CharacterUI.gd" id="1_8tod6"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/UI.gd" id="1_cvjfy"]
@@ -38,6 +38,7 @@
 [ext_resource type="Texture2D" uid="uid://bvm648ct7g0co" path="res://Art/UI/Character.png" id="28_ws067"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/CoverPanel.gd" id="29_5vimk"]
 [ext_resource type="Texture2D" uid="uid://cpp7ou6piu4r0" path="res://Art/UI/SkillSlot.png" id="34_f6u2n"]
+[ext_resource type="Script" path="res://Scripts/UI_scripts/DroppedItemsUI.gd" id="39_4oyr2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_u8o8f"]
 font = ExtResource("5_ai818")
@@ -141,15 +142,21 @@ region_rect = Rect2(0, 0, 15, 15)
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_bge57"]
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_t4b0o"]
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_reb7f"]
 texture = ExtResource("18_mog8i")
 region_rect = Rect2(0, 0, 40, 24)
+modulate_color = Color(1, 1, 1, 0.784314)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_705cy"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gnv88"]
 texture = ExtResource("19_3pi6p")
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
 region_rect = Rect2(0, 0, 40, 10)
+modulate_color = Color(1, 1, 1, 0.784314)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2bg7p"]
 
@@ -165,6 +172,8 @@ font_size = 8
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vlg4b"]
 texture = ExtResource("19_3pi6p")
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
 region_rect = Rect2(0, 0, 40, 10)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vukj7"]
@@ -1390,6 +1399,105 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_ojem5")
 theme_override_styles/hover = SubResource("StyleBoxTexture_ojq34")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_11eno")
 script = ExtResource("9_lvtlu")
+
+[node name="DroppedItems" type="Control" parent="UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("39_4oyr2")
+
+[node name="Shadow" type="TextureRect" parent="UI/DroppedItems"]
+self_modulate = Color(0.0784314, 0.231373, 0.427451, 0.607843)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -91.0
+offset_top = -51.0
+offset_right = 91.0
+offset_bottom = 51.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CanvasTexture_t4b0o")
+
+[node name="Background" type="TextureRect" parent="UI/DroppedItems"]
+self_modulate = Color(0.584314, 0.658824, 0.752941, 0.607843)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = -50.0
+offset_right = 90.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CanvasTexture_t4b0o")
+
+[node name="InventoryGrid" type="GridContainer" parent="UI/DroppedItems"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -89.0
+offset_top = -49.0
+offset_right = 89.0
+offset_bottom = 49.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 7
+
+[node name="ItemDescPanel" type="Panel" parent="UI/DroppedItems"]
+visible = false
+layout_mode = 0
+offset_left = 180.0
+offset_top = 33.0
+offset_right = 260.0
+offset_bottom = 133.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_dk08e")
+script = ExtResource("14_k6vq4")
+
+[node name="NameLabel" type="Label" parent="UI/DroppedItems/ItemDescPanel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 3.0
+offset_right = 71.0
+offset_bottom = 28.0
+size_flags_vertical = 0
+text = "Funny Shield"
+label_settings = SubResource("LabelSettings_h0dk4")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="DescLabel" type="Label" parent="UI/DroppedItems/ItemDescPanel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 35.0
+offset_right = 71.0
+offset_bottom = 69.0
+size_flags_vertical = 0
+text = "+5 Attack
+-5 Defense"
+label_settings = SubResource("LabelSettings_wulp2")
+vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="ItemActionsPanel" type="Panel" parent="UI"]
 visible = false

@@ -3,8 +3,8 @@ extends StaticBody2D
 var start_pos: Vector2
 var moving: bool = false
 var direction: Vector2
-@onready var animation_tree = $AnimationTree
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
+var animation_tree: AnimationTree = null
+var animation_player: AnimationPlayer = null
 @onready var particles: GPUParticles2D = $Particles
 @onready var sprite: Sprite2D = $Bullet
 @onready var texture_light: PointLight2D = $TextureLight
@@ -15,7 +15,7 @@ var direction: Vector2
 #@onready var state_machine = animation_tree.get("parameters/playback")
 
 @export var move_speed : float = 100
-@export var range: float
+@export var move_range: float
 @export var moving_projectile: bool = false
 @export var animated: bool = false
 var projectile_owner = null
@@ -30,8 +30,12 @@ func _ready():
 	
 	start_pos = self.position
 	if (animated):
+		#animation_tree = $AnimationTree
+		animation_player = $AnimationPlayer
+		
 		animation_player.connect("animation_finished", delete)
 		animation_player.queue("Slash")
+		
 	
 #	var bitmap = BitMap.new()
 #	bitmap.create_from_image_alpha(sprite.texture.get_image())
@@ -65,28 +69,28 @@ func _physics_process(_delta):
 
 	
 	
-func shoot(where: Vector2, animated: bool = false, who = null):
+func shoot(where: Vector2, _animated: bool = false, who = null):
 	#state_machine.travel("Start")
 	moving = true
 	direction = where.normalized()
 	projectile_owner = who
 
 		
-	if (not animated):
+	if (not _animated):
 		particles.emitting = false
 		
 		
-func change_sprite(skill: BaseSkill):
+func change_sprite(_skill: BaseSkill):
 	#to = skill.projectile
 #	sprite.set_texture(to)
 #	texture_light.set_texture(to)
-	texture_light.color = RandomStats.type_colors[skill.damage_type] # too many lights
-	sprite.self_modulate = RandomStats.type_colors[skill.damage_type]
-	light.color = RandomStats.type_colors[skill.damage_type]
+	texture_light.color = RandomStats.type_colors[_skill.damage_type] # too many lights
+	sprite.self_modulate = RandomStats.type_colors[_skill.damage_type]
+	light.color = RandomStats.type_colors[_skill.damage_type]
 	
-	if (skill.type == Enums.ESkillType.MAGIC):
-		sprite.material = GlobalSkills.shaders[skill.damage_type]
-		particles.process_material.color_ramp = GlobalSkills.colors[skill.damage_type]
+	if (_skill.type == Enums.ESkillType.MAGIC):
+		sprite.material = GlobalSkills.shaders[_skill.damage_type]
+		particles.process_material.color_ramp = GlobalSkills.colors[_skill.damage_type]
 	else:
 		sprite.material = null
 		particles.emitting = false
@@ -105,7 +109,7 @@ func change_sprite(skill: BaseSkill):
 #					emiss.push_back(Vector2(i,j))
 #	particles.set_emission_points(emiss)
 	
-func delete(anim_name):
+func delete(_anim):
 	print('delete triggered')
 	self.queue_free()
 

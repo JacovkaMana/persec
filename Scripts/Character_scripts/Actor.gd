@@ -89,7 +89,7 @@ func shoot_projectile(skill: BaseSkill) -> void:
 	else:
 		bullet.shoot(Vector2(0,0), true, self)
 	
-func take_damage(skill: BaseSkill, strength):
+func take_damage(_skill: BaseSkill, _strength):
 	data.hitpoints -= 20
 	self.modulate = Color8(255,0,0,255)
 	

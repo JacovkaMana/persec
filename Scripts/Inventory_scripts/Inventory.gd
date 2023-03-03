@@ -43,7 +43,8 @@ func add_item(item: Item, item_count: int = 1):
 		_inventory.append(item)
 		emit_signal("added_item", item)
 		return true	
-	return false
+		
+	#return false
 	
 	
 func is_initialized()->bool:
@@ -68,7 +69,7 @@ func remove_item(item: Item, count: int = 1):
 
 
 func equip_item(item: Item)->bool:	
-	var item_type = item.get_item_type()
+	#var item_type = item.get_item_type()
 	var slot_type = item.get_slot_type()[0]
 	
 	if slot_type not in _equipment.keys():
@@ -113,7 +114,7 @@ func get_inventory_items()->Array: #[InventoryItemSlotInfo]:
 
 
 func get_inventory_items_by_type(item_type: Enums.EItemType)->Array: #[InventoryItemSlotInfo]:
-	var out: Array[Item]
+	var out: Array[Item] = []
 	for item in _inventory:
 		if item.get_item_type() == item_type:
 		#if item.get_item_info().get_item_type() == item_type:

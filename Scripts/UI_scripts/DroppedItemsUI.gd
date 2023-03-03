@@ -1,62 +1,34 @@
 extends Control
 
-@onready var inventory_grid: GridContainer = get_node("InventoryGrid")
-@onready var desc_panel: Panel = get_node("ItemDescPanel")
+@onready var inventory_grid: GridContainer = $InventoryGrid
 @onready var player = get_tree().get_root().find_child("Player", true, false)
-@onready var active_item_lclick: Item = null
-@onready var active_slot_rclick: BaseSlotUI = null
+@onready var desc_panel: Panel = $ItemDescPanel
 @onready var actions_panel: Panel = get_tree().get_root().find_child("ItemActionsPanel", true, false)
-@onready var panel_hover = false
+
+
+var active_item_lclick: Item = null
+var active_slot_rclick: BaseSlotUI = null
+var panel_hover = false
 var ItemButton = preload("res://Scenes/Inventory/ItemButton.tscn")
+
+var _item_inventory = null
 # !!!!! При закрытии закрывается ItemActionsPanel, если она над этой менюшкой!!!
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
-	#print('Player test node')
-	#print(player.inventory)
-	player.data.inventory.connect("added_item", _on_new_item)
-	player.data.inventory.connect("updated_item", _on_updated_item)
-	player.data.inventory.connect("removed_item", _delete_item)
-	actions_panel\
-		.get_node("ItemActionsVBox")\
-		.get_node("EquipButton")\
-		.connect("action_menu_click", _on_action_click)
-	actions_panel\
-		.get_node("ItemActionsVBox")\
-		.get_node("DeleteButton")\
-		.connect("action_menu_click", _on_action_click)
-		
-	update_inventory();
+	player.connect("dropped_inventory_opened", _on_new_inventory)
 
-	# По хорошему обновление должно идти из кнопки, т.е. при открытии инвентаря по 
-	# дефолту выбрана вкладка 'Все предметы' и оттуда загружаются все предметы
-	# Хз верхним кнопкам отдельный нужен скрипт или как это сделать
-#
-#	for slot in inventory_grid.get_children() as Array[ItemSlotUI]:
-#		slot.connect("slot_mouse_lclick", _on_slot_mouse_lclick)
-#		slot.connect("slot_mouse_rclick", _on_slot_mouse_rclick)
-#		slot.connect("slot_mouse_release", _on_slot_mouse_release)
-#		slot.connect("slot_mouse_move_check", _on_slot_mouse_move)
-#
-#
-#		if (not slot.item):
-#			slot.item = Item.new()
-				
-	pass # Replace with function body.
 	
 	
 func update_inventory()->void:
-	for inv_item in player.data.inventory.get_inventory_items():
+	for inv_item in _item_inventory:
 		var newItemButton = ItemButton.instantiate()
 		
 		inventory_grid.add_child(newItemButton)
 		
 		newItemButton.set_item(inv_item)
 		newItemButton.find_child("ItemImage").texture = inv_item.sprite
-		#var mater = ShaderMaterial.new()
-		#mater.shader = ItemShader
-		#mater.set_shader_parameter('color',RandomStats.rarity_colors[new_item.rarity])
-		#newItemButton.find_child("ItemImage").material = mater
+
 		if (inv_item.is_stackable()):
 			newItemButton.find_child("ItemCount").text = str(inv_item.count)
 			newItemButton.find_child("ItemCount").visible = true
@@ -75,40 +47,30 @@ func _on_new_item(new_item)->bool:
 	
 	newItemButton.set_item(new_item)
 	newItemButton.find_child("ItemImage").texture = new_item.sprite
-	#var mater = ShaderMaterial.new()
-	#mater.shader = ItemShader
-	#mater.set_shader_parameter('color',RandomStats.rarity_colors[new_item.rarity])
-	#newItemButton.find_child("ItemImage").material = mater
+
 	if (new_item.is_stackable()):
 		newItemButton.find_child("ItemCount").text = str(new_item.count)
 		newItemButton.find_child("ItemCount").visible = true
 		
-		
-	
 	newItemButton.connect("slot_mouse_lclick", _on_slot_mouse_lclick)
 	newItemButton.connect("slot_mouse_rclick", _on_slot_mouse_rclick)
 	newItemButton.connect("slot_mouse_move_check", _on_slot_mouse_move)
 	
 	return true
+
+		
+
 	
 func _delete_item(item, delete: bool = false)->bool:
 	for slot in inventory_grid.get_children() as Array[ItemSlotUI]:
 		if slot.item == item:
 			inventory_grid.remove_child(slot)
-			if (delete):
-				player.data.inventory.remove_item(item)
 			return true
 	return false
 
-func _on_updated_item(new_item)->bool:
-	
-	_delete_item(new_item, false)
-	_on_new_item(new_item)
-	return true
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
+
 	
 func _on_slot_mouse_lclick(slot: BaseSlotUI):
 	if (!desc_panel.visible || active_item_lclick != slot.item):
@@ -156,18 +118,8 @@ func _on_slot_mouse_rclick(slot: BaseSlotUI):
 
 func _on_slot_mouse_move(_slot_type):
 	pass
-#	var mouse_pos = get_viewport().get_mouse_position()
-#
-#	if CHARACTER_PANEL_DICT[slot_type][0] < mouse_pos\
-#	&& CHARACTER_PANEL_DICT[slot_type][1] > mouse_pos:
-#		CHARACTER_PANEL_DICT[slot_type][2].get_child(0).visible = true
-#		panel_hover = true
-#	else:
-#		CHARACTER_PANEL_DICT[slot_type][2].get_child(0).visible = false
-#		panel_hover = false
 
-#	if panel_hover:
-#		print("released on panel, equip needed")
-#	else:
-	
-
+func _on_new_inventory(_inv):
+	self.visible = true
+	_item_inventory = _inv
+	update_inventory()

@@ -14,12 +14,12 @@ func _init():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func create_potion(name: String, description: String, rarity: int):
+func create_potion(_name: String, _description: String, _rarity: int):
 	var potion = BaseConsumableItem.new()
 	potion.initialize(
-		name,
-		description,
-		rarity
+		_name,
+		_description,
+		_rarity
 	)
 	potion.sprite = preload("res://Art/Sprites/Stackable/HealthPotion1.png")
 	return potion

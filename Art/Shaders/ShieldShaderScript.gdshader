@@ -1,5 +1,5 @@
 shader_type canvas_item;
-
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
 const float MPI = 1.5707966326;
 
 const int STEPS = 20;

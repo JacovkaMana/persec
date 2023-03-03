@@ -5,13 +5,12 @@ signal slot_mouse_lclick(slot: BaseSlotUI)
 signal slot_mouse_rclick(slot: BaseSlotUI)
 signal slot_mouse_move_check(slot_index)
 
-@onready var equipped_icon: TextureRect = get_node("Content/IsEquippedTextureRect")
 @onready var following: bool = false
 @onready var start_position = self.position
 @onready var area2d = $Area2D
-@onready var player = get_tree().get_root().find_child("Player", true, false)
 var type:Enums.EEquipmentSlot = Enums.EEquipmentSlot.NONE;
 var slot_entered: Area2D = null
+
 
 func _ready()->void:
 	super._ready()
@@ -22,7 +21,7 @@ func _ready()->void:
 	self.set_actions(["Equip", "Delete"])
 
 
-func _process(delta):
+func _process(_delta):
 	pass
 
 
@@ -80,7 +79,8 @@ func follow_cursor(cursor):
 func on_left_release():
 	#Возможно тут проверка на то, правильный ли тип слота
 	if slot_entered:
-		player.data.inventory.equip_item(self.item)
+		#player.data.
+		inventory.equip_item(self.item)
 	if following:
 		reset_position()
 		following = false
