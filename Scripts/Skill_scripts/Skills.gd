@@ -2,7 +2,7 @@ class_name Skills
 extends Resource
 
 
-var _skills: Array[BaseSkill]
+@export var _skills: Array[BaseSkill]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

@@ -114,6 +114,7 @@ enum EStat {
 	CONSTITUTION,
 	INTELLIGENCE,
 	PERCEPTION,
+	CHARISMA,
 }
 
 enum EModifierType {
@@ -129,4 +130,12 @@ enum EModifierSubtype {
 	Element,
 	Armor,
 	Hitpoints,	
+}
+
+enum EItemActions {
+	NONE = 0,
+	DROP,
+	USE,
+	EQUIP,
+	UNEQUIP,
 }

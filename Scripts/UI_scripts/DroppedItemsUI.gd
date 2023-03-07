@@ -61,7 +61,7 @@ func _on_new_item(new_item)->bool:
 		
 
 	
-func _delete_item(item, delete: bool = false)->bool:
+func _delete_item(item, _delete: bool = false)->bool:
 	for slot in inventory_grid.get_children() as Array[ItemSlotUI]:
 		if slot.item == item:
 			inventory_grid.remove_child(slot)

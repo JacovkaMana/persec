@@ -1,26 +1,35 @@
 extends CharacterBody2D
 class_name Actor
 
-@export var move_speed : float = 100.0
-@export var starting_direction : Vector2 = Vector2(0, 1)
-@export var move_direction: Vector2 = Vector2(0,0)
 @onready var animation_tree = $AnimationTree
+@onready var animation_player = $AnimationPlayer
 @onready var label = $HeadLabel
 @onready var sprite: Sprite2D = $Sprite
+@onready var cloak: Sprite2D = $Cloak
+@onready var face: Sprite2D = $Face
 @onready var state_machine = animation_tree.get("parameters/playback")
 @onready var Projectiles: Node2D = self.get_tree().get_root().find_child("Projectiles", true, false)
-var data = PlayerData.new()
-var asd: ParticleProcessMaterial
+
+@export var move_speed : float = 100.0
+@onready var data = PlayerData.new()
 @export var walking = false
+
+var asd: ParticleProcessMaterial
 var last_move
 var head_timer
 var collision
 var current_zone : Area2D
+var starting_direction : Vector2 = Vector2(0, 1)
+var move_direction: Vector2 = Vector2(0,0)
 
 func _ready():
 	update_animation_parameters(starting_direction)
-	state_machine.travel("Start")
-	#state_machine.travel("idle_bot")
+	
+	
+	animation_tree.connect("animation_finished", _on_anim_finished)
+	#animation_player.connect("animation_finished", _on_anim_finished)
+	
+	animation_tree.set("parameters/walking/current_state", "walking")
 
 
 func update_animation_parameters (move_input : Vector2):
@@ -29,7 +38,7 @@ func update_animation_parameters (move_input : Vector2):
 		#animation_tree.set("parameters/Walk/blend_position",move_input)
 		#animation_tree.set("parameters/Idle/blend_position",move_input)
 		#pass
-		
+	animation_tree.set("parameters/walking/transition_request", "walking")
 #	if (last_move != move_input):
 #		match (move_input):
 #			Vector2.LEFT:
@@ -44,8 +53,12 @@ func update_animation_parameters (move_input : Vector2):
 
 	if move_input.x < 0:
 		sprite.flip_h = true
+		cloak.flip_h = true
+		face.flip_h = true
 	elif move_input.x > 0:
 		sprite.flip_h = false
+		cloak.flip_h = false
+		face.flip_h = false
 
 	
 func _physics_process(_delta):
@@ -55,6 +68,11 @@ func _physics_process(_delta):
 	collision = move_and_collide(velocity)
 
 	walking = velocity != Vector2.ZERO
+	if	walking:
+		animation_tree.set("parameters/walking/transition_request", "walking")	
+		animation_tree.set("parameters/walking_speed/scale", 1)
+	else:
+		animation_tree.set("parameters/walking/transition_request", "idle")
 	
 	if (head_timer):
 		label.text = "%.2f" % (head_timer.time_left)
@@ -114,3 +132,6 @@ func cooldown(time):
 
 func set_zone(to):
 	current_zone = to
+
+func _on_anim_finished(name):
+	pass

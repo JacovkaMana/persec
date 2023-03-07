@@ -12,9 +12,7 @@ extends Resource
 @export var weight: float = 0.0
 @export var base_cost: float = 0.0
 
-
-
-func initialize(_name: String = '', _description: String = '', _rarity = null):
+func _init(_name: String = '', _description: String = '', _rarity = null):
 	
 	if(_name):
 		self.name = _name
@@ -24,10 +22,14 @@ func initialize(_name: String = '', _description: String = '', _rarity = null):
 	
 	if(_rarity):
 		self.rarity = _rarity
+
+
 	
 func is_stackable()->bool:
 	return false
 
+func get_item_actions():
+	return [Enums.EItemActions.DROP]
 
 func get_item_type():
 	return Enums.EItemType.ITEM

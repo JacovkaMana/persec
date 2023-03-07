@@ -1,5 +1,5 @@
 class_name BootsItem
-extends ArmorItem
+extends BaseEquipableItem
 
 func get_item_type():
 	return Enums.EItemType.BOOTS
@@ -10,7 +10,7 @@ func get_type_text()->String:
 func get_slot_type():
 	return [Enums.EEquipmentSlot.BOOTS]
 	
-func initialize(_name: String = '', _description: String = '', _rarity = null):
+func _init(_name: String = '', _description: String = '', _rarity = null):
 	
 	sprite = preload("res://Art/Sprites/Boots/Boots1.png")
 	

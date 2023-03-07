@@ -9,8 +9,7 @@ func _ready():
 	super()
 	var test_item = WeaponItem.new()
 	for i in range(5):
-		test_item = WeaponItem.new()
-		test_item.initialize(
+		test_item = WeaponItem.new(
 		'',
 		'from player',
 		null,
@@ -19,15 +18,13 @@ func _ready():
 		)
 		data.inventory.add_item(test_item)
 		
-	var test_armor = ArmorItem.new()
-	test_armor.initialize(
+	var test_armor = ArmorItem.new(
 		'Armor',
 		'From player',
 	)
 	data.inventory.add_item(test_armor)
 	
-	var test_boots = BootsItem.new()
-	test_boots.initialize(
+	var test_boots = BootsItem.new(
 		'Boots',
 		'From player',
 	)

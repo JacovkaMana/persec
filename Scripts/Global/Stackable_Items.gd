@@ -15,8 +15,7 @@ func _init():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func create_potion(_name: String, _description: String, _rarity: int):
-	var potion = BaseConsumableItem.new()
-	potion.initialize(
+	var potion = BaseConsumableItem.new(
 		_name,
 		_description,
 		_rarity

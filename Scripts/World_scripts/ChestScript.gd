@@ -24,7 +24,7 @@ func _ready():
 	#print(self.get_signal_list())
 	#print(self.get_signal_connection_list('mouse_entered'))
 
-func _on_input(viewport, event, idx):
+func _on_input(_viewport, event, _idx):
 	#print('button down')
 	#print(event)
 	#print(event.is_pressed())
@@ -45,6 +45,7 @@ func _on_input(viewport, event, idx):
 				#print((self.global_position - player.global_position).length())
 				if (self.global_position - player.global_position).length() < 80.0:
 					player.emit_signal("dropped_inventory_opened", chest_inventory)
+					anim.play('chest_opened')
 
 func _on_mouse_entered():
 	#anim.play('chest_opened')

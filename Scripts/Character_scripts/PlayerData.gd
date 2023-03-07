@@ -1,7 +1,7 @@
 class_name PlayerData
 extends Resource
 
-var hitpoints: float = 100.0
+@export var hitpoints: float = 100.0
 var inventory: Inventory = Inventory.new()
 var skills: Skills = Skills.new()
 var stats: Dictionary = {
@@ -10,6 +10,7 @@ var stats: Dictionary = {
 	Enums.EStat.CONSTITUTION: null,
 	Enums.EStat.INTELLIGENCE: null,
 	Enums.EStat.PERCEPTION: null,	
+	Enums.EStat.CHARISMA: null,	
 }
 # Called when the node enters the scene tree for the first time.
 func _ready():

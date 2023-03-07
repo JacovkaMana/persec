@@ -1,4 +1,4 @@
-class_name ArmorItem
+class_name GlovesItem
 extends BaseEquipableItem
 
 
@@ -25,7 +25,7 @@ func _init(_name: String = '', _description: String = '', _rarity = null):
 	if (_name):
 		self.name = _name
 	else:
-		self.name = 'Arrmor'
+		self.name = 'Glovess'
 
 
 	self.modifiers.append(

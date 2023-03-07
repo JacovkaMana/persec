@@ -8,24 +8,21 @@ signal updated_item(item: Item)
 signal removed_item(item: Item, delete: bool)
 signal equip_item_changed(slot_type: Enums.EEquipmentSlot, item_slot)
 
-var _inventory: Array[Item]
-var _equipment: Dictionary = {
+@export var _inventory: Array[Item]
+@export var _equipment: Dictionary = {
+	#weapons
 	Enums.EEquipmentSlot.L_HAND: null,
 	Enums.EEquipmentSlot.R_HAND: null,
+	#right armor
 	Enums.EEquipmentSlot.HELM: null,
 	Enums.EEquipmentSlot.ARMOR: null,
 	Enums.EEquipmentSlot.GLOVES: null,
 	Enums.EEquipmentSlot.BOOTS: null,
+	#left armor
 	Enums.EEquipmentSlot.AMULET: null,
+	Enums.EEquipmentSlot.BELT: null,
 	Enums.EEquipmentSlot.ACCESSORY_1: null,
 	Enums.EEquipmentSlot.ACCESSORY_2: null,
-	Enums.EEquipmentSlot.BELT: null,
-	Enums.EEquipmentSlot.CONSUMABLE_1: null,
-	Enums.EEquipmentSlot.CONSUMABLE_2: null,
-	Enums.EEquipmentSlot.CONSUMABLE_3: null,
-	Enums.EEquipmentSlot.CONSUMABLE_4: null,
-	Enums.EEquipmentSlot.CONSUMABLE_5: null,
-	Enums.EEquipmentSlot.CONSUMABLE_6: null,
 }
 
 

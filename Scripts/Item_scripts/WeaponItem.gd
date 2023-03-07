@@ -1,5 +1,5 @@
 class_name WeaponItem
-extends BaseUndurableItem
+extends BaseEquipableItem
 
 @export var level: int = 1
 @export var weapon_type: Enums.EWeaponSubtype = Enums.EWeaponSubtype.NONE
@@ -10,10 +10,7 @@ extends BaseUndurableItem
 @export var damage_high: int = 0
 @export var damage: String = ''
 
-@export var modifiers: Array[Modifier] = []
-
-
-func initialize(_name: String = '', _description: String = '', _rarity = null, _type = Enums.EWeaponSubtype.NONE, _damage: int = 0):
+func _init(_name: String = '', _description: String = '', _rarity = null, _type = Enums.EWeaponSubtype.NONE, _damage: int = 0):
 	
 	sprite = preload("res://Art/Sprites/Weapon/Sword1.png")
 	
@@ -46,6 +43,8 @@ func initialize(_name: String = '', _description: String = '', _rarity = null, _
 	self.modifiers.append(
 		Modifier.new()
 	)
+
+
 
 func get_item_type():
 	return Enums.EItemType.WEAPON

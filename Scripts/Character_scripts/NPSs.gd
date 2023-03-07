@@ -1,8 +1,37 @@
 extends Actor
 
+#stats
+@export_category('Stats')
+@export var STRENGTH: int = 0
+@export var DEXTERITY: int = 0
+@export var CONSTITUTION: int = 0
+@export var INTELLIGENCE: int = 0
+@export var PERCEPTION: int = 0
+@export var CHARISMA: int = 0
 
-  
-@export var walk_radius: float = 50
+
+#weapons
+@export_category('Equipment')
+@export var L_HAND: WeaponItem = null
+@export var R_HAND: WeaponItem = null
+
+#right armor
+@export var HELM: HelmItem = null
+@export var ARMOR: ArmorItem = null
+@export var GLOVES: GlovesItem = null
+@export var BOOTS: BootsItem = null
+#left armor
+@export var AMULET: Item = null
+@export var BELT: Item = null
+@export var ACCESSORY_1: Item = null
+@export var ACCESSORY_2: Item = null
+
+@export_category('Inventory')
+@export var INVENTORY : Array[Item] = []
+@export_category('Skills')
+@export var SKILLS: Array[String] = []
+
+var walk_radius: float = 50
 var last_direction_change: float = 0
 #@onready var raycast: ShapeCast2D = $RayCast
 #@onready var path: Path2D = $Path2D
@@ -21,6 +50,8 @@ var select_material = preload("res://Art/Shaders/HighlightShader.tres")
 
 
 func _ready():
+	super()
+	
 	
 	#self.connect("mouse_entered", _mouse_entered)
 	self.connect("mouse_entered", _on_mouse_entered)
@@ -94,11 +125,13 @@ func pick_new_state():
 		#current_state = NPS_STATE.Idle
 
 func _on_mouse_entered():
-	sprite.material = select_material
+	#self.material = select_material
+	animation_tree.set("parameters/glow/add_amount", 1)
 	
 	
 func _on_mouse_exited():
-	sprite.material = null
+	#sprite.material = null
+	animation_tree.set("parameters/glow/add_amount", 0)
 	
 	
 func set_zone(to : Area2D):
@@ -129,3 +162,16 @@ func label_timer(time):
 	
 func _hide_label():
 	label.visible = false
+	
+
+func take_damage(_skill: BaseSkill, _strength):
+	super(_skill, _strength)
+	if (data.hitpoints <= 0):
+		print('death')
+		animation_tree.set("parameters/death/transition_request", "true")
+	pass
+
+func _on_anim_finished(name):
+	print(name)
+	if (name == "death"):
+		self.queue_free()

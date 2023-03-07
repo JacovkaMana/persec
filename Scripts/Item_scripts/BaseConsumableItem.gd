@@ -7,3 +7,6 @@ func get_item_type()->int: #Enums.EItemType:
 
 func get_type_text()->String:
 		return "Consumable"
+
+func get_item_actions():
+	return [Enums.EItemActions.USE ,Enums.EItemActions.DROP]
