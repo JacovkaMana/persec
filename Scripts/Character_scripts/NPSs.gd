@@ -38,6 +38,8 @@ var last_direction_change: float = 0
 #@onready var path_follow: PathFollow2D = $Path2D/PathFollow2D
 #@onready var path_player = $PathPlayer
 @onready var vision: Area2D = $Vision
+@onready var interaction_hint = $InteractionHint
+@onready var interaction_hint_player = $InteractionHint/AnimationPlayer
 @onready var player = get_tree().get_root().find_child("Player", true, false)
 
 var current_state : Enums.ECharacterState = Enums.ECharacterState.ROAMING
@@ -98,32 +100,14 @@ func _physics_process(_delta):
 	
 	vision.rotation = move_direction.angle() + PI
 	
-func random_direction() -> void:
-	#move_direction = Vector2(randi_range(-1,1), randi_range(-1,1))
-	last_direction_change = Time.get_ticks_msec()
-	#print('random')
+func on_interact_area():
+	interaction_hint_player.queue("float")
+	interaction_hint.visible = true
 	
-#	var parent = self.get_parent()
-#	var bullet = Bullet.instantiate()
-#	var bullet_rotation = Vector2(randi_range(-1,1), randi_range(-1,1))
-#	bullet.global_position = self.global_position
-#	bullet.rotation = bullet_rotation.angle() + PI/2
-#	Projectiles.add_child(bullet)
-#
-#	bullet.shoot(bullet_rotation, randi_range(50,100))
-
-
-
-
-func pick_new_state():
-	pass
-	#if (current_state == NPS_STATE.IDLE):
-		#state_machine.travel("Walk")
-		#current_state = NPS_STATE.WALK
-	#elif(current_state == NPS_STATE.WALK):
-		#state_machine.travel("Idle")
-		#current_state = NPS_STATE.Idle
-
+func off_interact_area():
+	interaction_hint_player.queue("RESET")
+	interaction_hint.visible = false
+	
 func _on_mouse_entered():
 	#self.material = select_material
 	animation_tree.set("parameters/glow/add_amount", 1)
@@ -175,3 +159,6 @@ func _on_anim_finished(name):
 	print(name)
 	if (name == "death"):
 		self.queue_free()
+
+func interact():
+	print("nps interact")

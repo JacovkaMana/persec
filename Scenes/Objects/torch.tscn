@@ -139,17 +139,15 @@ texture_filter = 1
 texture_repeat = 2
 material = SubResource("CanvasItemMaterial_gra52")
 amount = 50
-lifetime = 2.5
-visibility_rect = Rect2(-237.326, -272.462, 472.127, 498.424)
-trail_length_secs = 5.07
-trail_sections = 12
-trail_section_subdivisions = 6
 process_material = SubResource("ParticleProcessMaterial_cuvte")
 texture = ExtResource("3_nln8m")
+lifetime = 2.5
+visibility_rect = Rect2(-237.326, -272.462, 472.127, 498.424)
+trail_sections = 12
+trail_section_subdivisions = 6
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 reset_on_save = false
-playback_speed = 1.5
 libraries = {
 "": SubResource("AnimationLibrary_fuq6g")
 }

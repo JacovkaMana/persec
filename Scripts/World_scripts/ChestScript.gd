@@ -4,6 +4,9 @@ extends StaticBody2D
 @onready var sprite = $Sprite2D
 var starting_material
 @export var chest_inventory: Array[Item] = []
+@onready var interaction_hint = $InteractionHint
+@onready var interaction_area = $InteractionArea
+@onready var interaction_hint_player = $InteractionHint/AnimationPlayer
 @onready var player = get_tree().get_root().find_child("Player", true, false)
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -42,10 +45,8 @@ func _on_input(_viewport, event, _idx):
 				#reset_position()
 			if event.button_index == 2:
 				#print('Right_click release on chest')
-				#print((self.global_position - player.global_position).length())
-				if (self.global_position - player.global_position).length() < 80.0:
-					player.emit_signal("dropped_inventory_opened", chest_inventory)
-					anim.play('chest_opened')
+				if interaction_area.overlaps_area(player.interaction_area):
+					interact()
 
 func _on_mouse_entered():
 	#anim.play('chest_opened')
@@ -57,4 +58,14 @@ func _on_mouse_exited():
 	sprite.material = null
 	
 	
-
+func on_interact_area():
+	interaction_hint_player.queue("float")
+	interaction_hint.visible = true
+	
+func off_interact_area():
+	interaction_hint_player.queue("RESET")
+	interaction_hint.visible = false
+	
+func interact():
+	player.emit_signal("dropped_inventory_opened", chest_inventory)
+	anim.play('chest_opened')

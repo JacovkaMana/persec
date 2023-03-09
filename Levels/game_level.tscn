@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://dhr18tr065cbd"]
+[gd_scene load_steps=79 format=3 uid="uid://dhr18tr065cbd"]
 
 [ext_resource type="Texture2D" uid="uid://b28ckc8cbay00" path="res://Art/UI/LargeProbe.png" id="1_baonv"]
 [ext_resource type="Texture2D" uid="uid://cilrxml7big3t" path="res://Art/DungeonNew.png" id="2_evfd3"]
@@ -1185,6 +1185,72 @@ physics_layer_0/collision_mask = 3
 sources/0 = SubResource("TileSetAtlasSource_d4nss")
 sources/1 = SubResource("TileSetAtlasSource_jfo7o")
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_up74c"]
+radius = 40.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_be5ms"]
+light_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_1dqqu"]
+offsets = PackedFloat32Array(0.518519)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_y3h8i"]
+gradient = SubResource("Gradient_1dqqu")
+width = 16
+
+[sub_resource type="Gradient" id="Gradient_be85a"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5dee4"]
+gradient = SubResource("Gradient_be85a")
+width = 16
+
+[sub_resource type="LabelSettings" id="LabelSettings_mivoc"]
+font = ExtResource("4_tc5lu")
+font_size = 8
+font_color = Color(0.0784314, 0.231373, 0.427451, 1)
+shadow_size = 0
+
+[sub_resource type="Animation" id="Animation_l50q1"]
+resource_name = "float"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(25, -30), Vector2(25, -27), Vector2(25, -30)]
+}
+
+[sub_resource type="Animation" id="Animation_fx51y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(25, -30)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5aio4"]
+_data = {
+"RESET": SubResource("Animation_fx51y"),
+"float": SubResource("Animation_l50q1")
+}
+
 [sub_resource type="LabelSettings" id="LabelSettings_2t76h"]
 font = ExtResource("4_tc5lu")
 font_size = 8
@@ -1355,6 +1421,9 @@ _data = {
 "chest_opened": SubResource("Animation_mywf2")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_mcm67"]
+radius = 30.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h1jk1"]
 size = Vector2(542, 219)
 
@@ -1457,16 +1526,84 @@ layer_2/tile_data = PackedInt32Array(-327689, 0, 7, -262153, 0, 8, -327688, 6553
 position = Vector2(-126, 308)
 collision_layer = 73
 input_pickable = true
-STRENGTH = 0
-DEXTERITY = 0
-CONSTITUTION = 0
-INTELLIGENCE = 0
-PERCEPTION = 0
-CHARISMA = 0
-INVENTORY = Array[Resource("res://Scripts/Item_scripts/Item.gd")]([])
-SKILLS = Array[Resource("res://Scripts/Item_scripts/Item.gd")]([])
 move_speed = 60.0
-walking = false
+
+[node name="InteractionArea" type="Area2D" parent="NPS"]
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPS/InteractionArea"]
+shape = SubResource("CircleShape2D_up74c")
+
+[node name="InteractionHint" type="Node2D" parent="NPS"]
+visible = false
+light_mask = 0
+z_index = 30
+material = SubResource("CanvasItemMaterial_be5ms")
+position = Vector2(25, -30)
+
+[node name="TextureRect" type="TextureRect" parent="NPS/InteractionHint"]
+self_modulate = Color(0.0784314, 0.231373, 0.427451, 0.666667)
+light_mask = 0
+use_parent_material = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -9.0
+offset_top = -9.0
+offset_right = 9.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(9, 9)
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture = SubResource("GradientTexture1D_y3h8i")
+
+[node name="InteractHint" type="TextureRect" parent="NPS/InteractionHint"]
+self_modulate = Color(1, 1, 1, 0.666667)
+light_mask = 0
+use_parent_material = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(8, 8)
+texture = SubResource("GradientTexture1D_5dee4")
+
+[node name="Label" type="Label" parent="NPS/InteractionHint"]
+self_modulate = Color(0.682353, 0.741176, 0.807843, 0.921569)
+light_mask = 0
+use_parent_material = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.5
+offset_top = -7.5
+offset_right = 7.5
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+text = " e"
+label_settings = SubResource("LabelSettings_mivoc")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="NPS/InteractionHint"]
+libraries = {
+"": SubResource("AnimationLibrary_5aio4")
+}
 
 [node name="Player" parent="." instance=ExtResource("7_hlodp")]
 collision_layer = 73
@@ -1508,13 +1645,27 @@ offset_bottom = -13.0
 text = "20"
 label_settings = SubResource("LabelSettings_2t76h")
 
+[node name="InteractionArea" type="Area2D" parent="Player"]
+collision_layer = 256
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/InteractionArea"]
+shape = SubResource("CircleShape2D_up74c")
+
 [node name="Projectiles" type="Node2D" parent="."]
 
 [node name="Lights" type="Node2D" parent="."]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="Lights"]
+visible = false
 position = Vector2(0, 1)
 color = Color(0.239216, 0.239216, 0.239216, 1)
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="Lights"]
+light_mask = 0
+color = Color(0.239216, 0.239216, 0.239216, 1)
+blend_mode = 2
+range_item_cull_mask = 3
 
 [node name="Torch" parent="Lights" instance=ExtResource("9_dr0pg")]
 
@@ -1770,6 +1921,82 @@ reset_on_save = false
 method_call_mode = 1
 libraries = {
 "": SubResource("AnimationLibrary_xfxlg")
+}
+
+[node name="InteractionArea" type="Area2D" parent="Chest"]
+collision_layer = 256
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chest/InteractionArea"]
+shape = SubResource("CircleShape2D_mcm67")
+
+[node name="InteractionHint" type="Node2D" parent="Chest"]
+light_mask = 0
+z_index = 30
+material = SubResource("CanvasItemMaterial_be5ms")
+position = Vector2(25, -30)
+
+[node name="TextureRect" type="TextureRect" parent="Chest/InteractionHint"]
+self_modulate = Color(0.0784314, 0.231373, 0.427451, 0.666667)
+light_mask = 0
+use_parent_material = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -9.0
+offset_top = -9.0
+offset_right = 9.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(9, 9)
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture = SubResource("GradientTexture1D_y3h8i")
+
+[node name="InteractHint" type="TextureRect" parent="Chest/InteractionHint"]
+self_modulate = Color(1, 1, 1, 0.666667)
+light_mask = 0
+use_parent_material = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(8, 8)
+texture = SubResource("GradientTexture1D_5dee4")
+
+[node name="Label" type="Label" parent="Chest/InteractionHint"]
+self_modulate = Color(0.682353, 0.741176, 0.807843, 0.921569)
+light_mask = 0
+use_parent_material = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.5
+offset_top = -7.5
+offset_right = 7.5
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+text = " e"
+label_settings = SubResource("LabelSettings_mivoc")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Chest/InteractionHint"]
+libraries = {
+"": SubResource("AnimationLibrary_5aio4")
 }
 
 [node name="Rooms" type="Node2D" parent="."]

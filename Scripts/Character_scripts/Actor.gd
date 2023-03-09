@@ -7,6 +7,7 @@ class_name Actor
 @onready var sprite: Sprite2D = $Sprite
 @onready var cloak: Sprite2D = $Cloak
 @onready var face: Sprite2D = $Face
+@onready var interaction_area: Area2D = $InteractionArea
 @onready var state_machine = animation_tree.get("parameters/playback")
 @onready var Projectiles: Node2D = self.get_tree().get_root().find_child("Projectiles", true, false)
 
@@ -27,6 +28,7 @@ func _ready():
 	
 	
 	animation_tree.connect("animation_finished", _on_anim_finished)
+	
 	#animation_player.connect("animation_finished", _on_anim_finished)
 	
 	animation_tree.set("parameters/walking/current_state", "walking")
@@ -135,3 +137,4 @@ func set_zone(to):
 
 func _on_anim_finished(name):
 	pass
+
