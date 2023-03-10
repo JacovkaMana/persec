@@ -21,6 +21,8 @@ func _ready():
 	
 	
 func update_inventory()->void:
+	for child in inventory_grid.get_children():
+		child.queue_free()
 	for inv_item in _item_inventory:
 		var newItemButton = ItemButton.instantiate()
 		

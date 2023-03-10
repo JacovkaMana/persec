@@ -2,6 +2,7 @@ extends Actor
 class_name PlayerScript
 
 signal dropped_inventory_opened(item_array: Array[Item])
+signal dialogue_started(with: CharacterBody2D)
 
 var invincible_timer = null
 
@@ -81,6 +82,8 @@ func _input(event):
 	if event.is_action_pressed("interact"):
 		if (interaction_area.get_overlapping_areas()):
 			interaction_area.get_overlapping_areas()[0].get_parent().interact()
+			if interaction_area.get_overlapping_areas()[0].get_parent().get_class() == "CharacterBody2D":
+				trigger_dialogue(interaction_area.get_overlapping_areas()[0].get_parent())
 		#print(interaction_area.get_overlapping_areas())
 		#print(InputMap.action_get_events("interact")[0].as_text())
 		#print(ProjectSettings.get_setting("input/interact")["events"].InputEventKey)
@@ -101,3 +104,9 @@ func _on_interaction_zone_entered(what: Area2D):
 func _on_interaction_zone_exited(what: Area2D):
 	#print(what.get_parent())
 	what.get_parent().off_interact_area()
+
+func trigger_dialogue(with):
+	print("Dialogue with " + str(with))
+	emit_signal("dialogue_started", with)
+	
+	
