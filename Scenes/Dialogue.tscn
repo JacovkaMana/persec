@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://pgmb2sj8gg82"]
+
+[sub_resource type="Gradient" id="Gradient_3mghn"]
+offsets = PackedFloat32Array(0.359788)
+colors = PackedColorArray(0.0784314, 0.231373, 0.427451, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ldjnc"]
+gradient = SubResource("Gradient_3mghn")
+
+[node name="Dialogue" type="CanvasLayer"]
+layer = 4
+follow_viewport_enabled = true
+
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(640, 360)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Control"]
+self_modulate = Color(1, 1, 1, 0.784314)
+custom_minimum_size = Vector2(320, 90)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -160.0
+offset_top = -115.0
+offset_right = 160.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = SubResource("GradientTexture1D_ldjnc")
+
+[node name="Label" type="RichTextLabel" parent="Control/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

@@ -13,4 +13,4 @@ func _process(_delta):
 
 
 func _on_mouse_clicked():
-	emit_signal("menu_close_clicked", String(self.name).substr(0,9))
+	self.get_parent().visible = false

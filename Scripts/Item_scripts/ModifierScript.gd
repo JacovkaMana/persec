@@ -7,10 +7,8 @@ extends Resource
 @export var value: int = 0
 var text: String = ''
 
-func _init():
-	initialize()
+func _init(random: bool = true):
 	
-func initialize(random: bool = true):
 	if (random):
 		
 		self.type = Enums.EModifierType.get(
@@ -33,6 +31,8 @@ func initialize(random: bool = true):
 			self.value = 0
 			self.text = 'Ability text'
 		
+	
+
 	
 func get_modifier_type():
 	return self.type

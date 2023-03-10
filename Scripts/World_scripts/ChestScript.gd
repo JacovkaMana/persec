@@ -21,11 +21,14 @@ func _ready():
 	self.connect("mouse_exited", _on_mouse_exited)
 	self.connect("input_event", _on_input)
 	
-	#print('connected')
-	#print(get_collision_layer_value(1))
-	#print(self.input_pickable)
-	#print(self.get_signal_list())
-	#print(self.get_signal_connection_list('mouse_entered'))
+
+	
+
+func remove_item(item: Item):
+	if item in chest_inventory:
+		chest_inventory.pop_at(chest_inventory.find(item))
+		return true
+	return false
 
 func _on_input(_viewport, event, _idx):
 	#print('button down')

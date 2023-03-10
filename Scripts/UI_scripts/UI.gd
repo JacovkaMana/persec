@@ -1,37 +1,24 @@
 extends Control
 
-var Character
-var Inventory
-@onready var character_close_btn: Button = self.find_child("CharacterCloseButton")
-@onready var inventory_close_btn: Button = self.find_child("InventoryCloseButton")
-# Called when the node enters the scene tree for the first time.
+@onready var Character_UI = $Character
+@onready var Inventory_UI = $Inventory
+@onready var DroppedItems_UI = $DroppedItems
+
+
 func _ready():
-	#Character = get_tree().get_root().get_node("GameLevel").find_child("Player")
-	Character = self.get_node('Character')
-	Inventory = self.get_node('Inventory')
-	character_close_btn.connect("menu_close_clicked", _on_menu_closed)
-	inventory_close_btn.connect("menu_close_clicked", _on_menu_closed)
-	#print(node)
-	pass # Replace with function body.
+	pass # Replace with fuction body.
 
 
 func _input(event):
 	
 	if event.is_action_pressed("character"):
-		
-		if Character.visible:
-			Character.visible = false
-		else:
-			Character.visible = true	
-			
+		character_switch()
 			
 	if event.is_action_pressed("inventory"):
-		
-		if Inventory.visible:
-			Inventory.visible = false
-		else:
-			Inventory.visible = true	
-			
+		inventory_switch()
+	
+	if event.is_action_pressed("interact"):
+		dropped_switch()
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -45,3 +32,20 @@ func _on_item_container_mouse_entered():
 
 func _on_menu_closed(menu_name: String):
 	self.find_child(menu_name).visible = false
+
+func character_switch():
+	if Character_UI.visible:
+		Character_UI.visible = false
+	else:
+		Character_UI.visible = true	
+
+func inventory_switch():
+	if Inventory_UI.visible:
+		Inventory_UI.visible = false
+	else:
+		Inventory_UI.visible = true	
+		
+func dropped_switch():
+	if DroppedItems_UI.visible:
+		DroppedItems_UI.visible = false
+	

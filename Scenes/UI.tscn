@@ -1401,7 +1401,7 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_11eno")
 script = ExtResource("9_lvtlu")
 
 [node name="DroppedItems" type="Control" parent="UI"]
-visible = false
+custom_minimum_size = Vector2(182, 102)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1498,6 +1498,19 @@ text = "+5 Attack
 label_settings = SubResource("LabelSettings_wulp2")
 vertical_alignment = 1
 autowrap_mode = 3
+
+[node name="DroppedCloseButton" type="Button" parent="UI/DroppedItems"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -11.0
+offset_bottom = 11.0
+grow_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ojem5")
+theme_override_styles/hover = SubResource("StyleBoxTexture_ojq34")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_11eno")
+script = ExtResource("9_lvtlu")
 
 [node name="ItemActionsPanel" type="Panel" parent="UI"]
 visible = false
