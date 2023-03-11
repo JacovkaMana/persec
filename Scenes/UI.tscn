@@ -1,8 +1,7 @@
-[gd_scene load_steps=80 format=3 uid="uid://dbksnam8cuw3o"]
+[gd_scene load_steps=79 format=3 uid="uid://dbksnam8cuw3o"]
 
 [ext_resource type="Script" path="res://Scripts/UI_scripts/CharacterUI.gd" id="1_8tod6"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/UI.gd" id="1_cvjfy"]
-[ext_resource type="Texture2D" uid="uid://dw1lw3xpx82tt" path="res://Art/UI/UI_Shadow.png" id="2_uxwkt"]
 [ext_resource type="Texture2D" uid="uid://bh3irpn80km6o" path="res://Art/UI/UI_Backplate.png" id="3_5tfiq"]
 [ext_resource type="Texture2D" uid="uid://swjg1maqaepn" path="res://Art/UI/SkillTest1.png" id="3_ik2u5"]
 [ext_resource type="Texture2D" uid="uid://e5h7qlqeup7q" path="res://Art/Skills/test.png" id="4_queiq"]
@@ -15,9 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://1mactnwdbpu7" path="res://Art/UI/UI_Inventory.png" id="6_83gsj"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/InventoryUI.gd" id="7_0wyy8"]
 [ext_resource type="Texture2D" uid="uid://dh52y5x0l4e52" path="res://Art/UI/UI_InventoryMenuIcon.png" id="8_cb6qa"]
-[ext_resource type="Material" uid="uid://cwiu31fr6bym" path="res://Art/Shaders/UI_ShadowShader.tres" id="8_fara6"]
 [ext_resource type="Texture2D" uid="uid://ca0lfmfiallgi" path="res://Art/UI/MenuClose_Hover.png" id="8_h5i0i"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/CloseButton.gd" id="9_lvtlu"]
+[ext_resource type="Material" uid="uid://bxfvh5qaxweye" path="res://Art/Shaders/UI_BlurShader.tres" id="11_3hf22"]
 [ext_resource type="Texture2D" uid="uid://cxsmrfblvux75" path="res://Art/UI/Amulet.png" id="11_72ij6"]
 [ext_resource type="Texture2D" uid="uid://bs3yn2n4cgxgk" path="res://Art/UI/Ring.png" id="12_k2607"]
 [ext_resource type="Texture2D" uid="uid://dw3xbfgh77pij" path="res://Art/UI/Item_Hover.png" id="12_teqho"]
@@ -759,15 +758,18 @@ pivot_offset = Vector2(154, 0)
 script = ExtResource("1_8tod6")
 
 [node name="Shadow" type="TextureRect" parent="UI/Character"]
-material = ExtResource("8_fara6")
+texture_filter = 1
+texture_repeat = 1
+material = ExtResource("11_3hf22")
 layout_mode = 0
 offset_left = -2.0
 offset_top = -2.0
 offset_right = 174.0
 offset_bottom = 294.0
-texture = ExtResource("2_uxwkt")
+texture = ExtResource("28_s3eqt")
 
 [node name="Background" type="TextureRect" parent="UI/Character"]
+modulate = Color(1, 1, 1, 0.392157)
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -1213,7 +1215,9 @@ grow_vertical = 2
 script = ExtResource("7_0wyy8")
 
 [node name="Shadow" type="TextureRect" parent="UI/Inventory"]
-material = ExtResource("8_fara6")
+texture_filter = 1
+texture_repeat = 1
+material = ExtResource("11_3hf22")
 layout_mode = 0
 offset_left = 2.0
 offset_top = -2.0

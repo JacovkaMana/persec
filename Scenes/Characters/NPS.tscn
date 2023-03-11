@@ -142,6 +142,22 @@ tracks/2/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_ttycq"]
+resource_name = "glow"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.25, 0.0]
+}
+
 [sub_resource type="Animation" id="Animation_cdr3l"]
 resource_name = "idle"
 loop_mode = 1
@@ -196,22 +212,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [1, 17, 18]
-}
-
-[sub_resource type="Animation" id="Animation_ttycq"]
-resource_name = "glow"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PointLight2D:energy")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.0, 0.25, 0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ygp6v"]
@@ -275,7 +275,7 @@ nodes/walking/node = SubResource("AnimationNodeTransition_mirae")
 nodes/walking/position = Vector2(200, 200)
 nodes/walking_speed/node = SubResource("AnimationNodeTimeScale_e3t6g")
 nodes/walking_speed/position = Vector2(0, 260)
-node_connections = [&"output", 0, &"glow", &"death", 0, &"Animation 3", &"death", 1, &"walking", &"walking", 0, &"Animation", &"walking", 1, &"walking_speed", &"walking_speed", 0, &"Animation 2", &"glow", 0, &"death", &"glow", 1, &"Animation 4"]
+node_connections = [&"output", 0, &"glow", &"death", 0, &"Animation 3", &"death", 1, &"walking", &"glow", 0, &"death", &"glow", 1, &"Animation 4", &"walking", 0, &"Animation", &"walking", 1, &"walking_speed", &"walking_speed", 0, &"Animation 2"]
 
 [node name="NPS" type="CharacterBody2D"]
 material = SubResource("ShaderMaterial_3juty")
