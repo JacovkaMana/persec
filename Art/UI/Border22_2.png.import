@@ -16,9 +16,9 @@ dest_files=["res://.godot/imported/Border22_2.png-e1a7fe3b7a84482d1a25d6f86aa7bd
 [params]
 
 compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=false

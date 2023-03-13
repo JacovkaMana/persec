@@ -16,9 +16,9 @@ dest_files=["res://.godot/imported/DungeonNew.png-79df46ac3e493a06f32f25a5d86753
 [params]
 
 compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=false
