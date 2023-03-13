@@ -1,7 +1,8 @@
-[gd_scene load_steps=79 format=3 uid="uid://dbksnam8cuw3o"]
+[gd_scene load_steps=80 format=3 uid="uid://dbksnam8cuw3o"]
 
 [ext_resource type="Script" path="res://Scripts/UI_scripts/CharacterUI.gd" id="1_8tod6"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/UI.gd" id="1_cvjfy"]
+[ext_resource type="Script" path="res://Scripts/Global/GlobalUI.gd" id="1_v0356"]
 [ext_resource type="Texture2D" uid="uid://bh3irpn80km6o" path="res://Art/UI/UI_Backplate.png" id="3_5tfiq"]
 [ext_resource type="Texture2D" uid="uid://swjg1maqaepn" path="res://Art/UI/SkillTest1.png" id="3_ik2u5"]
 [ext_resource type="Texture2D" uid="uid://e5h7qlqeup7q" path="res://Art/Skills/test.png" id="4_queiq"]
@@ -181,8 +182,11 @@ region_rect = Rect2(0, 0, 40, 10)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5cgrn"]
 
-[node name="CanvasLayer" type="CanvasLayer"]
+[node name="UI" type="CanvasLayer"]
 layer = 3
+script = ExtResource("1_v0356")
+ShadowColor = Color(0.282353, 0.45098, 0.666667, 1)
+BackgroundColor = Color(0.682353, 0.741176, 0.807843, 0.666667)
 
 [node name="HUD" type="Control" parent="."]
 custom_minimum_size = Vector2(640, 360)
@@ -1421,7 +1425,7 @@ grow_vertical = 2
 script = ExtResource("39_4oyr2")
 
 [node name="Shadow" type="TextureRect" parent="UI/DroppedItems"]
-self_modulate = Color(0.0784314, 0.231373, 0.427451, 0.607843)
+material = ExtResource("11_3hf22")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1437,7 +1441,7 @@ grow_vertical = 2
 texture = SubResource("CanvasTexture_t4b0o")
 
 [node name="Background" type="TextureRect" parent="UI/DroppedItems"]
-self_modulate = Color(0.584314, 0.658824, 0.752941, 0.607843)
+modulate = Color(0.584314, 0.658824, 0.752941, 0.392157)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

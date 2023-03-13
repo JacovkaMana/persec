@@ -12,9 +12,15 @@ var panel_hover = false
 var ItemButton = preload("res://Scenes/Inventory/ItemButton.tscn")
 
 var _item_inventory = null
+
+@onready var ui_settings = get_parent().get_parent()
+@onready var bground = $Background
+@onready var shadow = $Shadow
 # !!!!! При закрытии закрывается ItemActionsPanel, если она над этой менюшкой!!!
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	bground.modulate = ui_settings.BackgroundColor
+	shadow.modulate = ui_settings.ShadowColor
 	
 	player.connect("dropped_inventory_opened", _on_new_inventory)
 

@@ -10,7 +10,14 @@ extends Control
 var ItemButton = preload("res://Scenes/Inventory/ItemButton.tscn")
 # !!!!! При закрытии закрывается ItemActionsPanel, если она над этой менюшкой!!!
 # Called when the node enters the scene tree for the first time.
+
+@onready var ui_settings = get_parent().get_parent()
+@onready var bground = $Background
+@onready var shadow = $Shadow
+
 func _ready():
+	bground.modulate = ui_settings.BackgroundColor
+	shadow.modulate = ui_settings.ShadowColor
 	
 	#print('Player test node')
 	#print(player.inventory)

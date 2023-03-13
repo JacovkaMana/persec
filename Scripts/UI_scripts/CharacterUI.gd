@@ -18,7 +18,16 @@ var EquipButton = preload("res://Scenes/Inventory/EquipButton.tscn")
 var active_slot_rclick: BaseSlotUI = null
 var active_item_lclick: Item = null
 # Called when the node enters the scene tree for the first time.
+
+@onready var ui_settings = get_parent().get_parent()
+@onready var bground = $Background
+@onready var shadow = $Shadow
+
+
 func _ready():
+	bground.modulate = ui_settings.BackgroundColor
+	shadow.modulate = ui_settings.ShadowColor
+	
 	player.data.inventory.connect("equip_item_changed", _on_update_request)
 	_on_update_request(Enums.EEquipmentSlot.CONSUMABLE_1, null)
 	actions_panel\
