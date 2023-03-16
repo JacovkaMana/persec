@@ -5,5 +5,5 @@
 [resource]
 shader = ExtResource("1_2veht")
 shader_parameter/blur_amount = 1.0
-shader_parameter/mix_amount = 0.5
+shader_parameter/mix_amount = 0.6
 shader_parameter/color_over = Color(0.0784314, 0.231373, 0.427451, 1)

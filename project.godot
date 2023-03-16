@@ -21,6 +21,7 @@ Enums="*res://Scripts/Global/GlobalEnums.gd"
 RandomStats="*res://Scripts/Global/RandomStats.gd"
 StackableItems="*res://Scripts/Global/Stackable_Items.gd"
 GlobalSkills="*res://Scripts/Global/GlobalSkills.gd"
+InputManager="*res://Scripts/Global/InputManager.gd"
 
 [display]
 

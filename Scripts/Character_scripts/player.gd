@@ -5,9 +5,12 @@ signal dropped_inventory_opened(item_array: Array[Item])
 signal dialogue_started(with: CharacterBody2D)
 
 var invincible_timer = null
+var player_state: Enums.EPlayerState = Enums.EPlayerState.ROAMING
 
 func _ready():
 	super()
+	InputManager.player = self
+	
 	interaction_area.connect("area_entered", _on_interaction_zone_entered)
 	interaction_area.connect("area_exited", _on_interaction_zone_exited)
 	
@@ -63,31 +66,6 @@ func _ready():
 
 func _physics_process(_delta):
 	super(_delta)
-	move_direction = Vector2(
-		Input.get_action_strength("right") - Input.get_action_strength("left"),
-		Input.get_action_strength("down") -  Input.get_action_strength("up")
-)
-
-
-func _input(event):
-#	print(ProjectSettings.get_setting("input/interact"))
-		
-	if event.is_action_pressed("skill1"):
-		use_skill_id(0)
-	if event.is_action_pressed("skill2"):
-		use_skill_id(1)
-	if event.is_action_pressed("skill3"):
-		use_skill_id(2)
-	
-	if event.is_action_pressed("interact"):
-		if (interaction_area.get_overlapping_areas()):
-			interaction_area.get_overlapping_areas()[0].get_parent().interact()
-			if interaction_area.get_overlapping_areas()[0].get_parent().get_class() == "CharacterBody2D":
-				trigger_dialogue(interaction_area.get_overlapping_areas()[0].get_parent())
-		#print(interaction_area.get_overlapping_areas())
-		#print(InputMap.action_get_events("interact")[0].as_text())
-		#print(ProjectSettings.get_setting("input/interact")["events"].InputEventKey)
-	
 					
 
 func set_zone(to):
@@ -104,9 +82,17 @@ func _on_interaction_zone_entered(what: Area2D):
 func _on_interaction_zone_exited(what: Area2D):
 	#print(what.get_parent())
 	what.get_parent().off_interact_area()
+	
+func interact_with_nearest():
+	if (interaction_area.get_overlapping_areas()):
+		interaction_area.get_overlapping_areas()[0].get_parent().interact()
+		if interaction_area.get_overlapping_areas()[0].get_parent().get_class() == "CharacterBody2D":
+			trigger_dialogue(interaction_area.get_overlapping_areas()[0].get_parent())
 
 func trigger_dialogue(with):
 	print("Dialogue with " + str(with))
 	emit_signal("dialogue_started", with)
+	self.player_state = Enums.EPlayerState.TALKING
+	with.current_state = Enums.ECharacterState.TALKING
 	
-	
+

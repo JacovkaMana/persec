@@ -36,3 +36,6 @@ func add_melee():
 	
 func remove_melee():
 	melee_scene.queue_free()
+	
+func pause_game():
+	next_scene.process_mode = 4

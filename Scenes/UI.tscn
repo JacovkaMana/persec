@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=3 uid="uid://dbksnam8cuw3o"]
+[gd_scene load_steps=100 format=3 uid="uid://dbksnam8cuw3o"]
 
 [ext_resource type="Script" path="res://Scripts/UI_scripts/CharacterUI.gd" id="1_8tod6"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/UI.gd" id="1_cvjfy"]
@@ -39,6 +39,8 @@
 [ext_resource type="Script" path="res://Scripts/UI_scripts/CoverPanel.gd" id="29_5vimk"]
 [ext_resource type="Texture2D" uid="uid://cpp7ou6piu4r0" path="res://Art/UI/SkillSlot.png" id="34_f6u2n"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/DroppedItemsUI.gd" id="39_4oyr2"]
+[ext_resource type="Script" path="res://Scripts/UI_scripts/Dialogue.gd" id="40_bt3bl"]
+[ext_resource type="Script" path="res://Scripts/UI_scripts/ScreenLabel.gd" id="41_42gqc"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_u8o8f"]
 font = ExtResource("5_ai818")
@@ -182,11 +184,183 @@ region_rect = Rect2(0, 0, 40, 10)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5cgrn"]
 
+[sub_resource type="Gradient" id="Gradient_bx6uy"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_l3fiq"]
+gradient = SubResource("Gradient_bx6uy")
+
+[sub_resource type="Gradient" id="Gradient_cyf48"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vfqfn"]
+gradient = SubResource("Gradient_cyf48")
+
+[sub_resource type="Gradient" id="Gradient_tlact"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xii4s"]
+gradient = SubResource("Gradient_tlact")
+width = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_gs1ul"]
+line_spacing = 0.0
+font = ExtResource("5_ai818")
+font_size = 8
+font_color = Color(0.682353, 0.741176, 0.807843, 1)
+shadow_size = 0
+
+[sub_resource type="Gradient" id="Gradient_sj754"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_r5jui"]
+gradient = SubResource("Gradient_sj754")
+width = 40
+
+[sub_resource type="Gradient" id="Gradient_5q1je"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7aqwh"]
+gradient = SubResource("Gradient_5q1je")
+width = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_ee3f2"]
+font = ExtResource("5_ai818")
+font_size = 8
+font_color = Color(0.682353, 0.741176, 0.807843, 1)
+
+[sub_resource type="Gradient" id="Gradient_3f24u"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vnv3s"]
+gradient = SubResource("Gradient_3f24u")
+width = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_4pvu3"]
+font = ExtResource("5_ai818")
+font_size = 8
+font_color = Color(0.682353, 0.741176, 0.807843, 1)
+
+[sub_resource type="Animation" id="Animation_31af4"]
+resource_name = "Fade"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 1.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1), Vector2(1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.2, 1.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TextureRect:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1, 1.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.0784314, 0.231373, 0.427451, 0.784314), Color(0.0784314, 0.231373, 0.427451, 0.784314), Color(0.0784314, 0.231373, 0.427451, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_s4jx2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(640, 18)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TextureRect:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.0784314, 0.231373, 0.427451, 0.784314)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qxk5e"]
+_data = {
+"Fade": SubResource("Animation_31af4"),
+"RESET": SubResource("Animation_s4jx2")
+}
+
 [node name="UI" type="CanvasLayer"]
 layer = 3
 script = ExtResource("1_v0356")
 ShadowColor = Color(0.282353, 0.45098, 0.666667, 1)
-BackgroundColor = Color(0.682353, 0.741176, 0.807843, 0.666667)
+BackgroundColor = Color(0.682353, 0.741176, 0.807843, 0.588235)
 
 [node name="HUD" type="Control" parent="."]
 custom_minimum_size = Vector2(640, 360)
@@ -748,6 +922,7 @@ mouse_filter = 1
 script = ExtResource("1_cvjfy")
 
 [node name="Character" type="Control" parent="UI"]
+visible = false
 custom_minimum_size = Vector2(176, 296)
 layout_mode = 1
 anchors_preset = 4
@@ -1203,6 +1378,7 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="Inventory" type="Control" parent="UI"]
+visible = false
 custom_minimum_size = Vector2(176, 296)
 layout_mode = 1
 anchors_preset = 6
@@ -1230,7 +1406,7 @@ offset_bottom = 294.0
 texture = ExtResource("28_s3eqt")
 
 [node name="Background" type="TextureRect" parent="UI/Inventory"]
-modulate = Color(1, 1, 1, 0.392157)
+modulate = Color(0.682353, 0.741176, 0.807843, 0.666667)
 layout_mode = 0
 offset_right = 176.0
 offset_bottom = 296.0
@@ -1409,6 +1585,7 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_11eno")
 script = ExtResource("9_lvtlu")
 
 [node name="DroppedItems" type="Control" parent="UI"]
+visible = false
 custom_minimum_size = Vector2(182, 102)
 layout_mode = 1
 anchors_preset = 8
@@ -1613,6 +1790,275 @@ text = "Delete"
 label_settings = SubResource("LabelSettings_5fpuk")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Dialogue" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
+script = ExtResource("40_bt3bl")
+
+[node name="Shadow" type="TextureRect" parent="Dialogue"]
+material = ExtResource("11_3hf22")
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -61.0
+offset_right = 202.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = SubResource("GradientTexture1D_l3fiq")
+
+[node name="Background" type="TextureRect" parent="Dialogue"]
+self_modulate = Color(0.584314, 0.658824, 0.752941, 0.784314)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -199.0
+offset_top = -60.0
+offset_right = 201.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = SubResource("GradientTexture1D_vfqfn")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Dialogue/Background"]
+custom_minimum_size = Vector2(350, 50)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -175.0
+offset_right = 175.0
+offset_bottom = 50.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(0.0784314, 0.231373, 0.427451, 1)
+theme_override_fonts/normal_font = ExtResource("5_ai818")
+theme_override_fonts/bold_font = ExtResource("5_ai818")
+theme_override_fonts/italics_font = ExtResource("5_ai818")
+theme_override_fonts/bold_italics_font = ExtResource("5_ai818")
+theme_override_fonts/mono_font = ExtResource("5_ai818")
+theme_override_font_sizes/normal_font_size = 8
+text = "	asddddddddasdd dddddddddddd dddddddd dddssssssssssss sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
+
+[node name="Name" type="TextureRect" parent="Dialogue"]
+self_modulate = Color(0.0784314, 0.231373, 0.427451, 0.588235)
+custom_minimum_size = Vector2(27, 9)
+layout_mode = 0
+offset_left = 120.0
+offset_top = 288.0
+offset_right = 157.0
+offset_bottom = 299.0
+texture = SubResource("GradientTexture1D_xii4s")
+
+[node name="Label" type="Label" parent="Dialogue/Name"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 14.0
+grow_horizontal = 2
+text = "Test"
+label_settings = SubResource("LabelSettings_gs1ul")
+horizontal_alignment = 1
+
+[node name="Notifications" type="Control" parent="."]
+custom_minimum_size = Vector2(640, 360)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Notifications"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -100.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/separation = 1
+
+[node name="Notification" type="TextureRect" parent="Notifications/VBoxContainer"]
+self_modulate = Color(0.682353, 0.741176, 0.807843, 0.666667)
+custom_minimum_size = Vector2(100, 20)
+layout_mode = 2
+texture = SubResource("GradientTexture1D_r5jui")
+
+[node name="TextureRect" type="TextureRect" parent="Notifications/VBoxContainer/Notification"]
+self_modulate = Color(0.0784314, 0.231373, 0.427451, 0.941176)
+custom_minimum_size = Vector2(98, 18)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -0.5
+offset_right = 20.0
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_7aqwh")
+
+[node name="Label" type="Label" parent="Notifications/VBoxContainer/Notification"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -7.5
+offset_right = 22.0
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "+2 money"
+label_settings = SubResource("LabelSettings_ee3f2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Notification2" type="TextureRect" parent="Notifications/VBoxContainer"]
+self_modulate = Color(0.682353, 0.741176, 0.807843, 0.666667)
+custom_minimum_size = Vector2(100, 20)
+layout_mode = 2
+texture = SubResource("GradientTexture1D_r5jui")
+
+[node name="TextureRect" type="TextureRect" parent="Notifications/VBoxContainer/Notification2"]
+self_modulate = Color(0.0784314, 0.231373, 0.427451, 0.941176)
+custom_minimum_size = Vector2(98, 18)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -0.5
+offset_right = 20.0
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_7aqwh")
+
+[node name="Label" type="Label" parent="Notifications/VBoxContainer/Notification2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -7.5
+offset_right = 22.0
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "+2 money"
+label_settings = SubResource("LabelSettings_ee3f2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Notification3" type="TextureRect" parent="Notifications/VBoxContainer"]
+self_modulate = Color(0.682353, 0.741176, 0.807843, 0.666667)
+custom_minimum_size = Vector2(100, 20)
+layout_mode = 2
+texture = SubResource("GradientTexture1D_r5jui")
+
+[node name="TextureRect" type="TextureRect" parent="Notifications/VBoxContainer/Notification3"]
+self_modulate = Color(0.0784314, 0.231373, 0.427451, 0.941176)
+custom_minimum_size = Vector2(98, 18)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -0.5
+offset_right = 20.0
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_7aqwh")
+
+[node name="Label" type="Label" parent="Notifications/VBoxContainer/Notification3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -7.5
+offset_right = 22.0
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "+2 money"
+label_settings = SubResource("LabelSettings_ee3f2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScreenLabel" type="Control" parent="."]
+custom_minimum_size = Vector2(640, 360)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("41_42gqc")
+
+[node name="TextureRect" type="TextureRect" parent="ScreenLabel"]
+self_modulate = Color(0.0784314, 0.231373, 0.427451, 0.784314)
+custom_minimum_size = Vector2(640, 18)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -10.0
+offset_right = 320.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(320, 9)
+texture = SubResource("GradientTexture1D_vnv3s")
+
+[node name="Label" type="Label" parent="ScreenLabel"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -8.5
+offset_bottom = 8.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(320, 6)
+text = "Dungeon Sewers"
+label_settings = SubResource("LabelSettings_4pvu3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ScreenLabel"]
+libraries = {
+"": SubResource("AnimationLibrary_qxk5e")
+}
 
 [editable path="UI/Character/LeftCharacterVBox/AmuletPanel/EquipButton"]
 [editable path="UI/Character/LeftCharacterVBox/RingPanel1/EquipButton"]

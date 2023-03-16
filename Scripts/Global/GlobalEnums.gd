@@ -1,11 +1,21 @@
 extends Node
 
+enum EPlayerState {
+	NONE = 0,
+	ROAMING,
+	TALKING,
+	RANGE,
+	MELEE,
+}
+
 enum ECharacterState {
 	NONE = 0,
 	IDLE,
 	ROAMING,
+	TALKING,
 	SEARCHING,
-	FIGHTING,
+	RANGE,
+	MELEE,
 }
 
 enum EWeaponSubtype {

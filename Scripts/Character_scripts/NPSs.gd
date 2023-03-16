@@ -1,5 +1,5 @@
 extends Actor
-
+@export var npc_name: String = ""
 #stats
 @export_category('Stats')
 @export var STRENGTH: int = 0
@@ -44,6 +44,7 @@ var last_direction_change: float = 0
 
 var current_state : Enums.ECharacterState = Enums.ECharacterState.ROAMING
 var start_pos: Vector2 = Vector2.ZERO
+var dialogue_number: int = 0
 
 
 var select_material = preload("res://Art/Shaders/HighlightShader.tres")
@@ -90,15 +91,22 @@ func _physics_process(_delta):
 				else:
 					move_direction = (current_zone.follow_position - self.global_position).normalized()
 					move_speed = 70
-		Enums.ECharacterState.FIGHTING:
-			pass
-		Enums.ECharacterState.SEARCHING:
+		_:
 			pass
 
 
 
 	
 	vision.rotation = move_direction.angle() + PI
+	
+func get_dialogue():
+	var path = "res://Data/" + self.npc_name + '.json'
+	var file = FileAccess.open(path, FileAccess.READ)
+	var dialogue: Dictionary = JSON.parse_string(file.get_as_text())
+	if (str(dialogue_number + 1) in dialogue.keys()):
+		dialogue_number += 1
+		print(dialogue[str(dialogue_number)].text)
+
 	
 func on_interact_area():
 	interaction_hint_player.queue("float")
@@ -161,4 +169,4 @@ func _on_anim_finished(name):
 		self.queue_free()
 
 func interact():
-	print("nps interact")
+	get_dialogue()
