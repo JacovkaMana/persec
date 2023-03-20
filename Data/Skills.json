@@ -1,0 +1,23 @@
+{
+  "Slash": {
+    "description": "slash description",
+    "cost": 1,
+    "damage_type": "SLASH",
+    "skill_type": "BLADE",
+    "texture": "Slash"
+  },
+  "Fireball": {
+    "description": "fireball description",
+    "cost": 1,
+    "damage_type": "FIRE",
+    "skill_type": "MAGIC",
+    "texture": "Ball"
+  },
+  "Ice Slash": {
+    "description": "inceslash description",
+    "cost": 2,
+    "damage_type": "ICE",
+    "skill_type": "MAGIC",
+    "texture": "MovingSlash"
+  }
+}
