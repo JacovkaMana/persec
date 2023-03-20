@@ -562,6 +562,7 @@ offset_left = 259.0
 offset_top = 295.0
 offset_right = 380.0
 offset_bottom = 303.0
+theme_override_constants/separation = 1
 alignment = 1
 script = ExtResource("5_cohd6")
 
@@ -570,6 +571,22 @@ layout_mode = 2
 texture = ExtResource("4_v6vyg")
 
 [node name="StaminaBlock_2" type="TextureRect" parent="HUD/StaminaContainer"]
+layout_mode = 2
+texture = ExtResource("4_v6vyg")
+
+[node name="StaminaBlock_3" type="TextureRect" parent="HUD/StaminaContainer"]
+layout_mode = 2
+texture = ExtResource("4_v6vyg")
+
+[node name="StaminaBlock_4" type="TextureRect" parent="HUD/StaminaContainer"]
+layout_mode = 2
+texture = ExtResource("4_v6vyg")
+
+[node name="StaminaBlock_5" type="TextureRect" parent="HUD/StaminaContainer"]
+layout_mode = 2
+texture = ExtResource("4_v6vyg")
+
+[node name="StaminaBlock_6" type="TextureRect" parent="HUD/StaminaContainer"]
 layout_mode = 2
 texture = ExtResource("4_v6vyg")
 

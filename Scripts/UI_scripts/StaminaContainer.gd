@@ -8,4 +8,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	print(player.data.stamina)
+	#print(player.data.stamina)
+	for i in range(self.get_child_count()):
+		if (i + 1) <= player.data.max_stamina:
+			self.get_child(i).self_modulate = Color(1,1,1,  min(player.data.stamina, i + 1) / (i + 1))
+		else:
+			self.get_child(i).visible = false

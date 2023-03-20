@@ -24,33 +24,16 @@ var colors = {
 
 func _init():
 	
-#	var path = "res://Data/" + self.npc_name + '.json'
-#	var file = FileAccess.open(path, FileAccess.READ)
-#	var dialogue: Dictionary = JSON.parse_string(file.get_as_text())
+	var path = "res://Data/" + "Skills" + '.json'
+	var file = FileAccess.open(path, FileAccess.READ)
+	var dialogue: Dictionary = JSON.parse_string(file.get_as_text())
+	for skill in dialogue:
+		skills[skill] = AttackSkill.new(
+		skill,
+		dialogue[skill].cost,
+		Enums.EDamageType.get( dialogue[skill].damage_type ),
+		Enums.ESkillType.get( dialogue[skill].skill_type ),
+		load("res://PreRendered/Projectiles/" + dialogue[skill].texture + ".tscn"),
+	)
 
 
-
-	skills['Slash'] = AttackSkill.new(
-		'Slash',
-		1,
-		Enums.EDamageType.SLASH,
-		Enums.ESkillType.BLADE,
-		load("res://PreRendered/Projectiles/Slash.tscn"),
-	)
-	
-	skills['Fireball'] = AttackSkill.new(
-		'Fireball',
-		1,
-		Enums.EDamageType.FIRE,
-		Enums.ESkillType.MAGIC,
-		load("res://PreRendered/Projectiles/Ball.tscn"),
-		
-	)
-	
-	skills['Ice Slash'] = AttackSkill.new(
-		'Ice Slash',
-		2,
-		Enums.EDamageType.ICE,
-		Enums.ESkillType.MAGIC,
-		load("res://PreRendered/Projectiles/MovingSlash.tscn"),
-	)

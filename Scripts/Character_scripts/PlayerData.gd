@@ -3,7 +3,7 @@ extends Resource
 
 @export var hitpoints: float = 100.0
 @export var max_stamina: int = 4
-@export var stamina_regen: float = 2
+@export var stamina_regen: float = 10
 var stamina: float = 0.0
 var inventory: Inventory = Inventory.new()
 var skills: Skills = Skills.new()

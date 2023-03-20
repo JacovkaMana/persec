@@ -65,7 +65,7 @@ func update_animation_parameters (move_input : Vector2):
 
 func _process(delta):
 	if (self.data.stamina < self.data.max_stamina):
-		self.data.stamina += delta * self.data.stamina_regen
+		self.data.stamina += delta * self.data.stamina_regen / 20.0
 		if (self.data.stamina > self.data.max_stamina):
 			self.data.stamina = self.data.max_stamina
 
