@@ -24,20 +24,33 @@ var colors = {
 
 func _init():
 	
-	skills['Slash'] = AttackSkill.new()
-	skills['Slash'].name = 'Slash'
-	skills['Slash'].damage_type = Enums.EDamageType.SLASH
-	skills['Slash'].type = Enums.ESkillType.BLADE
-	skills['Slash'].projectile = load("res://PreRendered/Projectiles/Slash.tscn")
+#	var path = "res://Data/" + self.npc_name + '.json'
+#	var file = FileAccess.open(path, FileAccess.READ)
+#	var dialogue: Dictionary = JSON.parse_string(file.get_as_text())
+
+
+
+	skills['Slash'] = AttackSkill.new(
+		'Slash',
+		1,
+		Enums.EDamageType.SLASH,
+		Enums.ESkillType.BLADE,
+		load("res://PreRendered/Projectiles/Slash.tscn"),
+	)
 	
-	skills['Fireball'] = AttackSkill.new()
-	skills['Fireball'].name = 'Fireball'
-	skills['Fireball'].damage_type = Enums.EDamageType.FIRE
-	skills['Fireball'].type = Enums.ESkillType.MAGIC
-	skills['Fireball'].projectile = load("res://PreRendered/Projectiles/Ball.tscn")
+	skills['Fireball'] = AttackSkill.new(
+		'Fireball',
+		1,
+		Enums.EDamageType.FIRE,
+		Enums.ESkillType.MAGIC,
+		load("res://PreRendered/Projectiles/Ball.tscn"),
+		
+	)
 	
-	skills['Ice Slash'] = AttackSkill.new()
-	skills['Ice Slash'].name = 'Ice Slash'
-	skills['Ice Slash'].type = Enums.ESkillType.MAGIC
-	skills['Ice Slash'].damage_type = Enums.EDamageType.ICE
-	skills['Ice Slash'].projectile = load("res://PreRendered/Projectiles/MovingSlash.tscn")
+	skills['Ice Slash'] = AttackSkill.new(
+		'Ice Slash',
+		2,
+		Enums.EDamageType.ICE,
+		Enums.ESkillType.MAGIC,
+		load("res://PreRendered/Projectiles/MovingSlash.tscn"),
+	)

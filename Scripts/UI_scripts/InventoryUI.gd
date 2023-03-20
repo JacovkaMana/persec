@@ -14,10 +14,17 @@ var ItemButton = preload("res://Scenes/Inventory/ItemButton.tscn")
 @onready var ui_settings = get_parent().get_parent()
 @onready var bground = $Background
 @onready var shadow = $Shadow
+@onready var inventory_container = $InventoryContainer
 
 func _ready():
 	bground.modulate = ui_settings.BackgroundColor
 	shadow.modulate = ui_settings.ShadowColor
+	
+	inventory_container.get_child(0).connect("pressed", update_inventory.bind([Enums.EItemType.NONE]))
+	inventory_container.get_child(1).connect("pressed", update_inventory.bind([Enums.EItemType.WEAPON]))
+	inventory_container.get_child(2).connect("pressed", update_inventory.bind([Enums.EItemType.ARMOR, Enums.EItemType.HELM, Enums.EItemType.BOOTS]))
+	inventory_container.get_child(3).connect("pressed", update_inventory.bind([Enums.EItemType.AMULET]))
+	inventory_container.get_child(4).connect("pressed", update_inventory.bind([Enums.EItemType.CONSUMABLE]))
 	
 	#print('Player test node')
 	#print(player.inventory)
@@ -33,7 +40,7 @@ func _ready():
 		.get_node("DeleteButton")\
 		.connect("action_menu_click", _on_action_click)
 		
-	update_inventory();
+	update_inventory([Enums.EItemType.NONE]);
 
 	# По хорошему обновление должно идти из кнопки, т.е. при открытии инвентаря по 
 	# дефолту выбрана вкладка 'Все предметы' и оттуда загружаются все предметы
@@ -51,26 +58,37 @@ func _ready():
 				
 	pass # Replace with function body.
 	
+func update_inventory(types_arr: Array)->void:
+	for slot in inventory_grid.get_children() as Array[ItemSlotUI]:
+		inventory_grid.remove_child(slot)
 	
-func update_inventory()->void:
 	for inv_item in player.data.inventory.get_inventory_items():
-		var newItemButton = ItemButton.instantiate()
+		var type_cond = false
+		if (types_arr[0] == Enums.EItemType.NONE):
+			type_cond = true
+		else:
+			for type in types_arr:
+					if inv_item.get_item_type() == type:
+						type_cond = true
+					
+		if (type_cond):
+			var newItemButton = ItemButton.instantiate()
 		
-		inventory_grid.add_child(newItemButton)
-		
-		newItemButton.set_item(inv_item)
-		newItemButton.find_child("ItemImage").texture = inv_item.sprite
-		#var mater = ShaderMaterial.new()
-		#mater.shader = ItemShader
-		#mater.set_shader_parameter('color',RandomStats.rarity_colors[new_item.rarity])
-		#newItemButton.find_child("ItemImage").material = mater
-		if (inv_item.is_stackable()):
-			newItemButton.find_child("ItemCount").text = str(inv_item.count)
-			newItemButton.find_child("ItemCount").visible = true
-		
-		newItemButton.connect("slot_mouse_lclick", _on_slot_mouse_lclick)
-		newItemButton.connect("slot_mouse_rclick", _on_slot_mouse_rclick)
-		newItemButton.connect("slot_mouse_move_check", _on_slot_mouse_move)
+			inventory_grid.add_child(newItemButton)
+			
+			newItemButton.set_item(inv_item)
+			newItemButton.find_child("ItemImage").texture = inv_item.sprite
+			#var mater = ShaderMaterial.new()
+			#mater.shader = ItemShader
+			#mater.set_shader_parameter('color',RandomStats.rarity_colors[new_item.rarity])
+			#newItemButton.find_child("ItemImage").material = mater
+			if (inv_item.is_stackable()):
+				newItemButton.find_child("ItemCount").text = str(inv_item.count)
+				newItemButton.find_child("ItemCount").visible = true
+			
+			newItemButton.connect("slot_mouse_lclick", _on_slot_mouse_lclick)
+			newItemButton.connect("slot_mouse_rclick", _on_slot_mouse_rclick)
+			newItemButton.connect("slot_mouse_move_check", _on_slot_mouse_move)
 
 
 func _on_new_item(new_item)->bool:
@@ -89,7 +107,6 @@ func _on_new_item(new_item)->bool:
 	if (new_item.is_stackable()):
 		newItemButton.find_child("ItemCount").text = str(new_item.count)
 		newItemButton.find_child("ItemCount").visible = true
-		
 		
 	
 	newItemButton.connect("slot_mouse_lclick", _on_slot_mouse_lclick)

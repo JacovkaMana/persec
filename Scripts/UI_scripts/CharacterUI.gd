@@ -19,12 +19,13 @@ var active_slot_rclick: BaseSlotUI = null
 var active_item_lclick: Item = null
 # Called when the node enters the scene tree for the first time.
 
-@onready var ui_settings = get_parent().get_parent()
-@onready var bground = $Background
-@onready var shadow = $Shadow
+@onready var ui_settings = get_parent().get_parent().get_parent()
+@onready var bground = $"../Background"
+@onready var shadow = $"../Shadow"
 
 
 func _ready():
+	print(ui_settings.BackgroundColor)
 	bground.modulate = ui_settings.BackgroundColor
 	shadow.modulate = ui_settings.ShadowColor
 	

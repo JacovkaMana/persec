@@ -1,19 +1,22 @@
-[gd_scene load_steps=100 format=3 uid="uid://dbksnam8cuw3o"]
+[gd_scene load_steps=104 format=3 uid="uid://dbksnam8cuw3o"]
 
 [ext_resource type="Script" path="res://Scripts/UI_scripts/CharacterUI.gd" id="1_8tod6"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/UI.gd" id="1_cvjfy"]
 [ext_resource type="Script" path="res://Scripts/Global/GlobalUI.gd" id="1_v0356"]
 [ext_resource type="Texture2D" uid="uid://bh3irpn80km6o" path="res://Art/UI/UI_Backplate.png" id="3_5tfiq"]
+[ext_resource type="Theme" uid="uid://l3ac6jr0hvrq" path="res://Themes/ui_theme.tres" id="3_h5rw7"]
 [ext_resource type="Texture2D" uid="uid://swjg1maqaepn" path="res://Art/UI/SkillTest1.png" id="3_ik2u5"]
 [ext_resource type="Texture2D" uid="uid://e5h7qlqeup7q" path="res://Art/Skills/test.png" id="4_queiq"]
 [ext_resource type="Texture2D" uid="uid://dj6saa2kydvlc" path="res://Art/UI/HUD_Stamina.png" id="4_v6vyg"]
 [ext_resource type="Texture2D" uid="uid://bx0tcs2i3qce1" path="res://Art/UI/SkillTestShdaow.png" id="4_wsh4e"]
 [ext_resource type="Texture2D" uid="uid://dhim64q84qukn" path="res://Art/UI/UI_Char.png" id="4_xrr7e"]
 [ext_resource type="FontFile" uid="uid://bv3p1twxqpx6p" path="res://Fonts/Minecraftia-Regular.ttf" id="5_ai818"]
+[ext_resource type="Script" path="res://Scripts/UI_scripts/StaminaContainer.gd" id="5_cohd6"]
 [ext_resource type="Texture2D" uid="uid://m03kme2ly37o" path="res://Art/UI/Border22_1.png" id="5_e6gov"]
 [ext_resource type="Texture2D" uid="uid://byh8r3f22gvqa" path="res://Art/UI/Border34.png" id="5_mowgk"]
 [ext_resource type="Texture2D" uid="uid://1mactnwdbpu7" path="res://Art/UI/UI_Inventory.png" id="6_83gsj"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/InventoryUI.gd" id="7_0wyy8"]
+[ext_resource type="Script" path="res://Scripts/UI_scripts/SkillsContainer.gd" id="7_drj05"]
 [ext_resource type="Texture2D" uid="uid://dh52y5x0l4e52" path="res://Art/UI/UI_InventoryMenuIcon.png" id="8_cb6qa"]
 [ext_resource type="Texture2D" uid="uid://ca0lfmfiallgi" path="res://Art/UI/MenuClose_Hover.png" id="8_h5i0i"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/CloseButton.gd" id="9_lvtlu"]
@@ -38,201 +41,11 @@
 [ext_resource type="Texture2D" uid="uid://bvm648ct7g0co" path="res://Art/UI/Character.png" id="28_ws067"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/CoverPanel.gd" id="29_5vimk"]
 [ext_resource type="Texture2D" uid="uid://cpp7ou6piu4r0" path="res://Art/UI/SkillSlot.png" id="34_f6u2n"]
+[ext_resource type="Texture2D" uid="uid://vcslh0481xu1" path="res://Art/UI/UI_Stats.png" id="36_t4wn0"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/DroppedItemsUI.gd" id="39_4oyr2"]
+[ext_resource type="Script" path="res://Scripts/UI_scripts/CharacterContainer.gd" id="39_041b8"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/Dialogue.gd" id="40_bt3bl"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/ScreenLabel.gd" id="41_42gqc"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_u8o8f"]
-font = ExtResource("5_ai818")
-font_size = 8
-font_color = Color(0.682353, 0.741176, 0.807843, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_87j6u"]
-font = ExtResource("5_ai818")
-font_size = 8
-font_color = Color(0.682353, 0.741176, 0.807843, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_n77g3"]
-line_spacing = 0.0
-font = ExtResource("5_ai818")
-font_size = 8
-font_color = Color(0.0784314, 0.231373, 0.427451, 1)
-shadow_size = 0
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ojem5"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ojq34"]
-texture = ExtResource("8_h5i0i")
-region_rect = Rect2(0, 0, 11, 11)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_11eno"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sb5ce"]
-texture = ExtResource("11_72ij6")
-region_rect = Rect2(0, 0, 22, 22)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8jccc"]
-texture = ExtResource("12_k2607")
-region_rect = Rect2(0, 0, 22, 22)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e2cyl"]
-texture = ExtResource("12_k2607")
-region_rect = Rect2(0, 0, 22, 22)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_obnin"]
-texture = ExtResource("13_aduk8")
-region_rect = Rect2(0, 0, 22, 22)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dodc2"]
-texture = ExtResource("14_f3qx8")
-region_rect = Rect2(0, 0, 22, 22)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jl75u"]
-texture = ExtResource("15_58hf7")
-region_rect = Rect2(0, 0, 22, 22)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wh5vm"]
-texture = ExtResource("16_rijxa")
-region_rect = Rect2(0, 0, 22, 22)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5bfpp"]
-texture = ExtResource("17_otl5j")
-region_rect = Rect2(0, 0, 22, 22)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vxj55"]
-texture = ExtResource("19_x824n")
-region_rect = Rect2(0, 0, 22, 22)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pjirn"]
-texture = ExtResource("19_aroqj")
-region_rect = Rect2(0, 0, 22, 22)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0uvwy"]
-texture = ExtResource("28_ws067")
-region_rect = Rect2(-5, -5, 44, 66)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_thfi8"]
-size = Vector2(73, 101)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dk08e"]
-texture = ExtResource("13_esgr1")
-region_rect = Rect2(0, 0, 80, 100)
-
-[sub_resource type="LabelSettings" id="LabelSettings_h0dk4"]
-line_spacing = 0.0
-font = ExtResource("5_ai818")
-font_size = 8
-font_color = Color(0.0705882, 0.333333, 0.698039, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_wulp2"]
-line_spacing = 0.0
-font = ExtResource("5_ai818")
-font_size = 8
-font_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_to568"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e4ms3"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jtoyy"]
-texture = ExtResource("8_cb6qa")
-region_rect = Rect2(0, 0, 15, 15)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7fav8"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_61tsj"]
-
-[sub_resource type="ButtonGroup" id="ButtonGroup_bge57"]
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_t4b0o"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_reb7f"]
-texture = ExtResource("18_mog8i")
-region_rect = Rect2(0, 0, 40, 24)
-modulate_color = Color(1, 1, 1, 0.784314)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_705cy"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gnv88"]
-texture = ExtResource("19_3pi6p")
-expand_margin_top = 2.0
-expand_margin_bottom = 2.0
-region_rect = Rect2(0, 0, 40, 10)
-modulate_color = Color(1, 1, 1, 0.784314)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2bg7p"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_peaqi"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rf8ru"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_5fpuk"]
-font = ExtResource("5_ai818")
-font_size = 8
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ngump"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vlg4b"]
-texture = ExtResource("19_3pi6p")
-expand_margin_top = 2.0
-expand_margin_bottom = 2.0
-region_rect = Rect2(0, 0, 40, 10)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vukj7"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3e8yv"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5cgrn"]
-
-[sub_resource type="Gradient" id="Gradient_bx6uy"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_l3fiq"]
-gradient = SubResource("Gradient_bx6uy")
-
-[sub_resource type="Gradient" id="Gradient_cyf48"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_vfqfn"]
-gradient = SubResource("Gradient_cyf48")
-
-[sub_resource type="Gradient" id="Gradient_tlact"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_xii4s"]
-gradient = SubResource("Gradient_tlact")
-width = 20
-
-[sub_resource type="LabelSettings" id="LabelSettings_gs1ul"]
-line_spacing = 0.0
-font = ExtResource("5_ai818")
-font_size = 8
-font_color = Color(0.682353, 0.741176, 0.807843, 1)
-shadow_size = 0
-
-[sub_resource type="Gradient" id="Gradient_sj754"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_r5jui"]
-gradient = SubResource("Gradient_sj754")
-width = 40
-
-[sub_resource type="Gradient" id="Gradient_5q1je"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_7aqwh"]
-gradient = SubResource("Gradient_5q1je")
-width = 40
-
-[sub_resource type="LabelSettings" id="LabelSettings_ee3f2"]
-font = ExtResource("5_ai818")
-font_size = 8
-font_color = Color(0.682353, 0.741176, 0.807843, 1)
 
 [sub_resource type="Gradient" id="Gradient_3f24u"]
 offsets = PackedFloat32Array(1)
@@ -241,11 +54,6 @@ colors = PackedColorArray(1, 1, 1, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_vnv3s"]
 gradient = SubResource("Gradient_3f24u")
 width = 20
-
-[sub_resource type="LabelSettings" id="LabelSettings_4pvu3"]
-font = ExtResource("5_ai818")
-font_size = 8
-font_color = Color(0.682353, 0.741176, 0.807843, 1)
 
 [sub_resource type="Animation" id="Animation_31af4"]
 resource_name = "Fade"
@@ -356,14 +164,392 @@ _data = {
 "RESET": SubResource("Animation_s4jx2")
 }
 
+[sub_resource type="Gradient" id="Gradient_sj754"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_r5jui"]
+gradient = SubResource("Gradient_sj754")
+width = 40
+
+[sub_resource type="Gradient" id="Gradient_5q1je"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7aqwh"]
+gradient = SubResource("Gradient_5q1je")
+width = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_ee3f2"]
+font = ExtResource("5_ai818")
+font_size = 8
+font_color = Color(0.682353, 0.741176, 0.807843, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_u8o8f"]
+font = ExtResource("5_ai818")
+font_size = 8
+font_color = Color(0.682353, 0.741176, 0.807843, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_87j6u"]
+font = ExtResource("5_ai818")
+font_size = 8
+font_color = Color(0.682353, 0.741176, 0.807843, 1)
+
+[sub_resource type="Gradient" id="Gradient_bx6uy"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_l3fiq"]
+gradient = SubResource("Gradient_bx6uy")
+
+[sub_resource type="Gradient" id="Gradient_cyf48"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vfqfn"]
+gradient = SubResource("Gradient_cyf48")
+
+[sub_resource type="Gradient" id="Gradient_tlact"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xii4s"]
+gradient = SubResource("Gradient_tlact")
+width = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_gs1ul"]
+line_spacing = 0.0
+font = ExtResource("5_ai818")
+font_size = 8
+font_color = Color(0.682353, 0.741176, 0.807843, 1)
+shadow_size = 0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sb5ce"]
+texture = ExtResource("11_72ij6")
+region_rect = Rect2(0, 0, 22, 22)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8jccc"]
+texture = ExtResource("12_k2607")
+region_rect = Rect2(0, 0, 22, 22)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e2cyl"]
+texture = ExtResource("12_k2607")
+region_rect = Rect2(0, 0, 22, 22)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_obnin"]
+texture = ExtResource("13_aduk8")
+region_rect = Rect2(0, 0, 22, 22)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dodc2"]
+texture = ExtResource("14_f3qx8")
+region_rect = Rect2(0, 0, 22, 22)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jl75u"]
+texture = ExtResource("15_58hf7")
+region_rect = Rect2(0, 0, 22, 22)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wh5vm"]
+texture = ExtResource("16_rijxa")
+region_rect = Rect2(0, 0, 22, 22)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5bfpp"]
+texture = ExtResource("17_otl5j")
+region_rect = Rect2(0, 0, 22, 22)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vxj55"]
+texture = ExtResource("19_x824n")
+region_rect = Rect2(0, 0, 22, 22)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pjirn"]
+texture = ExtResource("19_aroqj")
+region_rect = Rect2(0, 0, 22, 22)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0uvwy"]
+texture = ExtResource("28_ws067")
+region_rect = Rect2(-5, -5, 44, 66)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_thfi8"]
+size = Vector2(73, 101)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dk08e"]
+texture = ExtResource("13_esgr1")
+region_rect = Rect2(0, 0, 80, 100)
+
+[sub_resource type="LabelSettings" id="LabelSettings_h0dk4"]
+line_spacing = 0.0
+font = ExtResource("5_ai818")
+font_size = 8
+font_color = Color(0.0705882, 0.333333, 0.698039, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_wulp2"]
+line_spacing = 0.0
+font = ExtResource("5_ai818")
+font_size = 8
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_to568"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e4ms3"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jtoyy"]
+texture = ExtResource("8_cb6qa")
+region_rect = Rect2(0, 0, 15, 15)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7fav8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_61tsj"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_717w3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ojem5"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ojq34"]
+texture = ExtResource("8_h5i0i")
+region_rect = Rect2(0, 0, 11, 11)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_11eno"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_bge57"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_t4b0o"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_reb7f"]
+texture = ExtResource("18_mog8i")
+region_rect = Rect2(0, 0, 40, 24)
+modulate_color = Color(1, 1, 1, 0.784314)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_705cy"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gnv88"]
+texture = ExtResource("19_3pi6p")
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+region_rect = Rect2(0, 0, 40, 10)
+modulate_color = Color(1, 1, 1, 0.784314)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2bg7p"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_peaqi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rf8ru"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5fpuk"]
+font = ExtResource("5_ai818")
+font_size = 8
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ngump"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vlg4b"]
+texture = ExtResource("19_3pi6p")
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+region_rect = Rect2(0, 0, 40, 10)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vukj7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3e8yv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5cgrn"]
+
 [node name="UI" type="CanvasLayer"]
 layer = 3
 script = ExtResource("1_v0356")
 ShadowColor = Color(0.282353, 0.45098, 0.666667, 1)
 BackgroundColor = Color(0.682353, 0.741176, 0.807843, 0.588235)
 
-[node name="HUD" type="Control" parent="."]
+[node name="ScreenLabel" type="Control" parent="."]
 custom_minimum_size = Vector2(640, 360)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
+script = ExtResource("41_42gqc")
+
+[node name="TextureRect" type="TextureRect" parent="ScreenLabel"]
+self_modulate = Color(0.0784314, 0.231373, 0.427451, 0.784314)
+custom_minimum_size = Vector2(640, 18)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -10.0
+offset_right = 320.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(320, 9)
+texture = SubResource("GradientTexture1D_vnv3s")
+
+[node name="Label" type="Label" parent="ScreenLabel"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -8.5
+offset_bottom = 8.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(320, 6)
+theme = ExtResource("3_h5rw7")
+theme_override_colors/font_color = Color(0.682353, 0.741176, 0.807843, 1)
+text = "Dungeon Sewers"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ScreenLabel"]
+libraries = {
+"": SubResource("AnimationLibrary_qxk5e")
+}
+
+[node name="Notifications" type="Control" parent="."]
+custom_minimum_size = Vector2(640, 360)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Notifications"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -100.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/separation = 1
+
+[node name="Notification" type="TextureRect" parent="Notifications/VBoxContainer"]
+self_modulate = Color(0.682353, 0.741176, 0.807843, 0.666667)
+custom_minimum_size = Vector2(100, 20)
+layout_mode = 2
+texture = SubResource("GradientTexture1D_r5jui")
+
+[node name="TextureRect" type="TextureRect" parent="Notifications/VBoxContainer/Notification"]
+self_modulate = Color(0.0784314, 0.231373, 0.427451, 0.941176)
+custom_minimum_size = Vector2(98, 18)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -0.5
+offset_right = 20.0
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_7aqwh")
+
+[node name="Label" type="Label" parent="Notifications/VBoxContainer/Notification"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -7.5
+offset_right = 22.0
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "+2 money"
+label_settings = SubResource("LabelSettings_ee3f2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Notification2" type="TextureRect" parent="Notifications/VBoxContainer"]
+self_modulate = Color(0.682353, 0.741176, 0.807843, 0.666667)
+custom_minimum_size = Vector2(100, 20)
+layout_mode = 2
+texture = SubResource("GradientTexture1D_r5jui")
+
+[node name="TextureRect" type="TextureRect" parent="Notifications/VBoxContainer/Notification2"]
+self_modulate = Color(0.0784314, 0.231373, 0.427451, 0.941176)
+custom_minimum_size = Vector2(98, 18)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -0.5
+offset_right = 20.0
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_7aqwh")
+
+[node name="Label" type="Label" parent="Notifications/VBoxContainer/Notification2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -7.5
+offset_right = 22.0
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "+2 money"
+label_settings = SubResource("LabelSettings_ee3f2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Notification3" type="TextureRect" parent="Notifications/VBoxContainer"]
+self_modulate = Color(0.682353, 0.741176, 0.807843, 0.666667)
+custom_minimum_size = Vector2(100, 20)
+layout_mode = 2
+texture = SubResource("GradientTexture1D_r5jui")
+
+[node name="TextureRect" type="TextureRect" parent="Notifications/VBoxContainer/Notification3"]
+self_modulate = Color(0.0784314, 0.231373, 0.427451, 0.941176)
+custom_minimum_size = Vector2(98, 18)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -0.5
+offset_right = 20.0
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_7aqwh")
+
+[node name="Label" type="Label" parent="Notifications/VBoxContainer/Notification3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -7.5
+offset_right = 22.0
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "+2 money"
+label_settings = SubResource("LabelSettings_ee3f2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HUD" type="Control" parent="."]
+custom_minimum_size = Vector2(200, 300)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 640.0
@@ -377,6 +563,7 @@ offset_top = 295.0
 offset_right = 380.0
 offset_bottom = 303.0
 alignment = 1
+script = ExtResource("5_cohd6")
 
 [node name="StaminaBlock_1" type="TextureRect" parent="HUD/StaminaContainer"]
 layout_mode = 2
@@ -386,33 +573,183 @@ texture = ExtResource("4_v6vyg")
 layout_mode = 2
 texture = ExtResource("4_v6vyg")
 
-[node name="ItemsContainer" type="HBoxContainer" parent="HUD"]
+[node name="SkillsContainer" type="HBoxContainer" parent="HUD"]
 layout_mode = 0
-offset_left = 260.0
+offset_left = 192.0
 offset_top = 306.0
-offset_right = 381.0
+offset_right = 448.0
 offset_bottom = 351.0
 alignment = 1
+script = ExtResource("7_drj05")
+lightup = Color(0.890196, 0, 0, 1)
 
-[node name="Control" type="Control" parent="HUD/ItemsContainer"]
+[node name="Skill1" type="Control" parent="HUD/SkillsContainer"]
+visible = false
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="TextureRect2" type="TextureRect" parent="HUD/ItemsContainer/Control"]
+[node name="BackRect" type="TextureRect" parent="HUD/SkillsContainer/Skill1"]
 layout_mode = 0
 offset_top = -1.0
 offset_right = 30.0
 offset_bottom = 29.0
 texture = ExtResource("34_f6u2n")
 
-[node name="TextureRect" type="TextureRect" parent="HUD/ItemsContainer/Control"]
+[node name="ColorRect" type="TextureRect" parent="HUD/SkillsContainer/Skill1"]
 modulate = Color(0.0784314, 0.231373, 0.427451, 1)
 layout_mode = 0
 offset_right = 30.0
 offset_bottom = 30.0
 texture = ExtResource("34_f6u2n")
+
+[node name="SkillRect" type="TextureRect" parent="HUD/SkillsContainer/Skill1"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 5.0
+offset_right = 20.0
+offset_bottom = 21.0
+
+[node name="Skill2" type="Control" parent="HUD/SkillsContainer"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="BackRect" type="TextureRect" parent="HUD/SkillsContainer/Skill2"]
+layout_mode = 0
+offset_top = -1.0
+offset_right = 30.0
+offset_bottom = 29.0
+texture = ExtResource("34_f6u2n")
+
+[node name="ColorRect" type="TextureRect" parent="HUD/SkillsContainer/Skill2"]
+modulate = Color(0.0784314, 0.231373, 0.427451, 1)
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+texture = ExtResource("34_f6u2n")
+
+[node name="SkillRect" type="TextureRect" parent="HUD/SkillsContainer/Skill2"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 5.0
+offset_right = 20.0
+offset_bottom = 21.0
+
+[node name="Skill3" type="Control" parent="HUD/SkillsContainer"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="BackRect" type="TextureRect" parent="HUD/SkillsContainer/Skill3"]
+layout_mode = 0
+offset_top = -1.0
+offset_right = 30.0
+offset_bottom = 29.0
+texture = ExtResource("34_f6u2n")
+
+[node name="ColorRect" type="TextureRect" parent="HUD/SkillsContainer/Skill3"]
+modulate = Color(0.0784314, 0.231373, 0.427451, 1)
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+texture = ExtResource("34_f6u2n")
+
+[node name="SkillRect" type="TextureRect" parent="HUD/SkillsContainer/Skill3"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 5.0
+offset_right = 20.0
+offset_bottom = 21.0
+
+[node name="Skill4" type="Control" parent="HUD/SkillsContainer"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="BackRect" type="TextureRect" parent="HUD/SkillsContainer/Skill4"]
+layout_mode = 0
+offset_top = -1.0
+offset_right = 30.0
+offset_bottom = 29.0
+texture = ExtResource("34_f6u2n")
+
+[node name="ColorRect" type="TextureRect" parent="HUD/SkillsContainer/Skill4"]
+modulate = Color(0.0784314, 0.231373, 0.427451, 1)
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+texture = ExtResource("34_f6u2n")
+
+[node name="SkillRect" type="TextureRect" parent="HUD/SkillsContainer/Skill4"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 5.0
+offset_right = 20.0
+offset_bottom = 21.0
+
+[node name="Skill5" type="Control" parent="HUD/SkillsContainer"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="BackRect" type="TextureRect" parent="HUD/SkillsContainer/Skill5"]
+layout_mode = 0
+offset_top = -1.0
+offset_right = 30.0
+offset_bottom = 29.0
+texture = ExtResource("34_f6u2n")
+
+[node name="ColorRect" type="TextureRect" parent="HUD/SkillsContainer/Skill5"]
+modulate = Color(0.0784314, 0.231373, 0.427451, 1)
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+texture = ExtResource("34_f6u2n")
+
+[node name="SkillRect" type="TextureRect" parent="HUD/SkillsContainer/Skill5"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 5.0
+offset_right = 20.0
+offset_bottom = 21.0
+
+[node name="Skill6" type="Control" parent="HUD/SkillsContainer"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="BackRect" type="TextureRect" parent="HUD/SkillsContainer/Skill6"]
+layout_mode = 0
+offset_top = -1.0
+offset_right = 30.0
+offset_bottom = 29.0
+texture = ExtResource("34_f6u2n")
+
+[node name="ColorRect" type="TextureRect" parent="HUD/SkillsContainer/Skill6"]
+modulate = Color(0.0784314, 0.231373, 0.427451, 1)
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+texture = ExtResource("34_f6u2n")
+
+[node name="SkillRect" type="TextureRect" parent="HUD/SkillsContainer/Skill6"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 5.0
+offset_right = 20.0
+offset_bottom = 21.0
 
 [node name="SkillsMenu" type="Control" parent="HUD"]
 visible = false
@@ -862,6 +1199,85 @@ text = "Skills
 label_settings = SubResource("LabelSettings_87j6u")
 horizontal_alignment = 1
 
+[node name="Dialogue" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
+script = ExtResource("40_bt3bl")
+
+[node name="Shadow" type="TextureRect" parent="Dialogue"]
+material = ExtResource("11_3hf22")
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -61.0
+offset_right = 202.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = SubResource("GradientTexture1D_l3fiq")
+
+[node name="Background" type="TextureRect" parent="Dialogue"]
+self_modulate = Color(0.584314, 0.658824, 0.752941, 0.784314)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -199.0
+offset_top = -60.0
+offset_right = 201.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = SubResource("GradientTexture1D_vfqfn")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Dialogue/Background"]
+custom_minimum_size = Vector2(350, 50)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -175.0
+offset_right = 175.0
+offset_bottom = 50.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(0.0784314, 0.231373, 0.427451, 1)
+theme_override_fonts/normal_font = ExtResource("5_ai818")
+theme_override_fonts/bold_font = ExtResource("5_ai818")
+theme_override_fonts/italics_font = ExtResource("5_ai818")
+theme_override_fonts/bold_italics_font = ExtResource("5_ai818")
+theme_override_fonts/mono_font = ExtResource("5_ai818")
+theme_override_font_sizes/normal_font_size = 8
+text = "	asddddddddasdd dddddddddddd dddddddd dddssssssssssss sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
+
+[node name="Name" type="TextureRect" parent="Dialogue"]
+self_modulate = Color(0.0784314, 0.231373, 0.427451, 0.588235)
+custom_minimum_size = Vector2(27, 9)
+layout_mode = 0
+offset_left = 120.0
+offset_top = 288.0
+offset_right = 157.0
+offset_bottom = 299.0
+texture = SubResource("GradientTexture1D_xii4s")
+
+[node name="Label" type="Label" parent="Dialogue/Name"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 14.0
+grow_horizontal = 2
+text = "Test"
+label_settings = SubResource("LabelSettings_gs1ul")
+horizontal_alignment = 1
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 offset_left = 15.0
 offset_top = 10.0
@@ -922,7 +1338,6 @@ mouse_filter = 1
 script = ExtResource("1_cvjfy")
 
 [node name="Character" type="Control" parent="UI"]
-visible = false
 custom_minimum_size = Vector2(176, 296)
 layout_mode = 1
 anchors_preset = 4
@@ -934,7 +1349,6 @@ offset_right = 186.0
 offset_bottom = 148.0
 grow_vertical = 2
 pivot_offset = Vector2(154, 0)
-script = ExtResource("1_8tod6")
 
 [node name="Shadow" type="TextureRect" parent="UI/Character"]
 texture_filter = 1
@@ -950,52 +1364,39 @@ texture = ExtResource("28_s3eqt")
 [node name="Background" type="TextureRect" parent="UI/Character"]
 modulate = Color(1, 1, 1, 0.392157)
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 176.0
+offset_bottom = 296.0
+theme = ExtResource("3_h5rw7")
 texture = ExtResource("3_5tfiq")
-
-[node name="Plates" type="TextureRect" parent="UI/Character"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("4_xrr7e")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/Character"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 15.0
+offset_bottom = 17.0
 grow_horizontal = 2
 
 [node name="Label" type="Label" parent="UI/Character/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 0
+theme = ExtResource("3_h5rw7")
 text = "Character"
-label_settings = SubResource("LabelSettings_n77g3")
 horizontal_alignment = 1
 
-[node name="TextureButton" type="TextureButton" parent="UI/Character"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -13.0
-offset_bottom = 13.0
-grow_horizontal = 0
-tooltip_text = "Close"
+[node name="Equipment" type="Control" parent="UI/Character"]
+visible = false
+anchors_preset = 0
+offset_right = 176.0
+offset_bottom = 296.0
+script = ExtResource("1_8tod6")
 
-[node name="CharacterCloseButton" type="Button" parent="UI/Character"]
+[node name="Plates" type="TextureRect" parent="UI/Character/Equipment"]
 layout_mode = 0
-offset_left = 164.0
-offset_top = 1.0
-offset_right = 175.0
-offset_bottom = 12.0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_ojem5")
-theme_override_styles/hover = SubResource("StyleBoxTexture_ojq34")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_11eno")
-script = ExtResource("9_lvtlu")
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_xrr7e")
 
-[node name="LeftCharacterVBox" type="VBoxContainer" parent="UI/Character"]
+[node name="LeftCharacterVBox" type="VBoxContainer" parent="UI/Character/Equipment"]
 layout_mode = 0
 offset_left = 23.0
 offset_top = 67.0
@@ -1003,12 +1404,12 @@ offset_right = 45.0
 offset_bottom = 170.0
 theme_override_constants/separation = 5
 
-[node name="AmuletPanel" type="Panel" parent="UI/Character/LeftCharacterVBox"]
+[node name="AmuletPanel" type="Panel" parent="UI/Character/Equipment/LeftCharacterVBox"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_sb5ce")
 
-[node name="HoverRect" type="TextureRect" parent="UI/Character/LeftCharacterVBox/AmuletPanel"]
+[node name="HoverRect" type="TextureRect" parent="UI/Character/Equipment/LeftCharacterVBox/AmuletPanel"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -1018,26 +1419,26 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("12_teqho")
 
-[node name="EquipButton" parent="UI/Character/LeftCharacterVBox/AmuletPanel" instance=ExtResource("13_i4h7w")]
+[node name="EquipButton" parent="UI/Character/Equipment/LeftCharacterVBox/AmuletPanel" instance=ExtResource("13_i4h7w")]
 visible = false
 layout_mode = 0
 type = 7
 
-[node name="Area2D" parent="UI/Character/LeftCharacterVBox/AmuletPanel/EquipButton" index="0"]
+[node name="Area2D" parent="UI/Character/Equipment/LeftCharacterVBox/AmuletPanel/EquipButton" index="0"]
 visible = false
 
-[node name="ItemImage" parent="UI/Character/LeftCharacterVBox/AmuletPanel/EquipButton/Content" index="0"]
+[node name="ItemImage" parent="UI/Character/Equipment/LeftCharacterVBox/AmuletPanel/EquipButton/Content" index="0"]
 anchor_right = 0.0
 anchor_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="RingPanel1" type="Panel" parent="UI/Character/LeftCharacterVBox"]
+[node name="RingPanel1" type="Panel" parent="UI/Character/Equipment/LeftCharacterVBox"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_8jccc")
 
-[node name="HoverRect" type="TextureRect" parent="UI/Character/LeftCharacterVBox/RingPanel1"]
+[node name="HoverRect" type="TextureRect" parent="UI/Character/Equipment/LeftCharacterVBox/RingPanel1"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -1047,26 +1448,26 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("12_teqho")
 
-[node name="EquipButton" parent="UI/Character/LeftCharacterVBox/RingPanel1" instance=ExtResource("13_i4h7w")]
+[node name="EquipButton" parent="UI/Character/Equipment/LeftCharacterVBox/RingPanel1" instance=ExtResource("13_i4h7w")]
 visible = false
 layout_mode = 0
 type = 8
 
-[node name="Area2D" parent="UI/Character/LeftCharacterVBox/RingPanel1/EquipButton" index="0"]
+[node name="Area2D" parent="UI/Character/Equipment/LeftCharacterVBox/RingPanel1/EquipButton" index="0"]
 visible = false
 
-[node name="ItemImage" parent="UI/Character/LeftCharacterVBox/RingPanel1/EquipButton/Content" index="0"]
+[node name="ItemImage" parent="UI/Character/Equipment/LeftCharacterVBox/RingPanel1/EquipButton/Content" index="0"]
 anchor_right = 0.0
 anchor_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="RingPanel2" type="Panel" parent="UI/Character/LeftCharacterVBox"]
+[node name="RingPanel2" type="Panel" parent="UI/Character/Equipment/LeftCharacterVBox"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_e2cyl")
 
-[node name="HoverRect" type="TextureRect" parent="UI/Character/LeftCharacterVBox/RingPanel2"]
+[node name="HoverRect" type="TextureRect" parent="UI/Character/Equipment/LeftCharacterVBox/RingPanel2"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -1076,26 +1477,26 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("12_teqho")
 
-[node name="EquipButton" parent="UI/Character/LeftCharacterVBox/RingPanel2" instance=ExtResource("13_i4h7w")]
+[node name="EquipButton" parent="UI/Character/Equipment/LeftCharacterVBox/RingPanel2" instance=ExtResource("13_i4h7w")]
 visible = false
 layout_mode = 0
 type = 9
 
-[node name="Area2D" parent="UI/Character/LeftCharacterVBox/RingPanel2/EquipButton" index="0"]
+[node name="Area2D" parent="UI/Character/Equipment/LeftCharacterVBox/RingPanel2/EquipButton" index="0"]
 visible = false
 
-[node name="ItemImage" parent="UI/Character/LeftCharacterVBox/RingPanel2/EquipButton/Content" index="0"]
+[node name="ItemImage" parent="UI/Character/Equipment/LeftCharacterVBox/RingPanel2/EquipButton/Content" index="0"]
 anchor_right = 0.0
 anchor_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="MiscPanel" type="Panel" parent="UI/Character/LeftCharacterVBox"]
+[node name="MiscPanel" type="Panel" parent="UI/Character/Equipment/LeftCharacterVBox"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_obnin")
 
-[node name="HoverRect" type="TextureRect" parent="UI/Character/LeftCharacterVBox/MiscPanel"]
+[node name="HoverRect" type="TextureRect" parent="UI/Character/Equipment/LeftCharacterVBox/MiscPanel"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -1105,21 +1506,21 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("12_teqho")
 
-[node name="EquipButton" parent="UI/Character/LeftCharacterVBox/MiscPanel" instance=ExtResource("13_i4h7w")]
+[node name="EquipButton" parent="UI/Character/Equipment/LeftCharacterVBox/MiscPanel" instance=ExtResource("13_i4h7w")]
 visible = false
 layout_mode = 0
 type = 10
 
-[node name="Area2D" parent="UI/Character/LeftCharacterVBox/MiscPanel/EquipButton" index="0"]
+[node name="Area2D" parent="UI/Character/Equipment/LeftCharacterVBox/MiscPanel/EquipButton" index="0"]
 visible = false
 
-[node name="ItemImage" parent="UI/Character/LeftCharacterVBox/MiscPanel/EquipButton/Content" index="0"]
+[node name="ItemImage" parent="UI/Character/Equipment/LeftCharacterVBox/MiscPanel/EquipButton/Content" index="0"]
 anchor_right = 0.0
 anchor_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="RightCharacterVBox" type="VBoxContainer" parent="UI/Character"]
+[node name="RightCharacterVBox" type="VBoxContainer" parent="UI/Character/Equipment"]
 layout_mode = 0
 offset_left = 131.0
 offset_top = 67.0
@@ -1127,12 +1528,12 @@ offset_right = 153.0
 offset_bottom = 170.0
 theme_override_constants/separation = 5
 
-[node name="HelmPanel" type="Panel" parent="UI/Character/RightCharacterVBox"]
+[node name="HelmPanel" type="Panel" parent="UI/Character/Equipment/RightCharacterVBox"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_dodc2")
 
-[node name="HoverRect" type="TextureRect" parent="UI/Character/RightCharacterVBox/HelmPanel"]
+[node name="HoverRect" type="TextureRect" parent="UI/Character/Equipment/RightCharacterVBox/HelmPanel"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -1142,26 +1543,26 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("12_teqho")
 
-[node name="EquipButton" parent="UI/Character/RightCharacterVBox/HelmPanel" instance=ExtResource("13_i4h7w")]
+[node name="EquipButton" parent="UI/Character/Equipment/RightCharacterVBox/HelmPanel" instance=ExtResource("13_i4h7w")]
 visible = false
 layout_mode = 0
 type = 3
 
-[node name="Area2D" parent="UI/Character/RightCharacterVBox/HelmPanel/EquipButton" index="0"]
+[node name="Area2D" parent="UI/Character/Equipment/RightCharacterVBox/HelmPanel/EquipButton" index="0"]
 visible = false
 
-[node name="ItemImage" parent="UI/Character/RightCharacterVBox/HelmPanel/EquipButton/Content" index="0"]
+[node name="ItemImage" parent="UI/Character/Equipment/RightCharacterVBox/HelmPanel/EquipButton/Content" index="0"]
 anchor_right = 0.0
 anchor_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="TorsoPanel" type="Panel" parent="UI/Character/RightCharacterVBox"]
+[node name="TorsoPanel" type="Panel" parent="UI/Character/Equipment/RightCharacterVBox"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_jl75u")
 
-[node name="HoverRect" type="TextureRect" parent="UI/Character/RightCharacterVBox/TorsoPanel"]
+[node name="HoverRect" type="TextureRect" parent="UI/Character/Equipment/RightCharacterVBox/TorsoPanel"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -1171,26 +1572,26 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("12_teqho")
 
-[node name="EquipButton" parent="UI/Character/RightCharacterVBox/TorsoPanel" instance=ExtResource("13_i4h7w")]
+[node name="EquipButton" parent="UI/Character/Equipment/RightCharacterVBox/TorsoPanel" instance=ExtResource("13_i4h7w")]
 visible = false
 layout_mode = 0
 type = 4
 
-[node name="Area2D" parent="UI/Character/RightCharacterVBox/TorsoPanel/EquipButton" index="0"]
+[node name="Area2D" parent="UI/Character/Equipment/RightCharacterVBox/TorsoPanel/EquipButton" index="0"]
 visible = false
 
-[node name="ItemImage" parent="UI/Character/RightCharacterVBox/TorsoPanel/EquipButton/Content" index="0"]
+[node name="ItemImage" parent="UI/Character/Equipment/RightCharacterVBox/TorsoPanel/EquipButton/Content" index="0"]
 anchor_right = 0.0
 anchor_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="PantsPanel" type="Panel" parent="UI/Character/RightCharacterVBox"]
+[node name="PantsPanel" type="Panel" parent="UI/Character/Equipment/RightCharacterVBox"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_wh5vm")
 
-[node name="HoverRect" type="TextureRect" parent="UI/Character/RightCharacterVBox/PantsPanel"]
+[node name="HoverRect" type="TextureRect" parent="UI/Character/Equipment/RightCharacterVBox/PantsPanel"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -1200,26 +1601,26 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("12_teqho")
 
-[node name="EquipButton" parent="UI/Character/RightCharacterVBox/PantsPanel" instance=ExtResource("13_i4h7w")]
+[node name="EquipButton" parent="UI/Character/Equipment/RightCharacterVBox/PantsPanel" instance=ExtResource("13_i4h7w")]
 visible = false
 layout_mode = 0
 type = 5
 
-[node name="Area2D" parent="UI/Character/RightCharacterVBox/PantsPanel/EquipButton" index="0"]
+[node name="Area2D" parent="UI/Character/Equipment/RightCharacterVBox/PantsPanel/EquipButton" index="0"]
 visible = false
 
-[node name="ItemImage" parent="UI/Character/RightCharacterVBox/PantsPanel/EquipButton/Content" index="0"]
+[node name="ItemImage" parent="UI/Character/Equipment/RightCharacterVBox/PantsPanel/EquipButton/Content" index="0"]
 anchor_right = 0.0
 anchor_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="BootsPanel" type="Panel" parent="UI/Character/RightCharacterVBox"]
+[node name="BootsPanel" type="Panel" parent="UI/Character/Equipment/RightCharacterVBox"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_5bfpp")
 
-[node name="HoverRect" type="TextureRect" parent="UI/Character/RightCharacterVBox/BootsPanel"]
+[node name="HoverRect" type="TextureRect" parent="UI/Character/Equipment/RightCharacterVBox/BootsPanel"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -1229,21 +1630,21 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("12_teqho")
 
-[node name="EquipButton" parent="UI/Character/RightCharacterVBox/BootsPanel" instance=ExtResource("13_i4h7w")]
+[node name="EquipButton" parent="UI/Character/Equipment/RightCharacterVBox/BootsPanel" instance=ExtResource("13_i4h7w")]
 visible = false
 layout_mode = 0
 type = 6
 
-[node name="Area2D" parent="UI/Character/RightCharacterVBox/BootsPanel/EquipButton" index="0"]
+[node name="Area2D" parent="UI/Character/Equipment/RightCharacterVBox/BootsPanel/EquipButton" index="0"]
 visible = false
 
-[node name="ItemImage" parent="UI/Character/RightCharacterVBox/BootsPanel/EquipButton/Content" index="0"]
+[node name="ItemImage" parent="UI/Character/Equipment/RightCharacterVBox/BootsPanel/EquipButton/Content" index="0"]
 anchor_right = 0.0
 anchor_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="LHandPanel" type="Panel" parent="UI/Character"]
+[node name="LHandPanel" type="Panel" parent="UI/Character/Equipment"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 0
 offset_left = 60.0
@@ -1252,7 +1653,7 @@ offset_right = 82.0
 offset_bottom = 197.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_vxj55")
 
-[node name="HoverRect" type="TextureRect" parent="UI/Character/LHandPanel"]
+[node name="HoverRect" type="TextureRect" parent="UI/Character/Equipment/LHandPanel"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -1262,21 +1663,21 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("12_teqho")
 
-[node name="EquipButton" parent="UI/Character/LHandPanel" instance=ExtResource("13_i4h7w")]
+[node name="EquipButton" parent="UI/Character/Equipment/LHandPanel" instance=ExtResource("13_i4h7w")]
 visible = false
 layout_mode = 0
 type = 1
 
-[node name="Area2D" parent="UI/Character/LHandPanel/EquipButton" index="0"]
+[node name="Area2D" parent="UI/Character/Equipment/LHandPanel/EquipButton" index="0"]
 visible = false
 
-[node name="ItemImage" parent="UI/Character/LHandPanel/EquipButton/Content" index="0"]
+[node name="ItemImage" parent="UI/Character/Equipment/LHandPanel/EquipButton/Content" index="0"]
 anchor_right = 0.0
 anchor_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="RHandPanel" type="Panel" parent="UI/Character"]
+[node name="RHandPanel" type="Panel" parent="UI/Character/Equipment"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 0
 offset_left = 94.0
@@ -1285,7 +1686,7 @@ offset_right = 116.0
 offset_bottom = 197.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_pjirn")
 
-[node name="HoverRect" type="TextureRect" parent="UI/Character/RHandPanel"]
+[node name="HoverRect" type="TextureRect" parent="UI/Character/Equipment/RHandPanel"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -1295,21 +1696,21 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("12_teqho")
 
-[node name="EquipButton" parent="UI/Character/RHandPanel" instance=ExtResource("13_i4h7w")]
+[node name="EquipButton" parent="UI/Character/Equipment/RHandPanel" instance=ExtResource("13_i4h7w")]
 visible = false
 layout_mode = 0
 type = 2
 
-[node name="Area2D" parent="UI/Character/RHandPanel/EquipButton" index="0"]
+[node name="Area2D" parent="UI/Character/Equipment/RHandPanel/EquipButton" index="0"]
 visible = false
 
-[node name="ItemImage" parent="UI/Character/RHandPanel/EquipButton/Content" index="0"]
+[node name="ItemImage" parent="UI/Character/Equipment/RHandPanel/EquipButton/Content" index="0"]
 anchor_right = 0.0
 anchor_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="CharacterPanel" type="Panel" parent="UI/Character"]
+[node name="CharacterPanel" type="Panel" parent="UI/Character/Equipment"]
 layout_mode = 0
 offset_left = 51.0
 offset_top = 68.0
@@ -1317,7 +1718,7 @@ offset_right = 125.0
 offset_bottom = 169.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_0uvwy")
 
-[node name="HoverRect" type="TextureRect" parent="UI/Character/CharacterPanel"]
+[node name="HoverRect" type="TextureRect" parent="UI/Character/Equipment/CharacterPanel"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -1327,7 +1728,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("12_teqho")
 
-[node name="CoverPanel" type="Panel" parent="UI/Character/CharacterPanel"]
+[node name="CoverPanel" type="Panel" parent="UI/Character/Equipment/CharacterPanel"]
 visible = false
 layout_mode = 0
 offset_right = 40.0
@@ -1335,13 +1736,13 @@ offset_bottom = 40.0
 script = ExtResource("29_5vimk")
 type = 17
 
-[node name="Area2D" type="Area2D" parent="UI/Character/CharacterPanel/CoverPanel"]
+[node name="Area2D" type="Area2D" parent="UI/Character/Equipment/CharacterPanel/CoverPanel"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Character/CharacterPanel/CoverPanel/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Character/Equipment/CharacterPanel/CoverPanel/Area2D"]
 position = Vector2(37.5, 50.5)
 shape = SubResource("RectangleShape2D_thfi8")
 
-[node name="ItemDescPanel" type="Panel" parent="UI/Character"]
+[node name="ItemDescPanel" type="Panel" parent="UI/Character/Equipment"]
 visible = false
 layout_mode = 0
 offset_left = 180.0
@@ -1351,7 +1752,7 @@ offset_bottom = 133.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_dk08e")
 script = ExtResource("14_k6vq4")
 
-[node name="NameLabel" type="Label" parent="UI/Character/ItemDescPanel"]
+[node name="NameLabel" type="Label" parent="UI/Character/Equipment/ItemDescPanel"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 3.0
@@ -1364,7 +1765,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="DescLabel" type="Label" parent="UI/Character/ItemDescPanel"]
+[node name="DescLabel" type="Label" parent="UI/Character/Equipment/ItemDescPanel"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 35.0
@@ -1377,8 +1778,88 @@ label_settings = SubResource("LabelSettings_wulp2")
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Inventory" type="Control" parent="UI"]
+[node name="SkillStats" type="Control" parent="UI/Character"]
 visible = false
+anchors_preset = 0
+offset_right = 176.0
+offset_bottom = 296.0
+
+[node name="Plates" type="TextureRect" parent="UI/Character/SkillStats"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("36_t4wn0")
+
+[node name="CharacterContainer" type="HBoxContainer" parent="UI/Character"]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 15.0
+offset_right = 122.0
+offset_bottom = 30.0
+theme_override_constants/separation = 3
+script = ExtResource("39_041b8")
+
+[node name="CharacterEquipButton" type="Button" parent="UI/Character/CharacterContainer"]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_to568")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_e4ms3")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_jtoyy")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_7fav8")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_61tsj")
+toggle_mode = true
+button_pressed = true
+action_mode = 0
+button_group = SubResource("ButtonGroup_717w3")
+
+[node name="CharacterStatsButton" type="Button" parent="UI/Character/CharacterContainer"]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_to568")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_e4ms3")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_jtoyy")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_7fav8")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_61tsj")
+toggle_mode = true
+action_mode = 0
+button_group = SubResource("ButtonGroup_717w3")
+
+[node name="CharacterSkillsButton" type="Button" parent="UI/Character/CharacterContainer"]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_to568")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_e4ms3")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_jtoyy")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_7fav8")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_61tsj")
+toggle_mode = true
+action_mode = 0
+button_group = SubResource("ButtonGroup_717w3")
+
+[node name="CharacterAchievementsButton" type="Button" parent="UI/Character/CharacterContainer"]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_to568")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_e4ms3")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_jtoyy")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_7fav8")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_61tsj")
+toggle_mode = true
+action_mode = 0
+button_group = SubResource("ButtonGroup_717w3")
+
+[node name="CharacterCloseButton" type="Button" parent="UI/Character"]
+layout_mode = 0
+offset_left = 164.0
+offset_top = 1.0
+offset_right = 175.0
+offset_bottom = 12.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ojem5")
+theme_override_styles/hover = SubResource("StyleBoxTexture_ojq34")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_11eno")
+script = ExtResource("9_lvtlu")
+
+[node name="Inventory" type="Control" parent="UI"]
 custom_minimum_size = Vector2(176, 296)
 layout_mode = 1
 anchors_preset = 6
@@ -1403,6 +1884,7 @@ offset_left = 2.0
 offset_top = -2.0
 offset_right = 178.0
 offset_bottom = 294.0
+theme = ExtResource("3_h5rw7")
 texture = ExtResource("28_s3eqt")
 
 [node name="Background" type="TextureRect" parent="UI/Inventory"]
@@ -1418,6 +1900,87 @@ offset_right = 176.0
 offset_bottom = 296.0
 texture = ExtResource("6_83gsj")
 
+[node name="InventoryContainer" type="HBoxContainer" parent="UI/Inventory"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 15.0
+offset_right = 140.0
+offset_bottom = 30.0
+theme_override_constants/separation = 3
+
+[node name="InventoryAllButton" type="Button" parent="UI/Inventory/InventoryContainer"]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_to568")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_e4ms3")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_jtoyy")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_7fav8")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_61tsj")
+toggle_mode = true
+button_pressed = true
+action_mode = 0
+button_group = SubResource("ButtonGroup_bge57")
+
+[node name="InventoryWeaponsButton" type="Button" parent="UI/Inventory/InventoryContainer"]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_to568")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_e4ms3")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_jtoyy")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_7fav8")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_61tsj")
+toggle_mode = true
+action_mode = 0
+button_group = SubResource("ButtonGroup_bge57")
+
+[node name="InventoryArmorButton" type="Button" parent="UI/Inventory/InventoryContainer"]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_to568")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_e4ms3")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_jtoyy")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_7fav8")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_61tsj")
+toggle_mode = true
+action_mode = 0
+button_group = SubResource("ButtonGroup_bge57")
+
+[node name="InventoryAccesoryButton" type="Button" parent="UI/Inventory/InventoryContainer"]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_to568")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_e4ms3")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_jtoyy")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_7fav8")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_61tsj")
+toggle_mode = true
+action_mode = 0
+button_group = SubResource("ButtonGroup_bge57")
+
+[node name="InventoryConsumableButton" type="Button" parent="UI/Inventory/InventoryContainer"]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_to568")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_e4ms3")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_jtoyy")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_7fav8")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_61tsj")
+toggle_mode = true
+action_mode = 0
+button_group = SubResource("ButtonGroup_bge57")
+
+[node name="InventoryKeyButton" type="Button" parent="UI/Inventory/InventoryContainer"]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_to568")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_e4ms3")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_jtoyy")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_7fav8")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_61tsj")
+toggle_mode = true
+action_mode = 0
+button_group = SubResource("ButtonGroup_bge57")
+
 [node name="MarginContainer" type="MarginContainer" parent="UI/Inventory"]
 layout_mode = 1
 anchors_preset = 10
@@ -1428,8 +1991,8 @@ grow_horizontal = 2
 [node name="Label" type="Label" parent="UI/Inventory/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 0
+theme = ExtResource("3_h5rw7")
 text = "Inventory"
-label_settings = SubResource("LabelSettings_n77g3")
 horizontal_alignment = 1
 
 [node name="TextureButton" type="TextureButton" parent="UI/Inventory"]
@@ -1451,87 +2014,6 @@ offset_bottom = 290.0
 theme_override_constants/h_separation = 3
 theme_override_constants/v_separation = 3
 columns = 5
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/Inventory"]
-layout_mode = 0
-offset_left = 35.0
-offset_top = 15.0
-offset_right = 140.0
-offset_bottom = 30.0
-theme_override_constants/separation = 3
-
-[node name="Button" type="Button" parent="UI/Inventory/HBoxContainer"]
-custom_minimum_size = Vector2(15, 15)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_to568")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_e4ms3")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_jtoyy")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_7fav8")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_61tsj")
-toggle_mode = true
-button_pressed = true
-action_mode = 0
-button_group = SubResource("ButtonGroup_bge57")
-
-[node name="Button2" type="Button" parent="UI/Inventory/HBoxContainer"]
-custom_minimum_size = Vector2(15, 15)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_to568")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_e4ms3")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_jtoyy")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_7fav8")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_61tsj")
-toggle_mode = true
-action_mode = 0
-button_group = SubResource("ButtonGroup_bge57")
-
-[node name="Button3" type="Button" parent="UI/Inventory/HBoxContainer"]
-custom_minimum_size = Vector2(15, 15)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_to568")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_e4ms3")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_jtoyy")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_7fav8")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_61tsj")
-toggle_mode = true
-action_mode = 0
-button_group = SubResource("ButtonGroup_bge57")
-
-[node name="Button4" type="Button" parent="UI/Inventory/HBoxContainer"]
-custom_minimum_size = Vector2(15, 15)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_to568")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_e4ms3")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_jtoyy")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_7fav8")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_61tsj")
-toggle_mode = true
-action_mode = 0
-button_group = SubResource("ButtonGroup_bge57")
-
-[node name="Button5" type="Button" parent="UI/Inventory/HBoxContainer"]
-custom_minimum_size = Vector2(15, 15)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_to568")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_e4ms3")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_jtoyy")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_7fav8")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_61tsj")
-toggle_mode = true
-action_mode = 0
-button_group = SubResource("ButtonGroup_bge57")
-
-[node name="Button6" type="Button" parent="UI/Inventory/HBoxContainer"]
-custom_minimum_size = Vector2(15, 15)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_to568")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_e4ms3")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_jtoyy")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_7fav8")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_61tsj")
-toggle_mode = true
-action_mode = 0
-button_group = SubResource("ButtonGroup_bge57")
 
 [node name="ItemDescPanel" type="Panel" parent="UI/Inventory"]
 visible = false
@@ -1791,282 +2273,13 @@ label_settings = SubResource("LabelSettings_5fpuk")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Dialogue" type="Control" parent="."]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 640.0
-offset_bottom = 360.0
-script = ExtResource("40_bt3bl")
-
-[node name="Shadow" type="TextureRect" parent="Dialogue"]
-material = ExtResource("11_3hf22")
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -200.0
-offset_top = -61.0
-offset_right = 202.0
-offset_bottom = -19.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = SubResource("GradientTexture1D_l3fiq")
-
-[node name="Background" type="TextureRect" parent="Dialogue"]
-self_modulate = Color(0.584314, 0.658824, 0.752941, 0.784314)
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -199.0
-offset_top = -60.0
-offset_right = 201.0
-offset_bottom = -20.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = SubResource("GradientTexture1D_vfqfn")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Dialogue/Background"]
-custom_minimum_size = Vector2(350, 50)
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -175.0
-offset_right = 175.0
-offset_bottom = 50.0
-grow_horizontal = 2
-theme_override_colors/default_color = Color(0.0784314, 0.231373, 0.427451, 1)
-theme_override_fonts/normal_font = ExtResource("5_ai818")
-theme_override_fonts/bold_font = ExtResource("5_ai818")
-theme_override_fonts/italics_font = ExtResource("5_ai818")
-theme_override_fonts/bold_italics_font = ExtResource("5_ai818")
-theme_override_fonts/mono_font = ExtResource("5_ai818")
-theme_override_font_sizes/normal_font_size = 8
-text = "	asddddddddasdd dddddddddddd dddddddd dddssssssssssss sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
-
-[node name="Name" type="TextureRect" parent="Dialogue"]
-self_modulate = Color(0.0784314, 0.231373, 0.427451, 0.588235)
-custom_minimum_size = Vector2(27, 9)
-layout_mode = 0
-offset_left = 120.0
-offset_top = 288.0
-offset_right = 157.0
-offset_bottom = 299.0
-texture = SubResource("GradientTexture1D_xii4s")
-
-[node name="Label" type="Label" parent="Dialogue/Name"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 14.0
-grow_horizontal = 2
-text = "Test"
-label_settings = SubResource("LabelSettings_gs1ul")
-horizontal_alignment = 1
-
-[node name="Notifications" type="Control" parent="."]
-custom_minimum_size = Vector2(640, 360)
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Notifications"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -100.0
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_constants/separation = 1
-
-[node name="Notification" type="TextureRect" parent="Notifications/VBoxContainer"]
-self_modulate = Color(0.682353, 0.741176, 0.807843, 0.666667)
-custom_minimum_size = Vector2(100, 20)
-layout_mode = 2
-texture = SubResource("GradientTexture1D_r5jui")
-
-[node name="TextureRect" type="TextureRect" parent="Notifications/VBoxContainer/Notification"]
-self_modulate = Color(0.0784314, 0.231373, 0.427451, 0.941176)
-custom_minimum_size = Vector2(98, 18)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -0.5
-offset_right = 20.0
-offset_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture1D_7aqwh")
-
-[node name="Label" type="Label" parent="Notifications/VBoxContainer/Notification"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -22.0
-offset_top = -7.5
-offset_right = 22.0
-offset_bottom = 9.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "+2 money"
-label_settings = SubResource("LabelSettings_ee3f2")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Notification2" type="TextureRect" parent="Notifications/VBoxContainer"]
-self_modulate = Color(0.682353, 0.741176, 0.807843, 0.666667)
-custom_minimum_size = Vector2(100, 20)
-layout_mode = 2
-texture = SubResource("GradientTexture1D_r5jui")
-
-[node name="TextureRect" type="TextureRect" parent="Notifications/VBoxContainer/Notification2"]
-self_modulate = Color(0.0784314, 0.231373, 0.427451, 0.941176)
-custom_minimum_size = Vector2(98, 18)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -0.5
-offset_right = 20.0
-offset_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture1D_7aqwh")
-
-[node name="Label" type="Label" parent="Notifications/VBoxContainer/Notification2"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -22.0
-offset_top = -7.5
-offset_right = 22.0
-offset_bottom = 9.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "+2 money"
-label_settings = SubResource("LabelSettings_ee3f2")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Notification3" type="TextureRect" parent="Notifications/VBoxContainer"]
-self_modulate = Color(0.682353, 0.741176, 0.807843, 0.666667)
-custom_minimum_size = Vector2(100, 20)
-layout_mode = 2
-texture = SubResource("GradientTexture1D_r5jui")
-
-[node name="TextureRect" type="TextureRect" parent="Notifications/VBoxContainer/Notification3"]
-self_modulate = Color(0.0784314, 0.231373, 0.427451, 0.941176)
-custom_minimum_size = Vector2(98, 18)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -0.5
-offset_right = 20.0
-offset_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture1D_7aqwh")
-
-[node name="Label" type="Label" parent="Notifications/VBoxContainer/Notification3"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -22.0
-offset_top = -7.5
-offset_right = 22.0
-offset_bottom = 9.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "+2 money"
-label_settings = SubResource("LabelSettings_ee3f2")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ScreenLabel" type="Control" parent="."]
-custom_minimum_size = Vector2(640, 360)
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("41_42gqc")
-
-[node name="TextureRect" type="TextureRect" parent="ScreenLabel"]
-self_modulate = Color(0.0784314, 0.231373, 0.427451, 0.784314)
-custom_minimum_size = Vector2(640, 18)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -320.0
-offset_top = -10.0
-offset_right = 320.0
-offset_bottom = 8.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(320, 9)
-texture = SubResource("GradientTexture1D_vnv3s")
-
-[node name="Label" type="Label" parent="ScreenLabel"]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -8.5
-offset_bottom = 8.5
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(320, 6)
-text = "Dungeon Sewers"
-label_settings = SubResource("LabelSettings_4pvu3")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="ScreenLabel"]
-libraries = {
-"": SubResource("AnimationLibrary_qxk5e")
-}
-
-[editable path="UI/Character/LeftCharacterVBox/AmuletPanel/EquipButton"]
-[editable path="UI/Character/LeftCharacterVBox/RingPanel1/EquipButton"]
-[editable path="UI/Character/LeftCharacterVBox/RingPanel2/EquipButton"]
-[editable path="UI/Character/LeftCharacterVBox/MiscPanel/EquipButton"]
-[editable path="UI/Character/RightCharacterVBox/HelmPanel/EquipButton"]
-[editable path="UI/Character/RightCharacterVBox/TorsoPanel/EquipButton"]
-[editable path="UI/Character/RightCharacterVBox/PantsPanel/EquipButton"]
-[editable path="UI/Character/RightCharacterVBox/BootsPanel/EquipButton"]
-[editable path="UI/Character/LHandPanel/EquipButton"]
-[editable path="UI/Character/RHandPanel/EquipButton"]
+[editable path="UI/Character/Equipment/LeftCharacterVBox/AmuletPanel/EquipButton"]
+[editable path="UI/Character/Equipment/LeftCharacterVBox/RingPanel1/EquipButton"]
+[editable path="UI/Character/Equipment/LeftCharacterVBox/RingPanel2/EquipButton"]
+[editable path="UI/Character/Equipment/LeftCharacterVBox/MiscPanel/EquipButton"]
+[editable path="UI/Character/Equipment/RightCharacterVBox/HelmPanel/EquipButton"]
+[editable path="UI/Character/Equipment/RightCharacterVBox/TorsoPanel/EquipButton"]
+[editable path="UI/Character/Equipment/RightCharacterVBox/PantsPanel/EquipButton"]
+[editable path="UI/Character/Equipment/RightCharacterVBox/BootsPanel/EquipButton"]
+[editable path="UI/Character/Equipment/LHandPanel/EquipButton"]
+[editable path="UI/Character/Equipment/RHandPanel/EquipButton"]

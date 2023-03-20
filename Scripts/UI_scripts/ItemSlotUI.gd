@@ -80,6 +80,7 @@ func on_left_release():
 	#Возможно тут проверка на то, правильный ли тип слота
 	if slot_entered:
 		#player.data.
+		#print(inventory)
 		inventory.equip_item(self.item)
 	if following:
 		reset_position()

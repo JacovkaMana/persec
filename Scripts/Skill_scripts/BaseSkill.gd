@@ -7,7 +7,7 @@ extends Resource
 #@export var projectile: Texture2D = preload("res://Art/Masks/test_mask.png")
 @export var description: String = "description"
 @export var type: Enums.ESkillType = Enums.ESkillType.NONE
-@export var base_cost: float = 0.0
+@export var cost: float = 0.0
 @export var effects: Array[Enums.EStatus] = []
 @export var mastery: int = 0
 @export var skills_needed: Array[BaseSkill] = []
@@ -15,20 +15,20 @@ extends Resource
 
 var projectile = null
 
-#func _init(name: String, description: String, rarity = null):
-#
-#	if(name):
-#		self.name = name
-#
-#	if(description):
-#		self.description = description
-#
-#	if(rarity):
-#		self.rarity = rarity
+func _init(name: String, description: String, rarity = null):
+
+	if(name):
+		self.name = name
+
+	if(description):
+		self.description = description
+
+	if(rarity):
+		self.rarity = rarity
 	
 	
 func get_cost():
-	return base_cost
+	return cost
 	
 func get_skill_sprite():
 	return projectile

@@ -1,0 +1,10 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://l3ac6jr0hvrq"]
+
+[ext_resource type="FontFile" uid="uid://bv3p1twxqpx6p" path="res://Fonts/Minecraftia-Regular.ttf" id="1_2a0td"]
+
+[resource]
+Label/colors/font_color = Color(0.0784314, 0.231373, 0.427451, 1)
+Label/font_sizes/font_size = 8
+Label/fonts/font = ExtResource("1_2a0td")
+TabContainer/font_sizes/font_size = 8
+TabContainer/fonts/font = ExtResource("1_2a0td")

@@ -62,6 +62,13 @@ func update_animation_parameters (move_input : Vector2):
 		cloak.flip_h = false
 		face.flip_h = false
 
+
+func _process(delta):
+	if (self.data.stamina < self.data.max_stamina):
+		self.data.stamina += delta * self.data.stamina_regen
+		if (self.data.stamina > self.data.max_stamina):
+			self.data.stamina = self.data.max_stamina
+
 	
 func _physics_process(_delta):
 	update_animation_parameters(move_direction)

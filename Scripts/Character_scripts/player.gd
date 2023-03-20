@@ -3,6 +3,7 @@ class_name PlayerScript
 
 signal dropped_inventory_opened(item_array: Array[Item])
 signal dialogue_started(with: CharacterBody2D)
+signal skill_used(skill_id: int)
 
 var invincible_timer = null
 var player_state: Enums.EPlayerState = Enums.EPlayerState.ROAMING
@@ -82,6 +83,17 @@ func _on_interaction_zone_entered(what: Area2D):
 func _on_interaction_zone_exited(what: Area2D):
 	#print(what.get_parent())
 	what.get_parent().off_interact_area()
+	
+
+func use_skill_id(id: int):
+	if id < data.skills.get_skills().size():
+		if (data.skills.get_skill_id(id).get_cost() <= data.stamina):
+			data.stamina -= data.skills.get_skill_id(id).get_cost()
+			emit_signal("skill_used", id)
+			shoot_projectile(
+				data.skills.get_skill_id(id)
+			)
+
 	
 func interact_with_nearest():
 	if (interaction_area.get_overlapping_areas()):

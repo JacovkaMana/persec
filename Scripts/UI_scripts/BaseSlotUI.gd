@@ -10,14 +10,14 @@ signal slot_mouse_exited(slot_index: BaseSlotUI)
 @onready var content: Control = $Content
 @onready var item_icon: TextureRect = null
 @onready var selector_icon: TextureRect = null
-@onready var inventory = null
+@onready var inventory
 var actions = []
 
 
 var _slot_info: InventoryItemSlotInfo = null 
 
 func _ready()->void:
-	inventory = get_tree().get_root().find_child("Inventory", true, false)
+	inventory = get_tree().get_root().find_child("Player", true, false).data.inventory
 #	self.connect("slot_mouse_entered", self, "on_slot_mouse_entered")
 
 	
