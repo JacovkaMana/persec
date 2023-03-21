@@ -381,10 +381,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 640.0
-offset_top = 530.0
-offset_right = 1280.0
-offset_bottom = 548.0
+offset_left = 960.0
+offset_top = 710.0
+offset_right = 1600.0
+offset_bottom = 728.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(320, 9)
@@ -575,7 +575,9 @@ script = ExtResource("5_cohd6")
 full_material = ExtResource("6_a0wlw")
 
 [node name="StaminaBlock_1" type="TextureRect" parent="HUD/StaminaContainer"]
-self_modulate = Color(0.5, 0.5, 0.5, 0.4)
+self_modulate = Color(0.501961, 0.501961, 0.501961, 1)
+texture_filter = 1
+texture_repeat = 1
 material = ExtResource("6_a0wlw")
 layout_mode = 2
 texture = ExtResource("4_v6vyg")

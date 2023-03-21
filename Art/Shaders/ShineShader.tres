@@ -4,5 +4,5 @@
 
 [resource]
 shader = ExtResource("1_05aqn")
-shader_parameter/shine_color = Color(0.4154, 0.525727, 0.67, 0.588235)
+shader_parameter/shine_color = Color(0.3808, 0.510453, 0.68, 0.588235)
 shader_parameter/shine_angle = 45.0

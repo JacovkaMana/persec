@@ -187,6 +187,7 @@ func _on_anim_finished(name):
 		var death_chest = Chest.instantiate()
 		
 		self.get_parent().add_child(death_chest)
+		death_chest.created_by = self
 		death_chest.global_position = self.global_position
 		death_chest.chest_inventory = self.data.inventory.get_inventory_items()
 		self.queue_free()

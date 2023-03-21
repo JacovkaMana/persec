@@ -18,7 +18,6 @@ func _ready():
 	print(bg_children)
 	print(get_parent())
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass

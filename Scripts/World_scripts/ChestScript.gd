@@ -3,6 +3,7 @@ extends StaticBody2D
 @onready var anim = $AnimationPlayer
 @onready var sprite = $Sprite2D
 var starting_material
+var created_by = null
 @export var chest_inventory: Array[Item] = []
 @onready var interaction_hint = $InteractionHint
 @onready var interaction_area = $InteractionArea
@@ -14,7 +15,7 @@ var starting_material
 func _ready():
 	#var idle = anim.get_animation('torch_loop')
 	#idle.set_loop(true)
-	anim.play('chest_closed')
+	anim.queue('chest_closed')
 	starting_material = sprite.material
 	sprite.material = null
 
@@ -34,6 +35,8 @@ func remove_item(item: Item):
 			interactable = false
 			interaction_hint_player.queue("RESET")
 			interaction_hint.visible = false
+			if (created_by):
+				self.queue_free()
 		return true
 	return false
 
