@@ -1,5 +1,6 @@
 extends Node
 
+var random_armor: Array = [ArmorItem,BootsItem,GlovesItem,HelmItem]
 var rarity_chances: Dictionary = {
 	Enums.ERarity.Common : 50,	 
 	Enums.ERarity.Uncommon : 30,	 

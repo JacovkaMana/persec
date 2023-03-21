@@ -27,7 +27,8 @@ extends Actor
 @export var ACCESSORY_2: Item = null
 
 @export_category('Inventory')
-@export var INVENTORY : Array[Item] = []
+@export var random_items: int = 0
+var INVENTORY : Array[Item] = []
 @export_category('Skills')
 @export var SKILLS: Array[String] = []
 
@@ -48,6 +49,7 @@ var dialogue_number: int = 0
 
 
 var select_material = preload("res://Art/Shaders/HighlightShader.tres")
+var Chest = preload("res://Scenes/Objects/chest.tscn")
 
 
 
@@ -76,7 +78,23 @@ func _ready():
 	vision.connect("body_entered", _on_vision_enter) 
 	vision.connect("body_exited", _on_vision_exit) 
 
-	#move_direction = Vector2(1,0)
+	for i in range(random_items):
+		var random_item
+		if randi() % 2 == 1:
+			random_item = RandomStats.random_armor.pick_random().new(
+				'',
+				'random generated',
+				''
+			)
+		else:
+			random_item = WeaponItem.new(
+		'',
+		'random generated',
+		null,
+		0,
+		30
+		)
+		self.data.inventory.add_item(random_item)
 	
 func _physics_process(_delta):
 	super(_delta)
@@ -166,6 +184,11 @@ func take_damage(_skill: BaseSkill, _strength):
 func _on_anim_finished(name):
 	print(name)
 	if (name == "death"):
+		var death_chest = Chest.instantiate()
+		
+		self.get_parent().add_child(death_chest)
+		death_chest.global_position = self.global_position
+		death_chest.chest_inventory = self.data.inventory.get_inventory_items()
 		self.queue_free()
 
 func interact():

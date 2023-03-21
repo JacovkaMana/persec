@@ -1,0 +1,268 @@
+[gd_scene load_steps=27 format=3 uid="uid://dp8kb5xmcasb8"]
+
+[ext_resource type="Script" path="res://Scripts/World_scripts/ChestScript.gd" id="1_gfmsb"]
+[ext_resource type="Script" path="res://Scripts/Item_scripts/ArmorItem.gd" id="2_s1dj0"]
+[ext_resource type="Texture2D" uid="uid://ih8uwmhh1er" path="res://Art/Sprites/Armor/Armor1.png" id="3_iac4y"]
+[ext_resource type="Script" path="res://Scripts/Item_scripts/BootsItem.gd" id="4_avi7e"]
+[ext_resource type="Texture2D" uid="uid://c6h2556xyk5g5" path="res://Art/Sprites/Boots/Boots1.png" id="5_uh7t7"]
+[ext_resource type="Material" uid="uid://bkei5kjj1v3mx" path="res://Art/Shaders/HighlightShader.tres" id="6_00w2a"]
+[ext_resource type="Texture2D" uid="uid://bns3dhl31q6cl" path="res://Art/Textures/treasure_chests_32x32.png" id="7_8u626"]
+[ext_resource type="FontFile" uid="uid://bv3p1twxqpx6p" path="res://Fonts/Minecraftia-Regular.ttf" id="8_ie8m8"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ugfnx"]
+
+[sub_resource type="Resource" id="Resource_gbw4d"]
+script = ExtResource("2_s1dj0")
+physical_defence = 0.0
+magic_defence = 0.0
+fire_defence = 0.0
+ice_defence = 0.0
+max_durability = 1.0
+modifiers = Array[Resource("res://Scripts/Item_scripts/ModifierScript.gd")]([])
+name = "ChestArmor"
+sprite = ExtResource("3_iac4y")
+description = "INITIALIZED"
+rarity = 1
+effects = Array[int]([])
+weight = 0.0
+base_cost = 0.0
+
+[sub_resource type="Resource" id="Resource_c1cno"]
+script = ExtResource("4_avi7e")
+max_durability = 1.0
+modifiers = Array[Resource("res://Scripts/Item_scripts/ModifierScript.gd")]([])
+name = "ChestBoots"
+sprite = ExtResource("5_uh7t7")
+description = "INITIALIZED"
+rarity = 1
+effects = Array[int]([])
+weight = 0.0
+base_cost = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qdoy3"]
+size = Vector2(22, 22)
+
+[sub_resource type="Animation" id="Animation_v53ad"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Chest/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+
+[sub_resource type="Animation" id="Animation_ap6i8"]
+resource_name = "chest_closed"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Chest/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+
+[sub_resource type="Animation" id="Animation_mywf2"]
+resource_name = "chest_open"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Chest/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [17]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xfxlg"]
+_data = {
+"RESET": SubResource("Animation_v53ad"),
+"chest_closed": SubResource("Animation_ap6i8"),
+"chest_opened": SubResource("Animation_mywf2")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mcm67"]
+radius = 30.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_be5ms"]
+light_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_1dqqu"]
+offsets = PackedFloat32Array(0.518519)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_y3h8i"]
+gradient = SubResource("Gradient_1dqqu")
+width = 16
+
+[sub_resource type="Gradient" id="Gradient_be85a"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5dee4"]
+gradient = SubResource("Gradient_be85a")
+width = 16
+
+[sub_resource type="LabelSettings" id="LabelSettings_mivoc"]
+font = ExtResource("8_ie8m8")
+font_size = 8
+font_color = Color(0.0784314, 0.231373, 0.427451, 1)
+shadow_size = 0
+
+[sub_resource type="Animation" id="Animation_fx51y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(25, -30)]
+}
+
+[sub_resource type="Animation" id="Animation_l50q1"]
+resource_name = "float"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(25, -30), Vector2(25, -27), Vector2(25, -30)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5aio4"]
+_data = {
+"RESET": SubResource("Animation_fx51y"),
+"float": SubResource("Animation_l50q1")
+}
+
+[node name="Chest" type="StaticBody2D" groups=["interactable"]]
+position = Vector2(-77, 96)
+collision_layer = 513
+collision_mask = 513
+input_pickable = true
+physics_material_override = SubResource("PhysicsMaterial_ugfnx")
+script = ExtResource("1_gfmsb")
+chest_inventory = Array[Resource("res://Scripts/Item_scripts/Item.gd")]([SubResource("Resource_gbw4d"), SubResource("Resource_c1cno")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_qdoy3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("6_00w2a")
+texture = ExtResource("7_8u626")
+hframes = 10
+vframes = 12
+frame = 7
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../..")
+reset_on_save = false
+method_call_mode = 1
+libraries = {
+"": SubResource("AnimationLibrary_xfxlg")
+}
+
+[node name="InteractionArea" type="Area2D" parent="."]
+collision_layer = 256
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("CircleShape2D_mcm67")
+
+[node name="InteractionHint" type="Node2D" parent="."]
+visible = false
+light_mask = 0
+z_index = 30
+material = SubResource("CanvasItemMaterial_be5ms")
+position = Vector2(25, -30)
+
+[node name="TextureRect" type="TextureRect" parent="InteractionHint"]
+self_modulate = Color(0.0784314, 0.231373, 0.427451, 0.666667)
+light_mask = 0
+use_parent_material = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -9.0
+offset_top = -9.0
+offset_right = 9.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(9, 9)
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture = SubResource("GradientTexture1D_y3h8i")
+
+[node name="InteractHint" type="TextureRect" parent="InteractionHint"]
+self_modulate = Color(1, 1, 1, 0.666667)
+light_mask = 0
+use_parent_material = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(8, 8)
+texture = SubResource("GradientTexture1D_5dee4")
+
+[node name="Label" type="Label" parent="InteractionHint"]
+self_modulate = Color(0.682353, 0.741176, 0.807843, 0.921569)
+light_mask = 0
+use_parent_material = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.5
+offset_top = -7.5
+offset_right = 7.5
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+text = " e"
+label_settings = SubResource("LabelSettings_mivoc")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="InteractionHint"]
+libraries = {
+"": SubResource("AnimationLibrary_5aio4")
+}

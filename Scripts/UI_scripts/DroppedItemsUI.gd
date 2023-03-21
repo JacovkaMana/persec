@@ -11,7 +11,8 @@ var active_slot_rclick: BaseSlotUI = null
 var panel_hover = false
 var ItemButton = preload("res://Scenes/Inventory/ItemButton.tscn")
 
-var _item_inventory = null
+var current_storage = null
+var _item_inventory: Array = []
 
 @onready var ui_settings = get_parent().get_parent()
 @onready var bground = $Background
@@ -24,12 +25,25 @@ func _ready():
 	
 	player.connect("dropped_inventory_opened", _on_new_inventory)
 
+	actions_panel\
+		.get_node("ItemActionsVBox")\
+		.get_node("EquipButton")\
+		.connect("action_menu_click", _on_action_click)
+	actions_panel\
+		.get_node("ItemActionsVBox")\
+		.get_node("DeleteButton")\
+		.connect("action_menu_click", _on_action_click)
+	actions_panel\
+		.get_node("ItemActionsVBox")\
+		.get_node("TakeButton")\
+		.connect("action_menu_click", _on_action_click)
+
 	
 	
 func update_inventory()->void:
 	for child in inventory_grid.get_children():
 		child.queue_free()
-	for inv_item in _item_inventory:
+	for inv_item in current_storage.chest_inventory:
 		var newItemButton = ItemButton.instantiate()
 		
 		inventory_grid.add_child(newItemButton)
@@ -73,7 +87,14 @@ func _delete_item(item, _delete: bool = false)->bool:
 	for slot in inventory_grid.get_children() as Array[ItemSlotUI]:
 		if slot.item == item:
 			inventory_grid.remove_child(slot)
+			if item in current_storage.chest_inventory:
+				current_storage.remove_item(item)
+				
+				
+			if current_storage.chest_inventory == []:
+				self.visible = false
 			return true
+				
 	return false
 
 	
@@ -94,6 +115,14 @@ func _on_slot_mouse_lclick(slot: BaseSlotUI):
 func _on_action_click(action: String):
 	if active_slot_rclick != null:
 		match action:
+			"Take":
+				if player.data.inventory.add_item(active_slot_rclick.item):
+					active_slot_rclick.disconnect("slot_mouse_lclick", _on_slot_mouse_lclick)
+					active_slot_rclick.disconnect("slot_mouse_rclick", _on_slot_mouse_rclick)
+					active_slot_rclick.disconnect("slot_mouse_move_check", _on_slot_mouse_move)
+					desc_panel.visible = false
+					actions_panel.visible = false
+					_delete_item(active_slot_rclick.item, true)
 			"Equip":
 				if player.data.inventory.equip_item(active_slot_rclick.item):
 					active_slot_rclick.disconnect("slot_mouse_lclick", _on_slot_mouse_lclick)
@@ -101,6 +130,7 @@ func _on_action_click(action: String):
 					active_slot_rclick.disconnect("slot_mouse_move_check", _on_slot_mouse_move)
 					desc_panel.visible = false
 					actions_panel.visible = false
+					_delete_item(active_slot_rclick.item, true)
 			"Delete":
 				_delete_item(active_slot_rclick.item, true)
 				active_slot_rclick = null
@@ -111,7 +141,9 @@ func _on_slot_mouse_rclick(slot: BaseSlotUI):
 	if (!actions_panel.visible || active_slot_rclick.item != slot.item):
 		active_slot_rclick = slot
 		
-		var actions = active_slot_rclick.get_actions()
+		var actions: Array = active_slot_rclick.get_actions()
+		actions.append('Take')
+		print(actions)
 		for action in actions_panel.get_node("ItemActionsVBox").get_children() as Array[Button]:
 			if String(action.name).split("B")[0] in actions:
 				action.visible = true
@@ -129,5 +161,5 @@ func _on_slot_mouse_move(_slot_type):
 
 func _on_new_inventory(_inv):
 	self.visible = true
-	_item_inventory = _inv
+	current_storage = _inv
 	update_inventory()

@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://yseo0hefxxp2"]
+
+[ext_resource type="Shader" path="res://Art/Shaders/ShineScript.gdshader" id="1_05aqn"]
+
+[resource]
+shader = ExtResource("1_05aqn")
+shader_parameter/shine_color = Color(0.4154, 0.525727, 0.67, 0.588235)
+shader_parameter/shine_angle = 45.0

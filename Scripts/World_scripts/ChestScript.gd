@@ -8,6 +8,8 @@ var starting_material
 @onready var interaction_area = $InteractionArea
 @onready var interaction_hint_player = $InteractionHint/AnimationPlayer
 @onready var player = get_tree().get_root().find_child("Player", true, false)
+
+@export var interactable: bool = true
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#var idle = anim.get_animation('torch_loop')
@@ -26,7 +28,12 @@ func _ready():
 
 func remove_item(item: Item):
 	if item in chest_inventory:
-		chest_inventory.pop_at(chest_inventory.find(item))
+		chest_inventory.erase(item)
+		
+		if chest_inventory == []:
+			interactable = false
+			interaction_hint_player.queue("RESET")
+			interaction_hint.visible = false
 		return true
 	return false
 
@@ -62,13 +69,16 @@ func _on_mouse_exited():
 	
 	
 func on_interact_area():
-	interaction_hint_player.queue("float")
-	interaction_hint.visible = true
+	if (interactable):
+		interaction_hint_player.queue("float")
+		interaction_hint.visible = true
 	
 func off_interact_area():
-	interaction_hint_player.queue("RESET")
-	interaction_hint.visible = false
+	if (interactable):
+		interaction_hint_player.queue("RESET")
+		interaction_hint.visible = false
 	
 func interact():
-	player.emit_signal("dropped_inventory_opened", chest_inventory)
-	anim.play('chest_opened')
+	if (interactable):
+		player.emit_signal("dropped_inventory_opened", self)
+		anim.play('chest_opened')

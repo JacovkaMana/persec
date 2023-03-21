@@ -1,4 +1,4 @@
-[gd_scene load_steps=104 format=3 uid="uid://dbksnam8cuw3o"]
+[gd_scene load_steps=102 format=3 uid="uid://dbksnam8cuw3o"]
 
 [ext_resource type="Script" path="res://Scripts/UI_scripts/CharacterUI.gd" id="1_8tod6"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/UI.gd" id="1_cvjfy"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://m03kme2ly37o" path="res://Art/UI/Border22_1.png" id="5_e6gov"]
 [ext_resource type="Texture2D" uid="uid://byh8r3f22gvqa" path="res://Art/UI/Border34.png" id="5_mowgk"]
 [ext_resource type="Texture2D" uid="uid://1mactnwdbpu7" path="res://Art/UI/UI_Inventory.png" id="6_83gsj"]
+[ext_resource type="Material" uid="uid://yseo0hefxxp2" path="res://Art/Shaders/ShineShader.tres" id="6_a0wlw"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/InventoryUI.gd" id="7_0wyy8"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/SkillsContainer.gd" id="7_drj05"]
 [ext_resource type="Texture2D" uid="uid://dh52y5x0l4e52" path="res://Art/UI/UI_InventoryMenuIcon.png" id="8_cb6qa"]
@@ -32,7 +33,6 @@
 [ext_resource type="Texture2D" uid="uid://bcrf2c3610tq7" path="res://Art/UI/Armor.png" id="15_58hf7"]
 [ext_resource type="Texture2D" uid="uid://i14ccwbjhcj6" path="res://Art/UI/Glove.png" id="16_rijxa"]
 [ext_resource type="Texture2D" uid="uid://bqfc0dywa7fnf" path="res://Art/UI/Boots.png" id="17_otl5j"]
-[ext_resource type="Texture2D" uid="uid://c37xj7g8aoq54" path="res://Art/UI/UI_ItemActionMenu.png" id="18_mog8i"]
 [ext_resource type="Texture2D" uid="uid://bdvj2eqeeqpw6" path="res://Art/UI/ItemAction_Hover.png" id="19_3pi6p"]
 [ext_resource type="Texture2D" uid="uid://kwcbpg33nxh1" path="res://Art/UI/Weapon.png" id="19_aroqj"]
 [ext_resource type="Texture2D" uid="uid://5f3t2ue0hkna" path="res://Art/UI/WeaponShield.png" id="19_x824n"]
@@ -313,21 +313,24 @@ region_rect = Rect2(0, 0, 11, 11)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_t4b0o"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_reb7f"]
-texture = ExtResource("18_mog8i")
-region_rect = Rect2(0, 0, 40, 24)
-modulate_color = Color(1, 1, 1, 0.784314)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_705cy"]
-
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gnv88"]
+texture = ExtResource("19_3pi6p")
+expand_margin_bottom = 2.0
+modulate_color = Color(0.0784314, 0.231373, 0.427451, 0.784314)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xnqce"]
 texture = ExtResource("19_3pi6p")
 expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 region_rect = Rect2(0, 0, 40, 10)
-modulate_color = Color(1, 1, 1, 0.784314)
+modulate_color = Color(0.305882, 0.466667, 0.670588, 0.784314)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2bg7p"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ov7ki"]
+texture = ExtResource("19_3pi6p")
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+region_rect = Rect2(0, 0, 40, 10)
+modulate_color = Color(0.0784314, 0.231373, 0.427451, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_peaqi"]
 
@@ -337,15 +340,19 @@ modulate_color = Color(1, 1, 1, 0.784314)
 font = ExtResource("5_ai818")
 font_size = 8
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ngump"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vlg4b"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ce0up"]
 texture = ExtResource("19_3pi6p")
 expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 region_rect = Rect2(0, 0, 40, 10)
+modulate_color = Color(0.305882, 0.466667, 0.670588, 0.784314)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vukj7"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_10peh"]
+texture = ExtResource("19_3pi6p")
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+region_rect = Rect2(0, 0, 40, 10)
+modulate_color = Color(0.0784314, 0.231373, 0.427451, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3e8yv"]
 
@@ -374,10 +381,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -320.0
-offset_top = -10.0
-offset_right = 320.0
-offset_bottom = 8.0
+offset_left = 640.0
+offset_top = 530.0
+offset_right = 1280.0
+offset_bottom = 548.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(320, 9)
@@ -565,28 +572,36 @@ offset_bottom = 303.0
 theme_override_constants/separation = 1
 alignment = 1
 script = ExtResource("5_cohd6")
+full_material = ExtResource("6_a0wlw")
 
 [node name="StaminaBlock_1" type="TextureRect" parent="HUD/StaminaContainer"]
+self_modulate = Color(0.5, 0.5, 0.5, 0.4)
+material = ExtResource("6_a0wlw")
 layout_mode = 2
 texture = ExtResource("4_v6vyg")
 
 [node name="StaminaBlock_2" type="TextureRect" parent="HUD/StaminaContainer"]
+material = ExtResource("6_a0wlw")
 layout_mode = 2
 texture = ExtResource("4_v6vyg")
 
 [node name="StaminaBlock_3" type="TextureRect" parent="HUD/StaminaContainer"]
+material = ExtResource("6_a0wlw")
 layout_mode = 2
 texture = ExtResource("4_v6vyg")
 
 [node name="StaminaBlock_4" type="TextureRect" parent="HUD/StaminaContainer"]
+material = ExtResource("6_a0wlw")
 layout_mode = 2
 texture = ExtResource("4_v6vyg")
 
 [node name="StaminaBlock_5" type="TextureRect" parent="HUD/StaminaContainer"]
+material = ExtResource("6_a0wlw")
 layout_mode = 2
 texture = ExtResource("4_v6vyg")
 
 [node name="StaminaBlock_6" type="TextureRect" parent="HUD/StaminaContainer"]
+material = ExtResource("6_a0wlw")
 layout_mode = 2
 texture = ExtResource("4_v6vyg")
 
@@ -781,6 +796,7 @@ grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="HUD/SkillsMenu"]
 self_modulate = Color(1, 1, 1, 0.607843)
+material = ExtResource("11_3hf22")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1296,6 +1312,7 @@ label_settings = SubResource("LabelSettings_gs1ul")
 horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+visible = false
 offset_left = 15.0
 offset_top = 10.0
 offset_right = 48.0
@@ -1322,6 +1339,7 @@ layout_mode = 2
 texture = ExtResource("5_mowgk")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
+visible = false
 offset_left = 595.0
 offset_top = 10.0
 offset_right = 628.0
@@ -2203,7 +2221,6 @@ offset_left = 26.0
 offset_top = 58.0
 offset_right = 74.0
 offset_bottom = 82.0
-theme_override_styles/panel = SubResource("StyleBoxTexture_reb7f")
 
 [node name="ItemActionsVBox" type="VBoxContainer" parent="UI/ItemActionsPanel"]
 layout_mode = 0
@@ -2212,13 +2229,39 @@ offset_right = 48.0
 offset_bottom = 41.0
 theme_override_constants/separation = 2
 
+[node name="TakeButton" type="Button" parent="UI/ItemActionsPanel/ItemActionsVBox"]
+visible = false
+custom_minimum_size = Vector2(20, 10)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_gnv88")
+theme_override_styles/hover = SubResource("StyleBoxTexture_xnqce")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_ov7ki")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_peaqi")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rf8ru")
+script = ExtResource("20_nbmo2")
+
+[node name="Label" type="Label" parent="UI/ItemActionsPanel/ItemActionsVBox/TakeButton"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -7.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Take"
+label_settings = SubResource("LabelSettings_5fpuk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="UnequipButton" type="Button" parent="UI/ItemActionsPanel/ItemActionsVBox"]
 visible = false
 custom_minimum_size = Vector2(20, 10)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_705cy")
-theme_override_styles/hover = SubResource("StyleBoxTexture_gnv88")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_2bg7p")
+theme_override_styles/normal = SubResource("StyleBoxTexture_gnv88")
+theme_override_styles/hover = SubResource("StyleBoxTexture_ce0up")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_10peh")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_peaqi")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_rf8ru")
 script = ExtResource("20_nbmo2")
@@ -2242,9 +2285,9 @@ vertical_alignment = 1
 visible = false
 custom_minimum_size = Vector2(20, 10)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_705cy")
-theme_override_styles/hover = SubResource("StyleBoxTexture_gnv88")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_2bg7p")
+theme_override_styles/normal = SubResource("StyleBoxTexture_gnv88")
+theme_override_styles/hover = SubResource("StyleBoxTexture_ce0up")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_10peh")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_peaqi")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_rf8ru")
 script = ExtResource("20_nbmo2")
@@ -2268,9 +2311,9 @@ vertical_alignment = 1
 visible = false
 custom_minimum_size = Vector2(20, 10)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_ngump")
-theme_override_styles/hover = SubResource("StyleBoxTexture_vlg4b")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_vukj7")
+theme_override_styles/normal = SubResource("StyleBoxTexture_gnv88")
+theme_override_styles/hover = SubResource("StyleBoxTexture_ce0up")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_10peh")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_3e8yv")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_5cgrn")
 script = ExtResource("20_nbmo2")
