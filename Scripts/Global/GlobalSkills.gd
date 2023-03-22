@@ -28,12 +28,18 @@ func _init():
 	var file = FileAccess.open(path, FileAccess.READ)
 	var dialogue: Dictionary = JSON.parse_string(file.get_as_text())
 	for skill in dialogue:
-		skills[skill] = AttackSkill.new(
-		skill,
-		dialogue[skill].cost,
-		Enums.EDamageType.get( dialogue[skill].damage_type ),
-		Enums.ESkillType.get( dialogue[skill].skill_type ),
-		load("res://PreRendered/Projectiles/" + dialogue[skill].texture + ".tscn"),
-	)
+		var skill_json = dialogue[skill]
+		if skill_json.type == 'attack':
+			skills[skill] = AttackSkill.new(
+			skill,
+			skill_json.description,
+			skill_json.ranged_damage,
+			skill_json.melee_damage,
+			skill_json.multiplier,
+			skill_json.cost,
+			Enums.EDamageType.get( skill_json.damage_type ),
+			Enums.ESkillType.get( skill_json.skill_type ),
+			load("res://PreRendered/Projectiles/" + skill_json.texture + ".tscn"),
+		)
 
 

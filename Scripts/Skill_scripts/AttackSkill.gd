@@ -2,23 +2,29 @@ class_name AttackSkill
 extends BaseSkill
 
 
-@export var damage: int = 100
-@export var multiplier: int = 1
+var ranged_damage: int
+var melee_damage: int
+var melee_attacks: int 
+var multiplier: int
 @export var damage_type: Enums.EDamageType = Enums.EDamageType.NONE
 
-func _init(name: String, stamina_cost: int ,damage_type: Enums.EDamageType, type: Enums.ESkillType, projectile):
+func _init(name: String, description: String, ranged_damage: int, melee_damage: int, multiplier:int,  stamina_cost: int ,damage_type: Enums.EDamageType, type: Enums.ESkillType, projectile):
 
 		self.name = name
+		self.description = description
+		self.ranged_damage = ranged_damage
+		self.melee_damage = melee_damage
+		self.multiplier = multiplier
 		self.damage_type = damage_type
 		self.type = type
 		self.projectile = projectile
 		self.cost = stamina_cost
 		
-func get_damage_string():
-	return (str(damage) + "%" + " x" + str(multiplier))
+func get_ranged_damage_string():
+	return (str(ranged_damage) + "%" + " x" + str(multiplier))
 
-func get_damage():
-	return damage
+func get_ranged_damage():
+	return ranged_damage
 	
 func get_multiplier():
 	return multiplier

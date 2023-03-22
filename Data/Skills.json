@@ -1,21 +1,33 @@
 {
   "Slash": {
+    "type": "attack",
     "description": "slash description",
     "cost": 1,
+    "melee_damage": 55,
+    "multiplier": 2,
+    "ranged_damage" : 100,
     "damage_type": "SLASH",
     "skill_type": "BLADE",
     "texture": "Slash"
   },
   "Fireball": {
+    "type": "attack",
     "description": "fireball description",
     "cost": 1,
+    "melee_damage": 100,
+    "multiplier": 1,
+    "ranged_damage" : 100,
     "damage_type": "FIRE",
     "skill_type": "MAGIC",
     "texture": "Ball"
   },
   "Ice Slash": {
+    "type": "attack",
     "description": "inceslash description",
     "cost": 2,
+    "melee_damage": 100,
+    "multiplier": 1,
+    "ranged_damage" : 100,
     "damage_type": "ICE",
     "skill_type": "MAGIC",
     "texture": "MovingSlash"

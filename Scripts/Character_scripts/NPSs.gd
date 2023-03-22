@@ -174,7 +174,7 @@ func _hide_label():
 	label.visible = false
 	
 
-func take_damage(_skill: BaseSkill, _strength):
+func take_ranged_damage(_skill: AttackSkill, _strength):
 	super(_skill, _strength)
 	if (data.hitpoints <= 0):
 		print('death')

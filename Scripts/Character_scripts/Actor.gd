@@ -105,7 +105,6 @@ func shoot_projectile(skill: BaseSkill) -> void:
 	#bullet.create_shape_owner(self)
 	bullet.add_collision_exception_with(self)
 	
-	print(skill.name)
 	bullet.skill = skill
 	
 	bullet.change_sprite(skill)		
@@ -116,8 +115,9 @@ func shoot_projectile(skill: BaseSkill) -> void:
 	else:
 		bullet.shoot(Vector2(0,0), true, self)
 	
-func take_damage(_skill: BaseSkill, _strength):
-	data.hitpoints -= 20
+func take_ranged_damage(_skill: AttackSkill, _strength):
+	data.hitpoints -= _skill.ranged_damage
+	print(data.hitpoints)
 	self.modulate = Color8(255,0,0,255)
 	
 	cooldown(1)

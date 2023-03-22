@@ -58,7 +58,7 @@ func _physics_process(_delta):
 		
 		if( is_instance_valid(collision_object) and not collision_object.get_collider() == projectile_owner):
 			if collision_object.get_collider().get_class() == 'CharacterBody2D':
-				collision_object.get_collider().take_damage(null, null)
+				collision_object.get_collider().take_ranged_damage(skill, null)
 				
 				if (not moving_projectile):
 					trigger_melee()
