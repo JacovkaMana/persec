@@ -46,7 +46,6 @@ func _ready():
 #		collision_polygon.polygon = poly
 #		self.add_child(collision_polygon)
 #	
-	print(move_speed)
 	
 	
 
@@ -57,8 +56,8 @@ func _physics_process(_delta):
 		collision_object = move_and_collide(direction*_delta*move_speed)
 		
 		if( is_instance_valid(collision_object) and not collision_object.get_collider() == projectile_owner):
-			if collision_object.get_collider().get_class() == 'CharacterBody2D':
-				collision_object.get_collider().take_ranged_damage(skill, null)
+			if collision_object.get_collider().name == 'HitBox':
+				collision_object.get_collider().get_parent().take_ranged_damage(skill, projectile_owner, null)
 				
 				if (not moving_projectile):
 					trigger_melee()

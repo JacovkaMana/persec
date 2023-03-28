@@ -6,7 +6,6 @@ extends CanvasLayer
 @onready var Character_UI = $UI/Character
 @onready var Inventory_UI = $UI/Inventory
 @onready var DroppedItems_UI = $UI/DroppedItems
-
 @onready var UI_Control = $UI
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,14 +13,10 @@ func _ready():
 	
 	var bg_children = find_children("Background", "TextureRect", true, false)
 	#var Background_children = self.find_children("Background", "TextureRect", true, false)
-	print('bg children')
-	print(bg_children)
-	print(get_parent())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
-
 
 
 func close_everything():

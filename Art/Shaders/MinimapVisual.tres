@@ -1,0 +1,15 @@
+[gd_resource type="VisualShader" load_steps=2 format=3 uid="uid://vh6cfi5pwi7a"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_4qoer"]
+input_name = "normal_texture"
+
+[resource]
+code = "shader_type canvas_item;
+
+
+"
+graph_offset = Vector2(-271.423, 30.065)
+mode = 1
+flags/light_only = false
+nodes/fragment/2/node = SubResource("VisualShaderNodeInput_4qoer")
+nodes/fragment/2/position = Vector2(-40, 200)

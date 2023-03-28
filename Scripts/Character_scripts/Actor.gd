@@ -85,6 +85,7 @@ func _physics_process(_delta):
 	
 	if (head_timer):
 		label.text = "%.2f" % (head_timer.time_left)
+		
 	
 func use_skill_id(id: int):
 	if id < data.skills.get_skills().size():
@@ -115,9 +116,9 @@ func shoot_projectile(skill: BaseSkill) -> void:
 	else:
 		bullet.shoot(Vector2(0,0), true, self)
 	
-func take_ranged_damage(_skill: AttackSkill, _strength):
-	data.hitpoints -= _skill.ranged_damage
-	print(data.hitpoints)
+func take_ranged_damage(_skill: AttackSkill, from: Actor,_strength):
+	data.hitpoints -= int(_skill.ranged_damage * from.get_damage() / 100.0)
+	print(int(_skill.ranged_damage * from.get_damage() / 100.0))
 	self.modulate = Color8(255,0,0,255)
 	
 	cooldown(1)
@@ -145,3 +146,9 @@ func set_zone(to):
 func _on_anim_finished(name):
 	pass
 
+
+func get_damage():
+	if	data.inventory.get_equipments_slot(Enums.EEquipmentSlot.R_HAND):
+		return data.inventory.get_equipments_slot(Enums.EEquipmentSlot.R_HAND).get_flat_damage()
+	else:
+		return data.stats[Enums.EStat.STRENGTH]

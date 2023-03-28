@@ -1,12 +1,15 @@
-[gd_scene load_steps=102 format=3 uid="uid://dbksnam8cuw3o"]
+[gd_scene load_steps=119 format=3 uid="uid://dbksnam8cuw3o"]
 
 [ext_resource type="Script" path="res://Scripts/UI_scripts/CharacterUI.gd" id="1_8tod6"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/UI.gd" id="1_cvjfy"]
 [ext_resource type="Script" path="res://Scripts/Global/GlobalUI.gd" id="1_v0356"]
+[ext_resource type="Texture2D" uid="uid://dwcfhyykdr6st" path="res://Art/Masks/Circle96.png" id="2_3oc87"]
+[ext_resource type="Script" path="res://Scripts/UI_scripts/MiniMap.gd" id="2_np4g4"]
 [ext_resource type="Texture2D" uid="uid://bh3irpn80km6o" path="res://Art/UI/UI_Backplate.png" id="3_5tfiq"]
 [ext_resource type="Theme" uid="uid://l3ac6jr0hvrq" path="res://Themes/ui_theme.tres" id="3_h5rw7"]
 [ext_resource type="Texture2D" uid="uid://swjg1maqaepn" path="res://Art/UI/SkillTest1.png" id="3_ik2u5"]
 [ext_resource type="Texture2D" uid="uid://e5h7qlqeup7q" path="res://Art/Skills/test.png" id="4_queiq"]
+[ext_resource type="PackedScene" uid="uid://ct3v7p6aip4py" path="res://Scenes/Maps/player_marker.tscn" id="4_rx6uk"]
 [ext_resource type="Texture2D" uid="uid://dj6saa2kydvlc" path="res://Art/UI/HUD_Stamina.png" id="4_v6vyg"]
 [ext_resource type="Texture2D" uid="uid://bx0tcs2i3qce1" path="res://Art/UI/SkillTestShdaow.png" id="4_wsh4e"]
 [ext_resource type="Texture2D" uid="uid://dhim64q84qukn" path="res://Art/UI/UI_Char.png" id="4_xrr7e"]
@@ -33,8 +36,10 @@
 [ext_resource type="Texture2D" uid="uid://bcrf2c3610tq7" path="res://Art/UI/Armor.png" id="15_58hf7"]
 [ext_resource type="Texture2D" uid="uid://i14ccwbjhcj6" path="res://Art/UI/Glove.png" id="16_rijxa"]
 [ext_resource type="Texture2D" uid="uid://bqfc0dywa7fnf" path="res://Art/UI/Boots.png" id="17_otl5j"]
+[ext_resource type="Texture2D" uid="uid://br8sc2snmr5k2" path="res://Art/UI/Bar.png" id="18_c482i"]
 [ext_resource type="Texture2D" uid="uid://bdvj2eqeeqpw6" path="res://Art/UI/ItemAction_Hover.png" id="19_3pi6p"]
 [ext_resource type="Texture2D" uid="uid://kwcbpg33nxh1" path="res://Art/UI/Weapon.png" id="19_aroqj"]
+[ext_resource type="Texture2D" uid="uid://blflx073tr8sg" path="res://Art/UI/circle15.png" id="19_hnkgf"]
 [ext_resource type="Texture2D" uid="uid://5f3t2ue0hkna" path="res://Art/UI/WeaponShield.png" id="19_x824n"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/ItemAction.gd" id="20_nbmo2"]
 [ext_resource type="Texture2D" uid="uid://ta1fnun00pmm" path="res://Art/UI/UI_ShadowFull.png" id="28_s3eqt"]
@@ -42,10 +47,17 @@
 [ext_resource type="Script" path="res://Scripts/UI_scripts/CoverPanel.gd" id="29_5vimk"]
 [ext_resource type="Texture2D" uid="uid://cpp7ou6piu4r0" path="res://Art/UI/SkillSlot.png" id="34_f6u2n"]
 [ext_resource type="Texture2D" uid="uid://vcslh0481xu1" path="res://Art/UI/UI_Stats.png" id="36_t4wn0"]
+[ext_resource type="Script" path="res://Scripts/UI_scripts/StatsContainer.gd" id="38_ord84"]
+[ext_resource type="Script" path="res://Scripts/UI_scripts/CharacterSkillsContainer.gd" id="38_q48wp"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/DroppedItemsUI.gd" id="39_4oyr2"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/CharacterContainer.gd" id="39_041b8"]
+[ext_resource type="Script" path="res://Scripts/UI_scripts/UpgradeStatButton.gd" id="39_gqfbm"]
+[ext_resource type="Texture2D" uid="uid://e2k83s0t1q8w" path="res://Art/UI/RectShadow.png" id="39_tgb0w"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/Dialogue.gd" id="40_bt3bl"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/ScreenLabel.gd" id="41_42gqc"]
+[ext_resource type="Texture2D" uid="uid://s2khw21nfwhq" path="res://Art/UI/Rect.png" id="43_jnhuc"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_71ey8"]
 
 [sub_resource type="Gradient" id="Gradient_3f24u"]
 offsets = PackedFloat32Array(1)
@@ -195,6 +207,17 @@ font = ExtResource("5_ai818")
 font_size = 8
 font_color = Color(0.682353, 0.741176, 0.807843, 1)
 
+[sub_resource type="Gradient" id="Gradient_dmp6y"]
+offsets = PackedFloat32Array(0, 0.58042, 1)
+colors = PackedColorArray(1, 1, 1, 0.607843, 1, 1, 1, 1, 1, 1, 1, 0.607843)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2ii58"]
+gradient = SubResource("Gradient_dmp6y")
+width = 10
+height = 10
+fill_from = Vector2(0.5, 0)
+fill_to = Vector2(0.5, 1)
+
 [sub_resource type="Gradient" id="Gradient_bx6uy"]
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 1, 1, 1)
@@ -287,6 +310,13 @@ font = ExtResource("5_ai818")
 font_size = 8
 font_color = Color(0, 0, 0, 1)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tii2f"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p5qms"]
+texture = ExtResource("39_tgb0w")
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_3mc1x"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_to568"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e4ms3"]
@@ -312,6 +342,8 @@ region_rect = Rect2(0, 0, 11, 11)
 [sub_resource type="ButtonGroup" id="ButtonGroup_bge57"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_t4b0o"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x4ts7"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gnv88"]
 texture = ExtResource("19_3pi6p")
@@ -364,6 +396,34 @@ script = ExtResource("1_v0356")
 ShadowColor = Color(0.282353, 0.45098, 0.666667, 1)
 BackgroundColor = Color(0.682353, 0.741176, 0.807843, 0.588235)
 
+[node name="MiniMap" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.784314)
+clip_children = 1
+position = Vector2(583, 56)
+texture = ExtResource("2_3oc87")
+script = ExtResource("2_np4g4")
+
+[node name="MinimapDisplay" type="TextureRect" parent="MiniMap"]
+texture_filter = 4
+texture_repeat = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -96.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_71ey8")
+stretch_mode = 2
+
+[node name="PlayerMarker" parent="MiniMap" instance=ExtResource("4_rx6uk")]
+offset_left = -51.0
+offset_top = -51.0
+offset_right = -45.0
+offset_bottom = -45.0
+
 [node name="ScreenLabel" type="Control" parent="."]
 custom_minimum_size = Vector2(640, 360)
 layout_mode = 3
@@ -381,10 +441,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 1280.0
-offset_top = 890.0
-offset_right = 1920.0
-offset_bottom = 908.0
+offset_left = 12480.0
+offset_top = 7190.0
+offset_right = 13120.0
+offset_bottom = 7208.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(320, 9)
@@ -413,6 +473,7 @@ libraries = {
 }
 
 [node name="Notifications" type="Control" parent="."]
+visible = false
 custom_minimum_size = Vector2(640, 360)
 layout_mode = 3
 anchors_preset = 0
@@ -420,7 +481,6 @@ offset_right = 640.0
 offset_bottom = 360.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Notifications"]
-visible = false
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 1
 anchors_preset = 11
@@ -1234,6 +1294,55 @@ text = "Skills
 label_settings = SubResource("LabelSettings_87j6u")
 horizontal_alignment = 1
 
+[node name="ColorRect" type="TextureRect" parent="HUD"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 326.0
+offset_right = 118.0
+offset_bottom = 343.0
+texture = ExtResource("18_c482i")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="HUD/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -2.5
+offset_right = 79.0
+offset_bottom = 2.5
+grow_horizontal = 2
+grow_vertical = 2
+value = 50.0
+nine_patch_stretch = true
+texture_progress = SubResource("GradientTexture2D_2ii58")
+tint_progress = Color(0.839216, 0, 0, 0.784314)
+
+[node name="TextureProgressBar2" type="TextureProgressBar" parent="HUD/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -7.5
+offset_right = -21.0
+offset_bottom = 7.5
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+nine_patch_stretch = true
+texture_progress = ExtResource("19_hnkgf")
+tint_progress = Color(0.839216, 0, 0, 0.580392)
+
+[node name="TextureRect" type="TextureRect" parent="HUD/ColorRect"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [node name="Dialogue" type="Control" parent="."]
 visible = false
 layout_mode = 3
@@ -1281,17 +1390,12 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -175.0
+offset_top = 3.0
 offset_right = 175.0
-offset_bottom = 50.0
+offset_bottom = 53.0
 grow_horizontal = 2
-theme_override_colors/default_color = Color(0.0784314, 0.231373, 0.427451, 1)
-theme_override_fonts/normal_font = ExtResource("5_ai818")
-theme_override_fonts/bold_font = ExtResource("5_ai818")
-theme_override_fonts/italics_font = ExtResource("5_ai818")
-theme_override_fonts/bold_italics_font = ExtResource("5_ai818")
-theme_override_fonts/mono_font = ExtResource("5_ai818")
-theme_override_font_sizes/normal_font_size = 8
-text = "	asddddddddasdd dddddddddddd dddddddd dddssssssssssss sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
+theme = ExtResource("3_h5rw7")
+text = "	asddddddddasdd dddddddddddd dddddddd dddssssssssssssffffffffffffffffffffffffffssssssssssssssssssssssssssssssssssssssssss"
 
 [node name="Name" type="TextureRect" parent="Dialogue"]
 self_modulate = Color(0.0784314, 0.231373, 0.427451, 0.588235)
@@ -1375,6 +1479,7 @@ mouse_filter = 1
 script = ExtResource("1_cvjfy")
 
 [node name="Character" type="Control" parent="UI"]
+visible = false
 custom_minimum_size = Vector2(176, 296)
 layout_mode = 1
 anchors_preset = 4
@@ -1816,7 +1921,6 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="SkillStats" type="Control" parent="UI/Character"]
-visible = false
 anchors_preset = 0
 offset_right = 176.0
 offset_bottom = 296.0
@@ -1826,6 +1930,399 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("36_t4wn0")
+
+[node name="CharacterStats" type="Control" parent="UI/Character/SkillStats"]
+anchors_preset = 0
+offset_left = 8.0
+offset_top = 50.0
+offset_right = 168.0
+offset_bottom = 191.0
+
+[node name="NameLabel" type="Label" parent="UI/Character/SkillStats/CharacterStats"]
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 13.0
+theme = ExtResource("3_h5rw7")
+text = "John Faith"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="UI/Character/SkillStats/CharacterStats"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 19.0
+offset_right = 159.0
+offset_bottom = 36.0
+theme = ExtResource("3_h5rw7")
+text = "Stats"
+horizontal_alignment = 1
+
+[node name="StatsContainer" type="VBoxContainer" parent="UI/Character/SkillStats/CharacterStats"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 34.0
+offset_right = 153.0
+offset_bottom = 137.0
+theme_override_constants/separation = 5
+script = ExtResource("38_ord84")
+
+[node name="Stat1" type="Control" parent="UI/Character/SkillStats/CharacterStats/StatsContainer"]
+custom_minimum_size = Vector2(0, 13)
+layout_mode = 2
+
+[node name="StatNameLabel" type="Label" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat1"]
+layout_mode = 0
+offset_right = 61.0
+offset_bottom = 13.0
+theme = ExtResource("3_h5rw7")
+text = "Strength"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatAmountLabel" type="Label" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat1"]
+layout_mode = 0
+offset_left = 60.0
+offset_right = 86.0
+offset_bottom = 13.0
+theme = ExtResource("3_h5rw7")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatUpCostLabel" type="Label" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat1"]
+layout_mode = 0
+offset_left = 85.0
+offset_right = 133.0
+offset_bottom = 17.0
+theme = ExtResource("3_h5rw7")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UpgradeStatButton" type="Button" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat1"]
+layout_mode = 0
+offset_left = 133.0
+offset_right = 146.0
+offset_bottom = 13.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_tii2f")
+theme_override_styles/hover = SubResource("StyleBoxTexture_p5qms")
+script = ExtResource("39_gqfbm")
+stat_type = 1
+
+[node name="Stat2" type="Control" parent="UI/Character/SkillStats/CharacterStats/StatsContainer"]
+custom_minimum_size = Vector2(0, 13)
+layout_mode = 2
+
+[node name="StatNameLabel" type="Label" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat2"]
+layout_mode = 0
+offset_right = 61.0
+offset_bottom = 13.0
+theme = ExtResource("3_h5rw7")
+text = "Dexterity"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatAmountLabel" type="Label" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat2"]
+layout_mode = 0
+offset_left = 60.0
+offset_right = 86.0
+offset_bottom = 13.0
+theme = ExtResource("3_h5rw7")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatUpCostLabel" type="Label" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat2"]
+layout_mode = 0
+offset_left = 85.0
+offset_right = 133.0
+offset_bottom = 17.0
+theme = ExtResource("3_h5rw7")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UpgradeStatButton" type="Button" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat2"]
+layout_mode = 0
+offset_left = 133.0
+offset_right = 146.0
+offset_bottom = 13.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_tii2f")
+theme_override_styles/hover = SubResource("StyleBoxTexture_p5qms")
+script = ExtResource("39_gqfbm")
+stat_type = 2
+
+[node name="Stat3" type="Control" parent="UI/Character/SkillStats/CharacterStats/StatsContainer"]
+custom_minimum_size = Vector2(0, 13)
+layout_mode = 2
+
+[node name="StatNameLabel" type="Label" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat3"]
+layout_mode = 0
+offset_right = 61.0
+offset_bottom = 13.0
+theme = ExtResource("3_h5rw7")
+text = "Constitution"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatAmountLabel" type="Label" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat3"]
+layout_mode = 0
+offset_left = 60.0
+offset_right = 86.0
+offset_bottom = 13.0
+theme = ExtResource("3_h5rw7")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatUpCostLabel" type="Label" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat3"]
+layout_mode = 0
+offset_left = 85.0
+offset_right = 133.0
+offset_bottom = 17.0
+theme = ExtResource("3_h5rw7")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UpgradeStatButton" type="Button" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat3"]
+layout_mode = 0
+offset_left = 133.0
+offset_right = 146.0
+offset_bottom = 13.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_tii2f")
+theme_override_styles/hover = SubResource("StyleBoxTexture_p5qms")
+script = ExtResource("39_gqfbm")
+stat_type = 3
+
+[node name="Stat4" type="Control" parent="UI/Character/SkillStats/CharacterStats/StatsContainer"]
+custom_minimum_size = Vector2(0, 13)
+layout_mode = 2
+
+[node name="StatNameLabel" type="Label" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat4"]
+layout_mode = 0
+offset_right = 61.0
+offset_bottom = 13.0
+theme = ExtResource("3_h5rw7")
+text = "Intelligence"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatAmountLabel" type="Label" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat4"]
+layout_mode = 0
+offset_left = 60.0
+offset_right = 86.0
+offset_bottom = 13.0
+theme = ExtResource("3_h5rw7")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatUpCostLabel" type="Label" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat4"]
+layout_mode = 0
+offset_left = 85.0
+offset_right = 133.0
+offset_bottom = 17.0
+theme = ExtResource("3_h5rw7")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UpgradeStatButton" type="Button" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat4"]
+layout_mode = 0
+offset_left = 133.0
+offset_right = 146.0
+offset_bottom = 13.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_tii2f")
+theme_override_styles/hover = SubResource("StyleBoxTexture_p5qms")
+script = ExtResource("39_gqfbm")
+stat_type = 4
+
+[node name="Stat5" type="Control" parent="UI/Character/SkillStats/CharacterStats/StatsContainer"]
+custom_minimum_size = Vector2(0, 13)
+layout_mode = 2
+
+[node name="StatNameLabel" type="Label" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat5"]
+layout_mode = 0
+offset_right = 61.0
+offset_bottom = 13.0
+theme = ExtResource("3_h5rw7")
+text = "Perception"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatAmountLabel" type="Label" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat5"]
+layout_mode = 0
+offset_left = 60.0
+offset_right = 86.0
+offset_bottom = 13.0
+theme = ExtResource("3_h5rw7")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatUpCostLabel" type="Label" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat5"]
+layout_mode = 0
+offset_left = 85.0
+offset_right = 133.0
+offset_bottom = 17.0
+theme = ExtResource("3_h5rw7")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UpgradeStatButton" type="Button" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat5"]
+layout_mode = 0
+offset_left = 133.0
+offset_right = 146.0
+offset_bottom = 13.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_tii2f")
+theme_override_styles/hover = SubResource("StyleBoxTexture_p5qms")
+script = ExtResource("39_gqfbm")
+stat_type = 5
+
+[node name="Stat6" type="Control" parent="UI/Character/SkillStats/CharacterStats/StatsContainer"]
+custom_minimum_size = Vector2(0, 13)
+layout_mode = 2
+
+[node name="StatNameLabel" type="Label" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat6"]
+layout_mode = 0
+offset_right = 61.0
+offset_bottom = 13.0
+theme = ExtResource("3_h5rw7")
+text = "Charisma"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatAmountLabel" type="Label" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat6"]
+layout_mode = 0
+offset_left = 60.0
+offset_right = 86.0
+offset_bottom = 13.0
+theme = ExtResource("3_h5rw7")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatUpCostLabel" type="Label" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat6"]
+layout_mode = 0
+offset_left = 85.0
+offset_right = 133.0
+offset_bottom = 17.0
+theme = ExtResource("3_h5rw7")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UpgradeStatButton" type="Button" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat6"]
+layout_mode = 0
+offset_left = 133.0
+offset_right = 146.0
+offset_bottom = 13.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_tii2f")
+theme_override_styles/hover = SubResource("StyleBoxTexture_p5qms")
+script = ExtResource("39_gqfbm")
+stat_type = 6
+
+[node name="CharacterSkills" type="Control" parent="UI/Character/SkillStats"]
+anchors_preset = 0
+offset_left = 9.0
+offset_top = 195.0
+offset_right = 168.0
+offset_bottom = 283.0
+
+[node name="CharacterSkillsContainer" type="HBoxContainer" parent="UI/Character/SkillStats/CharacterSkills"]
+layout_mode = 0
+offset_left = 8.0
+offset_right = 150.0
+offset_bottom = 22.0
+theme_override_constants/separation = 2
+script = ExtResource("38_q48wp")
+
+[node name="CharacterSkillButton1" type="TextureButton" parent="UI/Character/SkillStats/CharacterSkills/CharacterSkillsContainer"]
+visible = false
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_3mc1x")
+texture_pressed = ExtResource("43_jnhuc")
+
+[node name="CharacterSkillRect" type="TextureRect" parent="UI/Character/SkillStats/CharacterSkills/CharacterSkillsContainer/CharacterSkillButton1"]
+layout_mode = 0
+offset_right = 22.0
+offset_bottom = 22.0
+
+[node name="CharacterSkillButton2" type="TextureButton" parent="UI/Character/SkillStats/CharacterSkills/CharacterSkillsContainer"]
+visible = false
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_3mc1x")
+texture_pressed = ExtResource("43_jnhuc")
+
+[node name="CharacterSkillRect" type="TextureRect" parent="UI/Character/SkillStats/CharacterSkills/CharacterSkillsContainer/CharacterSkillButton2"]
+layout_mode = 0
+offset_right = 22.0
+offset_bottom = 22.0
+
+[node name="CharacterSkillButton3" type="TextureButton" parent="UI/Character/SkillStats/CharacterSkills/CharacterSkillsContainer"]
+visible = false
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_3mc1x")
+texture_pressed = ExtResource("43_jnhuc")
+
+[node name="CharacterSkillRect" type="TextureRect" parent="UI/Character/SkillStats/CharacterSkills/CharacterSkillsContainer/CharacterSkillButton3"]
+layout_mode = 0
+offset_right = 22.0
+offset_bottom = 22.0
+
+[node name="CharacterSkillButton4" type="TextureButton" parent="UI/Character/SkillStats/CharacterSkills/CharacterSkillsContainer"]
+visible = false
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_3mc1x")
+texture_pressed = ExtResource("43_jnhuc")
+
+[node name="CharacterSkillRect" type="TextureRect" parent="UI/Character/SkillStats/CharacterSkills/CharacterSkillsContainer/CharacterSkillButton4"]
+layout_mode = 0
+offset_right = 22.0
+offset_bottom = 22.0
+
+[node name="CharacterSkillButton5" type="TextureButton" parent="UI/Character/SkillStats/CharacterSkills/CharacterSkillsContainer"]
+visible = false
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_3mc1x")
+texture_pressed = ExtResource("43_jnhuc")
+
+[node name="CharacterSkillRect" type="TextureRect" parent="UI/Character/SkillStats/CharacterSkills/CharacterSkillsContainer/CharacterSkillButton5"]
+layout_mode = 0
+offset_right = 22.0
+offset_bottom = 22.0
+
+[node name="CharacterSkillButton6" type="TextureButton" parent="UI/Character/SkillStats/CharacterSkills/CharacterSkillsContainer"]
+visible = false
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_3mc1x")
+texture_pressed = ExtResource("43_jnhuc")
+
+[node name="CharacterSkillRect" type="TextureRect" parent="UI/Character/SkillStats/CharacterSkills/CharacterSkillsContainer/CharacterSkillButton6"]
+layout_mode = 0
+offset_right = 22.0
+offset_bottom = 22.0
+
+[node name="SkillDescLabel" type="RichTextLabel" parent="UI/Character/SkillStats/CharacterSkills"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 26.0
+offset_right = 156.0
+offset_bottom = 85.0
+theme = ExtResource("3_h5rw7")
 
 [node name="CharacterContainer" type="HBoxContainer" parent="UI/Character"]
 layout_mode = 0
@@ -1897,6 +2394,7 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_11eno")
 script = ExtResource("9_lvtlu")
 
 [node name="Inventory" type="Control" parent="UI"]
+visible = false
 custom_minimum_size = Vector2(176, 296)
 layout_mode = 1
 anchors_preset = 6
@@ -2223,6 +2721,7 @@ offset_left = 26.0
 offset_top = 58.0
 offset_right = 74.0
 offset_bottom = 82.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_x4ts7")
 
 [node name="ItemActionsVBox" type="VBoxContainer" parent="UI/ItemActionsPanel"]
 layout_mode = 0
@@ -2334,6 +2833,9 @@ text = "Delete"
 label_settings = SubResource("LabelSettings_5fpuk")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+position = Vector2(0, 1)
 
 [editable path="UI/Character/Equipment/LeftCharacterVBox/AmuletPanel/EquipButton"]
 [editable path="UI/Character/Equipment/LeftCharacterVBox/RingPanel1/EquipButton"]

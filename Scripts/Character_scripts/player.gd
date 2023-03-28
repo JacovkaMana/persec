@@ -2,7 +2,8 @@ extends Actor
 class_name PlayerScript
 
 signal dropped_inventory_opened(item_array: Array[Item])
-signal dialogue_started(with: CharacterBody2D)
+signal dialogue_started(with: String, text: String)
+signal dialogue_ended()
 signal skill_used(skill_id: int)
 
 var invincible_timer = null
@@ -49,7 +50,7 @@ func _ready():
 	for i in range(5):
 		data.inventory.add_item(test_item_stackable)
 	
-	print(interaction_area)
+
 
 
 	
@@ -58,7 +59,7 @@ func _ready():
 	data.skills.add_skill(GlobalSkills.skills['Slash'])
 	data.skills.add_skill(GlobalSkills.skills['Fireball'])
 	data.skills.add_skill(GlobalSkills.skills['Ice Slash'])
-	print(data.skills.get_skills())
+
 
 
 
@@ -67,6 +68,7 @@ func _ready():
 
 func _physics_process(_delta):
 	super(_delta)
+	
 					
 
 func set_zone(to):
@@ -98,13 +100,20 @@ func use_skill_id(id: int):
 func interact_with_nearest():
 	if (interaction_area.get_overlapping_areas()):
 		interaction_area.get_overlapping_areas()[0].get_parent().interact()
-		if interaction_area.get_overlapping_areas()[0].get_parent().get_class() == "CharacterBody2D":
-			trigger_dialogue(interaction_area.get_overlapping_areas()[0].get_parent())
+#		if interaction_area.get_overlapping_areas()[0].get_parent().get_class() == "CharacterBody2D":
+#			trigger_dialogue(interaction_area.get_overlapping_areas()[0].get_parent())
 
 func trigger_dialogue(with):
-	print("Dialogue with " + str(with))
-	emit_signal("dialogue_started", with)
-	self.player_state = Enums.EPlayerState.TALKING
-	with.current_state = Enums.ECharacterState.TALKING
+	var dialogue_text = with.get_dialogue()
+	print(dialogue_text)
+	if dialogue_text == null:
+		player_state = Enums.EPlayerState.ROAMING
+		with.current_state = Enums.ECharacterState.ROAMING
+		emit_signal("dialogue_ended")
+	else:
+		print("Dialogue with " + str(with))
+		emit_signal("dialogue_started", with.npc_name, dialogue_text)
+		self.player_state = Enums.EPlayerState.TALKING
+		with.current_state = Enums.ECharacterState.TALKING
 	
 

@@ -54,5 +54,8 @@ func get_slot_type():
 
 func is_equipable()->bool:
 	return true
+	
+func get_flat_damage()->int:
+	return randi_range(damage_low,damage_high)
 
 

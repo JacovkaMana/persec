@@ -45,6 +45,7 @@ func ui(_event):
 
 func interact(_event):
 	if _event.is_action_pressed("interact"):
+		player.move_direction = Vector2(0, 0);
 		player.interact_with_nearest()
 		
 func player_movement(_event):

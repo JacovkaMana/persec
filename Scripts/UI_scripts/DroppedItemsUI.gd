@@ -61,7 +61,7 @@ func update_inventory()->void:
 
 
 func _on_new_item(new_item)->bool:
-	print(new_item, "NEW ITEM ADDED")
+	#print(new_item, "NEW ITEM ADDED")
 	
 	var newItemButton = ItemButton.instantiate()
 	
@@ -143,7 +143,7 @@ func _on_slot_mouse_rclick(slot: BaseSlotUI):
 		
 		var actions: Array = active_slot_rclick.get_actions()
 		actions.append('Take')
-		print(actions)
+		#print(actions)
 		for action in actions_panel.get_node("ItemActionsVBox").get_children() as Array[Button]:
 			if String(action.name).split("B")[0] in actions:
 				action.visible = true

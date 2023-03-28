@@ -32,6 +32,8 @@ var INVENTORY : Array[Item] = []
 @export_category('Skills')
 @export var SKILLS: Array[String] = []
 
+@export var interaction_list: Array[Enums.ECharacterActions] = []
+
 var walk_radius: float = 50
 var last_direction_change: float = 0
 #@onready var raycast: ShapeCast2D = $RayCast
@@ -56,7 +58,7 @@ var Chest = preload("res://Scenes/Objects/chest.tscn")
 
 func _ready():
 	super()
-	
+	add_to_group('interactable')
 	
 	#self.connect("mouse_entered", _mouse_entered)
 	self.connect("mouse_entered", _on_mouse_entered)
@@ -73,7 +75,6 @@ func _ready():
 	if (not self.get_collision_mask_value(7)):
 		self.set_collision_mask_value(7, true)
 		collision = move_and_collide(Vector2(0,0))
-		print(collision)
 		
 	vision.connect("body_entered", _on_vision_enter) 
 	vision.connect("body_exited", _on_vision_exit) 
@@ -109,6 +110,8 @@ func _physics_process(_delta):
 				else:
 					move_direction = (current_zone.follow_position - self.global_position).normalized()
 					move_speed = 70
+		Enums.ECharacterState.TALKING:
+			self.move_direction = Vector2(0, 0);
 		_:
 			pass
 
@@ -123,7 +126,10 @@ func get_dialogue():
 	var dialogue: Dictionary = JSON.parse_string(file.get_as_text())
 	if (str(dialogue_number + 1) in dialogue.keys()):
 		dialogue_number += 1
-		print(dialogue[str(dialogue_number)].text)
+		return dialogue[str(dialogue_number)].text
+	else:
+		dialogue_number = 0
+		return null
 
 	
 func on_interact_area():
@@ -146,7 +152,7 @@ func _on_mouse_exited():
 	
 func set_zone(to : Area2D):
 	current_zone = to
-	print('nps at ' + str(current_zone))
+	#print('nps at ' + str(current_zone))
 	
 func _on_vision_enter(who):
 	if (who == player):
@@ -174,15 +180,13 @@ func _hide_label():
 	label.visible = false
 	
 
-func take_ranged_damage(_skill: AttackSkill, _strength):
-	super(_skill, _strength)
+func take_ranged_damage(_skill: AttackSkill, _from: Actor, _strength):
+	super(_skill, _from, _strength)
 	if (data.hitpoints <= 0):
-		print('death')
 		animation_tree.set("parameters/death/transition_request", "true")
 	pass
 
 func _on_anim_finished(name):
-	print(name)
 	if (name == "death"):
 		var death_chest = Chest.instantiate()
 		
@@ -193,4 +197,12 @@ func _on_anim_finished(name):
 		self.queue_free()
 
 func interact():
-	get_dialogue()
+	if Enums.ECharacterActions.TALK in self.interaction_list:
+			player.trigger_dialogue(self)
+	return null
+
+
+
+	
+	
+	

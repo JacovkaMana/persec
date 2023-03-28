@@ -1,12 +1,12 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bkei5kjj1v3mx"]
 
-[ext_resource type="Shader" path="res://Art/Shaders/HighlightShaderScript.gdshader" id="1_pes8y"]
+[ext_resource type="Shader" path="res://Art/Shaders/HighlightShaderScript.gdshader" id="1_iiyjg"]
 
 [resource]
-shader = ExtResource("1_pes8y")
+shader = ExtResource("1_iiyjg")
 shader_parameter/rainbow = false
-shader_parameter/line_color = Color(0.396078, 0.87451, 1, 1)
-shader_parameter/line_scale = 1.0
-shader_parameter/frequency = 1.0
-shader_parameter/light_offset = 0.177
+shader_parameter/line_color = Color(0.0784314, 0.231373, 0.427451, 0.784314)
+shader_parameter/line_scale = 1.2
+shader_parameter/frequency = 0.5
+shader_parameter/light_offset = 0.5
 shader_parameter/alpha = 1.0

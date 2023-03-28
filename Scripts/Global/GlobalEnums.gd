@@ -18,6 +18,12 @@ enum ECharacterState {
 	MELEE,
 }
 
+enum ECharacterActions{
+	NONE = 0,
+	TALK,
+	TRADE
+}
+
 enum EWeaponSubtype {
 	NONE = 0,
 	SWORD,

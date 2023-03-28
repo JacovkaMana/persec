@@ -25,7 +25,7 @@ var active_item_lclick: Item = null
 
 
 func _ready():
-	print(ui_settings.BackgroundColor)
+	#print(ui_settings.BackgroundColor)
 	bground.modulate = ui_settings.BackgroundColor
 	shadow.modulate = ui_settings.ShadowColor
 	

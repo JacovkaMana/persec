@@ -6,5 +6,8 @@
 Label/colors/font_color = Color(0.0784314, 0.231373, 0.427451, 1)
 Label/font_sizes/font_size = 8
 Label/fonts/font = ExtResource("1_2a0td")
+RichTextLabel/colors/default_color = Color(0.0784314, 0.231373, 0.427451, 1)
+RichTextLabel/font_sizes/normal_font_size = 8
+RichTextLabel/fonts/normal_font = ExtResource("1_2a0td")
 TabContainer/font_sizes/font_size = 8
 TabContainer/fonts/font = ExtResource("1_2a0td")

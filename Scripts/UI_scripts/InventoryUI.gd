@@ -92,7 +92,7 @@ func update_inventory(types_arr: Array)->void:
 
 
 func _on_new_item(new_item)->bool:
-	print(new_item, "NEW ITEM ADDED")
+	#print(new_item, "NEW ITEM ADDED")
 	
 	var newItemButton = ItemButton.instantiate()
 	
