@@ -1,6 +1,7 @@
 extends HBoxContainer
 
-
+@onready var equip = $"../Equipment"
+@onready var skill = $"../SkillStats"
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	_on_equip_selected()
@@ -14,9 +15,9 @@ func _process(delta):
 
 
 func _on_equip_selected():
-	get_parent().get_child(4).visible = false
-	get_parent().get_child(3).visible = true
+	skill.visible = false
+	equip.visible = true
 	
 func _on_stats_selected():
-	get_parent().get_child(3).visible = false
-	get_parent().get_child(4).visible = true
+	equip.visible = false
+	skill.visible = true

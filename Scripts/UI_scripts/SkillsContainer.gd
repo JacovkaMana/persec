@@ -1,4 +1,4 @@
-extends HBoxContainer
+extends Control
 
 @export var lightup: Color 
 
@@ -12,10 +12,14 @@ func _ready():
 	
 	player.connect("skill_used", _on_skill_used)
 	
-	for i in skill_slots.size():
-		get_child(i).get_child(2).texture = skill_slots[i].icon
-		get_child(i).visible = true
+	for i in get_child_count():
+		if i < skill_slots.size():
+			get_child(i).get_child(2).texture = skill_slots[i].icon
+			get_child(i).visible = true
+		else:
+			get_child(i).visible = false
 		#skill_slots[i]
+		#skill_slots.size():
 		
 func _on_skill_used(skill_i: int):
 	head_timer = Timer.new()

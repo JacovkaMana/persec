@@ -3,10 +3,14 @@
 [ext_resource type="FontFile" uid="uid://bv3p1twxqpx6p" path="res://Fonts/Minecraftia-Regular.ttf" id="1_2a0td"]
 
 [resource]
-Label/colors/font_color = Color(0.0784314, 0.231373, 0.427451, 1)
+Label/colors/font_color = Color(0.658824, 0.682353, 0.823529, 1)
+Label/colors/font_outline_color = Color(0.25098, 0.27451, 0.411765, 1)
+Label/constants/outline_size = 0
 Label/font_sizes/font_size = 8
 Label/fonts/font = ExtResource("1_2a0td")
-RichTextLabel/colors/default_color = Color(0.0784314, 0.231373, 0.427451, 1)
+RichTextLabel/colors/default_color = Color(0.658824, 0.682353, 0.823529, 1)
+RichTextLabel/colors/font_outline_color = Color(0.25098, 0.27451, 0.411765, 1)
+RichTextLabel/constants/outline_size = 0
 RichTextLabel/font_sizes/normal_font_size = 8
 RichTextLabel/fonts/normal_font = ExtResource("1_2a0td")
 TabContainer/font_sizes/font_size = 8

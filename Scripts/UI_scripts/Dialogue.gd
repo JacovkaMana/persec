@@ -6,6 +6,7 @@ extends Control
 @onready var actions_panel: Panel = get_tree().get_root().find_child("ItemActionsPanel", true, false)
 
 
+
 var active_item_lclick: Item = null
 var active_slot_rclick: BaseSlotUI = null
 var panel_hover = false
@@ -16,7 +17,8 @@ var _item_inventory = null
 @onready var ui_settings = get_parent()
 @onready var bground = $Background
 @onready var shadow = $Shadow
-@onready var name_label = $Name/Label
+@onready var name_label = $Label
+@onready var text_label = $RichTextLabel
 # !!!!! При закрытии закрывается ItemActionsPanel, если она над этой менюшкой!!!
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,8 +29,8 @@ func _ready():
 
 func _on_dialogue(with, text):
 	ui_settings.close_everything()
-	bground.get_child(0).text = text
-	name_label.text = with
+	text_label.text = text
+	name_label.text = ' ' + with + ' '
 	self.visible = true
 	#ui_settings.pause_game()
 

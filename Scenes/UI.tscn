@@ -1,9 +1,9 @@
-[gd_scene load_steps=119 format=3 uid="uid://dbksnam8cuw3o"]
+[gd_scene load_steps=126 format=3 uid="uid://dbksnam8cuw3o"]
 
 [ext_resource type="Script" path="res://Scripts/UI_scripts/CharacterUI.gd" id="1_8tod6"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/UI.gd" id="1_cvjfy"]
 [ext_resource type="Script" path="res://Scripts/Global/GlobalUI.gd" id="1_v0356"]
-[ext_resource type="Texture2D" uid="uid://dwcfhyykdr6st" path="res://Art/Masks/Circle96.png" id="2_3oc87"]
+[ext_resource type="Texture2D" uid="uid://d0g2mydsmvops" path="res://Art/Masks/Circle95.png" id="2_3n7ix"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/MiniMap.gd" id="2_np4g4"]
 [ext_resource type="Texture2D" uid="uid://bh3irpn80km6o" path="res://Art/UI/UI_Backplate.png" id="3_5tfiq"]
 [ext_resource type="Theme" uid="uid://l3ac6jr0hvrq" path="res://Themes/ui_theme.tres" id="3_h5rw7"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://dj6saa2kydvlc" path="res://Art/UI/HUD_Stamina.png" id="4_v6vyg"]
 [ext_resource type="Texture2D" uid="uid://bx0tcs2i3qce1" path="res://Art/UI/SkillTestShdaow.png" id="4_wsh4e"]
 [ext_resource type="Texture2D" uid="uid://dhim64q84qukn" path="res://Art/UI/UI_Char.png" id="4_xrr7e"]
+[ext_resource type="Texture2D" uid="uid://620p5t3jo6py" path="res://Art/UI/border97.png" id="5_6uhk6"]
 [ext_resource type="FontFile" uid="uid://bv3p1twxqpx6p" path="res://Fonts/Minecraftia-Regular.ttf" id="5_ai818"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/StaminaContainer.gd" id="5_cohd6"]
 [ext_resource type="Texture2D" uid="uid://m03kme2ly37o" path="res://Art/UI/Border22_1.png" id="5_e6gov"]
@@ -36,12 +37,19 @@
 [ext_resource type="Texture2D" uid="uid://bcrf2c3610tq7" path="res://Art/UI/Armor.png" id="15_58hf7"]
 [ext_resource type="Texture2D" uid="uid://i14ccwbjhcj6" path="res://Art/UI/Glove.png" id="16_rijxa"]
 [ext_resource type="Texture2D" uid="uid://bqfc0dywa7fnf" path="res://Art/UI/Boots.png" id="17_otl5j"]
-[ext_resource type="Texture2D" uid="uid://br8sc2snmr5k2" path="res://Art/UI/Bar.png" id="18_c482i"]
 [ext_resource type="Texture2D" uid="uid://bdvj2eqeeqpw6" path="res://Art/UI/ItemAction_Hover.png" id="19_3pi6p"]
 [ext_resource type="Texture2D" uid="uid://kwcbpg33nxh1" path="res://Art/UI/Weapon.png" id="19_aroqj"]
-[ext_resource type="Texture2D" uid="uid://blflx073tr8sg" path="res://Art/UI/circle15.png" id="19_hnkgf"]
+[ext_resource type="Texture2D" uid="uid://bjh6g16iitosp" path="res://Art/UI/Status_inner.png" id="19_mqkio"]
+[ext_resource type="Script" path="res://Scripts/UI_scripts/StatusScript.gd" id="19_uf81t"]
 [ext_resource type="Texture2D" uid="uid://5f3t2ue0hkna" path="res://Art/UI/WeaponShield.png" id="19_x824n"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/ItemAction.gd" id="20_nbmo2"]
+[ext_resource type="Texture2D" uid="uid://b25iadwyw65ih" path="res://Art/UI/Status_border.png" id="20_uddr6"]
+[ext_resource type="Texture2D" uid="uid://bcqrape83qe7c" path="res://Art/UI/Stamina_backplate.png" id="22_bdig2"]
+[ext_resource type="Texture2D" uid="uid://bio43rn7bhnj5" path="res://Art/UI/Dialogue_border.png" id="22_uev2u"]
+[ext_resource type="Texture2D" uid="uid://dndl53k15saxq" path="res://Art/UI/Dialogue_inner.png" id="23_js3lx"]
+[ext_resource type="Texture2D" uid="uid://ca2txa1cb3i8u" path="res://Art/UI/UI_Border.png" id="24_p3u6k"]
+[ext_resource type="Texture2D" uid="uid://di66g4t2colgg" path="res://Art/UI/test_portrait.png" id="24_wbwd0"]
+[ext_resource type="Texture2D" uid="uid://bgtg5vu2hb3gt" path="res://Art/UI/test_romb.png" id="25_70son"]
 [ext_resource type="Texture2D" uid="uid://ta1fnun00pmm" path="res://Art/UI/UI_ShadowFull.png" id="28_s3eqt"]
 [ext_resource type="Texture2D" uid="uid://bvm648ct7g0co" path="res://Art/UI/Character.png" id="28_ws067"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/CoverPanel.gd" id="29_5vimk"]
@@ -56,6 +64,7 @@
 [ext_resource type="Script" path="res://Scripts/UI_scripts/Dialogue.gd" id="40_bt3bl"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/ScreenLabel.gd" id="41_42gqc"]
 [ext_resource type="Texture2D" uid="uid://s2khw21nfwhq" path="res://Art/UI/Rect.png" id="43_jnhuc"]
+[ext_resource type="Texture2D" uid="uid://b0dgkkrkrhc1q" path="res://Art/UI/test_textfield3.png" id="57_4von8"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_71ey8"]
 
@@ -207,45 +216,35 @@ font = ExtResource("5_ai818")
 font_size = 8
 font_color = Color(0.682353, 0.741176, 0.807843, 1)
 
-[sub_resource type="Gradient" id="Gradient_dmp6y"]
-offsets = PackedFloat32Array(0, 0.58042, 1)
-colors = PackedColorArray(1, 1, 1, 0.607843, 1, 1, 1, 1, 1, 1, 1, 0.607843)
+[sub_resource type="Gradient" id="Gradient_wog8y"]
+offsets = PackedFloat32Array(0.296774)
+colors = PackedColorArray(0, 0, 0, 0.490196)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_2ii58"]
-gradient = SubResource("Gradient_dmp6y")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fh04w"]
+gradient = SubResource("Gradient_wog8y")
+width = 3
+
+[sub_resource type="Gradient" id="Gradient_22esc"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 0, 0, 0.392157, 1, 0.64, 0.64, 1, 1, 0, 0, 0.392157)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qtgob"]
+gradient = SubResource("Gradient_22esc")
 width = 10
-height = 10
+height = 30
 fill_from = Vector2(0.5, 0)
 fill_to = Vector2(0.5, 1)
 
-[sub_resource type="Gradient" id="Gradient_bx6uy"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(1, 1, 1, 1)
+[sub_resource type="Gradient" id="Gradient_er5yb"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(0.16, 0.2, 0.4, 1, 0.88, 0.9, 1, 1, 0.16, 0.2, 0.4, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_l3fiq"]
-gradient = SubResource("Gradient_bx6uy")
-
-[sub_resource type="Gradient" id="Gradient_cyf48"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_vfqfn"]
-gradient = SubResource("Gradient_cyf48")
-
-[sub_resource type="Gradient" id="Gradient_tlact"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_xii4s"]
-gradient = SubResource("Gradient_tlact")
-width = 20
-
-[sub_resource type="LabelSettings" id="LabelSettings_gs1ul"]
-line_spacing = 0.0
-font = ExtResource("5_ai818")
-font_size = 8
-font_color = Color(0.682353, 0.741176, 0.807843, 1)
-shadow_size = 0
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_100xk"]
+gradient = SubResource("Gradient_er5yb")
+width = 10
+height = 30
+fill_from = Vector2(0.5, 0)
+fill_to = Vector2(0.5, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sb5ce"]
 texture = ExtResource("11_72ij6")
@@ -390,20 +389,33 @@ modulate_color = Color(0.0784314, 0.231373, 0.427451, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5cgrn"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_rh1un"]
+font = ExtResource("5_ai818")
+font_size = 8
+font_color = Color(0.658824, 0.682353, 0.823529, 1)
+outline_size = 1
+outline_color = Color(0.25098, 0.27451, 0.411765, 1)
+
 [node name="UI" type="CanvasLayer"]
 layer = 3
 script = ExtResource("1_v0356")
 ShadowColor = Color(0.282353, 0.45098, 0.666667, 1)
 BackgroundColor = Color(0.682353, 0.741176, 0.807843, 0.588235)
 
-[node name="MiniMap" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.784314)
+[node name="MinimapUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MiniMap" type="Sprite2D" parent="MinimapUI"]
+self_modulate = Color(1, 1, 1, 0.784314)
 clip_children = 1
 position = Vector2(583, 56)
-texture = ExtResource("2_3oc87")
+texture = ExtResource("2_3n7ix")
 script = ExtResource("2_np4g4")
 
-[node name="MinimapDisplay" type="TextureRect" parent="MiniMap"]
+[node name="MinimapDisplay" type="TextureRect" parent="MinimapUI/MiniMap"]
 texture_filter = 4
 texture_repeat = 1
 anchors_preset = 8
@@ -418,11 +430,22 @@ grow_vertical = 2
 texture = SubResource("ViewportTexture_71ey8")
 stretch_mode = 2
 
-[node name="PlayerMarker" parent="MiniMap" instance=ExtResource("4_rx6uk")]
+[node name="PlayerMarker" parent="MinimapUI/MiniMap" instance=ExtResource("4_rx6uk")]
+self_modulate = Color(0.537255, 0.54902, 0.611765, 0.784314)
 offset_left = -51.0
 offset_top = -51.0
 offset_right = -45.0
 offset_bottom = -45.0
+
+[node name="TextureRect" type="TextureRect" parent="MinimapUI"]
+self_modulate = Color(0.537255, 0.54902, 0.611765, 0.784314)
+show_behind_parent = true
+layout_mode = 0
+offset_left = 534.0
+offset_top = 7.0
+offset_right = 631.0
+offset_bottom = 104.0
+texture = ExtResource("5_6uhk6")
 
 [node name="ScreenLabel" type="Control" parent="."]
 custom_minimum_size = Vector2(640, 360)
@@ -441,10 +464,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 12480.0
-offset_top = 7190.0
-offset_right = 13120.0
-offset_bottom = 7208.0
+offset_left = 13440.0
+offset_top = 7730.0
+offset_right = 14080.0
+offset_bottom = 7748.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(320, 9)
@@ -625,12 +648,11 @@ mouse_filter = 1
 
 [node name="StaminaContainer" type="HBoxContainer" parent="HUD"]
 layout_mode = 0
-offset_left = 259.0
-offset_top = 295.0
-offset_right = 380.0
-offset_bottom = 303.0
-theme_override_constants/separation = 1
-alignment = 1
+offset_left = 243.0
+offset_top = 306.0
+offset_right = 364.0
+offset_bottom = 314.0
+theme_override_constants/separation = 3
 script = ExtResource("5_cohd6")
 full_material = ExtResource("6_a0wlw")
 
@@ -667,178 +689,222 @@ material = ExtResource("6_a0wlw")
 layout_mode = 2
 texture = ExtResource("4_v6vyg")
 
-[node name="SkillsContainer" type="HBoxContainer" parent="HUD"]
+[node name="SkillsHotbar" type="Control" parent="HUD"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="HUD/SkillsHotbar"]
+visible = false
 layout_mode = 0
-offset_left = 192.0
-offset_top = 306.0
-offset_right = 448.0
-offset_bottom = 351.0
-alignment = 1
+offset_left = 582.0
+offset_top = 288.0
+offset_right = 627.0
+offset_bottom = 333.0
+rotation = 0.785398
+color = Color(0.25098, 0.27451, 0.411765, 1)
+
+[node name="SkillsContainer" type="Control" parent="HUD/SkillsHotbar"]
+anchors_preset = 0
+offset_left = 550.0
+offset_top = 287.0
+offset_right = 616.0
+offset_bottom = 352.0
 script = ExtResource("7_drj05")
 lightup = Color(0.890196, 0, 0, 1)
 
-[node name="Skill1" type="Control" parent="HUD/SkillsContainer"]
-visible = false
+[node name="Skill1" type="Control" parent="HUD/SkillsHotbar/SkillsContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+anchors_preset = 0
+offset_left = 17.0
+offset_top = 1.0
+offset_right = 49.0
+offset_bottom = 33.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="BackRect" type="TextureRect" parent="HUD/SkillsContainer/Skill1"]
+[node name="BackRect" type="TextureRect" parent="HUD/SkillsHotbar/SkillsContainer/Skill1"]
+self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
 layout_mode = 0
 offset_top = -1.0
 offset_right = 30.0
 offset_bottom = 29.0
 texture = ExtResource("34_f6u2n")
 
-[node name="ColorRect" type="TextureRect" parent="HUD/SkillsContainer/Skill1"]
-modulate = Color(0.0784314, 0.231373, 0.427451, 1)
+[node name="ColorRect" type="TextureRect" parent="HUD/SkillsHotbar/SkillsContainer/Skill1"]
+modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
 layout_mode = 0
 offset_right = 30.0
 offset_bottom = 30.0
 texture = ExtResource("34_f6u2n")
 
-[node name="SkillRect" type="TextureRect" parent="HUD/SkillsContainer/Skill1"]
+[node name="SkillRect" type="TextureRect" parent="HUD/SkillsHotbar/SkillsContainer/Skill1"]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 5.0
 offset_right = 20.0
 offset_bottom = 21.0
 
-[node name="Skill2" type="Control" parent="HUD/SkillsContainer"]
-visible = false
+[node name="Skill2" type="Control" parent="HUD/SkillsHotbar/SkillsContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+anchors_preset = 0
+offset_top = 19.0
+offset_right = 32.0
+offset_bottom = 51.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="BackRect" type="TextureRect" parent="HUD/SkillsContainer/Skill2"]
+[node name="BackRect" type="TextureRect" parent="HUD/SkillsHotbar/SkillsContainer/Skill2"]
+self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
 layout_mode = 0
 offset_top = -1.0
 offset_right = 30.0
 offset_bottom = 29.0
 texture = ExtResource("34_f6u2n")
 
-[node name="ColorRect" type="TextureRect" parent="HUD/SkillsContainer/Skill2"]
-modulate = Color(0.0784314, 0.231373, 0.427451, 1)
+[node name="ColorRect" type="TextureRect" parent="HUD/SkillsHotbar/SkillsContainer/Skill2"]
+modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
 layout_mode = 0
 offset_right = 30.0
 offset_bottom = 30.0
 texture = ExtResource("34_f6u2n")
 
-[node name="SkillRect" type="TextureRect" parent="HUD/SkillsContainer/Skill2"]
+[node name="SkillRect" type="TextureRect" parent="HUD/SkillsHotbar/SkillsContainer/Skill2"]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 5.0
 offset_right = 20.0
 offset_bottom = 21.0
 
-[node name="Skill3" type="Control" parent="HUD/SkillsContainer"]
-visible = false
+[node name="Skill3" type="Control" parent="HUD/SkillsHotbar/SkillsContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+anchors_preset = 0
+offset_left = 34.0
+offset_top = 19.0
+offset_right = 66.0
+offset_bottom = 51.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="BackRect" type="TextureRect" parent="HUD/SkillsContainer/Skill3"]
+[node name="BackRect" type="TextureRect" parent="HUD/SkillsHotbar/SkillsContainer/Skill3"]
+self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
 layout_mode = 0
 offset_top = -1.0
 offset_right = 30.0
 offset_bottom = 29.0
 texture = ExtResource("34_f6u2n")
 
-[node name="ColorRect" type="TextureRect" parent="HUD/SkillsContainer/Skill3"]
-modulate = Color(0.0784314, 0.231373, 0.427451, 1)
+[node name="ColorRect" type="TextureRect" parent="HUD/SkillsHotbar/SkillsContainer/Skill3"]
+modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
 layout_mode = 0
 offset_right = 30.0
 offset_bottom = 30.0
 texture = ExtResource("34_f6u2n")
 
-[node name="SkillRect" type="TextureRect" parent="HUD/SkillsContainer/Skill3"]
+[node name="SkillRect" type="TextureRect" parent="HUD/SkillsHotbar/SkillsContainer/Skill3"]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 5.0
 offset_right = 20.0
 offset_bottom = 21.0
 
-[node name="Skill4" type="Control" parent="HUD/SkillsContainer"]
-visible = false
+[node name="Skill4" type="Control" parent="HUD/SkillsHotbar/SkillsContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+anchors_preset = 0
+offset_left = 17.0
+offset_top = 37.0
+offset_right = 49.0
+offset_bottom = 69.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="BackRect" type="TextureRect" parent="HUD/SkillsContainer/Skill4"]
+[node name="BackRect" type="TextureRect" parent="HUD/SkillsHotbar/SkillsContainer/Skill4"]
+self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
 layout_mode = 0
 offset_top = -1.0
 offset_right = 30.0
 offset_bottom = 29.0
 texture = ExtResource("34_f6u2n")
 
-[node name="ColorRect" type="TextureRect" parent="HUD/SkillsContainer/Skill4"]
-modulate = Color(0.0784314, 0.231373, 0.427451, 1)
+[node name="ColorRect" type="TextureRect" parent="HUD/SkillsHotbar/SkillsContainer/Skill4"]
+modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
 layout_mode = 0
 offset_right = 30.0
 offset_bottom = 30.0
 texture = ExtResource("34_f6u2n")
 
-[node name="SkillRect" type="TextureRect" parent="HUD/SkillsContainer/Skill4"]
+[node name="SkillRect" type="TextureRect" parent="HUD/SkillsHotbar/SkillsContainer/Skill4"]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 5.0
 offset_right = 20.0
 offset_bottom = 21.0
 
-[node name="Skill5" type="Control" parent="HUD/SkillsContainer"]
+[node name="Skill5" type="Control" parent="HUD/SkillsHotbar/SkillsContainer"]
 visible = false
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+anchors_preset = 0
+offset_top = 72.0
+offset_right = 32.0
+offset_bottom = 104.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="BackRect" type="TextureRect" parent="HUD/SkillsContainer/Skill5"]
+[node name="BackRect" type="TextureRect" parent="HUD/SkillsHotbar/SkillsContainer/Skill5"]
+self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
 layout_mode = 0
 offset_top = -1.0
 offset_right = 30.0
 offset_bottom = 29.0
 texture = ExtResource("34_f6u2n")
 
-[node name="ColorRect" type="TextureRect" parent="HUD/SkillsContainer/Skill5"]
-modulate = Color(0.0784314, 0.231373, 0.427451, 1)
+[node name="ColorRect" type="TextureRect" parent="HUD/SkillsHotbar/SkillsContainer/Skill5"]
+modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
 layout_mode = 0
 offset_right = 30.0
 offset_bottom = 30.0
 texture = ExtResource("34_f6u2n")
 
-[node name="SkillRect" type="TextureRect" parent="HUD/SkillsContainer/Skill5"]
+[node name="SkillRect" type="TextureRect" parent="HUD/SkillsHotbar/SkillsContainer/Skill5"]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 5.0
 offset_right = 20.0
 offset_bottom = 21.0
 
-[node name="Skill6" type="Control" parent="HUD/SkillsContainer"]
+[node name="Skill6" type="Control" parent="HUD/SkillsHotbar/SkillsContainer"]
 visible = false
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+anchors_preset = 0
+offset_left = 36.0
+offset_top = 72.0
+offset_right = 68.0
+offset_bottom = 104.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="BackRect" type="TextureRect" parent="HUD/SkillsContainer/Skill6"]
+[node name="BackRect" type="TextureRect" parent="HUD/SkillsHotbar/SkillsContainer/Skill6"]
+self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
 layout_mode = 0
 offset_top = -1.0
 offset_right = 30.0
 offset_bottom = 29.0
 texture = ExtResource("34_f6u2n")
 
-[node name="ColorRect" type="TextureRect" parent="HUD/SkillsContainer/Skill6"]
-modulate = Color(0.0784314, 0.231373, 0.427451, 1)
+[node name="ColorRect" type="TextureRect" parent="HUD/SkillsHotbar/SkillsContainer/Skill6"]
+modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
 layout_mode = 0
 offset_right = 30.0
 offset_bottom = 30.0
 texture = ExtResource("34_f6u2n")
 
-[node name="SkillRect" type="TextureRect" parent="HUD/SkillsContainer/Skill6"]
+[node name="SkillRect" type="TextureRect" parent="HUD/SkillsHotbar/SkillsContainer/Skill6"]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 5.0
@@ -1294,54 +1360,102 @@ text = "Skills
 label_settings = SubResource("LabelSettings_87j6u")
 horizontal_alignment = 1
 
-[node name="ColorRect" type="TextureRect" parent="HUD"]
+[node name="Status" type="Control" parent="HUD"]
+anchors_preset = 0
+offset_left = 240.0
+offset_top = 315.0
+offset_right = 393.0
+offset_bottom = 338.0
+script = ExtResource("19_uf81t")
+
+[node name="Inner" type="TextureRect" parent="HUD/Status"]
+self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.490196)
 layout_mode = 0
-offset_left = 14.0
-offset_top = 326.0
-offset_right = 118.0
-offset_bottom = 343.0
-texture = ExtResource("18_c482i")
+offset_right = 153.0
+offset_bottom = 23.0
+texture = ExtResource("19_mqkio")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="HUD/ColorRect"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -21.0
-offset_top = -2.5
-offset_right = 79.0
-offset_bottom = 2.5
-grow_horizontal = 2
-grow_vertical = 2
-value = 50.0
-nine_patch_stretch = true
-texture_progress = SubResource("GradientTexture2D_2ii58")
-tint_progress = Color(0.839216, 0, 0, 0.784314)
+[node name="Border" type="TextureRect" parent="HUD/Status"]
+layout_mode = 0
+offset_right = 153.0
+offset_bottom = 23.0
+texture = ExtResource("20_uddr6")
 
-[node name="TextureProgressBar2" type="TextureProgressBar" parent="HUD/ColorRect"]
+[node name="HealthBar" type="TextureRect" parent="HUD/Status"]
+custom_minimum_size = Vector2(0, 3)
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = 14
 anchor_top = 0.5
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -36.0
-offset_top = -7.5
-offset_right = -21.0
+offset_left = 2.0
+offset_top = 4.5
+offset_right = -56.0
 offset_bottom = 7.5
 grow_horizontal = 2
 grow_vertical = 2
-value = 100.0
-nine_patch_stretch = true
-texture_progress = ExtResource("19_hnkgf")
-tint_progress = Color(0.839216, 0, 0, 0.580392)
+texture = SubResource("GradientTexture1D_fh04w")
 
-[node name="TextureRect" type="TextureRect" parent="HUD/ColorRect"]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="HUD/Status/HealthBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 40.0
+nine_patch_stretch = true
+texture_progress = SubResource("GradientTexture2D_qtgob")
+
+[node name="StaminaBar" type="TextureRect" parent="HUD/Status"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 2.0
+offset_top = -6.5
+offset_right = -56.0
+offset_bottom = -3.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_fh04w")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="HUD/Status/StaminaBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 40.0
+nine_patch_stretch = true
+texture_progress = SubResource("GradientTexture2D_100xk")
+
+[node name="StaminaBackplate" type="TextureProgressBar" parent="HUD/Status"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_top = -9.0
+offset_right = 153.0
+offset_bottom = 10.0
+max_value = 151.0
+value = 95.0
+texture_progress = ExtResource("22_bdig2")
+
+[node name="HealthLabel" type="Label" parent="HUD/Status"]
+layout_mode = 0
+offset_left = 98.0
+offset_top = 3.0
+offset_right = 152.0
+offset_bottom = 26.0
+theme = ExtResource("3_h5rw7")
+text = "4024/1040"
+horizontal_alignment = 1
+vertical_alignment = 2
 
 [node name="Dialogue" type="Control" parent="."]
 visible = false
@@ -1351,71 +1465,77 @@ offset_right = 640.0
 offset_bottom = 360.0
 script = ExtResource("40_bt3bl")
 
-[node name="Shadow" type="TextureRect" parent="Dialogue"]
-material = ExtResource("11_3hf22")
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -200.0
-offset_top = -61.0
-offset_right = 202.0
-offset_bottom = -19.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = SubResource("GradientTexture1D_l3fiq")
-
-[node name="Background" type="TextureRect" parent="Dialogue"]
-self_modulate = Color(0.584314, 0.658824, 0.752941, 0.784314)
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -199.0
-offset_top = -60.0
-offset_right = 201.0
-offset_bottom = -20.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = SubResource("GradientTexture1D_vfqfn")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Dialogue/Background"]
-custom_minimum_size = Vector2(350, 50)
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -175.0
-offset_top = 3.0
-offset_right = 175.0
-offset_bottom = 53.0
-grow_horizontal = 2
-theme = ExtResource("3_h5rw7")
-text = "	asddddddddasdd dddddddddddd dddddddd dddssssssssssssffffffffffffffffffffffffffssssssssssssssssssssssssssssssssssssssssss"
-
-[node name="Name" type="TextureRect" parent="Dialogue"]
-self_modulate = Color(0.0784314, 0.231373, 0.427451, 0.588235)
-custom_minimum_size = Vector2(27, 9)
+[node name="Variant3" type="TextureRect" parent="Dialogue"]
 layout_mode = 0
-offset_left = 120.0
-offset_top = 288.0
-offset_right = 157.0
-offset_bottom = 299.0
-texture = SubResource("GradientTexture1D_xii4s")
+offset_left = 121.0
+offset_top = 289.0
+offset_right = 521.0
+offset_bottom = 352.0
 
-[node name="Label" type="Label" parent="Dialogue/Name"]
+[node name="Border" type="TextureRect" parent="Dialogue/Variant3"]
 layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
+offset_right = 400.0
+offset_bottom = 63.0
+texture = ExtResource("22_uev2u")
+
+[node name="Inner" type="TextureRect" parent="Dialogue/Variant3"]
+self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.784314)
+layout_mode = 1
+offset_right = 400.0
+offset_bottom = 63.0
+texture = ExtResource("23_js3lx")
+
+[node name="Portrait" type="TextureRect" parent="Dialogue/Variant3"]
+layout_mode = 0
+offset_left = -46.0
+offset_right = -3.0
+offset_bottom = 63.0
+texture = ExtResource("24_wbwd0")
+
+[node name="TextureRect" type="TextureRect" parent="Dialogue/Variant3"]
+layout_mode = 0
+offset_left = -17.0
+offset_top = -17.0
+offset_right = 14.0
 offset_bottom = 14.0
+texture = ExtResource("25_70son")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Dialogue"]
+layout_mode = 1
+offset_left = 131.0
+offset_top = 298.0
+offset_right = 511.0
+offset_bottom = 340.0
+theme = ExtResource("3_h5rw7")
+text = "asddddddddasdd dddddddddddd dddddddd dddssssssssssssffffffffffffffffffffffffffssssssssssssssssssssssssssssssssssssssssss"
+fit_content = true
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+
+[node name="Label" type="Label" parent="Dialogue"]
+layout_mode = 1
+offset_left = 135.0
+offset_top = 275.0
+offset_right = 161.0
+offset_bottom = 292.0
+theme = ExtResource("3_h5rw7")
+text = " Test "
+vertical_alignment = 2
+
+[node name="Shadow" type="ColorRect" parent="Dialogue/Label"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.784314)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -4.5
+offset_bottom = 4.5
 grow_horizontal = 2
-text = "Test"
-label_settings = SubResource("LabelSettings_gs1ul")
-horizontal_alignment = 1
+grow_vertical = 2
+color = Color(0.0588235, 0.0705882, 0.141176, 0.784314)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 visible = false
@@ -1493,18 +1613,29 @@ grow_vertical = 2
 pivot_offset = Vector2(154, 0)
 
 [node name="Shadow" type="TextureRect" parent="UI/Character"]
+visible = false
 texture_filter = 1
 texture_repeat = 1
 material = ExtResource("11_3hf22")
+layout_mode = 0
+offset_left = -3.0
+offset_top = -3.0
+offset_right = 173.0
+offset_bottom = 293.0
+texture = ExtResource("28_s3eqt")
+
+[node name="Plates2" type="TextureRect" parent="UI/Character"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.588235)
 layout_mode = 0
 offset_left = -2.0
 offset_top = -2.0
 offset_right = 174.0
 offset_bottom = 294.0
-texture = ExtResource("28_s3eqt")
+texture = ExtResource("24_p3u6k")
 
 [node name="Background" type="TextureRect" parent="UI/Character"]
-modulate = Color(1, 1, 1, 0.392157)
+modulate = Color(0.0588235, 0.0705882, 0.141176, 0.784314)
 layout_mode = 0
 offset_right = 176.0
 offset_bottom = 296.0
@@ -1533,6 +1664,7 @@ offset_bottom = 296.0
 script = ExtResource("1_8tod6")
 
 [node name="Plates" type="TextureRect" parent="UI/Character/Equipment"]
+self_modulate = Color(1, 1, 1, 0.784314)
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -2411,6 +2543,7 @@ grow_vertical = 2
 script = ExtResource("7_0wyy8")
 
 [node name="Shadow" type="TextureRect" parent="UI/Inventory"]
+visible = false
 texture_filter = 1
 texture_repeat = 1
 material = ExtResource("11_3hf22")
@@ -2423,11 +2556,12 @@ theme = ExtResource("3_h5rw7")
 texture = ExtResource("28_s3eqt")
 
 [node name="Background" type="TextureRect" parent="UI/Inventory"]
-modulate = Color(0.682353, 0.741176, 0.807843, 0.666667)
+modulate = Color(0.0588235, 0.0705882, 0.141176, 0.784314)
 layout_mode = 0
 offset_right = 176.0
 offset_bottom = 296.0
 texture = ExtResource("3_5tfiq")
+flip_h = true
 
 [node name="Plates" type="TextureRect" parent="UI/Inventory"]
 layout_mode = 0
@@ -2834,7 +2968,39 @@ label_settings = SubResource("LabelSettings_5fpuk")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="TestText" type="Control" parent="."]
+visible = false
+custom_minimum_size = Vector2(640, 360)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="TestText"]
+self_modulate = Color(1, 1, 1, 0.784314)
+layout_mode = 0
+offset_left = 275.0
+offset_top = 203.0
+offset_right = 367.0
+offset_bottom = 231.0
+texture = ExtResource("57_4von8")
+
+[node name="Label" type="Label" parent="TestText/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Want to skip?"
+label_settings = SubResource("LabelSettings_rh1un")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
 position = Vector2(0, 1)
 
 [editable path="UI/Character/Equipment/LeftCharacterVBox/AmuletPanel/EquipButton"]

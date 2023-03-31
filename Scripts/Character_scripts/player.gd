@@ -39,10 +39,10 @@ func _ready():
 	)
 	data.inventory.add_item(test_boots)
 	
-	if not data.inventory.is_initialized():
-		for stat in data.stats.keys():
-			data.stats[stat] = 7
-		data.inventory._is_initialize = true
+#	if not data.inventory.is_initialized():
+#		for stat in data.stats.keys():
+#			data.stats[stat] = 7
+#		data.inventory._is_initialize = true
 		
 	var test_item_stackable = StackableItems.potions.small_potion
 

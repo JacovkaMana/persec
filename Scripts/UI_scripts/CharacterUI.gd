@@ -26,8 +26,8 @@ var active_item_lclick: Item = null
 
 func _ready():
 	#print(ui_settings.BackgroundColor)
-	bground.modulate = ui_settings.BackgroundColor
-	shadow.modulate = ui_settings.ShadowColor
+	#bground.modulate = ui_settings.BackgroundColor
+	#shadow.modulate = ui_settings.ShadowColor
 	
 	player.data.inventory.connect("equip_item_changed", _on_update_request)
 	_on_update_request(Enums.EEquipmentSlot.CONSUMABLE_1, null)

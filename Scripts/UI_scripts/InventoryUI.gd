@@ -17,8 +17,8 @@ var ItemButton = preload("res://Scenes/Inventory/ItemButton.tscn")
 @onready var inventory_container = $InventoryContainer
 
 func _ready():
-	bground.modulate = ui_settings.BackgroundColor
-	shadow.modulate = ui_settings.ShadowColor
+#	bground.modulate = ui_settings.BackgroundColor
+#	shadow.modulate = ui_settings.ShadowColor
 	
 	inventory_container.get_child(0).connect("pressed", update_inventory.bind([Enums.EItemType.NONE]))
 	inventory_container.get_child(1).connect("pressed", update_inventory.bind([Enums.EItemType.WEAPON]))

@@ -4,7 +4,8 @@ extends Sprite2D
 @onready var tilemap: TileMap = get_tree().get_root().find_child("TileMap", true, false)
 @onready var capture_viewport = get_tree().get_root().find_child("CaptureViewport", true, false)
 @onready var viewport_camera: Camera2D = capture_viewport.find_child('Camera')
-@onready var player_marker: Sprite2D = capture_viewport.find_child('PlayerMarker')
+@onready var player_marker = $PlayerMarker
+@onready var player_line: Line2D = capture_viewport.find_child('PlayerLine')
 @onready var marker_object = preload("res://Scenes/Maps/player_marker.tscn")
 @onready var display = $MinimapDisplay
 
@@ -35,7 +36,22 @@ func _ready():
 		capture_viewport.add_child(marker)
 	#print(interactables)
 	
+	var _timer = Timer.new()
+	_timer.set_wait_time(0.5)
+	_timer.set_one_shot(false)
+	_timer.connect("timeout", _player_line)  
+	add_child(_timer)
+	_timer.start()
+
 func _process(delta):
 	viewport_camera.global_position = player.global_position
+	
 
-
+func _player_line():
+	
+	if (player_line.get_point_count() > 4):
+		player_line.remove_point(0)
+		
+	player_line.add_point(
+		Vector2(player.global_position.x, player.global_position.y)
+	)
