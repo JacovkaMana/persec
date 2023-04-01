@@ -18,18 +18,23 @@ var stats: Dictionary = {
 	Enums.EStat.CHARISMA: 5,	
 }
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	print('ready from playerdata')
+#func _ready():
+#	print('ready from playerdata')
 
 func _init():
+	
+	inventory.connect("equip_item_changed", recalculate_stats)
 	recalculate_stats()
-	print('init from playerdata')
+	#print('init from data')
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
 
-func recalculate_stats():
+
+
+func recalculate_stats(_slot = null, _item = null):
 	calculate_hp()
+	calculate_modifiers()
 	
 func calculate_hp():
 	var cons = stats[Enums.EStat.CONSTITUTION]
@@ -38,5 +43,14 @@ func calculate_hp():
 	max_hitpoints = round( 
 		((20*cons + 0.2*cons*cons) + flat) * (1 + perc / 100)
 	)
-	print(max_hitpoints)
+	#print(max_hitpoints)
+	
+func calculate_modifiers():
+	for item in inventory._equipment.values():
+		if (item):
+			for modifier in item.modifiers:
+				print( modifier.get_modifier_text() )
+	#print( inventory._equipment.keys() )
+#	for item in inventory.get_equipments():
+#		print(item)
 	

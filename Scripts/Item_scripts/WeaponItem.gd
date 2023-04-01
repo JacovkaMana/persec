@@ -40,14 +40,15 @@ func _init(_name: String = '', _description: String = '', _rarity = null, _type 
 	self.damage_high = rad_damage[1]
 	self.damage = str(rad_damage[0]) + ' - ' + str(rad_damage[1])
 	
-	self.modifiers.append(
-		Modifier.new()
-	)
+	generate_modifiers()
 
 
 
 func get_item_type():
 	return Enums.EItemType.WEAPON
+	
+func get_equip_type():
+	return Enums.EEquipType.WEAPON
 	
 func get_slot_type():
 	return [Enums.EEquipmentSlot.R_HAND, Enums.EEquipmentSlot.L_HAND]

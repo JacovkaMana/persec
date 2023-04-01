@@ -16,13 +16,14 @@ func _process(delta):
 	#print(player.data.stamina)
 	for i in range(self.get_child_count()):
 		if (i + 1) <= player.data.max_stamina:
-			var alpha = min(player.data.stamina, i + 1) / (i + 1)
-			self.get_child(i).self_modulate = Color(alpha,alpha,alpha, alpha)
+#			var alpha = min(player.data.stamina, i + 1) / (i + 1)
+#			self.get_child(i).self_modulate = Color(alpha,alpha,alpha, alpha)
 			#self.get_child(i).self_modulate = Color(1,1,1, alpha)
-			if (alpha == 1):
+			if (min(player.data.stamina, i + 1) / (i + 1) == 1):
+				self.get_child(i).visible = true
 				self.get_child(i).material = full_material
 			else:
-				self.get_child(i).material = null
+				self.get_child(i).visible = false
 
 		else:
 			self.get_child(i).visible = false

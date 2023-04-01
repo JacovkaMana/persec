@@ -1,6 +1,21 @@
 extends Node
 
 var random_armor: Array = [ArmorItem,BootsItem,GlovesItem,HelmItem]
+
+var modifier_subtype = {
+	Enums.EEquipType.ARMOR: [Enums.EModifierSubtype.Armor, Enums.EModifierSubtype.Evasion, Enums.EModifierSubtype.Hitpoints],
+	Enums.EEquipType.GLOVES: [Enums.EModifierSubtype.Armor, Enums.EModifierSubtype.Evasion, Enums.EModifierSubtype.Hitpoints],
+	Enums.EEquipType.HELM: [Enums.EModifierSubtype.Armor, Enums.EModifierSubtype.Evasion, Enums.EModifierSubtype.Hitpoints],
+	Enums.EEquipType.BOOTS: [Enums.EModifierSubtype.Armor, Enums.EModifierSubtype.Evasion, Enums.EModifierSubtype.Hitpoints],
+	Enums.EEquipType.WEAPON: [Enums.EModifierSubtype.Physical_Damage, 
+				Enums.EModifierSubtype.Fire_Damage, 
+				Enums.EModifierSubtype.Ice_Damage, 
+				Enums.EModifierSubtype.Wind_Damage, 
+				Enums.EModifierSubtype.Earth_Damage, 
+				Enums.EModifierSubtype.Thunder_Damage, 
+				Enums.EModifierSubtype.Water_Damage]
+}
+
 var rarity_chances: Dictionary = {
 	Enums.ERarity.Common : 50,	 
 	Enums.ERarity.Uncommon : 30,	 

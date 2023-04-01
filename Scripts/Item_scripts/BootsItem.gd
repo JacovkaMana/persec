@@ -3,12 +3,17 @@ extends BaseEquipableItem
 
 func get_item_type():
 	return Enums.EItemType.BOOTS
+	
+func get_equip_type():
+	return Enums.EEquipType.BOOTS
 
 func get_type_text()->String:
 		return "Boots"
 
 func get_slot_type():
 	return [Enums.EEquipmentSlot.BOOTS]
+	
+	
 	
 func _init(_name: String = '', _description: String = '', _rarity = null):
 	
@@ -27,9 +32,7 @@ func _init(_name: String = '', _description: String = '', _rarity = null):
 		self.name = 'Botz'
 
 
-	self.modifiers.append(
-		Modifier.new()
-	)
+	generate_modifiers()
 
 
 func is_equipable()->bool:

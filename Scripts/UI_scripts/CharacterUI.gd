@@ -99,12 +99,16 @@ func _on_equip_mouse_rclick(slot: BaseSlotUI):
 func _on_equip_mouse_lclick(slot: BaseSlotUI):
 	if (!desc_panel.visible || active_item_lclick != slot.item):
 		active_item_lclick = slot.item
-		desc_panel.get_node("NameLabel").text = slot.item.name
-		desc_panel.find_child("DescLabel").text = slot.item.description
-		desc_panel.visible = true
+#		desc_panel.find_child("NameLabel").text = slot.item.name
+#		desc_panel.find_child("DescLabel").text = slot.item.description
+#		desc_panel.visible = true
+		desc_panel.set_item(slot.item)
 	else:
-		desc_panel.visible = false
-		desc_panel.position = Vector2(180,32)
+		desc_panel.remove_item()
+#		desc_panel.visible = false
+#		desc_panel.position = Vector2(-84,32)
+		
+		
 	
 
 func _on_action_click(action: String):

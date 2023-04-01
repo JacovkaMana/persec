@@ -1,4 +1,4 @@
-[gd_scene load_steps=126 format=3 uid="uid://dbksnam8cuw3o"]
+[gd_scene load_steps=128 format=3 uid="uid://dbksnam8cuw3o"]
 
 [ext_resource type="Script" path="res://Scripts/UI_scripts/CharacterUI.gd" id="1_8tod6"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/UI.gd" id="1_cvjfy"]
@@ -30,7 +30,6 @@
 [ext_resource type="Texture2D" uid="uid://bs3yn2n4cgxgk" path="res://Art/UI/Ring.png" id="12_k2607"]
 [ext_resource type="Texture2D" uid="uid://dw3xbfgh77pij" path="res://Art/UI/Item_Hover.png" id="12_teqho"]
 [ext_resource type="Texture2D" uid="uid://dcodbjst37jag" path="res://Art/UI/Misc.png" id="13_aduk8"]
-[ext_resource type="Texture2D" uid="uid://ccapmy3ecf4or" path="res://Art/UI/UI_ItemDesc.png" id="13_esgr1"]
 [ext_resource type="PackedScene" uid="uid://cekpuyet8xdyi" path="res://Scenes/Inventory/EquipButton.tscn" id="13_i4h7w"]
 [ext_resource type="Texture2D" uid="uid://bw8r3ppeekyk5" path="res://Art/UI/Helmet.png" id="14_f3qx8"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/ItemDescPanel.gd" id="14_k6vq4"]
@@ -64,7 +63,9 @@
 [ext_resource type="Script" path="res://Scripts/UI_scripts/Dialogue.gd" id="40_bt3bl"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/ScreenLabel.gd" id="41_42gqc"]
 [ext_resource type="Texture2D" uid="uid://s2khw21nfwhq" path="res://Art/UI/Rect.png" id="43_jnhuc"]
+[ext_resource type="Texture2D" uid="uid://b6l272i0gpps8" path="res://Art/UI/ItemDescription_inner.png" id="48_mna44"]
 [ext_resource type="Texture2D" uid="uid://b0dgkkrkrhc1q" path="res://Art/UI/test_textfield3.png" id="57_4von8"]
+[ext_resource type="Texture2D" uid="uid://o4le8l6bgt6m" path="res://Art/UI/ItemDescription_border.png" id="62_abqq1"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_71ey8"]
 
@@ -288,26 +289,20 @@ region_rect = Rect2(0, 0, 22, 22)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0uvwy"]
 texture = ExtResource("28_ws067")
-region_rect = Rect2(-5, -5, 44, 66)
+texture_margin_right = 8.2844
+texture_margin_bottom = 0.622998
+region_rect = Rect2(-8, -9, 52, 78)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_thfi8"]
 size = Vector2(73, 101)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dk08e"]
-texture = ExtResource("13_esgr1")
-region_rect = Rect2(0, 0, 80, 100)
+texture = ExtResource("48_mna44")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
 
-[sub_resource type="LabelSettings" id="LabelSettings_h0dk4"]
-line_spacing = 0.0
-font = ExtResource("5_ai818")
-font_size = 8
-font_color = Color(0.0705882, 0.333333, 0.698039, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_wulp2"]
-line_spacing = 0.0
-font = ExtResource("5_ai818")
-font_size = 8
-font_color = Color(0, 0, 0, 1)
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_yra3x"]
+color = Color(0.537255, 0.54902, 0.611765, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tii2f"]
 
@@ -341,6 +336,18 @@ region_rect = Rect2(0, 0, 11, 11)
 [sub_resource type="ButtonGroup" id="ButtonGroup_bge57"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_t4b0o"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_h0dk4"]
+line_spacing = 0.0
+font = ExtResource("5_ai818")
+font_size = 8
+font_color = Color(0.0705882, 0.333333, 0.698039, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_wulp2"]
+line_spacing = 0.0
+font = ExtResource("5_ai818")
+font_size = 8
+font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x4ts7"]
 
@@ -464,10 +471,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 13440.0
-offset_top = 7730.0
-offset_right = 14080.0
-offset_bottom = 7748.0
+offset_left = 15040.0
+offset_top = 8630.0
+offset_right = 15680.0
+offset_bottom = 8648.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(320, 9)
@@ -657,7 +664,7 @@ script = ExtResource("5_cohd6")
 full_material = ExtResource("6_a0wlw")
 
 [node name="StaminaBlock_1" type="TextureRect" parent="HUD/StaminaContainer"]
-self_modulate = Color(0.501961, 0.501961, 0.501961, 1)
+self_modulate = Color(0.960784, 0.960784, 0.960784, 1)
 texture_filter = 1
 texture_repeat = 1
 material = ExtResource("6_a0wlw")
@@ -1599,7 +1606,6 @@ mouse_filter = 1
 script = ExtResource("1_cvjfy")
 
 [node name="Character" type="Control" parent="UI"]
-visible = false
 custom_minimum_size = Vector2(176, 296)
 layout_mode = 1
 anchors_preset = 4
@@ -1657,7 +1663,6 @@ text = "Character"
 horizontal_alignment = 1
 
 [node name="Equipment" type="Control" parent="UI/Character"]
-visible = false
 anchors_preset = 0
 offset_right = 176.0
 offset_bottom = 296.0
@@ -1985,6 +1990,7 @@ grow_horizontal = 1
 grow_vertical = 1
 
 [node name="CharacterPanel" type="Panel" parent="UI/Character/Equipment"]
+texture_repeat = 1
 layout_mode = 0
 offset_left = 51.0
 offset_top = 68.0
@@ -2017,42 +2023,79 @@ position = Vector2(37.5, 50.5)
 shape = SubResource("RectangleShape2D_thfi8")
 
 [node name="ItemDescPanel" type="Panel" parent="UI/Character/Equipment"]
-visible = false
-layout_mode = 0
+self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.784314)
 offset_left = 180.0
-offset_top = 33.0
-offset_right = 260.0
-offset_bottom = 133.0
+offset_top = 32.0
+offset_right = 300.0
+offset_bottom = 232.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_dk08e")
 script = ExtResource("14_k6vq4")
 
 [node name="NameLabel" type="Label" parent="UI/Character/Equipment/ItemDescPanel"]
 layout_mode = 0
-offset_left = 8.0
-offset_top = 3.0
-offset_right = 71.0
-offset_bottom = 28.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 94.0
+offset_bottom = 29.0
 size_flags_vertical = 0
+theme = ExtResource("3_h5rw7")
 text = "Funny Shield"
-label_settings = SubResource("LabelSettings_h0dk4")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="DescLabel" type="Label" parent="UI/Character/Equipment/ItemDescPanel"]
+[node name="ItemIcon" type="TextureRect" parent="UI/Character/Equipment/ItemDescPanel"]
 layout_mode = 0
+offset_left = 94.0
+offset_top = 4.0
+offset_right = 116.0
+offset_bottom = 26.0
+
+[node name="Border" type="TextureRect" parent="UI/Character/Equipment/ItemDescPanel"]
+offset_right = 120.0
+offset_bottom = 200.0
+texture = ExtResource("62_abqq1")
+
+[node name="Container" type="VFlowContainer" parent="UI/Character/Equipment/ItemDescPanel"]
 offset_left = 8.0
-offset_top = 35.0
-offset_right = 71.0
-offset_bottom = 69.0
+offset_top = 34.0
+offset_right = 111.0
+offset_bottom = 184.0
+theme_override_constants/v_separation = 4
+
+[node name="Description" type="RichTextLabel" parent="UI/Character/Equipment/ItemDescPanel/Container"]
+layout_mode = 2
 size_flags_vertical = 0
+mouse_filter = 2
+theme = ExtResource("3_h5rw7")
+bbcode_enabled = true
+text = "Heals a small amount of something"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="UI/Character/Equipment/ItemDescPanel/Container"]
+custom_minimum_size = Vector2(103, 1)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 1
+theme_override_styles/separator = SubResource("StyleBoxLine_yra3x")
+
+[node name="Modifier" type="RichTextLabel" parent="UI/Character/Equipment/ItemDescPanel/Container"]
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+theme = ExtResource("3_h5rw7")
 text = "+5 Attack
 -5 Defense"
-label_settings = SubResource("LabelSettings_wulp2")
-vertical_alignment = 1
-autowrap_mode = 3
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
 
 [node name="SkillStats" type="Control" parent="UI/Character"]
+visible = false
 anchors_preset = 0
 offset_right = 176.0
 offset_bottom = 296.0
@@ -2516,9 +2559,9 @@ button_group = SubResource("ButtonGroup_717w3")
 
 [node name="CharacterCloseButton" type="Button" parent="UI/Character"]
 layout_mode = 0
-offset_left = 164.0
+offset_left = 1.0
 offset_top = 1.0
-offset_right = 175.0
+offset_right = 12.0
 offset_bottom = 12.0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ojem5")
 theme_override_styles/hover = SubResource("StyleBoxTexture_ojq34")
@@ -2526,7 +2569,6 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_11eno")
 script = ExtResource("9_lvtlu")
 
 [node name="Inventory" type="Control" parent="UI"]
-visible = false
 custom_minimum_size = Vector2(176, 296)
 layout_mode = 1
 anchors_preset = 6
@@ -2685,40 +2727,80 @@ theme_override_constants/v_separation = 3
 columns = 5
 
 [node name="ItemDescPanel" type="Panel" parent="UI/Inventory"]
-visible = false
+self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.784314)
 layout_mode = 0
-offset_left = -84.0
+offset_left = -126.0
 offset_top = 32.0
-offset_right = -4.0
-offset_bottom = 132.0
+offset_right = -6.0
+offset_bottom = 232.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_dk08e")
 script = ExtResource("14_k6vq4")
 
 [node name="NameLabel" type="Label" parent="UI/Inventory/ItemDescPanel"]
 layout_mode = 0
-offset_left = 8.0
-offset_top = 3.0
-offset_right = 71.0
-offset_bottom = 28.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 94.0
+offset_bottom = 29.0
 size_flags_vertical = 0
+theme = ExtResource("3_h5rw7")
 text = "Funny Shield"
-label_settings = SubResource("LabelSettings_h0dk4")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="DescLabel" type="Label" parent="UI/Inventory/ItemDescPanel"]
+[node name="ItemIcon" type="TextureRect" parent="UI/Inventory/ItemDescPanel"]
+layout_mode = 0
+offset_left = 94.0
+offset_top = 4.0
+offset_right = 116.0
+offset_bottom = 26.0
+
+[node name="Border" type="TextureRect" parent="UI/Inventory/ItemDescPanel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("62_abqq1")
+
+[node name="Container" type="VFlowContainer" parent="UI/Inventory/ItemDescPanel"]
 layout_mode = 0
 offset_left = 8.0
-offset_top = 35.0
-offset_right = 71.0
-offset_bottom = 69.0
+offset_top = 34.0
+offset_right = 111.0
+offset_bottom = 184.0
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
+
+[node name="Description" type="RichTextLabel" parent="UI/Inventory/ItemDescPanel/Container"]
+layout_mode = 2
 size_flags_vertical = 0
-text = "+5 Attack
--5 Defense"
-label_settings = SubResource("LabelSettings_wulp2")
-vertical_alignment = 1
-autowrap_mode = 3
+mouse_filter = 2
+theme = ExtResource("3_h5rw7")
+bbcode_enabled = true
+text = "Heals a small amount of something"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="UI/Inventory/ItemDescPanel/Container"]
+custom_minimum_size = Vector2(103, 1)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 1
+theme_override_styles/separator = SubResource("StyleBoxLine_yra3x")
+
+[node name="Modifier" type="RichTextLabel" parent="UI/Inventory/ItemDescPanel/Container"]
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+theme = ExtResource("3_h5rw7")
+text = "+5 Attack damage
+-5 Defense damage"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
 
 [node name="InventoryCloseButton" type="Button" parent="UI/Inventory"]
 layout_mode = 1

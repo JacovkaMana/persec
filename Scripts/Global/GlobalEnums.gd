@@ -88,10 +88,20 @@ enum EItemType {
 	WEAPON,
 	ARMOR,
 	HELM,
+	GLOVES,
 	BOOTS,
 	AMULET,
 	CONSUMABLE,
 	NOTE,
+}
+
+enum EEquipType {
+	NONE = 0,
+	WEAPON,
+	ARMOR,
+	HELM,
+	GLOVES,
+	BOOTS,
 }
 
 enum EItemEffectType {
@@ -137,15 +147,21 @@ enum EModifierType {
 	NONE = 0,
 	Percent,
 	Flat,
-	Ability,
+	#Ability,
 }
 
 enum EModifierSubtype {
 	NONE = 0,
-	Damage,
-	Element,
+	Physical_Damage,
+	Fire_Damage,
+	Ice_Damage,
+	Wind_Damage,
+	Earth_Damage,
+	Thunder_Damage,
+	Water_Damage,
 	Armor,
-	Hitpoints,	
+	Evasion,
+	Hitpoints,
 }
 
 enum EItemActions {

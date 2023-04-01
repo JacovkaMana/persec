@@ -28,15 +28,16 @@ func _init(_name: String = '', _description: String = '', _rarity = null):
 		self.name = 'Glovess'
 
 
-	self.modifiers.append(
-		Modifier.new()
-	)
+	generate_modifiers()
 
 func get_item_type():
-	return Enums.EItemType.ARMOR
+	return Enums.EItemType.GLOVES
+
+func get_equip_type():
+	return Enums.EEquipType.GLOVES
 
 func get_slot_type():
-	return [Enums.EEquipmentSlot.ARMOR]
+	return [Enums.EEquipmentSlot.GLOVES]
 
 func is_equipable()->bool:
 	return true

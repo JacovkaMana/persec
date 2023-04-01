@@ -27,13 +27,14 @@ func _init(_name: String = '', _description: String = '', _rarity = null):
 	else:
 		self.name = 'Arrmor'
 
+	generate_modifiers()
 
-	self.modifiers.append(
-		Modifier.new()
-	)
 
 func get_item_type():
 	return Enums.EItemType.ARMOR
+	
+func get_equip_type():
+	return Enums.EEquipType.ARMOR
 
 func get_slot_type():
 	return [Enums.EEquipmentSlot.ARMOR]

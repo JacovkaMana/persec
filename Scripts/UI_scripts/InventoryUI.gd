@@ -88,7 +88,6 @@ func update_inventory(types_arr: Array)->void:
 			
 			newItemButton.connect("slot_mouse_lclick", _on_slot_mouse_lclick)
 			newItemButton.connect("slot_mouse_rclick", _on_slot_mouse_rclick)
-			newItemButton.connect("slot_mouse_move_check", _on_slot_mouse_move)
 
 
 func _on_new_item(new_item)->bool:
@@ -111,7 +110,6 @@ func _on_new_item(new_item)->bool:
 	
 	newItemButton.connect("slot_mouse_lclick", _on_slot_mouse_lclick)
 	newItemButton.connect("slot_mouse_rclick", _on_slot_mouse_rclick)
-	newItemButton.connect("slot_mouse_move_check", _on_slot_mouse_move)
 	
 	return true
 	
@@ -137,12 +135,14 @@ func _process(_delta):
 func _on_slot_mouse_lclick(slot: BaseSlotUI):
 	if (!desc_panel.visible || active_item_lclick != slot.item):
 		active_item_lclick = slot.item
-		desc_panel.find_child("NameLabel").text = slot.item.name
-		desc_panel.find_child("DescLabel").text = slot.item.description
-		desc_panel.visible = true
+#		desc_panel.find_child("NameLabel").text = slot.item.name
+#		desc_panel.find_child("DescLabel").text = slot.item.description
+#		desc_panel.visible = true
+		desc_panel.set_item(slot.item)
 	else:
-		desc_panel.visible = false
-		desc_panel.position = Vector2(-84,32)
+		desc_panel.remove_item()
+#		desc_panel.visible = false
+#		desc_panel.position = Vector2(-84,32)
 		
 	
 func _on_action_click(action: String):
@@ -152,7 +152,6 @@ func _on_action_click(action: String):
 				if player.data.inventory.equip_item(active_slot_rclick.item):
 					active_slot_rclick.disconnect("slot_mouse_lclick", _on_slot_mouse_lclick)
 					active_slot_rclick.disconnect("slot_mouse_rclick", _on_slot_mouse_rclick)
-					active_slot_rclick.disconnect("slot_mouse_move_check", _on_slot_mouse_move)
 					desc_panel.visible = false
 					actions_panel.visible = false
 			"Delete":
@@ -176,22 +175,5 @@ func _on_slot_mouse_rclick(slot: BaseSlotUI):
 		actions_panel.visible = true
 	else:
 		actions_panel.visible = false
-
-
-func _on_slot_mouse_move(_slot_type):
-	pass
-#	var mouse_pos = get_viewport().get_mouse_position()
-#
-#	if CHARACTER_PANEL_DICT[slot_type][0] < mouse_pos\
-#	&& CHARACTER_PANEL_DICT[slot_type][1] > mouse_pos:
-#		CHARACTER_PANEL_DICT[slot_type][2].get_child(0).visible = true
-#		panel_hover = true
-#	else:
-#		CHARACTER_PANEL_DICT[slot_type][2].get_child(0).visible = false
-#		panel_hover = false
-
-#	if panel_hover:
-#		print("released on panel, equip needed")
-#	else:
 	
 

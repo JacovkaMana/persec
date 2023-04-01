@@ -4,6 +4,9 @@ extends BaseEquipableItem
 func get_item_type():
 	return Enums.EItemType.HELM
 
+func get_equip_type():
+	return Enums.EEquipType.HELM
+	
 func get_type_text()->String:
 		return "Helm"
 
@@ -30,3 +33,5 @@ func _init(_name: String = '', _description: String = '', _rarity = null):
 		self.name = _name
 	else:
 		self.name = 'Helmm'
+		
+	generate_modifiers()
