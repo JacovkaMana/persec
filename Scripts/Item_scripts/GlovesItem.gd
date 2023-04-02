@@ -27,7 +27,10 @@ func _init(_name: String = '', _description: String = '', _rarity = null):
 	else:
 		self.name = 'Glovess'
 
-
+	item_stats["Physical Defense"] = 0
+	item_stats["Magic Defense"] = 0
+	item_stats["Evasion"] = 0
+	
 	generate_modifiers()
 
 func get_item_type():

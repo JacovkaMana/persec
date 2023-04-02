@@ -1,6 +1,8 @@
 class_name PlayerData
 extends Resource
 
+signal stats_changed(stats: Dictionary)
+
 @export var hitpoints: float = 100.0
 @export var max_hitpoints: float = 100.0
 @export var max_stamina: int = 4
@@ -35,6 +37,9 @@ func _process(_delta):
 func recalculate_stats(_slot = null, _item = null):
 	calculate_hp()
 	calculate_modifiers()
+	print ( inventory.get_equipments_slot(Enums.EEquipmentSlot.R_HAND) )
+	
+	emit_signal("stats_changed", stats)
 	
 func calculate_hp():
 	var cons = stats[Enums.EStat.CONSTITUTION]
@@ -43,7 +48,35 @@ func calculate_hp():
 	max_hitpoints = round( 
 		((20*cons + 0.2*cons*cons) + flat) * (1 + perc / 100)
 	)
+	return max_hitpoints
 	#print(max_hitpoints)
+
+func calculate_damage_range():
+	if (inventory.get_equipments_slot(Enums.EEquipmentSlot.R_HAND)):
+		return inventory.get_equipments_slot(Enums.EEquipmentSlot.R_HAND).damage
+	else:
+		return stats[Enums.EStat.STRENGTH]
+	
+func calculate_crit_chance():
+	if (inventory.get_equipments_slot(Enums.EEquipmentSlot.R_HAND)):
+		return inventory.get_equipments_slot(Enums.EEquipmentSlot.R_HAND).crit_chance
+	else:
+		return stats[Enums.EStat.DEXTERITY]
+	
+func calculate_crit_damage():
+	if (inventory.get_equipments_slot(Enums.EEquipmentSlot.R_HAND)):
+		return inventory.get_equipments_slot(Enums.EEquipmentSlot.R_HAND).crit_damage
+	else:
+		return stats[Enums.EStat.DEXTERITY]
+	
+func calculate_defense():
+	return 10
+	
+func calculate_evasion():
+	return 6
+	
+func calculate_damage():
+	return inventory.get_equipments_slot(Enums.EEquipmentSlot.R_HAND).get_flat_damage()
 	
 func calculate_modifiers():
 	for item in inventory._equipment.values():

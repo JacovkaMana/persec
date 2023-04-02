@@ -1,4 +1,4 @@
-[gd_scene load_steps=128 format=3 uid="uid://dbksnam8cuw3o"]
+[gd_scene load_steps=131 format=3 uid="uid://dbksnam8cuw3o"]
 
 [ext_resource type="Script" path="res://Scripts/UI_scripts/CharacterUI.gd" id="1_8tod6"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/UI.gd" id="1_cvjfy"]
@@ -64,6 +64,8 @@
 [ext_resource type="Script" path="res://Scripts/UI_scripts/ScreenLabel.gd" id="41_42gqc"]
 [ext_resource type="Texture2D" uid="uid://s2khw21nfwhq" path="res://Art/UI/Rect.png" id="43_jnhuc"]
 [ext_resource type="Texture2D" uid="uid://b6l272i0gpps8" path="res://Art/UI/ItemDescription_inner.png" id="48_mna44"]
+[ext_resource type="Texture2D" uid="uid://bsxiojosbcl3v" path="res://Art/UI/ItemDescription_begin.png" id="50_oaank"]
+[ext_resource type="Texture2D" uid="uid://d08e0rkainycx" path="res://Art/UI/ItemDescription_end.png" id="52_n5jko"]
 [ext_resource type="Texture2D" uid="uid://b0dgkkrkrhc1q" path="res://Art/UI/test_textfield3.png" id="57_4von8"]
 [ext_resource type="Texture2D" uid="uid://o4le8l6bgt6m" path="res://Art/UI/ItemDescription_border.png" id="62_abqq1"]
 
@@ -298,11 +300,12 @@ size = Vector2(73, 101)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dk08e"]
 texture = ExtResource("48_mna44")
-axis_stretch_horizontal = 2
-axis_stretch_vertical = 2
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_yra3x"]
 color = Color(0.537255, 0.54902, 0.611765, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_tq7nw"]
+color = Color(0, 0, 0, 0)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tii2f"]
 
@@ -2024,12 +2027,19 @@ shape = SubResource("RectangleShape2D_thfi8")
 
 [node name="ItemDescPanel" type="Panel" parent="UI/Character/Equipment"]
 self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.784314)
+layout_mode = 0
 offset_left = 180.0
 offset_top = 32.0
 offset_right = 300.0
 offset_bottom = 232.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_dk08e")
 script = ExtResource("14_k6vq4")
+
+[node name="Start" type="TextureRect" parent="UI/Character/Equipment/ItemDescPanel"]
+offset_top = 1.0
+offset_right = 120.0
+offset_bottom = 26.0
+texture = ExtResource("50_oaank")
 
 [node name="NameLabel" type="Label" parent="UI/Character/Equipment/ItemDescPanel"]
 layout_mode = 0
@@ -2052,20 +2062,28 @@ offset_right = 116.0
 offset_bottom = 26.0
 
 [node name="Border" type="TextureRect" parent="UI/Character/Equipment/ItemDescPanel"]
+visible = false
+layout_mode = 0
 offset_right = 120.0
 offset_bottom = 200.0
 texture = ExtResource("62_abqq1")
 
-[node name="Container" type="VFlowContainer" parent="UI/Character/Equipment/ItemDescPanel"]
+[node name="End" type="TextureRect" parent="UI/Character/Equipment/ItemDescPanel"]
+offset_top = 138.0
+offset_right = 120.0
+offset_bottom = 163.0
+texture = ExtResource("52_n5jko")
+
+[node name="Container" type="VBoxContainer" parent="UI/Character/Equipment/ItemDescPanel"]
+layout_mode = 2
 offset_left = 8.0
 offset_top = 34.0
-offset_right = 111.0
-offset_bottom = 184.0
-theme_override_constants/v_separation = 4
+offset_right = 112.0
+offset_bottom = 136.0
+theme_override_constants/separation = 4
 
 [node name="Description" type="RichTextLabel" parent="UI/Character/Equipment/ItemDescPanel/Container"]
 layout_mode = 2
-size_flags_vertical = 0
 mouse_filter = 2
 theme = ExtResource("3_h5rw7")
 bbcode_enabled = true
@@ -2075,6 +2093,26 @@ scroll_active = false
 autowrap_mode = 2
 
 [node name="HSeparator" type="HSeparator" parent="UI/Character/Equipment/ItemDescPanel/Container"]
+custom_minimum_size = Vector2(103, 1)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 1
+theme_override_styles/separator = SubResource("StyleBoxLine_yra3x")
+
+[node name="Stats" type="RichTextLabel" parent="UI/Character/Equipment/ItemDescPanel/Container"]
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+theme = ExtResource("3_h5rw7")
+text = "+5 Attack
+-5 Defense"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="ISeparator" type="HSeparator" parent="UI/Character/Equipment/ItemDescPanel/Container"]
 custom_minimum_size = Vector2(103, 1)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -2093,6 +2131,130 @@ text = "+5 Attack
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
+
+[node name="ISeparator2" type="HSeparator" parent="UI/Character/Equipment/ItemDescPanel/Container"]
+custom_minimum_size = Vector2(103, 1)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 1
+theme_override_styles/separator = SubResource("StyleBoxLine_tq7nw")
+
+[node name="CurrentStats" type="Control" parent="UI/Character/Equipment"]
+anchors_preset = 0
+offset_left = 23.0
+offset_top = 203.0
+offset_right = 153.0
+offset_bottom = 293.0
+
+[node name="Damage_label" type="Label" parent="UI/Character/Equipment/CurrentStats"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 43.0
+offset_bottom = 53.0
+theme = ExtResource("3_h5rw7")
+text = "Damage"
+
+[node name="Damage" type="Label" parent="UI/Character/Equipment/CurrentStats"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 39.0
+offset_right = 43.0
+offset_bottom = 62.0
+theme = ExtResource("3_h5rw7")
+text = "20-25"
+
+[node name="CritCh_label" type="Label" parent="UI/Character/Equipment/CurrentStats"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 49.0
+offset_right = 59.0
+offset_bottom = 72.0
+theme = ExtResource("3_h5rw7")
+text = "Crit Chance"
+
+[node name="CritCh" type="Label" parent="UI/Character/Equipment/CurrentStats"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 58.0
+offset_right = 43.0
+offset_bottom = 81.0
+theme = ExtResource("3_h5rw7")
+text = "14%"
+
+[node name="CritDmg_label" type="Label" parent="UI/Character/Equipment/CurrentStats"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 68.0
+offset_right = 59.0
+offset_bottom = 91.0
+theme = ExtResource("3_h5rw7")
+text = "Crit Damage"
+
+[node name="CritDmg" type="Label" parent="UI/Character/Equipment/CurrentStats"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 77.0
+offset_right = 43.0
+offset_bottom = 100.0
+theme = ExtResource("3_h5rw7")
+text = "120%"
+
+[node name="Health_label" type="Label" parent="UI/Character/Equipment/CurrentStats"]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 30.0
+offset_right = 108.0
+offset_bottom = 53.0
+theme = ExtResource("3_h5rw7")
+text = "Health"
+
+[node name="Health" type="Label" parent="UI/Character/Equipment/CurrentStats"]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 39.0
+offset_right = 108.0
+offset_bottom = 62.0
+theme = ExtResource("3_h5rw7")
+text = "1024"
+
+[node name="Defense_label" type="Label" parent="UI/Character/Equipment/CurrentStats"]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 49.0
+offset_right = 124.0
+offset_bottom = 72.0
+theme = ExtResource("3_h5rw7")
+text = "Defense"
+
+[node name="Defense" type="Label" parent="UI/Character/Equipment/CurrentStats"]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 58.0
+offset_right = 108.0
+offset_bottom = 81.0
+theme = ExtResource("3_h5rw7")
+text = "15"
+
+[node name="Evasion_label" type="Label" parent="UI/Character/Equipment/CurrentStats"]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 68.0
+offset_right = 124.0
+offset_bottom = 91.0
+theme = ExtResource("3_h5rw7")
+text = "Evasion"
+
+[node name="Evasion" type="Label" parent="UI/Character/Equipment/CurrentStats"]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 77.0
+offset_right = 108.0
+offset_bottom = 100.0
+theme = ExtResource("3_h5rw7")
+text = "79"
 
 [node name="SkillStats" type="Control" parent="UI/Character"]
 visible = false
@@ -2606,6 +2768,7 @@ texture = ExtResource("3_5tfiq")
 flip_h = true
 
 [node name="Plates" type="TextureRect" parent="UI/Inventory"]
+visible = false
 layout_mode = 0
 offset_right = 176.0
 offset_bottom = 296.0
@@ -2736,6 +2899,12 @@ offset_bottom = 232.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_dk08e")
 script = ExtResource("14_k6vq4")
 
+[node name="Start" type="TextureRect" parent="UI/Inventory/ItemDescPanel"]
+offset_top = 1.0
+offset_right = 120.0
+offset_bottom = 35.0
+texture = ExtResource("50_oaank")
+
 [node name="NameLabel" type="Label" parent="UI/Inventory/ItemDescPanel"]
 layout_mode = 0
 offset_left = 1.0
@@ -2757,19 +2926,25 @@ offset_right = 116.0
 offset_bottom = 26.0
 
 [node name="Border" type="TextureRect" parent="UI/Inventory/ItemDescPanel"]
+visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("62_abqq1")
 
-[node name="Container" type="VFlowContainer" parent="UI/Inventory/ItemDescPanel"]
+[node name="End" type="TextureRect" parent="UI/Inventory/ItemDescPanel"]
+layout_mode = 2
+offset_top = 138.0
+offset_right = 120.0
+offset_bottom = 163.0
+texture = ExtResource("52_n5jko")
+
+[node name="Container" type="VBoxContainer" parent="UI/Inventory/ItemDescPanel"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 34.0
 offset_right = 111.0
-offset_bottom = 184.0
-theme_override_constants/h_separation = 4
-theme_override_constants/v_separation = 4
+offset_bottom = 67.0
 
 [node name="Description" type="RichTextLabel" parent="UI/Inventory/ItemDescPanel/Container"]
 layout_mode = 2
@@ -2791,6 +2966,26 @@ mouse_filter = 2
 theme_override_constants/separation = 1
 theme_override_styles/separator = SubResource("StyleBoxLine_yra3x")
 
+[node name="Stats" type="RichTextLabel" parent="UI/Inventory/ItemDescPanel/Container"]
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+theme = ExtResource("3_h5rw7")
+text = "+5 Attack
+-5 Defense"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="ISeparator" type="HSeparator" parent="UI/Inventory/ItemDescPanel/Container"]
+custom_minimum_size = Vector2(103, 1)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 1
+theme_override_styles/separator = SubResource("StyleBoxLine_yra3x")
+
 [node name="Modifier" type="RichTextLabel" parent="UI/Inventory/ItemDescPanel/Container"]
 layout_mode = 2
 size_flags_vertical = 0
@@ -2801,6 +2996,15 @@ text = "+5 Attack damage
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
+
+[node name="ISeparator2" type="HSeparator" parent="UI/Inventory/ItemDescPanel/Container"]
+custom_minimum_size = Vector2(103, 1)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 1
+theme_override_styles/separator = SubResource("StyleBoxLine_tq7nw")
 
 [node name="InventoryCloseButton" type="Button" parent="UI/Inventory"]
 layout_mode = 1

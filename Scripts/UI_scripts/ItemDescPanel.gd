@@ -4,9 +4,12 @@ extends Panel
 @onready var drag_position = self.position
 @onready var name_label = $NameLabel
 @onready var desc_label = $Container/Description
+@onready var stats_label = $Container/Stats
+@onready var stats_separator = $Container/ISeparator
 @onready var modifier_label = $Container/Modifier
 @onready var item_icon = $ItemIcon
-
+@onready var container: VBoxContainer = $Container
+@onready var ending = $End
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	connect("gui_input", _on_gui_input)
@@ -23,10 +26,26 @@ func set_item(item):
 	item_icon.texture = item.sprite
 	modifier_label.text = ''
 	if item.is_equipable():
+		stats_label.visible = true
+		modifier_label.visible = true
+		stats_separator.visible = true
+		stats_label.text = ''
+		for stat in item.item_stats.keys():
+				stats_label.text += stat + ' ' + str(item.item_stats[stat])
+				stats_label.text += "\n"
 		for modifier in item.modifiers:
 				modifier_label.text += modifier.get_modifier_text() 
 				modifier_label.text += "\n"
+	else:
+		stats_label.visible = false
+		modifier_label.visible = false
+		stats_separator.visible = false
+	
+	container.queue_sort()
+	ending.position.y = self.size.y - 25
+	self.size.y = 34 + container.size.y
 	self.visible = true
+	#self.visible = true
 func remove_item():
 	self.visible = false
 	#self.position = Vector2(-104,32)

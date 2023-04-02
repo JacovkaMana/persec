@@ -1,6 +1,8 @@
 class_name BootsItem
 extends BaseEquipableItem
 
+
+
 func get_item_type():
 	return Enums.EItemType.BOOTS
 	
@@ -31,6 +33,9 @@ func _init(_name: String = '', _description: String = '', _rarity = null):
 	else:
 		self.name = 'Botz'
 
+	item_stats["Physical Defense"] = 0
+	item_stats["Magic Defense"] = 0
+	item_stats["Evasion"] = 0
 
 	generate_modifiers()
 

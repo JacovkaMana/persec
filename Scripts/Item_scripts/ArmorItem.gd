@@ -2,10 +2,8 @@ class_name ArmorItem
 extends BaseEquipableItem
 
 
-@export var physical_defence: float
-@export var magic_defence: float
-@export var fire_defence: float
-@export var ice_defence: float
+
+
 
 
 func get_type_text()->String:
@@ -27,6 +25,10 @@ func _init(_name: String = '', _description: String = '', _rarity = null):
 	else:
 		self.name = 'Arrmor'
 
+	item_stats["Physical Defense"] = 0
+	item_stats["Magic Defense"] = 0
+	item_stats["Evasion"] = 0
+	
 	generate_modifiers()
 
 

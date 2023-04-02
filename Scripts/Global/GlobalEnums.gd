@@ -95,6 +95,7 @@ enum EItemType {
 	NOTE,
 }
 
+
 enum EEquipType {
 	NONE = 0,
 	WEAPON,

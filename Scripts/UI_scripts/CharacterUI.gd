@@ -17,7 +17,16 @@ extends Control
 var EquipButton = preload("res://Scenes/Inventory/EquipButton.tscn")
 var active_slot_rclick: BaseSlotUI = null
 var active_item_lclick: Item = null
-# Called when the node enters the scene tree for the first time.
+
+
+@onready var stat_label_dict: Dictionary = {
+	'Damage': $CurrentStats/Damage,
+	'CritCh': $CurrentStats/CritCh,
+	'CritDmg': $CurrentStats/CritDmg,
+	'Health': $CurrentStats/Health,
+	'Defense': $CurrentStats/Defense,
+	'Evasion': $CurrentStats/Evasion,
+}
 
 @onready var ui_settings = get_parent().get_parent().get_parent()
 @onready var bground = $"../Background"
@@ -28,7 +37,7 @@ func _ready():
 	#print(ui_settings.BackgroundColor)
 	#bground.modulate = ui_settings.BackgroundColor
 	#shadow.modulate = ui_settings.ShadowColor
-	
+	player.data.connect("stats_changed", _on_stats_changed)
 	player.data.inventory.connect("equip_item_changed", _on_update_request)
 	_on_update_request(Enums.EEquipmentSlot.CONSUMABLE_1, null)
 	actions_panel\
@@ -62,7 +71,14 @@ func _process(_delta):
 #				player.inventory.remove_item(item)
 #			return true
 #	return false
-
+func _on_stats_changed(_stats):
+	stat_label_dict['Damage'].text = str(player.data.calculate_damage_range())
+	stat_label_dict['CritCh'].text = str(player.data.calculate_crit_chance())
+	stat_label_dict['CritDmg'].text = str(player.data.calculate_crit_damage())
+	stat_label_dict['Health'].text = str(player.data.calculate_hp())
+	stat_label_dict['Defense'].text = str(player.data.calculate_defense())
+	stat_label_dict['Evasion'].text = str(player.data.calculate_evasion())
+	print('on_stats')
 
 func _on_update_request(_slot_type: Enums.EEquipmentSlot, _item_slot):
 	var equipments = player.data.inventory.get_equipments()

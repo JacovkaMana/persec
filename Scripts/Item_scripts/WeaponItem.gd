@@ -6,6 +6,9 @@ extends BaseEquipableItem
 @export var damage_type: Enums.EDamageType = Enums.EDamageType.NONE
 @export var stamina_cost: float = 1.0
 
+@export var crit_chance: int = 15
+@export var crit_damage: int = 120
+
 @export var damage_low: int = 0
 @export var damage_high: int = 0
 @export var damage: String = ''
@@ -39,6 +42,10 @@ func _init(_name: String = '', _description: String = '', _rarity = null, _type 
 	self.damage_low = rad_damage[0]
 	self.damage_high = rad_damage[1]
 	self.damage = str(rad_damage[0]) + ' - ' + str(rad_damage[1])
+	
+	item_stats["Damage"] = self.damage
+	item_stats["Crit Chance"] = str(self.crit_chance) + '%'
+	item_stats["Crit Damage"] = str(self.crit_damage) + '%'
 	
 	generate_modifiers()
 
