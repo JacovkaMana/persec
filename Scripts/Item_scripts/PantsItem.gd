@@ -1,11 +1,8 @@
-class_name GlovesItem
+class_name PantsItem
 extends BaseEquipableItem
 
 
-@export var physical_defence: float
-@export var magic_defence: float
-@export var fire_defence: float
-@export var ice_defence: float
+@export var armor_type: Enums.EArmorType = Enums.EArmorType.NONE
 
 
 func get_type_text()->String:
@@ -13,7 +10,9 @@ func get_type_text()->String:
 
 func _init(_name: String = '', _description: String = '', _rarity = null):
 	
-	sprite = preload("res://Art/Sprites/Armor/Armor1.png")
+	self.armor_type = Enums.EArmorType.PLATE
+	var sprites = GlobalSprites.pants[self.armor_type]
+	sprite = sprites[randi() % sprites.size()]
 	
 	self.description = _description
 	

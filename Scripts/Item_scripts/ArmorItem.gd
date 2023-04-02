@@ -1,8 +1,7 @@
 class_name ArmorItem
 extends BaseEquipableItem
 
-
-
+@export var armor_type: Enums.EArmorType = Enums.EArmorType.NONE
 
 
 
@@ -10,8 +9,9 @@ func get_type_text()->String:
 		return "Armor"
 
 func _init(_name: String = '', _description: String = '', _rarity = null):
-	
-	sprite = preload("res://Art/Sprites/Armor/Armor1.png")
+	self.armor_type = Enums.EArmorType.PLATE
+	var sprites = GlobalSprites.armor[self.armor_type]
+	sprite = sprites[randi() % sprites.size()]
 	
 	self.description = _description
 	

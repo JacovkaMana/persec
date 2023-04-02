@@ -37,7 +37,6 @@ func _process(_delta):
 func recalculate_stats(_slot = null, _item = null):
 	calculate_hp()
 	calculate_modifiers()
-	print ( inventory.get_equipments_slot(Enums.EEquipmentSlot.R_HAND) )
 	
 	emit_signal("stats_changed", stats)
 	
@@ -82,7 +81,8 @@ func calculate_modifiers():
 	for item in inventory._equipment.values():
 		if (item):
 			for modifier in item.modifiers:
-				print( modifier.get_modifier_text() )
+				pass
+				#print( modifier.get_modifier_text() )
 	#print( inventory._equipment.keys() )
 #	for item in inventory.get_equipments():
 #		print(item)

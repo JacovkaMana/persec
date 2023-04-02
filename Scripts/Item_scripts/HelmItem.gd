@@ -1,6 +1,8 @@
 class_name HelmItem
 extends BaseEquipableItem
 
+@export var armor_type: Enums.EArmorType = Enums.EArmorType.NONE
+
 func get_item_type():
 	return Enums.EItemType.HELM
 
@@ -20,7 +22,9 @@ func is_equipable()->bool:
 
 func _init(_name: String = '', _description: String = '', _rarity = null):
 	
-	sprite = preload("res://Art/Sprites/Boots/Boots1.png")
+	self.armor_type = Enums.EArmorType.PLATE
+	var sprites = GlobalSprites.helm[self.armor_type]
+	sprite = sprites[randi() % sprites.size()]
 	
 	self.description = _description
 	

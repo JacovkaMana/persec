@@ -1,6 +1,18 @@
 extends Node
 
-var random_armor: Array = [ArmorItem,BootsItem,GlovesItem,HelmItem]
+var random_armor: Array = [ArmorItem,BootsItem,PantsItem,HelmItem]
+
+
+#var weapon_slots = {
+#
+#	Enums.EWeaponSubtype.SWORD : [Enums.EEquipmentSlot.L_HAND, Enums.EEquipmentSlot.R_HAND],
+#	Enums.EWeaponSubtype.AXE : [Enums.EEquipmentSlot.L_HAND, Enums.EEquipmentSlot.R_HAND],
+#	Enums.EWeaponSubtype.SPEAR : [Enums.EEquipmentSlot.L_HAND, Enums.EEquipmentSlot.R_HAND],
+#	Enums.EWeaponSubtype.BOW : [Enums.EEquipmentSlot.L_HAND, Enums.EEquipmentSlot.R_HAND],
+#	Enums.EWeaponSubtype.CROSSBOW : [Enums.EEquipmentSlot.L_HAND, Enums.EEquipmentSlot.R_HAND],
+#	Enums.EWeaponSubtype.SHIELD : [Enums.EEquipmentSlot.L_HAND, Enums.EEquipmentSlot.R_HAND],
+#	Enums.EWeaponSubtype.FISTS : [Enums.EEquipmentSlot.L_HAND, Enums.EEquipmentSlot.R_HAND],
+#}
 
 var modifier_subtype = {
 	Enums.EEquipType.ARMOR: [Enums.EModifierSubtype.Armor, Enums.EModifierSubtype.Evasion, Enums.EModifierSubtype.Hitpoints],

@@ -52,7 +52,9 @@ func _ready():
 	for panel in PLACEMENT_DICT.values():
 		panel.get_child(1).connect("equip_mouse_lclick", _on_equip_mouse_lclick)
 		panel.get_child(1).connect("equip_mouse_rclick", _on_equip_mouse_rclick)
-	pass # Replace with function body.
+	
+	
+	player.data.recalculate_stats()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -78,7 +80,7 @@ func _on_stats_changed(_stats):
 	stat_label_dict['Health'].text = str(player.data.calculate_hp())
 	stat_label_dict['Defense'].text = str(player.data.calculate_defense())
 	stat_label_dict['Evasion'].text = str(player.data.calculate_evasion())
-	print('on_stats')
+	
 
 func _on_update_request(_slot_type: Enums.EEquipmentSlot, _item_slot):
 	var equipments = player.data.inventory.get_equipments()
@@ -96,6 +98,8 @@ func _on_update_request(_slot_type: Enums.EEquipmentSlot, _item_slot):
 					
 
 func _on_equip_mouse_rclick(slot: BaseSlotUI):
+	if not (active_slot_rclick):
+		pass
 	if (!actions_panel.visible || active_slot_rclick.item != slot.item):
 		active_slot_rclick = slot
 

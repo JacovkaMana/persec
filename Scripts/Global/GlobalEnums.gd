@@ -24,6 +24,13 @@ enum ECharacterActions{
 	TRADE
 }
 
+enum EArmorType {
+	NONE = 0,
+	CLOTH,
+	LEATHER,
+	PLATE,
+}
+
 enum EWeaponSubtype {
 	NONE = 0,
 	SWORD,

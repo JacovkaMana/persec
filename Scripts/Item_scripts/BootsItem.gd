@@ -1,7 +1,7 @@
 class_name BootsItem
 extends BaseEquipableItem
 
-
+@export var armor_type: Enums.EArmorType = Enums.EArmorType.NONE
 
 func get_item_type():
 	return Enums.EItemType.BOOTS
@@ -19,7 +19,9 @@ func get_slot_type():
 	
 func _init(_name: String = '', _description: String = '', _rarity = null):
 	
-	sprite = preload("res://Art/Sprites/Boots/Boots1.png")
+	self.armor_type = Enums.EArmorType.PLATE
+	var sprites = GlobalSprites.boots[self.armor_type]
+	sprite = sprites[randi() % sprites.size()]
 	
 	self.description = _description
 	

@@ -41,11 +41,16 @@ func set_item(item):
 		modifier_label.visible = false
 		stats_separator.visible = false
 	
-	container.queue_sort()
-	ending.position.y = self.size.y - 25
+#	for i in range(2):
+#		container.visible = false
+#		container.visible = true
+#		container.visible = false
+#		container.visible = true
+	
+	container.size.y = 1
 	self.size.y = 34 + container.size.y
+	ending.position.y = self.size.y - 25
 	self.visible = true
-	#self.visible = true
 func remove_item():
 	self.visible = false
 	#self.position = Vector2(-104,32)

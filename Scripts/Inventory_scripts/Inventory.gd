@@ -67,10 +67,28 @@ func remove_item(item: Item, count: int = 1):
 
 func equip_item(item: Item)->bool:	
 	#var item_type = item.get_item_type()
+
 	var slot_type = item.get_slot_type()[0]
+	
+	
+	if item.get_equip_type() == Enums.EEquipType.WEAPON:
+		if item.twohanded:
+			for slot in item.get_slot_type():
+				if _equipment[slot]:
+					var old_item = _equipment[slot]
+					_equipment[slot] = null
+					add_item(old_item)		
+		else:
+			for slot in item.get_slot_type():
+				if not _equipment[slot]:
+					slot_type = slot
+					break
 	
 	if slot_type not in _equipment.keys():
 		return false
+	
+	if item.get_equip_type() == Enums.EEquipType.WEAPON:
+		print(item.twohanded)
 	
 	if _equipment[slot_type]:
 		var old_item = _equipment[slot_type]

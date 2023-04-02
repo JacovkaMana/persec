@@ -474,10 +474,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 15040.0
-offset_top = 8630.0
-offset_right = 15680.0
-offset_bottom = 8648.0
+offset_left = 15360.0
+offset_top = 8810.0
+offset_right = 16000.0
+offset_bottom = 8828.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(320, 9)
@@ -2036,6 +2036,7 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_dk08e")
 script = ExtResource("14_k6vq4")
 
 [node name="Start" type="TextureRect" parent="UI/Character/Equipment/ItemDescPanel"]
+layout_mode = 0
 offset_top = 1.0
 offset_right = 120.0
 offset_bottom = 26.0
@@ -2069,6 +2070,7 @@ offset_bottom = 200.0
 texture = ExtResource("62_abqq1")
 
 [node name="End" type="TextureRect" parent="UI/Character/Equipment/ItemDescPanel"]
+layout_mode = 0
 offset_top = 138.0
 offset_right = 120.0
 offset_bottom = 163.0
@@ -2079,7 +2081,7 @@ layout_mode = 2
 offset_left = 8.0
 offset_top = 34.0
 offset_right = 112.0
-offset_bottom = 136.0
+offset_bottom = 141.0
 theme_override_constants/separation = 4
 
 [node name="Description" type="RichTextLabel" parent="UI/Character/Equipment/ItemDescPanel/Container"]
@@ -2768,7 +2770,6 @@ texture = ExtResource("3_5tfiq")
 flip_h = true
 
 [node name="Plates" type="TextureRect" parent="UI/Inventory"]
-visible = false
 layout_mode = 0
 offset_right = 176.0
 offset_bottom = 296.0
@@ -2890,6 +2891,7 @@ theme_override_constants/v_separation = 3
 columns = 5
 
 [node name="ItemDescPanel" type="Panel" parent="UI/Inventory"]
+visible = false
 self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.784314)
 layout_mode = 0
 offset_left = -126.0
@@ -2900,6 +2902,7 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_dk08e")
 script = ExtResource("14_k6vq4")
 
 [node name="Start" type="TextureRect" parent="UI/Inventory/ItemDescPanel"]
+layout_mode = 0
 offset_top = 1.0
 offset_right = 120.0
 offset_bottom = 35.0

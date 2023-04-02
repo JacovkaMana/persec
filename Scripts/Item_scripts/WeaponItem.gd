@@ -13,9 +13,13 @@ extends BaseEquipableItem
 @export var damage_high: int = 0
 @export var damage: String = ''
 
+@export var twohanded: bool = false
+
 func _init(_name: String = '', _description: String = '', _rarity = null, _type = Enums.EWeaponSubtype.NONE, _damage: int = 0):
 	
-	sprite = preload("res://Art/Sprites/Weapon/Sword1.png")
+
+	if (randi() % 2 == 1):
+		self.twohanded = true
 	
 	self.description = _description
 	
@@ -46,6 +50,9 @@ func _init(_name: String = '', _description: String = '', _rarity = null, _type 
 	item_stats["Damage"] = self.damage
 	item_stats["Crit Chance"] = str(self.crit_chance) + '%'
 	item_stats["Crit Damage"] = str(self.crit_damage) + '%'
+	
+	var sprites = GlobalSprites.weapon[self.weapon_type]
+	sprite = sprites[randi() % sprites.size()]
 	
 	generate_modifiers()
 

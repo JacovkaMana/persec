@@ -12,6 +12,7 @@ var player_state: Enums.EPlayerState = Enums.EPlayerState.ROAMING
 func _ready():
 	super()
 	InputManager.player = self
+	data.recalculate_stats()
 	
 	interaction_area.connect("area_entered", _on_interaction_zone_entered)
 	interaction_area.connect("area_exited", _on_interaction_zone_exited)

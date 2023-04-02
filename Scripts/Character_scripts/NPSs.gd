@@ -18,7 +18,7 @@ extends Actor
 #right armor
 @export var HELM: HelmItem = null
 @export var ARMOR: ArmorItem = null
-@export var GLOVES: GlovesItem = null
+@export var PANTS: PantsItem = null
 @export var BOOTS: BootsItem = null
 #left armor
 @export var AMULET: Item = null
