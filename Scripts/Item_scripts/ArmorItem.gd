@@ -9,6 +9,7 @@ func get_type_text()->String:
 		return "Armor"
 
 func _init(_name: String = '', _description: String = '', _rarity = null):
+	
 	self.armor_type = Enums.EArmorType.PLATE
 	var sprites = GlobalSprites.armor[self.armor_type]
 	sprite = sprites[randi() % sprites.size()]
@@ -25,9 +26,16 @@ func _init(_name: String = '', _description: String = '', _rarity = null):
 	else:
 		self.name = 'Arrmor'
 
-	item_stats["Physical Defense"] = 0
-	item_stats["Magic Defense"] = 0
-	item_stats["Evasion"] = 0
+	match self.armor_type:
+		Enums.EArmorType.CLOTH:
+			item_stats["Magic Defense"] = self.item_level
+			item_stats["Evasion"] = self.item_level
+		Enums.EArmorType.LEATHER:
+			item_stats["Physical Defense"] = self.item_level
+			item_stats["Evasion"] = self.item_level
+		Enums.EArmorType.PLATE:
+			item_stats["Physical Defense"] = self.item_level
+			item_stats["Magic Defense"] = self.item_level
 	
 	generate_modifiers()
 

@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://bx0tcs2i3qce1" path="res://Art/UI/SkillTestShdaow.png" id="4_wsh4e"]
 [ext_resource type="Texture2D" uid="uid://dhim64q84qukn" path="res://Art/UI/UI_Char.png" id="4_xrr7e"]
 [ext_resource type="Texture2D" uid="uid://620p5t3jo6py" path="res://Art/UI/border97.png" id="5_6uhk6"]
-[ext_resource type="FontFile" uid="uid://bv3p1twxqpx6p" path="res://Fonts/Minecraftia-Regular.ttf" id="5_ai818"]
+[ext_resource type="FontFile" uid="uid://c0s1j1n8esy7x" path="res://Fonts/Minecraftia-Regular.ttf" id="5_ai818"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/StaminaContainer.gd" id="5_cohd6"]
 [ext_resource type="Texture2D" uid="uid://m03kme2ly37o" path="res://Art/UI/Border22_1.png" id="5_e6gov"]
 [ext_resource type="Texture2D" uid="uid://byh8r3f22gvqa" path="res://Art/UI/Border34.png" id="5_mowgk"]
@@ -2026,6 +2026,7 @@ position = Vector2(37.5, 50.5)
 shape = SubResource("RectangleShape2D_thfi8")
 
 [node name="ItemDescPanel" type="Panel" parent="UI/Character/Equipment"]
+visible = false
 self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.784314)
 layout_mode = 0
 offset_left = 180.0
@@ -2662,6 +2663,7 @@ offset_top = 26.0
 offset_right = 156.0
 offset_bottom = 85.0
 theme = ExtResource("3_h5rw7")
+theme_override_constants/line_separation = -3
 
 [node name="CharacterContainer" type="HBoxContainer" parent="UI/Character"]
 layout_mode = 0
