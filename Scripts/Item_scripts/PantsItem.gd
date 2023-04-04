@@ -24,7 +24,7 @@ func _init(_name: String = '', _description: String = '', _rarity = null):
 	if (_name):
 		self.name = _name
 	else:
-		self.name = 'Glovess'
+		self.name = 'Pantss'
 
 	item_stats["Physical Defense"] = 0
 	item_stats["Magic Defense"] = 0

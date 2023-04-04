@@ -8,7 +8,7 @@ var melee_attacks: int
 var multiplier: int
 @export var damage_type: Enums.EDamageType = Enums.EDamageType.NONE
 
-func _init(name: String, description: String, ranged_damage: int, melee_damage: int, multiplier:int,  stamina_cost: int ,damage_type: Enums.EDamageType, type: Enums.ESkillType, projectile):
+func _init(name: String, description: String, ranged_damage: int, melee_damage: int, multiplier:int,  stamina_cost: int ,damage_type: Enums.EDamageType, type: Enums.ESkillType, projectile, skill_icon):
 
 		self.name = name
 		self.description = description
@@ -19,7 +19,8 @@ func _init(name: String, description: String, ranged_damage: int, melee_damage: 
 		self.type = type
 		self.projectile = projectile
 		self.cost = stamina_cost
-		
+		self.icon =GlobalSprites.skill_icons[skill_icon]
+
 func get_ranged_damage_string():
 	return (str(ranged_damage) + "%" + " x" + str(multiplier))
 

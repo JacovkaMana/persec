@@ -51,6 +51,12 @@ extends Node
 		],
 }
 
+@onready var skill_icons = {
+	"single_59" : preload("res://Art/Icons/Skills/single_59.png"),
+	"single_41" : preload("res://Art/Icons/Skills/single_41.png"),
+	"single_6" : preload("res://Art/Icons/Skills/single_6.png"),
+}
+
 # Called when the node enters the scene tree for the first time.
 func _init():
 	pass

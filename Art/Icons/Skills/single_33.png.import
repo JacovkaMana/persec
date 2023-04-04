@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cntx3oe5lyw6t"
-path="res://.godot/imported/Helm1.png-4c15a87f4d98ec72e9439a64bf32a887.ctex"
+uid="uid://btf6wkqq1h3le"
+path="res://.godot/imported/single_33.png-297723a3617996815fbeb06822e9dc39.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Sprites/Helm/Helm1.png"
-dest_files=["res://.godot/imported/Helm1.png-4c15a87f4d98ec72e9439a64bf32a887.ctex"]
+source_file="res://Art/Icons/Skills/single_33.png"
+dest_files=["res://.godot/imported/single_33.png-297723a3617996815fbeb06822e9dc39.ctex"]
 
 [params]
 

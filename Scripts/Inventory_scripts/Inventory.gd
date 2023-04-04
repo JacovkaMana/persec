@@ -16,13 +16,13 @@ signal equip_item_changed(slot_type: Enums.EEquipmentSlot, item_slot)
 	#right armor
 	Enums.EEquipmentSlot.HELM: null,
 	Enums.EEquipmentSlot.ARMOR: null,
-	Enums.EEquipmentSlot.GLOVES: null,
+	Enums.EEquipmentSlot.PANTS: null,
 	Enums.EEquipmentSlot.BOOTS: null,
 	#left armor
 	Enums.EEquipmentSlot.AMULET: null,
-	Enums.EEquipmentSlot.BELT: null,
 	Enums.EEquipmentSlot.ACCESSORY_1: null,
 	Enums.EEquipmentSlot.ACCESSORY_2: null,
+	Enums.EEquipmentSlot.GLOVES: null,
 }
 
 

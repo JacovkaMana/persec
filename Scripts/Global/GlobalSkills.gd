@@ -22,7 +22,7 @@ var colors = {
 	Enums.EDamageType.FIRE : preload("res://Art/Colors/Fire.tres"),
 }
 
-func _init():
+func _ready():
 	
 	var path = "res://Data/" + "Skills" + '.json'
 	var file = FileAccess.open(path, FileAccess.READ)
@@ -40,6 +40,7 @@ func _init():
 			Enums.EDamageType.get( skill_json.damage_type ),
 			Enums.ESkillType.get( skill_json.skill_type ),
 			load("res://PreRendered/Projectiles/" + skill_json.texture + ".tscn"),
+			skill_json.icon
 		)
 
 

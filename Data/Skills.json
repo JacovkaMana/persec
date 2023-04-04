@@ -8,7 +8,8 @@
     "ranged_damage" : 100,
     "damage_type": "SLASH",
     "skill_type": "BLADE",
-    "texture": "Slash"
+    "texture": "Slash",
+    "icon": "single_59"
   },
   "Fireball": {
     "type": "attack",
@@ -19,7 +20,8 @@
     "ranged_damage" : 100,
     "damage_type": "FIRE",
     "skill_type": "MAGIC",
-    "texture": "Ball"
+    "texture": "Ball",
+    "icon": "single_41"
   },
   "Ice Slash": {
     "type": "attack",
@@ -30,6 +32,7 @@
     "ranged_damage" : 100,
     "damage_type": "ICE",
     "skill_type": "MAGIC",
-    "texture": "MovingSlash"
+    "texture": "MovingSlash",
+    "icon": "single_6"
   }
 }

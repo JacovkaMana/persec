@@ -4,6 +4,10 @@ extends StaticBody2D
 @onready var sprite = $Sprite2D
 var starting_material
 var created_by = null
+
+@export var random: bool = false
+@export var random_items: int = 0
+
 @export var chest_inventory: Array[Item] = []
 @onready var interaction_hint = $InteractionHint
 @onready var interaction_area = $InteractionArea
@@ -24,6 +28,25 @@ func _ready():
 	self.connect("mouse_exited", _on_mouse_exited)
 	self.connect("input_event", _on_input)
 	
+	if (random):
+		chest_inventory = []
+		for i in range(random_items):
+			var random_item
+			if randi() % 2 == 1:
+				random_item = RandomStats.random_armor.pick_random().new(
+					'',
+					'random generated',
+					''
+				)
+			else:
+				random_item = WeaponItem.new(
+			'',
+			'random generated',
+			null,
+			0,
+			30
+			)
+			chest_inventory.append(random_item)
 
 	
 

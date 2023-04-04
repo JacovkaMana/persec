@@ -28,7 +28,9 @@ func _init():
 	inventory.connect("equip_item_changed", recalculate_stats)
 	recalculate_stats()
 	#print('init from data')
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+	print(
+		stat_cost(Enums.EStat.DEXTERITY)
+	)
 func _process(_delta):
 	pass
 
@@ -83,7 +85,18 @@ func calculate_modifiers():
 			for modifier in item.modifiers:
 				pass
 				#print( modifier.get_modifier_text() )
-	#print( inventory._equipment.keys() )
-#	for item in inventory.get_equipments():
-#		print(item)
+
+func stat_cost(stat: Enums.EStat):
+	var s = stats[stat]
+	var stat_a = 0.5
+	var stat_b = 1
+	return round(s*s * stat_a + s * stat_b)
 	
+func increase_stat(stat: Enums.EStat):
+	var cost = stat_cost(stat)
+	if (money >= cost):
+		money -= cost
+		stats[stat] += 1
+		return true
+	else:
+		return false

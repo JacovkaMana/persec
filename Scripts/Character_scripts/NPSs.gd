@@ -184,7 +184,7 @@ func take_ranged_damage(_skill: AttackSkill, _from: Actor, _strength):
 	super(_skill, _from, _strength)
 	if (data.hitpoints <= 0):
 		animation_tree.set("parameters/death/transition_request", "true")
-	pass
+		player.kill_confirm(self)
 
 func _on_anim_finished(name):
 	if (name == "death"):

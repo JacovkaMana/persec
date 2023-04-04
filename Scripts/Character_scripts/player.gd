@@ -5,6 +5,9 @@ signal dropped_inventory_opened(item_array: Array[Item])
 signal dialogue_started(with: String, text: String)
 signal dialogue_ended()
 signal skill_used(skill_id: int)
+signal kill_confirmed(who: Actor)
+signal money_earned(much: int)
+
 
 var invincible_timer = null
 var player_state: Enums.EPlayerState = Enums.EPlayerState.ROAMING
@@ -59,6 +62,7 @@ func _ready():
 	
 	data.skills.add_skill(GlobalSkills.skills['Slash'])
 	data.skills.add_skill(GlobalSkills.skills['Fireball'])
+	data.skills.add_skill(GlobalSkills.skills['Ice Slash'])
 	data.skills.add_skill(GlobalSkills.skills['Ice Slash'])
 
 
@@ -118,3 +122,12 @@ func trigger_dialogue(with):
 		with.current_state = Enums.ECharacterState.TALKING
 	
 
+
+func kill_confirm(who):
+	emit_signal("kill_confirmed", who)
+	money_earn(20)
+	
+func money_earn(much):
+	self.data.money += much
+	emit_signal("money_earned", much)
+	

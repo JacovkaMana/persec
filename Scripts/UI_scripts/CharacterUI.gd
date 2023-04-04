@@ -28,10 +28,12 @@ var active_item_lclick: Item = null
 	'Evasion': $CurrentStats/Evasion,
 }
 
+
 @onready var ui_settings = get_parent().get_parent().get_parent()
 @onready var bground = $"../Background"
 @onready var shadow = $"../Shadow"
 
+@onready var stats_container = $"../SkillStats/CharacterStats/StatsContainer"
 
 func _ready():
 	#print(ui_settings.BackgroundColor)
@@ -39,7 +41,7 @@ func _ready():
 	#shadow.modulate = ui_settings.ShadowColor
 	player.data.connect("stats_changed", _on_stats_changed)
 	player.data.inventory.connect("equip_item_changed", _on_update_request)
-	_on_update_request(Enums.EEquipmentSlot.CONSUMABLE_1, null)
+	_on_update_request(Enums.EEquipmentSlot.NONE, null)
 	actions_panel\
 		.get_node("ItemActionsVBox")\
 		.get_node("UnequipButton")\
@@ -80,6 +82,9 @@ func _on_stats_changed(_stats):
 	stat_label_dict['Health'].text = str(player.data.calculate_hp())
 	stat_label_dict['Defense'].text = str(player.data.calculate_defense())
 	stat_label_dict['Evasion'].text = str(player.data.calculate_evasion())
+	
+	
+	stats_container.reload()
 	
 
 func _on_update_request(_slot_type: Enums.EEquipmentSlot, _item_slot):

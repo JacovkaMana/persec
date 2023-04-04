@@ -20,8 +20,7 @@ var _item_inventory: Array = []
 # !!!!! При закрытии закрывается ItemActionsPanel, если она над этой менюшкой!!!
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	bground.modulate = ui_settings.BackgroundColor
-	shadow.modulate = ui_settings.ShadowColor
+
 	
 	player.connect("dropped_inventory_opened", _on_new_inventory)
 
@@ -104,12 +103,14 @@ func _delete_item(item, _delete: bool = false)->bool:
 func _on_slot_mouse_lclick(slot: BaseSlotUI):
 	if (!desc_panel.visible || active_item_lclick != slot.item):
 		active_item_lclick = slot.item
-		desc_panel.find_child("NameLabel").text = slot.item.name
-		desc_panel.find_child("DescLabel").text = slot.item.description
-		desc_panel.visible = true
+#		desc_panel.find_child("NameLabel").text = slot.item.name
+#		desc_panel.find_child("DescLabel").text = slot.item.description
+#		desc_panel.visible = true
+		desc_panel.set_item(slot.item)
 	else:
-		desc_panel.visible = false
-		desc_panel.position = Vector2(-84,32)
+		desc_panel.remove_item()
+#		desc_panel.visible = false
+#		desc_panel.position = Vector2(-84,32)
 		
 	
 func _on_action_click(action: String):

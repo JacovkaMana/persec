@@ -63,3 +63,5 @@ func player_roaming(_event):
 			player.use_skill_id(1)
 		if _event.is_action_pressed("skill3"):
 			player.use_skill_id(2)
+		if _event.is_action_pressed("skill4"):
+			player.use_skill_id(3)

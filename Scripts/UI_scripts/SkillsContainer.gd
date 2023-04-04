@@ -14,7 +14,7 @@ func _ready():
 	
 	for i in get_child_count():
 		if i < skill_slots.size():
-			get_child(i).get_child(2).texture = skill_slots[i].icon
+			get_child(i).get_child(1).get_child(0).texture = skill_slots[i].icon
 			get_child(i).visible = true
 		else:
 			get_child(i).visible = false
