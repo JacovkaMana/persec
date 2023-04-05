@@ -1,10 +1,10 @@
-[gd_scene load_steps=30 format=3 uid="uid://chku42sa88b0g"]
+[gd_scene load_steps=31 format=3 uid="uid://chku42sa88b0g"]
 
 [ext_resource type="Script" path="res://Scripts/Character_scripts/NPSs.gd" id="1_81pvv"]
 [ext_resource type="Shader" path="res://Art/Shaders/OutlineTest.gdshader" id="1_hatnr"]
 [ext_resource type="Texture2D" uid="uid://bgn8fb6jsnab6" path="res://Art/Character/Mage.png" id="2_k8ds2"]
 [ext_resource type="Shader" uid="uid://bna8w8wik6u0h" path="res://Art/Shaders/PlayerVisualShader.tres" id="3_4e4ep"]
-[ext_resource type="FontFile" uid="uid://bv3p1twxqpx6p" path="res://Fonts/Minecraftia-Regular.ttf" id="3_35dde"]
+[ext_resource type="FontFile" uid="uid://c0s1j1n8esy7x" path="res://Fonts/Minecraftia-Regular.ttf" id="3_35dde"]
 [ext_resource type="Texture2D" uid="uid://85m7q3fj3yqw" path="res://Art/Character/MageCloak.png" id="3_lgs3t"]
 [ext_resource type="Texture2D" uid="uid://dm1531nlm22l5" path="res://Art/Masks/Ball.png" id="4_8am1b"]
 [ext_resource type="Texture2D" uid="uid://brk6fgd2qanql" path="res://Art/Character/MageFace.png" id="4_8lg8s"]
@@ -14,12 +14,15 @@
 shader = ExtResource("1_hatnr")
 shader_parameter/outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rbf11"]
-size = Vector2(28, 29)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1mfgp"]
+size = Vector2(32, 56)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_edpkx"]
 shader = ExtResource("3_4e4ep")
 shader_parameter/PlayerCloak = Color(0.2, 0.788235, 1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rbf11"]
+size = Vector2(30, 28)
 
 [sub_resource type="LabelSettings" id="LabelSettings_h4cy4"]
 font = ExtResource("3_35dde")
@@ -102,6 +105,18 @@ tracks/5/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("HitBox/CollisionShape2D:disabled")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_v7wnx"]
 resource_name = "death"
@@ -136,6 +151,18 @@ tracks/2/path = NodePath("CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HitBox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -257,7 +284,6 @@ input_1/reset = true
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_e3t6g"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_hjofk"]
-graph_offset = Vector2(-142.448, 130.31)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_5c0ga")
 nodes/Animation/position = Vector2(-20, 140)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_i0gjw")
@@ -283,13 +309,13 @@ collision_layer = 65
 script = ExtResource("1_81pvv")
 
 [node name="HitBox" type="CharacterBody2D" parent="."]
+visible = false
 collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-visible = false
-position = Vector2(-1, 0)
-shape = SubResource("RectangleShape2D_rbf11")
+position = Vector2(-2, 4)
+shape = SubResource("RectangleShape2D_1mfgp")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 visible = false
@@ -319,7 +345,8 @@ hframes = 8
 vframes = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-2, -8.5)
+visible = false
+position = Vector2(-2, -9)
 shape = SubResource("RectangleShape2D_rbf11")
 
 [node name="HeadLabel" type="Label" parent="."]

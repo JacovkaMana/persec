@@ -40,7 +40,6 @@
 [ext_resource type="Texture2D" uid="uid://bdvj2eqeeqpw6" path="res://Art/UI/ItemAction_Hover.png" id="19_3pi6p"]
 [ext_resource type="Texture2D" uid="uid://kwcbpg33nxh1" path="res://Art/UI/Weapon.png" id="19_aroqj"]
 [ext_resource type="Texture2D" uid="uid://bjh6g16iitosp" path="res://Art/UI/Status_inner.png" id="19_mqkio"]
-[ext_resource type="Script" path="res://Scripts/UI_scripts/StatusScript.gd" id="19_uf81t"]
 [ext_resource type="Texture2D" uid="uid://5f3t2ue0hkna" path="res://Art/UI/WeaponShield.png" id="19_x824n"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/ItemAction.gd" id="20_nbmo2"]
 [ext_resource type="Texture2D" uid="uid://b25iadwyw65ih" path="res://Art/UI/Status_border.png" id="20_uddr6"]
@@ -53,6 +52,7 @@
 [ext_resource type="Texture2D" uid="uid://bgtg5vu2hb3gt" path="res://Art/UI/test_romb.png" id="25_70son"]
 [ext_resource type="Texture2D" uid="uid://d4cmvyxjmuffq" path="res://Art/UI/Money_border.png" id="25_o7q84"]
 [ext_resource type="Texture2D" uid="uid://bw1on6g5dl7nx" path="res://Art/UI/Money_inner.png" id="26_5oqrj"]
+[ext_resource type="Texture2D" uid="uid://bijpbur8p3jeb" path="res://Art/Icons/Skills/single_7.png" id="27_5ui8o"]
 [ext_resource type="Texture2D" uid="uid://ta1fnun00pmm" path="res://Art/UI/UI_ShadowFull.png" id="28_s3eqt"]
 [ext_resource type="Texture2D" uid="uid://bvm648ct7g0co" path="res://Art/UI/Character.png" id="28_ws067"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/CoverPanel.gd" id="29_5vimk"]
@@ -446,10 +446,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 18560.0
-offset_top = 10610.0
-offset_right = 19200.0
-offset_bottom = 10628.0
+offset_left = 21120.0
+offset_top = 12050.0
+offset_right = 21760.0
+offset_bottom = 12068.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(320, 9)
@@ -493,9 +493,9 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -640.0
-offset_top = 30.0
+offset_top = 53.0
 offset_right = -590.0
-offset_bottom = 83.0
+offset_bottom = 106.0
 grow_horizontal = 0
 theme_override_constants/separation = 1
 
@@ -558,6 +558,7 @@ texture = ExtResource("4_v6vyg")
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 
 [node name="ColorRect" type="ColorRect" parent="HUD/SkillsHotbar"]
 visible = false
@@ -778,6 +779,240 @@ offset_bottom = 30.0
 texture = ExtResource("34_f6u2n")
 
 [node name="SkillRect" type="TextureRect" parent="HUD/SkillsHotbar/SkillsContainer/Skill6"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 5.0
+offset_right = 20.0
+offset_bottom = 21.0
+
+[node name="ItemsHotbar" type="Control" parent="HUD"]
+anchors_preset = 0
+offset_left = -523.0
+offset_right = -483.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="HUD/ItemsHotbar"]
+visible = false
+layout_mode = 0
+offset_left = 582.0
+offset_top = 288.0
+offset_right = 627.0
+offset_bottom = 333.0
+rotation = 0.785398
+color = Color(0.25098, 0.27451, 0.411765, 1)
+
+[node name="ItemsContainer" type="Control" parent="HUD/ItemsHotbar"]
+anchors_preset = 0
+offset_left = 550.0
+offset_top = 287.0
+offset_right = 616.0
+offset_bottom = 352.0
+
+[node name="Item1" type="Control" parent="HUD/ItemsHotbar/ItemsContainer"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+anchors_preset = 0
+offset_left = 17.0
+offset_top = 1.0
+offset_right = 49.0
+offset_bottom = 33.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="BackRect" type="TextureRect" parent="HUD/ItemsHotbar/ItemsContainer/Item1"]
+self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
+layout_mode = 0
+offset_top = -1.0
+offset_right = 30.0
+offset_bottom = 29.0
+texture = ExtResource("34_f6u2n")
+
+[node name="ColorRect" type="TextureRect" parent="HUD/ItemsHotbar/ItemsContainer/Item1"]
+self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
+clip_children = 2
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+texture = ExtResource("34_f6u2n")
+
+[node name="SkillRect" type="TextureRect" parent="HUD/ItemsHotbar/ItemsContainer/Item1/ColorRect"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 26.0
+offset_bottom = 26.0
+
+[node name="Item2" type="Control" parent="HUD/ItemsHotbar/ItemsContainer"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+anchors_preset = 0
+offset_top = 19.0
+offset_right = 32.0
+offset_bottom = 51.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="BackRect" type="TextureRect" parent="HUD/ItemsHotbar/ItemsContainer/Item2"]
+self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
+layout_mode = 0
+offset_top = -1.0
+offset_right = 30.0
+offset_bottom = 29.0
+texture = ExtResource("34_f6u2n")
+
+[node name="ColorRect" type="TextureRect" parent="HUD/ItemsHotbar/ItemsContainer/Item2"]
+self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
+clip_children = 2
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+texture = ExtResource("34_f6u2n")
+
+[node name="SkillRect" type="TextureRect" parent="HUD/ItemsHotbar/ItemsContainer/Item2/ColorRect"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 26.0
+offset_bottom = 26.0
+
+[node name="Item3" type="Control" parent="HUD/ItemsHotbar/ItemsContainer"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+anchors_preset = 0
+offset_left = 34.0
+offset_top = 19.0
+offset_right = 66.0
+offset_bottom = 51.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="BackRect" type="TextureRect" parent="HUD/ItemsHotbar/ItemsContainer/Item3"]
+self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
+layout_mode = 0
+offset_top = -1.0
+offset_right = 30.0
+offset_bottom = 29.0
+texture = ExtResource("34_f6u2n")
+
+[node name="ColorRect" type="TextureRect" parent="HUD/ItemsHotbar/ItemsContainer/Item3"]
+self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
+clip_children = 2
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+texture = ExtResource("34_f6u2n")
+
+[node name="SkillRect" type="TextureRect" parent="HUD/ItemsHotbar/ItemsContainer/Item3/ColorRect"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 26.0
+offset_bottom = 26.0
+
+[node name="Item4" type="Control" parent="HUD/ItemsHotbar/ItemsContainer"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+anchors_preset = 0
+offset_left = 17.0
+offset_top = 37.0
+offset_right = 49.0
+offset_bottom = 69.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="BackRect" type="TextureRect" parent="HUD/ItemsHotbar/ItemsContainer/Item4"]
+self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
+layout_mode = 0
+offset_top = -1.0
+offset_right = 30.0
+offset_bottom = 29.0
+texture = ExtResource("34_f6u2n")
+
+[node name="ColorRect" type="TextureRect" parent="HUD/ItemsHotbar/ItemsContainer/Item4"]
+self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
+clip_children = 2
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+texture = ExtResource("34_f6u2n")
+
+[node name="SkillRect" type="TextureRect" parent="HUD/ItemsHotbar/ItemsContainer/Item4/ColorRect"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 26.0
+offset_bottom = 26.0
+
+[node name="Skill5" type="Control" parent="HUD/ItemsHotbar/ItemsContainer"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+anchors_preset = 0
+offset_top = 72.0
+offset_right = 32.0
+offset_bottom = 104.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="BackRect" type="TextureRect" parent="HUD/ItemsHotbar/ItemsContainer/Skill5"]
+self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
+layout_mode = 0
+offset_top = -1.0
+offset_right = 30.0
+offset_bottom = 29.0
+texture = ExtResource("34_f6u2n")
+
+[node name="ColorRect" type="TextureRect" parent="HUD/ItemsHotbar/ItemsContainer/Skill5"]
+modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+texture = ExtResource("34_f6u2n")
+
+[node name="SkillRect" type="TextureRect" parent="HUD/ItemsHotbar/ItemsContainer/Skill5"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 5.0
+offset_right = 20.0
+offset_bottom = 21.0
+
+[node name="Skill6" type="Control" parent="HUD/ItemsHotbar/ItemsContainer"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+anchors_preset = 0
+offset_left = 36.0
+offset_top = 72.0
+offset_right = 68.0
+offset_bottom = 104.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="BackRect" type="TextureRect" parent="HUD/ItemsHotbar/ItemsContainer/Skill6"]
+self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
+layout_mode = 0
+offset_top = -1.0
+offset_right = 30.0
+offset_bottom = 29.0
+texture = ExtResource("34_f6u2n")
+
+[node name="ColorRect" type="TextureRect" parent="HUD/ItemsHotbar/ItemsContainer/Skill6"]
+modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+texture = ExtResource("34_f6u2n")
+
+[node name="SkillRect" type="TextureRect" parent="HUD/ItemsHotbar/ItemsContainer/Skill6"]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 5.0
@@ -1239,7 +1474,6 @@ offset_left = 240.0
 offset_top = 315.0
 offset_right = 393.0
 offset_bottom = 338.0
-script = ExtResource("19_uf81t")
 
 [node name="Inner" type="TextureRect" parent="HUD/Status"]
 self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.490196)
@@ -1376,6 +1610,79 @@ offset_bottom = 4.5
 grow_horizontal = 0
 grow_vertical = 2
 texture = ExtResource("25_6mgam")
+
+[node name="StatusesContainer" type="HBoxContainer" parent="HUD"]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 280.0
+offset_right = 392.0
+offset_bottom = 302.0
+
+[node name="Status1" type="Control" parent="HUD/StatusesContainer"]
+visible = false
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="HUD/StatusesContainer/Status1"]
+layout_mode = 2
+offset_right = 22.0
+offset_bottom = 22.0
+texture = ExtResource("27_5ui8o")
+
+[node name="Status2" type="Control" parent="HUD/StatusesContainer"]
+visible = false
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="HUD/StatusesContainer/Status2"]
+layout_mode = 2
+offset_right = 22.0
+offset_bottom = 22.0
+texture = ExtResource("27_5ui8o")
+
+[node name="Status3" type="Control" parent="HUD/StatusesContainer"]
+visible = false
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="HUD/StatusesContainer/Status3"]
+layout_mode = 2
+offset_right = 22.0
+offset_bottom = 22.0
+texture = ExtResource("27_5ui8o")
+
+[node name="Status4" type="Control" parent="HUD/StatusesContainer"]
+visible = false
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="HUD/StatusesContainer/Status4"]
+layout_mode = 2
+offset_right = 22.0
+offset_bottom = 22.0
+texture = ExtResource("27_5ui8o")
+
+[node name="Status5" type="Control" parent="HUD/StatusesContainer"]
+visible = false
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="HUD/StatusesContainer/Status5"]
+layout_mode = 2
+offset_right = 22.0
+offset_bottom = 22.0
+texture = ExtResource("27_5ui8o")
+
+[node name="Status6" type="Control" parent="HUD/StatusesContainer"]
+visible = false
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="HUD/StatusesContainer/Status6"]
+layout_mode = 2
+offset_right = 22.0
+offset_bottom = 22.0
+texture = ExtResource("27_5ui8o")
 
 [node name="Dialogue" type="Control" parent="."]
 visible = false
@@ -1519,7 +1826,6 @@ mouse_filter = 1
 script = ExtResource("1_cvjfy")
 
 [node name="Character" type="Control" parent="UI"]
-visible = false
 custom_minimum_size = Vector2(176, 296)
 layout_mode = 1
 anchors_preset = 4
@@ -1578,7 +1884,6 @@ text = "Character"
 horizontal_alignment = 1
 
 [node name="Equipment" type="Control" parent="UI/Character"]
-visible = false
 anchors_preset = 0
 offset_right = 176.0
 offset_bottom = 296.0
@@ -1860,6 +2165,7 @@ texture = ExtResource("12_teqho")
 [node name="EquipButton" parent="UI/Character/Equipment/LHandPanel" instance=ExtResource("13_i4h7w")]
 visible = false
 layout_mode = 0
+type = 1
 
 [node name="Area2D" parent="UI/Character/Equipment/LHandPanel/EquipButton" index="0"]
 visible = false
@@ -1892,6 +2198,7 @@ texture = ExtResource("12_teqho")
 [node name="EquipButton" parent="UI/Character/Equipment/RHandPanel" instance=ExtResource("13_i4h7w")]
 visible = false
 layout_mode = 0
+type = 2
 
 [node name="Area2D" parent="UI/Character/Equipment/RHandPanel/EquipButton" index="0"]
 visible = false
@@ -2170,6 +2477,7 @@ theme = ExtResource("3_h5rw7")
 text = "79"
 
 [node name="SkillStats" type="Control" parent="UI/Character"]
+visible = false
 anchors_preset = 0
 offset_right = 176.0
 offset_bottom = 296.0
@@ -2237,14 +2545,29 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Icon" type="TextureRect" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat1"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -33.0
+offset_top = -4.5
+offset_right = -21.0
+offset_bottom = 4.5
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("25_6mgam")
+
 [node name="StatUpCostLabel" type="Label" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat1"]
 layout_mode = 0
-offset_left = 85.0
-offset_right = 133.0
+offset_left = 86.0
+offset_right = 114.0
 offset_bottom = 17.0
 theme = ExtResource("3_h5rw7")
 text = "0"
-horizontal_alignment = 1
+horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="UpgradeStatButton" type="Button" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat1"]
@@ -2280,16 +2603,6 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="StatUpCostLabel" type="Label" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat2"]
-layout_mode = 0
-offset_left = 85.0
-offset_right = 133.0
-offset_bottom = 17.0
-theme = ExtResource("3_h5rw7")
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="UpgradeStatButton" type="Button" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat2"]
 layout_mode = 0
 offset_left = 133.0
@@ -2299,6 +2612,31 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_tii2f")
 theme_override_styles/hover = SubResource("StyleBoxTexture_p5qms")
 script = ExtResource("39_gqfbm")
 stat_type = 2
+
+[node name="Icon" type="TextureRect" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat2"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -33.0
+offset_top = -4.5
+offset_right = -21.0
+offset_bottom = 4.5
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("25_6mgam")
+
+[node name="StatUpCostLabel" type="Label" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat2"]
+layout_mode = 0
+offset_left = 86.0
+offset_right = 114.0
+offset_bottom = 17.0
+theme = ExtResource("3_h5rw7")
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="Stat3" type="Control" parent="UI/Character/SkillStats/CharacterStats/StatsContainer"]
 custom_minimum_size = Vector2(0, 13)
@@ -2323,16 +2661,6 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="StatUpCostLabel" type="Label" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat3"]
-layout_mode = 0
-offset_left = 85.0
-offset_right = 133.0
-offset_bottom = 17.0
-theme = ExtResource("3_h5rw7")
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="UpgradeStatButton" type="Button" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat3"]
 layout_mode = 0
 offset_left = 133.0
@@ -2342,6 +2670,31 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_tii2f")
 theme_override_styles/hover = SubResource("StyleBoxTexture_p5qms")
 script = ExtResource("39_gqfbm")
 stat_type = 3
+
+[node name="Icon" type="TextureRect" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat3"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -33.0
+offset_top = -4.5
+offset_right = -21.0
+offset_bottom = 4.5
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("25_6mgam")
+
+[node name="StatUpCostLabel" type="Label" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat3"]
+layout_mode = 0
+offset_left = 86.0
+offset_right = 114.0
+offset_bottom = 17.0
+theme = ExtResource("3_h5rw7")
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="Stat4" type="Control" parent="UI/Character/SkillStats/CharacterStats/StatsContainer"]
 custom_minimum_size = Vector2(0, 13)
@@ -2366,16 +2719,6 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="StatUpCostLabel" type="Label" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat4"]
-layout_mode = 0
-offset_left = 85.0
-offset_right = 133.0
-offset_bottom = 17.0
-theme = ExtResource("3_h5rw7")
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="UpgradeStatButton" type="Button" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat4"]
 layout_mode = 0
 offset_left = 133.0
@@ -2385,6 +2728,31 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_tii2f")
 theme_override_styles/hover = SubResource("StyleBoxTexture_p5qms")
 script = ExtResource("39_gqfbm")
 stat_type = 4
+
+[node name="Icon" type="TextureRect" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat4"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -33.0
+offset_top = -4.5
+offset_right = -21.0
+offset_bottom = 4.5
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("25_6mgam")
+
+[node name="StatUpCostLabel" type="Label" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat4"]
+layout_mode = 0
+offset_left = 86.0
+offset_right = 114.0
+offset_bottom = 17.0
+theme = ExtResource("3_h5rw7")
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="Stat5" type="Control" parent="UI/Character/SkillStats/CharacterStats/StatsContainer"]
 custom_minimum_size = Vector2(0, 13)
@@ -2409,16 +2777,6 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="StatUpCostLabel" type="Label" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat5"]
-layout_mode = 0
-offset_left = 85.0
-offset_right = 133.0
-offset_bottom = 17.0
-theme = ExtResource("3_h5rw7")
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="UpgradeStatButton" type="Button" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat5"]
 layout_mode = 0
 offset_left = 133.0
@@ -2428,6 +2786,31 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_tii2f")
 theme_override_styles/hover = SubResource("StyleBoxTexture_p5qms")
 script = ExtResource("39_gqfbm")
 stat_type = 5
+
+[node name="Icon" type="TextureRect" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat5"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -33.0
+offset_top = -4.5
+offset_right = -21.0
+offset_bottom = 4.5
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("25_6mgam")
+
+[node name="StatUpCostLabel" type="Label" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat5"]
+layout_mode = 0
+offset_left = 86.0
+offset_right = 114.0
+offset_bottom = 17.0
+theme = ExtResource("3_h5rw7")
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="Stat6" type="Control" parent="UI/Character/SkillStats/CharacterStats/StatsContainer"]
 custom_minimum_size = Vector2(0, 13)
@@ -2452,16 +2835,6 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="StatUpCostLabel" type="Label" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat6"]
-layout_mode = 0
-offset_left = 85.0
-offset_right = 133.0
-offset_bottom = 17.0
-theme = ExtResource("3_h5rw7")
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="UpgradeStatButton" type="Button" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat6"]
 layout_mode = 0
 offset_left = 133.0
@@ -2471,6 +2844,31 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_tii2f")
 theme_override_styles/hover = SubResource("StyleBoxTexture_p5qms")
 script = ExtResource("39_gqfbm")
 stat_type = 6
+
+[node name="Icon" type="TextureRect" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat6"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -33.0
+offset_top = -4.5
+offset_right = -21.0
+offset_bottom = 4.5
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("25_6mgam")
+
+[node name="StatUpCostLabel" type="Label" parent="UI/Character/SkillStats/CharacterStats/StatsContainer/Stat6"]
+layout_mode = 0
+offset_left = 86.0
+offset_right = 114.0
+offset_bottom = 17.0
+theme = ExtResource("3_h5rw7")
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="CharacterSkills" type="Control" parent="UI/Character/SkillStats"]
 anchors_preset = 0

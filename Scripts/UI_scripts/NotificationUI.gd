@@ -22,7 +22,6 @@ func reload():
 	
 	bg.size.x = container.size.x + 32
 	self.size.x = container.size.x + 32
-	print(self.size.x)
 
 
 func fade():

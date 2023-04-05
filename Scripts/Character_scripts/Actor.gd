@@ -10,10 +10,13 @@ class_name Actor
 @onready var interaction_area: Area2D = $InteractionArea
 @onready var state_machine = animation_tree.get("parameters/playback")
 @onready var Projectiles: Node2D = self.get_tree().get_root().find_child("Projectiles", true, false)
+@onready var Stationary_Projectiles: Node2D = $Projectiles
+@onready var hitbox = $HitBox
 
 @export var move_speed : float = 100.0
-@onready var data = PlayerData.new()
+@export var data: PlayerData# = PlayerData.new()
 @export var walking = false
+@export var dsds: int
 
 var asd: ParticleProcessMaterial
 var last_move
@@ -24,6 +27,8 @@ var starting_direction : Vector2 = Vector2(0, 1)
 var move_direction: Vector2 = Vector2(0,0)
 
 func _ready():
+	if not (data):
+		data = PlayerData.new()
 	update_animation_parameters(starting_direction)
 	
 	
@@ -89,22 +94,35 @@ func _physics_process(_delta):
 	
 func use_skill_id(id: int):
 	if id < data.skills.get_skills().size():
-		shoot_projectile(
-			data.skills.get_skill_id(id)
-		)
+		
+		match data.skills.get_skill_id(id).get_skill_type(): 
+			'Attack':
+				shoot_projectile( data.skills.get_skill_id(id))
+			'Status':
+				use_status_skill( data.skills.get_skill_id(id))
 	
-func shoot_projectile(skill: BaseSkill) -> void:
+func shoot_projectile(skill: BaseSkill, at: CharacterBody2D = null) -> void:
 	var proj = skill.projectile
 	var bullet = proj.instantiate()
-	var bullet_rotation = ( get_global_mouse_position() - self.global_position ).normalized()
+	var bullet_rotation
+	if (at):
+		bullet_rotation = ( at.global_position - self.global_position ).normalized()
+	else:
+		bullet_rotation = ( get_global_mouse_position() - self.global_position ).normalized()
+		
+	if skill.type == Enums.ESkillType.MAGIC:
+		bullet.magic == true
+	
+		
 
 	if (bullet.moving_projectile):
 		Projectiles.add_child(bullet)
 	else:
-		self.add_child(bullet)
+		Stationary_Projectiles.add_child(bullet)
 	
 	#bullet.create_shape_owner(self)
 	bullet.add_collision_exception_with(self)
+	bullet.add_collision_exception_with(hitbox)
 	
 	bullet.skill = skill
 	
@@ -115,10 +133,11 @@ func shoot_projectile(skill: BaseSkill) -> void:
 		bullet.shoot(bullet_rotation, true, self)
 	else:
 		bullet.shoot(Vector2(0,0), true, self)
+		
 	
 func take_ranged_damage(_skill: AttackSkill, from: Actor,_strength):
 	data.hitpoints -= int(_skill.ranged_damage * from.get_damage() / 100.0)
-	print(int(_skill.ranged_damage * from.get_damage() / 100.0))
+	#print(int(_skill.ranged_damage * from.get_damage() / 100.0))
 	self.modulate = Color8(255,0,0,255)
 	
 	cooldown(1)
@@ -152,3 +171,33 @@ func get_damage():
 		return data.inventory.get_equipments_slot(Enums.EEquipmentSlot.R_HAND).get_flat_damage()
 	else:
 		return data.stats[Enums.EStat.STRENGTH]
+		
+func use_status_skill(skill: StatusSkill):
+	for child in Stationary_Projectiles.get_children():
+		if child.skill == skill:
+			child.queue_free()
+		
+	var status_timer =  ( self.data.add_status( skill.self_status, skill.status_duration) )
+	if (status_timer):
+
+		self.add_child(status_timer)
+		
+		var proj = skill.projectile
+		var bullet = proj.instantiate()
+		var bullet_rotation = ( get_global_mouse_position() - self.global_position ).normalized()
+
+		Stationary_Projectiles.add_child(bullet)
+		
+		bullet.add_collision_exception_with(self)
+		bullet.add_collision_exception_with(hitbox)
+
+		bullet.skill = skill
+		bullet.name = skill.name
+		
+		bullet.change_sprite(skill)		
+		bullet.global_position = self.global_position
+		bullet.rotation = bullet_rotation.angle() + PI/2
+		bullet.shoot(Vector2(0,0), true, self)
+		
+		status_timer.timeout.connect( bullet.delete.bind(null) ) 
+		status_timer.start()

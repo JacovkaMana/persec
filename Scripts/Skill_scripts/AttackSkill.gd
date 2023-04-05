@@ -19,7 +19,7 @@ func _init(name: String, description: String, ranged_damage: int, melee_damage: 
 		self.type = type
 		self.projectile = projectile
 		self.cost = stamina_cost
-		self.icon =GlobalSprites.skill_icons[skill_icon]
+		self.icon = GlobalSprites.skill_icons[skill_icon]
 
 func get_ranged_damage_string():
 	return (str(ranged_damage) + "%" + " x" + str(multiplier))
@@ -29,3 +29,6 @@ func get_ranged_damage():
 	
 func get_multiplier():
 	return multiplier
+
+func get_skill_type():
+	return 'Attack'

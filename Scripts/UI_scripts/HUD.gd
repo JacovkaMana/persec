@@ -16,6 +16,9 @@ var tween
 @onready var stamina_blocks = $StaminaContainer
 
 @onready var money_label = $Coins/Label
+
+@onready var statuses_container = $StatusesContainer
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
@@ -28,9 +31,6 @@ func _process(delta):
 	
 	for i in range(stamina_blocks.get_child_count()):
 		if (i + 1) <= player.data.max_stamina:
-#			var alpha = min(player.data.stamina, i + 1) / (i + 1)
-#			self.get_child(i).self_modulate = Color(alpha,alpha,alpha, alpha)
-			#self.get_child(i).self_modulate = Color(1,1,1, alpha)
 			if (min(player.data.stamina, i + 1) / (i + 1) == 1):
 				stamina_blocks.get_child(i).visible = true
 				stamina_blocks.get_child(i).material = full_material
@@ -39,6 +39,15 @@ func _process(delta):
 
 		else:
 			stamina_blocks.get_child(i).visible = false
+	
+	
+	
+	for i in range(statuses_container.get_child_count()):
+		if i < player.data.statuses.size():
+			statuses_container.get_child(i).visible = true
+			#statuses_container.get_child(i).get_child(0).texture = player.data.statuses[ player.data.statuses.keys(i) ]
+		else:
+			statuses_container.get_child(i).visible = false
 	
 	
 	stamina_container.size.x = 18 * player.data.max_stamina

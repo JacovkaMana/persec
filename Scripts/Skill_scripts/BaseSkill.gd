@@ -33,3 +33,7 @@ func get_cost():
 	
 func get_skill_sprite():
 	return projectile
+	
+	
+func get_skill_type():
+	return ''

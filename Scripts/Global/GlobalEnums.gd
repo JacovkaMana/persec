@@ -14,8 +14,8 @@ enum ECharacterState {
 	ROAMING,
 	TALKING,
 	SEARCHING,
-	RANGE,
-	MELEE,
+	FIGHT_RANGE,
+	FIGHT_MELEE,
 }
 
 enum ECharacterActions{
@@ -55,6 +55,7 @@ enum ERarity {
 
 enum EStatus {
 	NONE = 0,
+	DEFENDING,
 	BURNING,
 }
 

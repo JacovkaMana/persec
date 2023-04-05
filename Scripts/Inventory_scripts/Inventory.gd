@@ -88,7 +88,8 @@ func equip_item(item: Item)->bool:
 		return false
 	
 	if item.get_equip_type() == Enums.EEquipType.WEAPON:
-		print(item.twohanded)
+		item.twohanded
+		
 	
 	if _equipment[slot_type]:
 		var old_item = _equipment[slot_type]

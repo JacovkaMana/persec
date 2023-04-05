@@ -7,7 +7,7 @@ extends Actor
 @export var CONSTITUTION: int = 0
 @export var INTELLIGENCE: int = 0
 @export var PERCEPTION: int = 0
-@export var CHARISMA: int = 0
+#@export var CHARISMA: int = 0
 
 
 #weapons
@@ -31,6 +31,8 @@ extends Actor
 var INVENTORY : Array[Item] = []
 @export_category('Skills')
 @export var SKILLS: Array[String] = []
+@export var Stamina_max: int = 3
+@export var Stamina_regen: int = 20
 
 @export var interaction_list: Array[Enums.ECharacterActions] = []
 
@@ -96,6 +98,14 @@ func _ready():
 		30
 		)
 		self.data.inventory.add_item(random_item)
+		
+		
+	for skill_string in SKILLS:
+		data.skills.add_skill(GlobalSkills.skills[skill_string])
+		
+		
+	data.max_stamina = Stamina_max
+	data.stamina_regen = Stamina_regen
 	
 func _physics_process(_delta):
 	super(_delta)
@@ -112,6 +122,11 @@ func _physics_process(_delta):
 					move_speed = 70
 		Enums.ECharacterState.TALKING:
 			self.move_direction = Vector2(0, 0);
+		Enums.ECharacterState.FIGHT_RANGE:
+			attack_player_ranged()
+		Enums.ECharacterState.SEARCHING:
+			#self.move_direction = Vector2(0, 0);
+			pass
 		_:
 			pass
 
@@ -158,11 +173,13 @@ func _on_vision_enter(who):
 	if (who == player):
 		label.text = "!"
 		label.visible = true
+		self.current_state = Enums.ECharacterState.FIGHT_RANGE
 		
 func _on_vision_exit(who):
 	if (who == player):
 		label.text = "?"
 		label_timer(3)
+		#self.current_state = Enums.ECharacterState.ROAMING
 		
 func label_timer(time):
 	
@@ -202,7 +219,28 @@ func interact():
 	return null
 
 
-
+func attack_player_ranged():
+	for skill in data.skills.get_skills():
+		match skill.get_skill_type(): 
+			'Attack':
+				if (skill.get_cost() <= data.stamina):
+					data.stamina -= skill.get_cost()
+					shoot_projectile( skill, player)
+			'Status':
+				pass
 	
+
+
+func use_skill_id(id: int):
+	if id < data.skills.get_skills().size():
+		if (data.skills.get_skill_id(id).get_cost() <= data.stamina):
+			data.stamina -= data.skills.get_skill_id(id).get_cost()
+			emit_signal("skill_used", id)
+			
+			match data.skills.get_skill_id(id).get_skill_type(): 
+				'Attack':
+					shoot_projectile( data.skills.get_skill_id(id))
+				'Status':
+					use_status_skill( data.skills.get_skill_id(id))
 	
 	

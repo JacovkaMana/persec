@@ -2,12 +2,15 @@ class_name PlayerData
 extends Resource
 
 signal stats_changed(stats: Dictionary)
+signal status_changed()
 
 @export var hitpoints: float = 100.0
 @export var max_hitpoints: float = 100.0
 @export var max_stamina: int = 4
 @export var stamina_regen: float = 40
 @export var money: int = 0
+
+var statuses: Dictionary = {}
 var stamina: float = 0.0
 var inventory: Inventory = Inventory.new()
 var skills: Skills = Skills.new()
@@ -28,9 +31,7 @@ func _init():
 	inventory.connect("equip_item_changed", recalculate_stats)
 	recalculate_stats()
 	#print('init from data')
-	print(
-		stat_cost(Enums.EStat.DEXTERITY)
-	)
+
 func _process(_delta):
 	pass
 
@@ -100,3 +101,28 @@ func increase_stat(stat: Enums.EStat):
 		return true
 	else:
 		return false
+		
+	
+func add_status(status: Enums.EStatus, duration: int):
+	
+	if self.statuses.has(status):
+		self.statuses[status].queue_free()
+		
+	var status_timer = Timer.new()
+	status_timer.set_wait_time(duration)
+	status_timer.set_one_shot(true)
+	status_timer.timeout.connect(remove_status.bind(status))  
+	status_timer.start()
+	self.statuses[status] = status_timer
+	print(duration)
+	
+	#emit_signal("status_changed")
+	return self.statuses[status]
+
+	
+func remove_status(status: Enums.EStatus):
+	if self.statuses.has(status):
+		statuses[status].queue_free()
+		self.statuses.erase(status)
+		
+	#emit_signal("status_changed")

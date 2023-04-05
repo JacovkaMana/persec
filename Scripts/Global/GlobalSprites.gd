@@ -55,6 +55,7 @@ extends Node
 	"single_59" : preload("res://Art/Icons/Skills/single_59.png"),
 	"single_41" : preload("res://Art/Icons/Skills/single_41.png"),
 	"single_6" : preload("res://Art/Icons/Skills/single_6.png"),
+	"single_7" : preload("res://Art/Icons/Skills/single_7.png"),
 }
 
 # Called when the node enters the scene tree for the first time.

@@ -29,18 +29,32 @@ func _ready():
 	var dialogue: Dictionary = JSON.parse_string(file.get_as_text())
 	for skill in dialogue:
 		var skill_json = dialogue[skill]
-		if skill_json.type == 'attack':
-			skills[skill] = AttackSkill.new(
-			skill,
-			skill_json.description,
-			skill_json.ranged_damage,
-			skill_json.melee_damage,
-			skill_json.multiplier,
-			skill_json.cost,
-			Enums.EDamageType.get( skill_json.damage_type ),
-			Enums.ESkillType.get( skill_json.skill_type ),
-			load("res://PreRendered/Projectiles/" + skill_json.texture + ".tscn"),
-			skill_json.icon
-		)
+		match skill_json.type:
+			'attack':
+				skills[skill] = AttackSkill.new(
+				skill,
+				skill_json.description,
+				skill_json.ranged_damage,
+				skill_json.melee_damage,
+				skill_json.multiplier,
+				skill_json.cost,
+				Enums.EDamageType.get( skill_json.damage_type ),
+				Enums.ESkillType.get( skill_json.skill_type ),
+				load("res://PreRendered/Projectiles/" + skill_json.texture + ".tscn"),
+				skill_json.icon
+				)
+			'status':
+				skills[skill] = StatusSkill.new(
+				skill,
+				skill_json.description,
+				Enums.EStatus.get( skill_json.self_status ),
+				Enums.EStatus.get( skill_json.enemy_status ),
+				skill_json.duration,
+				skill_json.cost,
+				Enums.EDamageType.get( skill_json.damage_type ),
+				Enums.ESkillType.get( skill_json.skill_type ),
+				load("res://PreRendered/Projectiles/" + skill_json.texture + ".tscn"),
+				skill_json.icon
+			)
 
 

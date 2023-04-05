@@ -60,9 +60,9 @@ func _ready():
 	
 	data.inventory.equip_item(test_item)
 	
-	data.skills.add_skill(GlobalSkills.skills['Slash'])
+	data.skills.add_skill(GlobalSkills.skills['Defend'])
 	data.skills.add_skill(GlobalSkills.skills['Fireball'])
-	data.skills.add_skill(GlobalSkills.skills['Ice Slash'])
+	data.skills.add_skill(GlobalSkills.skills['Ice Strike'])
 	data.skills.add_skill(GlobalSkills.skills['Ice Slash'])
 
 
@@ -97,9 +97,12 @@ func use_skill_id(id: int):
 		if (data.skills.get_skill_id(id).get_cost() <= data.stamina):
 			data.stamina -= data.skills.get_skill_id(id).get_cost()
 			emit_signal("skill_used", id)
-			shoot_projectile(
-				data.skills.get_skill_id(id)
-			)
+			
+			match data.skills.get_skill_id(id).get_skill_type(): 
+				'Attack':
+					shoot_projectile( data.skills.get_skill_id(id))
+				'Status':
+					use_status_skill( data.skills.get_skill_id(id))
 
 	
 func interact_with_nearest():
