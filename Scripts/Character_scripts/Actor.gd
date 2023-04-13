@@ -18,6 +18,8 @@ class_name Actor
 @export var walking = false
 @export var dsds: int
 
+@onready var Statuses = $Statuses
+
 var asd: ParticleProcessMaterial
 var last_move
 var head_timer
@@ -173,31 +175,12 @@ func get_damage():
 		return data.stats[Enums.EStat.STRENGTH]
 		
 func use_status_skill(skill: StatusSkill):
-	for child in Stationary_Projectiles.get_children():
-		if child.skill == skill:
-			child.queue_free()
 		
 	var status_timer =  ( self.data.add_status( skill.self_status, skill.status_duration) )
 	if (status_timer):
 
 		self.add_child(status_timer)
-		
-		var proj = skill.projectile
-		var bullet = proj.instantiate()
-		var bullet_rotation = ( get_global_mouse_position() - self.global_position ).normalized()
-
-		Stationary_Projectiles.add_child(bullet)
-		
-		bullet.add_collision_exception_with(self)
-		bullet.add_collision_exception_with(hitbox)
-
-		bullet.skill = skill
-		bullet.name = skill.name
-		
-		bullet.change_sprite(skill)		
-		bullet.global_position = self.global_position
-		bullet.rotation = bullet_rotation.angle() + PI/2
-		bullet.shoot(Vector2(0,0), true, self)
-		
-		status_timer.timeout.connect( bullet.delete.bind(null) ) 
+		self.Statuses.show_status(skill.self_status)
+#
+		status_timer.timeout.connect( self.Statuses.hide_status.bind(skill.self_status) ) 
 		status_timer.start()

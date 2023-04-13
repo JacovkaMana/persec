@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://chku42sa88b0g"]
+[gd_scene load_steps=33 format=3 uid="uid://chku42sa88b0g"]
 
 [ext_resource type="Script" path="res://Scripts/Character_scripts/NPSs.gd" id="1_81pvv"]
 [ext_resource type="Shader" path="res://Art/Shaders/OutlineTest.gdshader" id="1_hatnr"]
@@ -6,6 +6,7 @@
 [ext_resource type="Shader" uid="uid://bna8w8wik6u0h" path="res://Art/Shaders/PlayerVisualShader.tres" id="3_4e4ep"]
 [ext_resource type="FontFile" uid="uid://c0s1j1n8esy7x" path="res://Fonts/Minecraftia-Regular.ttf" id="3_35dde"]
 [ext_resource type="Texture2D" uid="uid://85m7q3fj3yqw" path="res://Art/Character/MageCloak.png" id="3_lgs3t"]
+[ext_resource type="Script" path="res://Scripts/Character_scripts/HitBox.gd" id="3_m2t84"]
 [ext_resource type="Texture2D" uid="uid://dm1531nlm22l5" path="res://Art/Masks/Ball.png" id="4_8am1b"]
 [ext_resource type="Texture2D" uid="uid://brk6fgd2qanql" path="res://Art/Character/MageFace.png" id="4_8lg8s"]
 [ext_resource type="Texture2D" uid="uid://garspyffcbgq" path="res://Art/UI/LightProbe.png" id="6_3ita2"]
@@ -29,7 +30,10 @@ font = ExtResource("3_35dde")
 font_size = 8
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qwcsy"]
-radius = 117.35
+radius = 120.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n5svg"]
+radius = 200.0
 
 [sub_resource type="Animation" id="Animation_uhobr"]
 length = 0.001
@@ -309,9 +313,9 @@ collision_layer = 65
 script = ExtResource("1_81pvv")
 
 [node name="HitBox" type="CharacterBody2D" parent="."]
-visible = false
 collision_layer = 8
 collision_mask = 0
+script = ExtResource("3_m2t84")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(-2, 4)
@@ -345,7 +349,6 @@ hframes = 8
 vframes = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(-2, -9)
 shape = SubResource("RectangleShape2D_rbf11")
 
@@ -358,17 +361,29 @@ offset_bottom = -11.0
 text = "20"
 label_settings = SubResource("LabelSettings_h4cy4")
 
-[node name="Vision" type="Area2D" parent="."]
-visible = false
-disable_mode = 1
-collision_layer = 64
-collision_mask = 64
+[node name="VisionIdle" type="Area2D" parent="."]
+disable_mode = 2
+collision_layer = 80
+collision_mask = 80
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Vision"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VisionIdle"]
 position = Vector2(-80, 0)
 shape = SubResource("CircleShape2D_qwcsy")
 
-[node name="Sprite2D" type="Sprite2D" parent="Vision"]
+[node name="Sprite2D" type="Sprite2D" parent="VisionIdle"]
+visible = false
+position = Vector2(-80, 17)
+texture = ExtResource("4_8am1b")
+
+[node name="VisionBattle" type="Area2D" parent="."]
+disable_mode = 2
+collision_layer = 80
+collision_mask = 80
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VisionBattle"]
+shape = SubResource("CircleShape2D_n5svg")
+
+[node name="Sprite2D" type="Sprite2D" parent="VisionBattle"]
 visible = false
 position = Vector2(-80, 17)
 texture = ExtResource("4_8am1b")

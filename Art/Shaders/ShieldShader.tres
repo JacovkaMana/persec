@@ -1,7 +1,10 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://d1rup2825ejku"]
 
-[ext_resource type="Shader" path="res://Art/Shaders/OutlineTest.gdshader" id="1_v1rjw"]
+[ext_resource type="Shader" uid="uid://c481dqdrmqaa8" path="res://Art/Shaders/ShieldVisualShader.tres" id="1_80xyy"]
 
 [resource]
-shader = ExtResource("1_v1rjw")
-shader_parameter/outline_color = null
+shader = ExtResource("1_80xyy")
+shader_parameter/Color = Color(1, 1, 1, 1)
+shader_parameter/Inner = 0.226
+shader_parameter/Opacity = 1.0
+shader_parameter/Outer = 0.333

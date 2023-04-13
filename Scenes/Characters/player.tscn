@@ -1,7 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://dsyukixpu7tpu"]
+[gd_scene load_steps=21 format=3 uid="uid://dsyukixpu7tpu"]
 
 [ext_resource type="Script" path="res://Scripts/Character_scripts/player.gd" id="1_odqex"]
 [ext_resource type="Texture2D" uid="uid://bgn8fb6jsnab6" path="res://Art/Character/Mage.png" id="2_ar4bo"]
+[ext_resource type="Script" path="res://Scripts/Character_scripts/HitBox.gd" id="2_rkaol"]
 [ext_resource type="Texture2D" uid="uid://85m7q3fj3yqw" path="res://Art/Character/MageCloak.png" id="3_06c88"]
 [ext_resource type="Shader" uid="uid://bna8w8wik6u0h" path="res://Art/Shaders/PlayerVisualShader.tres" id="3_l24t6"]
 [ext_resource type="Texture2D" uid="uid://brk6fgd2qanql" path="res://Art/Character/MageFace.png" id="4_714xx"]
@@ -198,19 +199,13 @@ y_sort_enabled = true
 script = ExtResource("1_odqex")
 
 [node name="HitBox" type="CharacterBody2D" parent="."]
-visible = false
 collision_layer = 8
 collision_mask = 0
+script = ExtResource("2_rkaol")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(-2, 4)
 shape = SubResource("RectangleShape2D_4s8yi")
-
-[node name="Sprite" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("2_ar4bo")
-hframes = 8
-vframes = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 0)
@@ -226,6 +221,12 @@ frame = 16
 
 [node name="Face" type="Sprite2D" parent="."]
 texture = ExtResource("4_714xx")
+hframes = 8
+vframes = 9
+
+[node name="Sprite" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_ar4bo")
 hframes = 8
 vframes = 9
 

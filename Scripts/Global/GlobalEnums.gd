@@ -18,6 +18,18 @@ enum ECharacterState {
 	FIGHT_MELEE,
 }
 
+enum ECharacterBehaviour {
+	FRIENDLY,
+	NEUTRAL,
+	HOSTILE,
+}
+
+enum ECharacterBattleTrait{
+	NORMAL,
+	ACCURATE,
+	RECKLES,
+}
+
 enum ECharacterActions{
 	NONE = 0,
 	TALK,

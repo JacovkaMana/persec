@@ -4,7 +4,7 @@ var start_pos: Vector2
 var moving: bool = false
 var direction: Vector2
 var animation_tree: AnimationTree = null
-var animation_player: AnimationPlayer = null
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var particles: GPUParticles2D = $Particles
 @onready var sprite: Sprite2D = $Bullet
 @onready var texture_light: PointLight2D = $TextureLight
@@ -25,6 +25,7 @@ var projectile_owner = null
 var skill = null
 var collision_object = null
 var test_color = preload("res://Art/Colors/Ice.tres")
+var freeze: bool = false
 var tween
 
 @onready var SceneManager = self.get_tree().get_root().find_child("SceneManager", true, false)
@@ -33,10 +34,7 @@ func _ready():
 	
 	start_pos = self.position
 	if (animated):
-		#animation_tree = $AnimationTree
-		animation_player = $AnimationPlayer
-		
-		animation_player.connect("animation_finished", delete)
+		animation_player.connect("animation_finished", _on_animation_finished)
 		animation_player.queue("Start")
 		
 #	if (magic):
@@ -59,10 +57,15 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
+	if not (freeze):
+		move_n_collide(_delta)
+			
+	
+func move_n_collide(_delta):
 	if (moving):
 		collision_object = move_and_collide(direction*_delta*move_speed)
 		if is_instance_valid(collision_object):
-			print( collision_object.get_collider() )
+			#print( collision_object.get_collider() )
 			match collision_object.get_collider().name:
 				projectile_owner.name:
 					self.add_collision_exception_with(projectile_owner)
@@ -72,14 +75,14 @@ func _physics_process(_delta):
 					match skill.get_skill_type(): 
 						'Attack':
 							collision_object.get_collider().get_parent().take_ranged_damage(skill, projectile_owner, null)
-					self.queue_free()
+					self.delete()
 				'TileMap':
-					self.queue_free()
+					self.delete()
 				_:
 					if collision_object.get_collider().projectile_owner == self.projectile_owner:
 						self.add_collision_exception_with(collision_object.get_collider())
 					else:
-						self.queue_free()
+						self.delete()
 	else:
 		collision_object = move_and_collide(direction*_delta*move_speed)
 		if (projectile_owner == player):
@@ -106,7 +109,6 @@ func _physics_process(_delta):
 						self.add_collision_exception_with(collision_object.get_collider())
 					else:
 						collision_object.get_collider().queue_free()
-		
 	
 	
 func shoot(where: Vector2, _animated: bool = false, who = null):
@@ -168,13 +170,35 @@ func change_sprite(_skill: BaseSkill):
 #					#print(im.get_pixel(i,j).a)
 #					emiss.push_back(Vector2(i,j))
 #	particles.set_emission_points(emiss)
+
+
+
+func _on_animation_finished(_anim):
+	match _anim:
+		"Start":
+			delete()
+		'delete':
+			actually_delete()
 	
-func delete(_anim):
-	#print('delete triggered')
-	print('delete')
+	
+func delete():
+	freeze = true
+	move_speed = 0
+	move_and_collide(Vector2.ZERO)
+	self.constant_linear_velocity = Vector2.ZERO
+	self.constant_angular_velocity = 0
+	
+	if animation_player.has_animation("delete"):
+		animation_player.queue("delete")
+	else:
+		actually_delete()
+	
+func actually_delete():
 	self.queue_free()
 
 func trigger_melee():
 	SceneManager.add_melee()
 	
+func get_collider_type():
+	return 'Projectile'
 	

@@ -134,3 +134,5 @@ func money_earn(much):
 	self.data.money += much
 	emit_signal("money_earned", much)
 	
+func get_collider_type():
+	return 'Player'

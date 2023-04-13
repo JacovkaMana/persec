@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c2jkt7yfmok38"
-path.s3tc="res://.godot/imported/SwordAtlas.png-cbb1b748fe1e972a2456859a1cea3688.s3tc.ctex"
+uid="uid://dukituof4fxrh"
+path.s3tc="res://.godot/imported/polygon-150x150.jpg-0e2b1a457404c03b6f1a5f8dec92fd4c.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,15 +11,15 @@ metadata={
 
 [deps]
 
-source_file="res://Art/Textures/SwordAtlas.png"
-dest_files=["res://.godot/imported/SwordAtlas.png-cbb1b748fe1e972a2456859a1cea3688.s3tc.ctex"]
+source_file="res://Art/Textures/polygon-150x150.jpg"
+dest_files=["res://.godot/imported/polygon-150x150.jpg-0e2b1a457404c03b6f1a5f8dec92fd4c.s3tc.ctex"]
 
 [params]
 
 compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
-compress/hdr_compression=1
+compress/hdr_compression=0
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true

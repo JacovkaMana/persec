@@ -1,5 +1,9 @@
 extends Actor
+class_name NPS
+
 @export var npc_name: String = ""
+@export var behaviuor: Enums.ECharacterBehaviour
+@export var fight_ai : BaseAI
 #stats
 @export_category('Stats')
 @export var STRENGTH: int = 0
@@ -42,7 +46,10 @@ var last_direction_change: float = 0
 #@onready var path: Path2D = $Path2D
 #@onready var path_follow: PathFollow2D = $Path2D/PathFollow2D
 #@onready var path_player = $PathPlayer
-@onready var vision: Area2D = $Vision
+@onready var vision_idle: Area2D = $VisionIdle
+@onready var vision_battle: Area2D = $VisionBattle
+var vision
+
 @onready var interaction_hint = $InteractionHint
 @onready var interaction_hint_player = $InteractionHint/AnimationPlayer
 @onready var player = get_tree().get_root().find_child("Player", true, false)
@@ -55,7 +62,7 @@ var dialogue_number: int = 0
 var select_material = preload("res://Art/Shaders/HighlightShader.tres")
 var Chest = preload("res://Scenes/Objects/chest.tscn")
 
-
+var last_vision = []
 
 
 func _ready():
@@ -78,8 +85,8 @@ func _ready():
 		self.set_collision_mask_value(7, true)
 		collision = move_and_collide(Vector2(0,0))
 		
-	vision.connect("body_entered", _on_vision_enter) 
-	vision.connect("body_exited", _on_vision_exit) 
+	#vision.connect("body_entered", _on_vision_enter) 
+	#vision.connect("body_exited", _on_vision_exit) 
 
 	for i in range(random_items):
 		var random_item
@@ -99,13 +106,16 @@ func _ready():
 		)
 		self.data.inventory.add_item(random_item)
 		
-		
+	vision = vision_idle
+	
+	
 	for skill_string in SKILLS:
 		data.skills.add_skill(GlobalSkills.skills[skill_string])
 		
 		
 	data.max_stamina = Stamina_max
 	data.stamina_regen = Stamina_regen
+	self.fight_ai = MageAI.new()
 	
 func _physics_process(_delta):
 	super(_delta)
@@ -123,13 +133,26 @@ func _physics_process(_delta):
 		Enums.ECharacterState.TALKING:
 			self.move_direction = Vector2(0, 0);
 		Enums.ECharacterState.FIGHT_RANGE:
-			attack_player_ranged()
+			#self.fight_ai.ai_vision_process(vision.get_overlapping_bodies())
+			self.fight_ai.ai_process(_delta)
 		Enums.ECharacterState.SEARCHING:
 			#self.move_direction = Vector2(0, 0);
 			pass
 		_:
 			pass
 
+	var current_vision = vision.get_overlapping_bodies()
+	if current_vision != last_vision:
+	
+		for who in current_vision:
+			if who not in last_vision:
+				_on_vision_enter(who)
+								
+		for who in last_vision:
+			if who not in current_vision:
+				_on_vision_exit(who)
+						
+	last_vision = current_vision
 
 
 	
@@ -170,16 +193,33 @@ func set_zone(to : Area2D):
 	#print('nps at ' + str(current_zone))
 	
 func _on_vision_enter(who):
-	if (who == player):
-		label.text = "!"
-		label.visible = true
-		self.current_state = Enums.ECharacterState.FIGHT_RANGE
+	match who.get_collider_type():
+		'Player':
+			if(self.behaviuor == Enums.ECharacterBehaviour.HOSTILE):
+				label.text = "!"
+				label.visible = true
+				self.vision = vision_battle
+				self.fight_ai.setup(self, who)
+				self.current_state = Enums.ECharacterState.FIGHT_RANGE
+				
+		'Projectile':
+			if (who.projectile_owner != self):
+				if(self.behaviuor == Enums.ECharacterBehaviour.HOSTILE):
+					
+					self.fight_ai.setup(self, who.projectile_owner)
+					self.current_state = Enums.ECharacterState.FIGHT_RANGE
+					self.fight_ai.projectile_coming(who)
+		
 		
 func _on_vision_exit(who):
-	if (who == player):
-		label.text = "?"
-		label_timer(3)
-		#self.current_state = Enums.ECharacterState.ROAMING
+	if is_instance_valid(who):
+		match who.get_collider_type():
+			'Player':
+					label.text = "?"
+					label.visible = true
+			'Projectile':
+				if(self.current_state == Enums.ECharacterState.FIGHT_RANGE):
+					self.fight_ai.projectile_exited(who)
 		
 func label_timer(time):
 	
@@ -218,19 +258,6 @@ func interact():
 			player.trigger_dialogue(self)
 	return null
 
-
-func attack_player_ranged():
-	for skill in data.skills.get_skills():
-		match skill.get_skill_type(): 
-			'Attack':
-				if (skill.get_cost() <= data.stamina):
-					data.stamina -= skill.get_cost()
-					shoot_projectile( skill, player)
-			'Status':
-				pass
-	
-
-
 func use_skill_id(id: int):
 	if id < data.skills.get_skills().size():
 		if (data.skills.get_skill_id(id).get_cost() <= data.stamina):
@@ -244,3 +271,5 @@ func use_skill_id(id: int):
 					use_status_skill( data.skills.get_skill_id(id))
 	
 	
+func get_collider_type():
+	return 'NPS'

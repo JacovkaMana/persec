@@ -22,7 +22,7 @@ extends Node
 
 @onready var pants = {
 	Enums.EArmorType.PLATE : [
-		preload("res://Art/Sprites/Armor/Armor2.png"),
+		preload("res://Art/Sprites/Gloves/Gloves1.png"),
 	],
 }
 
