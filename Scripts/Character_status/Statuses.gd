@@ -1,6 +1,8 @@
 extends Node2D
 
 
+# Defending, Burning, Freezing, Bleeding, Stun,
+
 @onready var Status_dict = {
 	Enums.EStatus.DEFENDING : $Defending,
 	Enums.EStatus.BURNING : $Burning
@@ -16,7 +18,6 @@ func show_status(status: Enums.EStatus):
 		Status_dict[status].visible = true
 		match Status_dict[status].get_class():
 			'Area2D': 
-				print('enable monitoring')
 				Status_dict[status].intercept = true
 		
 func hide_status(status: Enums.EStatus):

@@ -33,7 +33,7 @@ var tween
 func _ready():
 	
 	start_pos = self.position
-	if (animated):
+	if (animation_player):
 		animation_player.connect("animation_finished", _on_animation_finished)
 		animation_player.queue("Start")
 		
@@ -183,13 +183,17 @@ func _on_animation_finished(_anim):
 	
 func delete():
 	freeze = true
-	move_speed = 0
-	move_and_collide(Vector2.ZERO)
+	self.move_speed = 0
+	self.direction = Vector2.ZERO
+	#move_and_collide(Vector2.ZERO)
 	self.constant_linear_velocity = Vector2.ZERO
 	self.constant_angular_velocity = 0
-	
-	if animation_player.has_animation("delete"):
-		animation_player.queue("delete")
+	#self.process_mode = Node.PROCESS_MODE_DISABLED
+	if animation_player:
+		if animation_player.has_animation("delete"):
+			animation_player.play("delete")
+		else:
+			actually_delete()
 	else:
 		actually_delete()
 	

@@ -9,7 +9,7 @@ class_name Actor
 @onready var face: Sprite2D = $Face
 @onready var interaction_area: Area2D = $InteractionArea
 @onready var state_machine = animation_tree.get("parameters/playback")
-@onready var Projectiles: Node2D = self.get_tree().get_root().find_child("Projectiles", true, false)
+@onready var Projectiles: Node2D = self.get_tree().get_root().find_child("NeutralProjectiles", true, false)
 @onready var Stationary_Projectiles: Node2D = $Projectiles
 @onready var hitbox = $HitBox
 

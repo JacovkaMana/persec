@@ -1,14 +1,12 @@
 extends BaseAI
 class_name MageAI
 
-#var owner: Actor = null
-#var target: Actor = null
-#var active: bool = false
+
 var dodge_direction = Vector2.ZERO
 var visible_projectiles = []
 
 var distance_to_target = 200.0
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func ai_process(delta):
 
 	check_projectiles()
@@ -46,7 +44,6 @@ func projectile_coming(which):
 	var direction = owner.global_position.direction_to(which.global_position)
 	var time = distance / which.move_speed
 	dodge_direction = Vector2(direction.x - 0.5, direction.y - 0.5).normalized()
-	print(dodge_direction)
 
 
 	visible_projectiles.append(which)
@@ -57,12 +54,10 @@ func check_projectiles():
 		var check_distance = owner.global_position.distance_to(proj.global_position)
 		var check_time = check_distance / proj.move_speed
 		if (check_time < 0.3):
-			print('defence')
 			use_defence()
 	#owner.move_direction += Vector2(cos(_angle - PI/2),sin(_angle - PI/2))
 
 func projectile_exited(which):
-	print('exited')
 	dodge_direction = Vector2.ZERO
 	if (which in visible_projectiles):
 		visible_projectiles.erase(which)

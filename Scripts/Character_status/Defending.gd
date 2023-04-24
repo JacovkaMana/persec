@@ -19,7 +19,7 @@ func _process(delta):
 
 
 func _on_enter(what):
-	print('Defending trigger')
+	pass
 #	print(what)
 #	print(self.get_overlapping_bodies())
 #	match what.get_collider_type():

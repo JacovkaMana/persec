@@ -1,11 +1,16 @@
-[gd_scene load_steps=21 format=3 uid="uid://dsyukixpu7tpu"]
+[gd_scene load_steps=37 format=3 uid="uid://dsyukixpu7tpu"]
 
 [ext_resource type="Script" path="res://Scripts/Character_scripts/player.gd" id="1_odqex"]
 [ext_resource type="Texture2D" uid="uid://bgn8fb6jsnab6" path="res://Art/Character/Mage.png" id="2_ar4bo"]
 [ext_resource type="Script" path="res://Scripts/Character_scripts/HitBox.gd" id="2_rkaol"]
 [ext_resource type="Texture2D" uid="uid://85m7q3fj3yqw" path="res://Art/Character/MageCloak.png" id="3_06c88"]
 [ext_resource type="Shader" uid="uid://bna8w8wik6u0h" path="res://Art/Shaders/PlayerVisualShader.tres" id="3_l24t6"]
+[ext_resource type="Script" path="res://Scripts/Character_status/Statuses.gd" id="3_lu2kb"]
+[ext_resource type="Script" path="res://Scripts/Character_status/Defending.gd" id="4_7l3ue"]
 [ext_resource type="Texture2D" uid="uid://brk6fgd2qanql" path="res://Art/Character/MageFace.png" id="4_714xx"]
+[ext_resource type="Material" uid="uid://d1rup2825ejku" path="res://Art/Shaders/ShieldShader.tres" id="5_08l8c"]
+[ext_resource type="Texture2D" uid="uid://bmw2s4ps8kfm8" path="res://Art/Textures/particle_examples/floaty_32.png" id="6_4u1ue"]
+[ext_resource type="Material" uid="uid://cs1kal7oh4cgv" path="res://Art/Shaders/StarfieldShader.tres" id="7_pfdii"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4s8yi"]
 size = Vector2(32, 56)
@@ -194,6 +199,94 @@ nodes/walking_speed/node = SubResource("AnimationNodeTimeScale_e3t6g")
 nodes/walking_speed/position = Vector2(0, 260)
 node_connections = [&"output", 0, &"walking", &"walking", 0, &"Animation", &"walking", 1, &"walking_speed", &"walking_speed", 0, &"Animation 2"]
 
+[sub_resource type="Gradient" id="Gradient_416hx"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rost0"]
+gradient = SubResource("Gradient_416hx")
+width = 70
+height = 80
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_36a42"]
+radius = 33.0
+height = 81.72
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_u0b8c"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 7
+particles_anim_v_frames = 7
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_1m5bp"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0.815686)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dv0lw"]
+gradient = SubResource("Gradient_1m5bp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gu1bl"]
+emission_shape = 3
+emission_box_extents = Vector3(14.974, 16.17, 1)
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+gravity = Vector3(0, -30, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
+angular_velocity_min = -20.0
+angular_velocity_max = 20.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+linear_accel_max = 2.11
+radial_accel_max = 2.11
+angle_min = -90.0
+angle_max = 90.0
+scale_min = 0.7
+color = Color(1, 0.552941, 0.188235, 1)
+color_ramp = SubResource("GradientTexture1D_dv0lw")
+hue_variation_min = -0.04
+hue_variation_max = 0.06
+turbulence_enabled = true
+turbulence_noise_scale = 7.0
+turbulence_noise_speed = Vector3(0.4, -1, 0.4)
+turbulence_noise_speed_random = 0.32
+turbulence_influence_min = 1.0
+turbulence_influence_max = 1.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_pdwcq"]
+blend_mode = 1
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_018sr"]
+emission_shape = 3
+emission_box_extents = Vector3(14.974, 17, 1)
+particle_flag_disable_z = true
+direction = Vector3(0, 1, 0)
+spread = 5.0
+gravity = Vector3(0, 1, 0)
+initial_velocity_min = 2.0
+initial_velocity_max = 5.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.1
+scale_max = 0.2
+color = Color(1, 0, 0.0156863, 1)
+hue_variation_min = -0.04
+hue_variation_max = 0.06
+turbulence_noise_scale = 7.0
+turbulence_noise_speed = Vector3(0.4, -1, 0.4)
+turbulence_noise_speed_random = 0.32
+turbulence_influence_min = 1.0
+turbulence_influence_max = 1.0
+
+[sub_resource type="Gradient" id="Gradient_y5ulg"]
+colors = PackedColorArray(1, 1, 1, 0.784314, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bgedj"]
+gradient = SubResource("Gradient_y5ulg")
+width = 32
+fill_from = Vector2(0.5, 1)
+fill_to = Vector2(0.5, 0)
+
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
 script = ExtResource("1_odqex")
@@ -246,3 +339,60 @@ parameters/walking/current_state = "walking"
 parameters/walking/transition_request = ""
 parameters/walking/current_index = 1
 parameters/walking_speed/scale = 1.0
+
+[node name="Statuses" type="Node2D" parent="."]
+script = ExtResource("3_lu2kb")
+
+[node name="Defending" type="Area2D" parent="Statuses"]
+visible = false
+collision_layer = 0
+collision_mask = 8
+input_pickable = false
+script = ExtResource("4_7l3ue")
+
+[node name="Sprite2D" type="Sprite2D" parent="Statuses/Defending"]
+texture_filter = 2
+texture_repeat = 2
+material = ExtResource("5_08l8c")
+texture = SubResource("GradientTexture2D_rost0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Statuses/Defending"]
+visible = false
+shape = SubResource("CapsuleShape2D_36a42")
+
+[node name="Burning" type="Node2D" parent="Statuses"]
+visible = false
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Statuses/Burning"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_u0b8c")
+position = Vector2(-2, 16)
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_gu1bl")
+texture = ExtResource("6_4u1ue")
+
+[node name="Bleeding" type="Node2D" parent="Statuses"]
+visible = false
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Statuses/Bleeding"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_pdwcq")
+position = Vector2(-2, -6)
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_018sr")
+texture = SubResource("GradientTexture2D_bgedj")
+trail_lifetime = 1.0
+trail_sections = 16
+trail_section_subdivisions = 44
+
+[node name="Casting" type="Node2D" parent="Statuses"]
+modulate = Color(1, 1, 1, 0.607843)
+
+[node name="GPUParticles2D" type="Sprite2D" parent="Statuses/Casting"]
+texture_filter = 1
+texture_repeat = 2
+material = ExtResource("7_pfdii")
+position = Vector2(-2, 1)
+texture = SubResource("GradientTexture2D_bgedj")
