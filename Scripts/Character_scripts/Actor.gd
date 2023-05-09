@@ -175,12 +175,28 @@ func get_damage():
 		return data.stats[Enums.EStat.STRENGTH]
 		
 func use_status_skill(skill: StatusSkill):
-		
-	var status_timer =  ( self.data.add_status( skill.self_status, skill.status_duration) )
+	
+	if (skill.self_status):
+			self.initiate_status(skill, skill.self_status, skill.status_duration)
+
+
+func initiate_status(skill: StatusSkill, status: Enums.EStatus, duration: int):
+	
+	var status_timer =  ( self.data.add_status( status, duration) )
 	if (status_timer):
 
 		self.add_child(status_timer)
-		self.Statuses.show_status(skill.self_status)
+
+		#self.Statuses.show_status(skill.self_status)
+	match status:
+			null:
+				pass
+			Enums.EStatus.DEFEND:
+				self.Statuses.show_status(status)
+			Enums.EStatus.SHIELD:
+				self.Statuses.shield(skill, status, duration, data.stats[Enums.EStat.INTELLIGENCE] * 10.0)
 #
-		status_timer.timeout.connect( self.Statuses.hide_status.bind(skill.self_status) ) 
-		status_timer.start()
+	status_timer.timeout.connect( self.Statuses.hide_status.bind(status) ) 
+	status_timer.start()
+
+

@@ -1,6 +1,9 @@
 extends Area2D
 
 var intercept: bool = false
+var shield: float = 0
+
+@onready var statuses = self.get_parent()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,8 +17,12 @@ func _process(delta):
 	if (intercept):
 		for body in self.get_overlapping_bodies():
 			if body.get_collider_type() == 'Projectile':
-				if body.projectile_owner != self.get_parent().get_parent():
+				if body.projectile_owner != self.get_parent().get_parent() and not body.freeze:
 					body.delete()
+					print(shield)
+					shield -= int(body.skill.ranged_damage * body.projectile_owner.get_damage() / 100.0)
+					if (shield <= 0):
+						statuses.hide_status(Enums.EStatus.SHIELD)
 
 
 func _on_enter(what):

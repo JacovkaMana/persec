@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://df5krdejcuxcq"]
+
+[ext_resource type="Shader" path="res://Art/Shaders/BgScript.gdshader" id="1_ehmu4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yfvll"]
+shader = ExtResource("1_ehmu4")
+shader_parameter/fill = -0.01
+shader_parameter/color = null
+
+[sub_resource type="Gradient" id="Gradient_j44ka"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_s0kme"]
+gradient = SubResource("Gradient_j44ka")
+width = 640
+height = 320
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_yfvll")
+texture = SubResource("GradientTexture2D_s0kme")

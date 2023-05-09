@@ -36,7 +36,7 @@ var INVENTORY : Array[Item] = []
 @export_category('Skills')
 @export var SKILLS: Array[String] = []
 @export var Stamina_max: int = 3
-@export var Stamina_regen: int = 20
+@export var Stamina_regen: int = 10
 
 @export var interaction_list: Array[Enums.ECharacterActions] = []
 
@@ -53,6 +53,8 @@ var vision
 @onready var interaction_hint = $InteractionHint
 @onready var interaction_hint_player = $InteractionHint/AnimationPlayer
 @onready var player = get_tree().get_root().find_child("Player", true, false)
+
+@onready var nps_hud = $HUD
 
 var current_state : Enums.ECharacterState = Enums.ECharacterState.ROAMING
 var start_pos: Vector2 = Vector2.ZERO
@@ -116,6 +118,9 @@ func _ready():
 	data.max_stamina = Stamina_max
 	data.stamina_regen = Stamina_regen
 	self.fight_ai = MageAI.new()
+	print(self.data.inventory._inventory)
+	print(self.data.inventory._equipment)
+
 	
 func _physics_process(_delta):
 	super(_delta)
@@ -181,11 +186,14 @@ func off_interact_area():
 func _on_mouse_entered():
 	#self.material = select_material
 	animation_tree.set("parameters/glow/add_amount", 1)
+	nps_hud.visible = true
+	
 	
 	
 func _on_mouse_exited():
 	#sprite.material = null
 	animation_tree.set("parameters/glow/add_amount", 0)
+	nps_hud.visible = false
 	
 	
 func set_zone(to : Area2D):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=129 format=3 uid="uid://dbksnam8cuw3o"]
+[gd_scene load_steps=133 format=3 uid="uid://dbksnam8cuw3o"]
 
 [ext_resource type="Script" path="res://Scripts/UI_scripts/CharacterUI.gd" id="1_8tod6"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/UI.gd" id="1_cvjfy"]
@@ -73,6 +73,7 @@
 [ext_resource type="Texture2D" uid="uid://d08e0rkainycx" path="res://Art/UI/ItemDescription_end.png" id="52_n5jko"]
 [ext_resource type="Texture2D" uid="uid://b0dgkkrkrhc1q" path="res://Art/UI/test_textfield3.png" id="57_4von8"]
 [ext_resource type="Texture2D" uid="uid://o4le8l6bgt6m" path="res://Art/UI/ItemDescription_border.png" id="62_abqq1"]
+[ext_resource type="Shader" path="res://Art/Shaders/BgScript.gdshader" id="74_7oajc"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_71ey8"]
 
@@ -203,31 +204,31 @@ font = ExtResource("5_ai818")
 font_size = 8
 font_color = Color(0.682353, 0.741176, 0.807843, 1)
 
-[sub_resource type="Gradient" id="Gradient_wog8y"]
+[sub_resource type="Gradient" id="Gradient_q1a2c"]
 offsets = PackedFloat32Array(0.296774)
 colors = PackedColorArray(0, 0, 0, 0.490196)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_fh04w"]
-gradient = SubResource("Gradient_wog8y")
+gradient = SubResource("Gradient_q1a2c")
 width = 3
 
-[sub_resource type="Gradient" id="Gradient_22esc"]
+[sub_resource type="Gradient" id="Gradient_sjiqm"]
 offsets = PackedFloat32Array(0, 0.5, 1)
 colors = PackedColorArray(1, 0, 0, 0.392157, 1, 0.64, 0.64, 1, 1, 0, 0, 0.392157)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_qtgob"]
-gradient = SubResource("Gradient_22esc")
+gradient = SubResource("Gradient_sjiqm")
 width = 10
 height = 30
 fill_from = Vector2(0.5, 0)
 fill_to = Vector2(0.5, 1)
 
-[sub_resource type="Gradient" id="Gradient_er5yb"]
+[sub_resource type="Gradient" id="Gradient_ew4tm"]
 offsets = PackedFloat32Array(0, 0.5, 1)
 colors = PackedColorArray(0.16, 0.2, 0.4, 1, 0.88, 0.9, 1, 1, 0.16, 0.2, 0.4, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_100xk"]
-gradient = SubResource("Gradient_er5yb")
+gradient = SubResource("Gradient_ew4tm")
 width = 10
 height = 30
 fill_from = Vector2(0.5, 0)
@@ -378,6 +379,18 @@ font_color = Color(0.658824, 0.682353, 0.823529, 1)
 outline_size = 1
 outline_color = Color(0.25098, 0.27451, 0.411765, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o4qwv"]
+shader = ExtResource("74_7oajc")
+shader_parameter/fill = 1.0
+shader_parameter/color = Color(0.133333, 0, 0.729412, 0.458824)
+
+[sub_resource type="Gradient" id="Gradient_mqklq"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mvhth"]
+gradient = SubResource("Gradient_mqklq")
+width = 640
+height = 320
+
 [node name="UI" type="CanvasLayer"]
 layer = 3
 script = ExtResource("1_v0356")
@@ -413,7 +426,7 @@ texture = SubResource("ViewportTexture_71ey8")
 stretch_mode = 2
 
 [node name="PlayerMarker" parent="MinimapUI/MiniMap" instance=ExtResource("4_rx6uk")]
-self_modulate = Color(0.537255, 0.54902, 0.611765, 0.784314)
+self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
 offset_left = -51.0
 offset_top = -51.0
 offset_right = -45.0
@@ -446,10 +459,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 24000.0
-offset_top = 13670.0
-offset_right = 24640.0
-offset_bottom = 13688.0
+offset_left = 26880.0
+offset_top = 15290.0
+offset_right = 27520.0
+offset_bottom = 15308.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(320, 9)
@@ -3685,6 +3698,12 @@ vertical_alignment = 1
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 visible = false
 position = Vector2(0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_o4qwv")
+position = Vector2(328, 181)
+texture = SubResource("GradientTexture2D_mvhth")
 
 [editable path="UI/Character/Equipment/LeftCharacterVBox/AmuletPanel/EquipButton"]
 [editable path="UI/Character/Equipment/LeftCharacterVBox/RingPanel1/EquipButton"]

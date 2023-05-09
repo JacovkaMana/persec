@@ -8,6 +8,7 @@ var visible_projectiles = []
 var distance_to_target = 200.0
 
 func ai_process(delta):
+	super(delta)
 
 	check_projectiles()
 
@@ -71,11 +72,14 @@ func use_defence():
 					owner.use_status_skill( skill)
 					
 
-func ranged_attack():
-	for skill in owner.data.skills.get_skills():
-		match skill.get_skill_type(): 
-			'Attack':
-				if (skill.get_cost() <= owner.data.stamina):
-					owner.data.stamina -= skill.get_cost()
-					owner.shoot_projectile( skill, target)
+func attack():
+	match (randi() % 10):
+		0:
+			strongest_ranged_attack()
+		1: 
+			strongest_ranged_attack()
+		_:
+			cheapest_ranged_attack()
+					
+
 

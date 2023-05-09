@@ -35,6 +35,7 @@ func _ready():
 				skill,
 				skill_json.description,
 				skill_json.ranged_damage,
+				skill_json.moving,
 				skill_json.melee_damage,
 				skill_json.multiplier,
 				skill_json.cost,

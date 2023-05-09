@@ -6,13 +6,15 @@ var ranged_damage: int
 var melee_damage: int
 var melee_attacks: int 
 var multiplier: int
+var moving_projectile : bool
 @export var damage_type: Enums.EDamageType = Enums.EDamageType.NONE
 
-func _init(name: String, description: String, ranged_damage: int, melee_damage: int, multiplier:int,  stamina_cost: int ,damage_type: Enums.EDamageType, type: Enums.ESkillType, projectile, skill_icon):
+func _init(name: String, description: String, ranged_damage: int, moving : bool, melee_damage: int, multiplier:int,  stamina_cost: int ,damage_type: Enums.EDamageType, type: Enums.ESkillType, projectile, skill_icon):
 
 		self.name = name
 		self.description = description
 		self.ranged_damage = ranged_damage
+		self.moving_projectile = moving
 		self.melee_damage = melee_damage
 		self.multiplier = multiplier
 		self.damage_type = damage_type

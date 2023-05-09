@@ -67,8 +67,9 @@ enum ERarity {
 
 enum EStatus {
 	NONE = 0,
-	DEFENDING,
-	BURNING,
+	DEFEND,
+	BURN,
+	SHIELD,
 }
 
 enum EDamageType {

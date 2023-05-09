@@ -10,6 +10,7 @@ const float stepsize = 0.290;
 const float zoom = 1.0;
 const float tile = 0.850;
 uniform float speed2 = 0.2;
+uniform float edge = 0.2;
  
 const float brightness = 0.0015;
 const float darkmatter = 0.100;
@@ -20,7 +21,12 @@ const float saturation = 0.90;
 const float transverseSpeed = 1.0; //zoom;
 const float cloud = 0.17;
 
- 
+ float circle(vec2 position, float radius, float feather)
+{
+	return smoothstep(radius, radius + feather, length(position - vec2(0.5)));
+}
+
+
 float triangle(float x, float a) { 
 	float output2 = 2.0*abs(  3.0*  ( (x/a) - floor( (x/a) + 0.5) ) ) - 1.0;
 	return output2;
@@ -155,9 +161,18 @@ void fragment() {
 	backCol2.r *= 0.05;	
 	
 	
+	float fade_effect = sin(TIME) * 0.01;
+	float outer = circle(vec2(UV.x, UV.y), 0.35, 5.01);
+	float inner = 1.0 - circle(vec2(UV.x, UV.y), 0.1, 0.1 - fade_effect );
+	
 	backCol2.b = 0.5*mix(backCol2.g, backCol2.b, 0.8);
 	backCol2.g = 0.0;
-	backCol2.bg = mix(backCol2.gb, backCol2.bg, 0.5*(cos(TIME*0.01) + 1.5));	
-	COLOR = forCol2 + vec4(backCol2, 1.0);
-	COLOR.a = clamp(texture(TEXTURE, UV).a, 0.0, 1.0);
+	backCol2.bg = mix(backCol2.gb, backCol2.bg, 0.5*(cos(0.05) + 1.5));	
+	COLOR.rgb = forCol2.xyz + vec4(backCol2, 1.0).xyz;
+	//COLOR.a -= outer + inner;
+	float r_dist = distance(UV, vec2(0.5, 0.5));
+	//COLOR.a = 1.0 / (smoothstep(0.2, 0.5, r_dist));// * (1.0 - step(0.5, r_dist)));
+	COLOR.a *= texture(TEXTURE, UV).a;
+	COLOR.a *= 2.0;
 }
+
