@@ -1,4 +1,4 @@
-[gd_scene load_steps=133 format=3 uid="uid://dbksnam8cuw3o"]
+[gd_scene load_steps=146 format=3 uid="uid://dbksnam8cuw3o"]
 
 [ext_resource type="Script" path="res://Scripts/UI_scripts/CharacterUI.gd" id="1_8tod6"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/UI.gd" id="1_cvjfy"]
@@ -74,6 +74,12 @@
 [ext_resource type="Texture2D" uid="uid://b0dgkkrkrhc1q" path="res://Art/UI/test_textfield3.png" id="57_4von8"]
 [ext_resource type="Texture2D" uid="uid://o4le8l6bgt6m" path="res://Art/UI/ItemDescription_border.png" id="62_abqq1"]
 [ext_resource type="Shader" path="res://Art/Shaders/BgScript.gdshader" id="74_7oajc"]
+[ext_resource type="Texture2D" uid="uid://3dcmkp7esafg" path="res://Art/Noise/iChannel0.png" id="75_18dot"]
+[ext_resource type="Script" path="res://Scripts/UI_scripts/LoadingBattle.gd" id="75_fytsb"]
+[ext_resource type="Shader" path="res://Art/Shaders/MenuScript.gdshader" id="75_oi43j"]
+[ext_resource type="Shader" path="res://Art/Shaders/BgScript2.gdshader" id="76_0m388"]
+[ext_resource type="Texture2D" uid="uid://bm15143fq2qdq" path="res://Art/Noise/iChannel1.png" id="76_wkn6r"]
+[ext_resource type="Texture2D" uid="uid://dr6ylkuvmfsqs" path="res://Art/Noise/iChannel2.png" id="77_2vvdw"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_71ey8"]
 
@@ -381,8 +387,10 @@ outline_color = Color(0.25098, 0.27451, 0.411765, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o4qwv"]
 shader = ExtResource("74_7oajc")
-shader_parameter/fill = 1.0
-shader_parameter/color = Color(0.133333, 0, 0.729412, 0.458824)
+shader_parameter/progress = null
+shader_parameter/ring_color = Color(0.976, 0.447, 0.023, 1)
+shader_parameter/time = 0.0
+shader_parameter/scale = 1.0
 
 [sub_resource type="Gradient" id="Gradient_mqklq"]
 
@@ -390,6 +398,114 @@ shader_parameter/color = Color(0.133333, 0, 0.729412, 0.458824)
 gradient = SubResource("Gradient_mqklq")
 width = 640
 height = 320
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_flnu7"]
+shader = ExtResource("76_0m388")
+shader_parameter/screen_resolution = 1.0
+shader_parameter/iChannel0 = ExtResource("75_18dot")
+shader_parameter/iChannel1 = ExtResource("76_wkn6r")
+shader_parameter/iChannel2 = ExtResource("77_2vvdw")
+
+[sub_resource type="Gradient" id="Gradient_niu05"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fvp6c"]
+gradient = SubResource("Gradient_niu05")
+width = 640
+height = 320
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eoehv"]
+shader = ExtResource("75_oi43j")
+shader_parameter/progress = 1.0
+shader_parameter/diamondPixelSize = 40.0
+shader_parameter/SCALE = Vector2(960, 540)
+shader_parameter/inner = Color(0.372549, 0.364706, 0.568627, 1)
+shader_parameter/border = Color(0.0784314, 0.0509804, 0.321569, 1)
+shader_parameter/outer = Color(0.133333, 0.117647, 0.180392, 1)
+shader_parameter/alpha = 255.0
+
+[sub_resource type="Animation" id="Animation_l2i6h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect2:material:shader_parameter/scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [26.356]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect3:material:shader_parameter/progress")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TextureRect3:material:shader_parameter/alpha")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [255.0]
+}
+
+[sub_resource type="Animation" id="Animation_6dveh"]
+resource_name = "start"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect2:material:shader_parameter/scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9, 1.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 2.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect3:material:shader_parameter/progress")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(0.659755, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TextureRect3:material:shader_parameter/alpha")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(0.482968, 1),
+"update": 0,
+"values": [150.0, 255.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2fqvh"]
+_data = {
+"RESET": SubResource("Animation_l2i6h"),
+"start": SubResource("Animation_6dveh")
+}
 
 [node name="UI" type="CanvasLayer"]
 layer = 3
@@ -459,10 +575,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 26880.0
-offset_top = 15290.0
-offset_right = 27520.0
-offset_bottom = 15308.0
+offset_left = 27840.0
+offset_top = 15830.0
+offset_right = 28480.0
+offset_bottom = 15848.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(320, 9)
@@ -3704,6 +3820,43 @@ visible = false
 material = SubResource("ShaderMaterial_o4qwv")
 position = Vector2(328, 181)
 texture = SubResource("GradientTexture2D_mvhth")
+
+[node name="LoadingBattle" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
+script = ExtResource("75_fytsb")
+
+[node name="TextureRect2" type="TextureRect" parent="LoadingBattle"]
+visible = false
+material = SubResource("ShaderMaterial_flnu7")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_fvp6c")
+expand_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="LoadingBattle"]
+material = SubResource("ShaderMaterial_eoehv")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_fvp6c")
+expand_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LoadingBattle"]
+reset_on_save = false
+method_call_mode = 1
+libraries = {
+"": SubResource("AnimationLibrary_2fqvh")
+}
 
 [editable path="UI/Character/Equipment/LeftCharacterVBox/AmuletPanel/EquipButton"]
 [editable path="UI/Character/Equipment/LeftCharacterVBox/RingPanel1/EquipButton"]

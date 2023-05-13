@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6h7e70oyagei"
-path.s3tc="res://.godot/imported/b17c6850f8b866d7b0b510e434144836.jpg-da70ead95a5c64ca43ff7b13468e71fd.s3tc.ctex"
+uid="uid://bm15143fq2qdq"
+path="res://.godot/imported/iChannel1.png-0ef89eed1d8ed646e79a514ed96f4d4b.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Shaders/b17c6850f8b866d7b0b510e434144836.jpg"
-dest_files=["res://.godot/imported/b17c6850f8b866d7b0b510e434144836.jpg-da70ead95a5c64ca43ff7b13468e71fd.s3tc.ctex"]
+source_file="res://Art/Noise/iChannel1.png"
+dest_files=["res://.godot/imported/iChannel1.png-0ef89eed1d8ed646e79a514ed96f4d4b.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
@@ -28,7 +27,7 @@ roughness/mode=0
 roughness/src_normal=""
 process/fix_alpha_border=true
 process/premult_alpha=false
-process/normal_map_invert_y=false
+process/normal_map_invert_y=true
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0

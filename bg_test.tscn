@@ -1,11 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://df5krdejcuxcq"]
+[gd_scene load_steps=7 format=3 uid="uid://df5krdejcuxcq"]
 
 [ext_resource type="Shader" path="res://Art/Shaders/BgScript.gdshader" id="1_ehmu4"]
+[ext_resource type="Texture2D" uid="uid://cu3jr2f2r3xxu" path="res://Art/Shaders/noise_combined.png" id="2_ndif0"]
+[ext_resource type="Texture2D" uid="uid://b1wfyhpoedew4" path="res://Art/Shaders/wellnoise.png" id="3_ouqi1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yfvll"]
 shader = ExtResource("1_ehmu4")
-shader_parameter/fill = -0.01
-shader_parameter/color = null
+shader_parameter/progress = null
+shader_parameter/ring_color = Color(0.976, 0.447, 0.023, 1)
+shader_parameter/time = 0.0
+shader_parameter/scale = 1.0
+shader_parameter/iChannel0 = ExtResource("2_ndif0")
+shader_parameter/iChannel1 = ExtResource("3_ouqi1")
 
 [sub_resource type="Gradient" id="Gradient_j44ka"]
 

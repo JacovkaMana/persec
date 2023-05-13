@@ -1,21 +1,16 @@
 shader_type canvas_item;
 
-uniform sampler2D SCREEN_TEXTURE: hint_screen_texture, filter_linear_mipmap;
-
-uniform float progress : hint_range(0, 1);
 uniform sampler2D iChannel0;
 uniform sampler2D iChannel1;
 uniform sampler2D iChannel2;
-uniform vec4 ring_color : source_color = vec4(0.976, 0.447, 0.023, 1);
-uniform float time = 0.0;
-uniform float scale = 1.0;
 
+uniform float screen_resolution = 1;
 
 mat2 rot_dist(float s, float d)
 {
     float angularspeed = s * pow(d, 8.0);
-    float cas = cos(angularspeed) ;
-    float sas = sin(angularspeed) ;
+    float cas = cos(angularspeed);
+    float sas = sin(angularspeed);
     return mat2(vec2(cas, -sas), vec2(sas, cas));
 }
 
@@ -23,14 +18,13 @@ void fragment()
 {
 	
 	
-   // vec3 ring_color = vec3(0.976, 0.447, 0.023);
-    vec2 screen_pixel_size = SCREEN_PIXEL_SIZE;
-    vec2 uv = FRAGCOORD.xy/(1.0 / screen_pixel_size);
-    float ratio = (1.0 / screen_pixel_size).y/(1.0 / screen_pixel_size).x;
-	//float ratio = 360.0 / 640.0;
+    vec3 ring_color = vec3(0.976, 0.447, 0.023);
+    
+    vec2 uv = FRAGCOORD.xy/(1.0 / SCREEN_PIXEL_SIZE);
+    float ratio = (1.0 / SCREEN_PIXEL_SIZE).y/(1.0 / SCREEN_PIXEL_SIZE).x;
     uv.y *= ratio;
     
-    vec2 center = ((1.0 / screen_pixel_size).xy * .5f) / (1.0 / screen_pixel_size).xy;
+    vec2 center = ((1.0 / SCREEN_PIXEL_SIZE).xy * .5f) / (1.0 / SCREEN_PIXEL_SIZE).xy;
     //center = iMouse.xy / iResolution.xy;
     center.y *= ratio;
     
@@ -41,7 +35,6 @@ void fragment()
                         texture(iChannel2, _s * vec2(uv.x + TIME * -.3, uv.y + TIME * .2)).r) * _a * pow(1. - _dist, 5.);
     
     float dist = distance(uvp, center);
-	//dist *= scale * ratio;
     float idist = 1.0 - dist;
     vec2 dir = normalize(uv - center);
     
@@ -53,18 +46,17 @@ void fragment()
     
     // Phases
     float speed = -0.06;
-    float phase1 = fract(TIME * speed + 0.5);
+    float phase1 = fract(TIME * speed + .5);
     float phase2 = fract(TIME * speed);
     
     float pidist = pow(idist, 2.3);
     vec2 uv1 = (dir * pidist * .2) + phase1 * dir;
     vec2 uv2 = (dir * pidist * .2) + phase2 * dir;
     
-
     // Samplings
     float lerp = abs((.5 - phase1) / .5);
-    float sampling1 = texture(SCREEN_TEXTURE, uv1 * rot_dist(2.4, idist)).r;
-    float sampling2 = texture(SCREEN_TEXTURE, uv2 * rot_dist(2.4, idist)).r;
+    float sampling1 = texture(iChannel0, uv1 * rot_dist(2.4, idist)).r;
+    float sampling2 = texture(iChannel0, uv2 * rot_dist(2.4, idist)).r;
     
     float sampling3 = texture(iChannel0, uv1 * 2. * rot_dist(2.6, idist)).g;
     float sampling4 = texture(iChannel0, uv2 * 2. * rot_dist(2.6, idist)).g;
@@ -75,24 +67,17 @@ void fragment()
     float stars = (1. - smoothstep(0.22, 0.34, mix(sampling3, sampling4, lerp))) * 0.4;
     
     vec3 sp = mix(sampling1, sampling2, lerp) * vec3(1.);
+	vec2 sp_test = normalize(vec2(0.5,0.5) - UV) * 0.6 * sampling1;
+	sp = vec3(0.2, 0.2, 0.2);
     sp *= 0.2;
-	sp = vec3(0.2,0.2,0.2);
-   	//sp += stars * vec3(0.13, 0.31, 0.46);
-	sp += stars * ring_color.rgb;
-    sp += smoothstep(0.26, 0.54, mix(sampling5, sampling6, lerp)) * vec3(0.7) * pow(idist, 8.);
+   	sp += stars * vec3(0.13, 0.31, 0.46);
+    sp += smoothstep(0.26, 0.14, mix(sampling5, sampling6, lerp)) * vec3(0.7) * pow(idist, 8.) * ring_color;
     
     vec3 finalSamp = sp;
-    vec3 col = ring_color.rgb * pow(0.7 - dist, 7.);
-	col *= 0.5;
+    vec3 col = ring_color * pow(1.0 - dist, 7.);
     float ring = pow(smoothstep(.32, .08, dist * 1.5) * 3.5, 2.8) + 1.;
 
     
     
     COLOR = vec4(finalSamp * mask + 1.2 * ring * mask * finalSamp * col, 1.);
-	
-	vec2 screen_center = screen_pixel_size / 2.0 ;
-	if ( pow((uv.x - center.x), 2) + pow((uv.y - center.y), 2) > pow(center.x * progress, 2.0)) {
-		discard;
-	}
-
 }

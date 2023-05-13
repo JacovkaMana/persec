@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6h7e70oyagei"
-path.s3tc="res://.godot/imported/b17c6850f8b866d7b0b510e434144836.jpg-da70ead95a5c64ca43ff7b13468e71fd.s3tc.ctex"
+uid="uid://cbx81yabfk0n5"
+path.s3tc="res://.godot/imported/wellnoise.png-72ab2dd37152b242a628e001d6888bf4.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Art/Shaders/b17c6850f8b866d7b0b510e434144836.jpg"
-dest_files=["res://.godot/imported/b17c6850f8b866d7b0b510e434144836.jpg-da70ead95a5c64ca43ff7b13468e71fd.s3tc.ctex"]
+source_file="res://Art/Noise/wellnoise.png"
+dest_files=["res://.godot/imported/wellnoise.png-72ab2dd37152b242a628e001d6888bf4.s3tc.ctex"]
 
 [params]
 
