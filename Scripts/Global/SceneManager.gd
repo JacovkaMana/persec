@@ -19,7 +19,7 @@ func _ready():
 	ui_scene = ui.instantiate()
 	self.add_child(ui_scene)
 		
-	
+	self.add_melee()
 
 
 

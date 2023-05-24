@@ -23,7 +23,7 @@ void fragment()
     vec2 uv = FRAGCOORD.xy/(1.0 / SCREEN_PIXEL_SIZE);
     float ratio = (1.0 / SCREEN_PIXEL_SIZE).y/(1.0 / SCREEN_PIXEL_SIZE).x;
     uv.y *= ratio;
-    
+  
     vec2 center = ((1.0 / SCREEN_PIXEL_SIZE).xy * .5f) / (1.0 / SCREEN_PIXEL_SIZE).xy;
     //center = iMouse.xy / iResolution.xy;
     center.y *= ratio;
@@ -54,7 +54,7 @@ void fragment()
     vec2 uv2 = (dir * pidist * .2) + phase2 * dir;
     
     // Samplings
-    float lerp = abs((.5 - phase1) / .5);
+    float lerp = abs((0.5 - phase1) / .5);
     float sampling1 = texture(iChannel0, uv1 * rot_dist(2.4, idist)).r;
     float sampling2 = texture(iChannel0, uv2 * rot_dist(2.4, idist)).r;
     
@@ -71,7 +71,7 @@ void fragment()
 	sp = vec3(0.2, 0.2, 0.2);
     sp *= 0.2;
    	sp += stars * vec3(0.13, 0.31, 0.46);
-    sp += smoothstep(0.26, 0.14, mix(sampling5, sampling6, lerp)) * vec3(0.7) * pow(idist, 8.) * ring_color;
+    sp += smoothstep(0.26, 0.14, mix(sampling5, sampling6, lerp)) * vec3(.7) * pow(idist, 8.) * ring_color;
     
     vec3 finalSamp = sp;
     vec3 col = ring_color * pow(1.0 - dist, 7.);

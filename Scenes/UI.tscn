@@ -1,4 +1,4 @@
-[gd_scene load_steps=146 format=3 uid="uid://dbksnam8cuw3o"]
+[gd_scene load_steps=145 format=3 uid="uid://dbksnam8cuw3o"]
 
 [ext_resource type="Script" path="res://Scripts/UI_scripts/CharacterUI.gd" id="1_8tod6"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/UI.gd" id="1_cvjfy"]
@@ -74,11 +74,8 @@
 [ext_resource type="Texture2D" uid="uid://b0dgkkrkrhc1q" path="res://Art/UI/test_textfield3.png" id="57_4von8"]
 [ext_resource type="Texture2D" uid="uid://o4le8l6bgt6m" path="res://Art/UI/ItemDescription_border.png" id="62_abqq1"]
 [ext_resource type="Shader" path="res://Art/Shaders/BgScript.gdshader" id="74_7oajc"]
-[ext_resource type="Texture2D" uid="uid://3dcmkp7esafg" path="res://Art/Noise/iChannel0.png" id="75_18dot"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/LoadingBattle.gd" id="75_fytsb"]
 [ext_resource type="Shader" path="res://Art/Shaders/MenuScript.gdshader" id="75_oi43j"]
-[ext_resource type="Shader" path="res://Art/Shaders/BgScript2.gdshader" id="76_0m388"]
-[ext_resource type="Texture2D" uid="uid://bm15143fq2qdq" path="res://Art/Noise/iChannel1.png" id="76_wkn6r"]
 [ext_resource type="Texture2D" uid="uid://dr6ylkuvmfsqs" path="res://Art/Noise/iChannel2.png" id="77_2vvdw"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_71ey8"]
@@ -388,9 +385,9 @@ outline_color = Color(0.25098, 0.27451, 0.411765, 1)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o4qwv"]
 shader = ExtResource("74_7oajc")
 shader_parameter/progress = null
+shader_parameter/ratio_scale = null
+shader_parameter/speed_scale = 1.0
 shader_parameter/ring_color = Color(0.976, 0.447, 0.023, 1)
-shader_parameter/time = 0.0
-shader_parameter/scale = 1.0
 
 [sub_resource type="Gradient" id="Gradient_mqklq"]
 
@@ -399,11 +396,21 @@ gradient = SubResource("Gradient_mqklq")
 width = 640
 height = 320
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_atnpy"]
+noise_type = 0
+seed = 6
+frequency = 0.02
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_locwd"]
+noise = SubResource("FastNoiseLite_atnpy")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_flnu7"]
-shader = ExtResource("76_0m388")
-shader_parameter/screen_resolution = 1.0
-shader_parameter/iChannel0 = ExtResource("75_18dot")
-shader_parameter/iChannel1 = ExtResource("76_wkn6r")
+shader = ExtResource("74_7oajc")
+shader_parameter/progress = 0.149314
+shader_parameter/ratio_scale = 0.82
+shader_parameter/speed_scale = 3.0
+shader_parameter/ring_color = Color(0.980392, 0.137255, 1, 1)
+shader_parameter/iChannel1 = SubResource("NoiseTexture2D_locwd")
 shader_parameter/iChannel2 = ExtResource("77_2vvdw")
 
 [sub_resource type="Gradient" id="Gradient_niu05"]
@@ -461,20 +468,33 @@ tracks/2/keys = {
 "update": 0,
 "values": [255.0]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TextureRect2:material:shader_parameter/ratio_scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
 
 [sub_resource type="Animation" id="Animation_6dveh"]
 resource_name = "start"
+length = 2.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect2:material:shader_parameter/scale")
+tracks/0/path = NodePath("TextureRect2:material:shader_parameter/progress")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.9, 1.9),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.8, 2.2),
+"transitions": PackedFloat32Array(0.999998, 4.43827, 1),
 "update": 0,
-"values": [1.0, 2.0, 1.0]
+"values": [0.0, 0.01, 1.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -483,7 +503,7 @@ tracks/1/path = NodePath("TextureRect3:material:shader_parameter/progress")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.9),
+"times": PackedFloat32Array(0, 1.6),
 "transitions": PackedFloat32Array(0.659755, 1),
 "update": 0,
 "values": [0.0, 1.0]
@@ -495,10 +515,22 @@ tracks/2/path = NodePath("TextureRect3:material:shader_parameter/alpha")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.9),
+"times": PackedFloat32Array(0, 1.1),
 "transitions": PackedFloat32Array(0.482968, 1),
 "update": 0,
 "values": [150.0, 255.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TextureRect2:material:shader_parameter/ratio_scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.6, 2.1),
+"transitions": PackedFloat32Array(1.51572, 1.03526, 0.999998, 1),
+"update": 0,
+"values": [30.0, 10.0, 1.0, 0.1]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2fqvh"]
@@ -575,10 +607,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 27840.0
-offset_top = 15830.0
-offset_right = 28480.0
-offset_bottom = 15848.0
+offset_left = 28800.0
+offset_top = 16370.0
+offset_right = 29440.0
+offset_bottom = 16388.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(320, 9)
@@ -3829,7 +3861,6 @@ offset_bottom = 360.0
 script = ExtResource("75_fytsb")
 
 [node name="TextureRect2" type="TextureRect" parent="LoadingBattle"]
-visible = false
 material = SubResource("ShaderMaterial_flnu7")
 layout_mode = 1
 anchors_preset = 15
@@ -3841,6 +3872,7 @@ texture = SubResource("GradientTexture2D_fvp6c")
 expand_mode = 2
 
 [node name="TextureRect3" type="TextureRect" parent="LoadingBattle"]
+visible = false
 material = SubResource("ShaderMaterial_eoehv")
 layout_mode = 1
 anchors_preset = 15
@@ -3853,6 +3885,7 @@ expand_mode = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="LoadingBattle"]
 reset_on_save = false
+speed_scale = 1.5
 method_call_mode = 1
 libraries = {
 "": SubResource("AnimationLibrary_2fqvh")

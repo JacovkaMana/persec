@@ -7,9 +7,9 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yfvll"]
 shader = ExtResource("1_ehmu4")
 shader_parameter/progress = null
+shader_parameter/ratio_scale = null
+shader_parameter/speed_scale = 1.0
 shader_parameter/ring_color = Color(0.976, 0.447, 0.023, 1)
-shader_parameter/time = 0.0
-shader_parameter/scale = 1.0
 shader_parameter/iChannel0 = ExtResource("2_ndif0")
 shader_parameter/iChannel1 = ExtResource("3_ouqi1")
 
