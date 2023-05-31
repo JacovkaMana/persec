@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cty23hqjxysv4"
-path.s3tc="res://.godot/imported/Fire.png-4868a8f1e39a22d8b5192dff31285446.s3tc.ctex"
+uid="uid://des3a8p0doe1t"
+path.s3tc="res://.godot/imported/DungeonFloor.png-b9f229f987357fd932766f5f67fe239c.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Art/Icons/Fire.png"
-dest_files=["res://.godot/imported/Fire.png-4868a8f1e39a22d8b5192dff31285446.s3tc.ctex"]
+source_file="res://Art/Backgrounds/DungeonFloor.png"
+dest_files=["res://.godot/imported/DungeonFloor.png-b9f229f987357fd932766f5f67fe239c.s3tc.ctex"]
 
 [params]
 

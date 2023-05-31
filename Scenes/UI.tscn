@@ -1,4 +1,4 @@
-[gd_scene load_steps=145 format=3 uid="uid://dbksnam8cuw3o"]
+[gd_scene load_steps=149 format=3 uid="uid://dbksnam8cuw3o"]
 
 [ext_resource type="Script" path="res://Scripts/UI_scripts/CharacterUI.gd" id="1_8tod6"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/UI.gd" id="1_cvjfy"]
@@ -77,6 +77,7 @@
 [ext_resource type="Script" path="res://Scripts/UI_scripts/LoadingBattle.gd" id="75_fytsb"]
 [ext_resource type="Shader" path="res://Art/Shaders/MenuScript.gdshader" id="75_oi43j"]
 [ext_resource type="Texture2D" uid="uid://dr6ylkuvmfsqs" path="res://Art/Noise/iChannel2.png" id="77_2vvdw"]
+[ext_resource type="Shader" path="res://Art/Shaders/BgNew1.gdshader" id="78_yhn6x"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_71ey8"]
 
@@ -407,7 +408,7 @@ noise = SubResource("FastNoiseLite_atnpy")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_flnu7"]
 shader = ExtResource("74_7oajc")
 shader_parameter/progress = 0.149314
-shader_parameter/ratio_scale = 0.82
+shader_parameter/ratio_scale = 1.0
 shader_parameter/speed_scale = 3.0
 shader_parameter/ring_color = Color(0.980392, 0.137255, 1, 1)
 shader_parameter/iChannel1 = SubResource("NoiseTexture2D_locwd")
@@ -539,6 +540,18 @@ _data = {
 "start": SubResource("Animation_6dveh")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rws0f"]
+shader = ExtResource("78_yhn6x")
+shader_parameter/color = Color(0.976471, 0.447059, 0.0235294, 1)
+shader_parameter/progress = 100.0
+
+[sub_resource type="Gradient" id="Gradient_mnewt"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_r3wdp"]
+gradient = SubResource("Gradient_mnewt")
+width = 1
+height = 1
+
 [node name="UI" type="CanvasLayer"]
 layer = 3
 script = ExtResource("1_v0356")
@@ -607,10 +620,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 28800.0
-offset_top = 16370.0
-offset_right = 29440.0
-offset_bottom = 16388.0
+offset_left = 31360.0
+offset_top = 17810.0
+offset_right = 32000.0
+offset_bottom = 17828.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(320, 9)
@@ -3861,6 +3874,7 @@ offset_bottom = 360.0
 script = ExtResource("75_fytsb")
 
 [node name="TextureRect2" type="TextureRect" parent="LoadingBattle"]
+visible = false
 material = SubResource("ShaderMaterial_flnu7")
 layout_mode = 1
 anchors_preset = 15
@@ -3890,6 +3904,16 @@ method_call_mode = 1
 libraries = {
 "": SubResource("AnimationLibrary_2fqvh")
 }
+
+[node name="TextureRect" type="TextureRect" parent="LoadingBattle"]
+visible = false
+material = SubResource("ShaderMaterial_rws0f")
+layout_mode = 0
+offset_left = 8.0
+offset_top = 11.0
+offset_right = 618.0
+offset_bottom = 349.0
+texture = SubResource("GradientTexture2D_r3wdp")
 
 [editable path="UI/Character/Equipment/LeftCharacterVBox/AmuletPanel/EquipButton"]
 [editable path="UI/Character/Equipment/LeftCharacterVBox/RingPanel1/EquipButton"]
