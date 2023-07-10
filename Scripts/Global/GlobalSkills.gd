@@ -1,8 +1,5 @@
 extends Node
-
-var skills = {
-	
-}
+var skills : Array[AttackSkill]
 
 var shaders = {
 	Enums.EDamageType.EARTH : preload("res://Art/Shaders/EarthShader.tres"),
@@ -23,39 +20,36 @@ var colors = {
 }
 
 func _ready():
-	
 	var path = "res://Data/" + "Skills" + '.json'
 	var file = FileAccess.open(path, FileAccess.READ)
-	var dialogue: Dictionary = JSON.parse_string(file.get_as_text())
-	for skill in dialogue:
-		var skill_json = dialogue[skill]
-		match skill_json.type:
+	var skill_list: Array = JSON.parse_string(file.get_as_text())
+	for skill in skill_list:
+		match skill.type:
 			'attack':
-				skills[skill] = AttackSkill.new(
-				skill,
-				skill_json.description,
-				skill_json.ranged_damage,
-				skill_json.moving,
-				skill_json.melee_damage,
-				skill_json.multiplier,
-				skill_json.cost,
-				Enums.EDamageType.get( skill_json.damage_type ),
-				Enums.ESkillType.get( skill_json.skill_type ),
-				load("res://PreRendered/Projectiles/" + skill_json.texture + ".tscn"),
-				skill_json.icon
-				)
+				skills.append(AttackSkill.new(
+				skill.name,
+				skill.description,
+				skill.damage.ranged,
+				skill.moving,
+				skill.damage.melee,
+				skill.damage.multiplier,
+				skill.cost,
+				Enums.EDamageType.get( skill.damage_type ),
+				Enums.ESkillType.get( skill.skill_type ),
+				load("res://PreRendered/Projectiles/" + skill.texture + ".tscn"),
+				skill.icon
+				)) 
 			'status':
-				skills[skill] = StatusSkill.new(
-				skill,
-				skill_json.description,
-				Enums.EStatus.get( skill_json.self_status ),
-				Enums.EStatus.get( skill_json.enemy_status ),
-				skill_json.duration,
-				skill_json.cost,
-				Enums.EDamageType.get( skill_json.damage_type ),
-				Enums.ESkillType.get( skill_json.skill_type ),
-				load("res://PreRendered/Projectiles/" + skill_json.texture + ".tscn"),
-				skill_json.icon
-			)
-
+				skills.append(StatusSkill.new(
+				skill.name,
+				skill.description,
+				Enums.EStatus.get( skill.status["self"] ),
+				Enums.EStatus.get( skill.status.enemy ),
+				skill.status.duration,
+				skill.cost,
+				Enums.EDamageType.get( skill.damage_type ),
+				Enums.ESkillType.get( skill.skill_type ),
+				load("res://PreRendered/Projectiles/" + skill.texture + ".tscn"),
+				skill.icon
+			))
 

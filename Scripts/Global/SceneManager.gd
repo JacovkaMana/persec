@@ -19,7 +19,7 @@ func _ready():
 	ui_scene = ui.instantiate()
 	self.add_child(ui_scene)
 		
-	self.add_melee()
+	#self.add_melee()
 
 
 
@@ -39,3 +39,6 @@ func remove_melee():
 	
 func pause_game():
 	next_scene.process_mode = 4
+	
+func unpause_game():
+	next_scene.process_mode = 0

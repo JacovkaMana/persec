@@ -60,10 +60,10 @@ func _ready():
 	
 	data.inventory.equip_item(test_item)
 	
-	data.skills.add_skill(GlobalSkills.skills['Shield'])
-	data.skills.add_skill(GlobalSkills.skills['Fireball'])
-	data.skills.add_skill(GlobalSkills.skills['Ice Strike'])
-	data.skills.add_skill(GlobalSkills.skills['Ice Slash'])
+	data.skills.add_skill(GlobalSkills.skills[0])
+	data.skills.add_skill(GlobalSkills.skills[1])
+	data.skills.add_skill(GlobalSkills.skills[2])
+	data.skills.add_skill(GlobalSkills.skills[3])
 
 
 

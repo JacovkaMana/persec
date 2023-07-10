@@ -42,6 +42,9 @@ func ui(_event):
 	if _event.is_action_pressed("interact"):
 		UI_Global.dropped_switch()
 		
+	if _event.is_action_pressed("menu"):
+		UI_Global.menu_switch()
+		
 
 func interact(_event):
 	if _event.is_action_pressed("interact"):

@@ -100,7 +100,7 @@ func move_n_collide(_delta):
 						'Attack':
 							collision_object.get_collider().get_parent().take_ranged_damage(skill, projectile_owner, null)
 							print('trigger_melee')
-							#trigger_melee()
+							trigger_melee()
 					self.queue_free()
 				'TileMap':
 					pass

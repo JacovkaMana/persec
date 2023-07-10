@@ -1,8 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://bkrie7fkkmqry"]
+[gd_scene load_steps=14 format=3 uid="uid://0mlhyd57f6qr"]
 
 [ext_resource type="Texture2D" uid="uid://qjfbulhi2b1d" path="res://Art/Backgrounds/test.jpg" id="1_nfp84"]
 [ext_resource type="Texture2D" uid="uid://bgn8fb6jsnab6" path="res://Art/Character/Mage.png" id="2_e4pxw"]
-[ext_resource type="Material" uid="uid://cc5cvdvxfvk6k" path="res://Art/Shaders/VHS_Shader.tres" id="2_jwuwn"]
 [ext_resource type="Shader" path="res://Art/Shaders/HorizonTest.gdshader" id="2_rdfne"]
 [ext_resource type="Texture2D" uid="uid://garspyffcbgq" path="res://Art/UI/LightProbe.png" id="3_3n644"]
 [ext_resource type="FontFile" uid="uid://c0s1j1n8esy7x" path="res://Fonts/Minecraftia-Regular.ttf" id="3_fdo2l"]
@@ -91,7 +90,6 @@ texture = SubResource("GradientTexture1D_8mwvv")
 
 [node name="TextureRect3" type="TextureRect" parent="Control"]
 visible = false
-material = ExtResource("2_jwuwn")
 layout_mode = 0
 anchor_left = 0.5
 anchor_right = 0.5

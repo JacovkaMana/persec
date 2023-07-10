@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://00mxkxg5m2l7" path="res://Art/UI/Border22_4.png" id="2_4m14t"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/ItemSlotUI.gd" id="3_wx2gw"]
 [ext_resource type="Texture2D" uid="uid://cvbi3j2ic3s22" path="res://Art/UI/Border22_3.png" id="4_68aug"]
-[ext_resource type="FontFile" uid="uid://bv3p1twxqpx6p" path="res://Fonts/Minecraftia-Regular.ttf" id="5_v44rv"]
+[ext_resource type="FontFile" uid="uid://c0s1j1n8esy7x" path="res://Fonts/Minecraftia-Regular.ttf" id="5_v44rv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4fqqm"]
 

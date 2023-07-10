@@ -5,8 +5,12 @@ extends CanvasLayer
 
 @onready var Character_UI = $UI/Character
 @onready var Inventory_UI = $UI/Inventory
+@onready var Menu_UI = $PauseMenu
+@onready var Menu_Content = $PauseMenu/MenuContent
+@onready var Menu_Animation = $PauseMenu/AnimationPlayer
 @onready var DroppedItems_UI = $UI/DroppedItems
 @onready var UI_Control = $UI
+@onready var SceneManager = self.get_tree().get_root().find_child("SceneManager", true, false)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	InputManager.UI_Global = self
@@ -38,6 +42,24 @@ func inventory_switch():
 		Inventory_UI.visible = false
 	else:
 		Inventory_UI.visible = true	
+		
+		
+func menu_switch():
+	if Menu_UI.visible:
+		Menu_Content.visible = false
+		Menu_Animation.play_backwards("menu_startup")
+		await Menu_Animation.animation_finished
+		Menu_UI.visible = false
+		SceneManager.unpause_game()
+	else:
+		# Тут ещё паузу надо вставить
+		SceneManager.pause_game()
+		Menu_Animation.seek(1, true)
+		Menu_UI.visible = true
+		#Menu_Animation.play("menu_startup")
+		#await Menu_Animation.animation_finished
+		Menu_Content.visible = true
+		
 		
 func dropped_switch():
 	if DroppedItems_UI.visible:

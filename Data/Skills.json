@@ -1,66 +1,81 @@
-{
-  "Slash": {
-	"type": "attack",
-	"description": "slash description",
-	"cost": 1,
-	"melee_damage": 55,
-	"multiplier": 2,
-	"ranged_damage" : 100,
-	"moving" : false,
-	"damage_type": "SLASH",
-	"skill_type": "BLADE",
-	"texture": "Slash",
-	"icon": "single_59"
-  },
-  "Fireball": {
-	"type": "attack",
-	"description": "fireball description",
-	"cost": 1,
-	"melee_damage": 100,
-	"multiplier": 1,
-	"ranged_damage" : 100,
-	"moving" : true,
-	"damage_type": "FIRE",
-	"skill_type": "MAGIC",
-	"texture": "Ball",
-	"icon": "single_41"
-  },
-  "Ice Strike": {
-	"type": "attack",
-	"description": "ince strike description",
-	"cost": 1,
-	"melee_damage": 100,
-	"multiplier": 1,
-	"ranged_damage" : 100,
-	"moving" : false,
-	"damage_type": "ICE",
-	"skill_type": "MAGIC",
-	"texture": "Slash",
-	"icon": "single_59"
-  },
-  "Ice Slash": {
-	"type": "attack",
-	"description": "inceslash description",
-	"cost": 2,
-	"melee_damage": 100,
-	"multiplier": 1,
-	"ranged_damage" : 100,
-	"moving" : true,
-	"damage_type": "ICE",
-	"skill_type": "MAGIC",
-	"texture": "MovingSlash",
-	"icon": "single_6"
-  },
-  "Shield": {
-	"type": "status",
-	"description": "defend description",
-	"cost": 2,
-	"self_status": "SHIELD",
-	"enemy_status": "NONE",
-	"duration": 2,
-	"damage_type": "SLASH",
-	"skill_type": "BLADE",
-	"texture": "Shield",
-	"icon": "single_7"
-  }
-}
+[
+	{
+		"name": "Slash",
+		"type": "attack",
+		"description": "slash description",
+		"cost": 1,
+		"damage": {
+			"melee": 55,
+			"ranged": 2,
+			"multiplier": 2
+		},
+		"moving": false,
+		"damage_type": "SLASH",
+		"skill_type": "BLADE",
+		"texture": "Slash",
+		"icon": "single_59"
+	},
+	{
+		"name": "Fireball",
+		"type": "attack",
+		"description": "fireball description",
+		"cost": 1,
+		"damage": {
+			"melee": 100,
+			"ranged": 100,
+			"multiplier": 1
+		},
+		"moving": true,
+		"damage_type": "FIRE",
+		"skill_type": "MAGIC",
+		"texture": "Ball",
+		"icon": "single_41"
+	},
+	{
+		"name": "Ice Strike",
+		"type": "attack",
+		"description": "ice strike description",
+		"cost": 1,
+		"damage": {
+			"melee": 100,
+			"ranged": 100,
+			"multiplier": 1
+		},
+		"moving": false,
+		"damage_type": "ICE",
+		"skill_type": "MAGIC",
+		"texture": "Slash",
+		"icon": "single_59"
+	},
+	{
+		"name": "Ice Slash",
+		"type": "attack",
+		"description": "inceslash description",
+		"cost": 2,
+		"damage": {
+			"melee": 100,
+			"ranged": 200,
+			"multiplier": 1
+		},
+		"moving": true,
+		"damage_type": "ICE",
+		"skill_type": "MAGIC",
+		"texture": "MovingSlash",
+		"icon": "single_6"
+	},
+	{
+		"name": "Shield",
+		"type": "status",
+		"description": "defend description",
+		"cost": 2,
+		"status": {
+			"self": "SHIELD",
+			"enemy": "NONE",
+			"duration": 2
+		},
+		"damage_type": "SLASH",
+		"skill_type": "BLADE",
+		"texture": "Shield",
+		"icon": "single_7"
+	}
+]

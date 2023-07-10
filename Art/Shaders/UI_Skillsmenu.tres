@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://815ag23rg045"]
+
+[ext_resource type="Shader" path="res://Art/Shaders/UI_SkillsMenu.gdshader" id="1_00fbv"]
+
+[resource]
+shader = ExtResource("1_00fbv")
+shader_parameter/color = Color(0.431373, 0.666667, 0.733333, 1)
+shader_parameter/x_move = 0.241
+shader_parameter/y_move = null
+shader_parameter/progress = null

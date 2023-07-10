@@ -1,4 +1,4 @@
-[gd_scene load_steps=149 format=3 uid="uid://dbksnam8cuw3o"]
+[gd_scene load_steps=204 format=3 uid="uid://dbksnam8cuw3o"]
 
 [ext_resource type="Script" path="res://Scripts/UI_scripts/CharacterUI.gd" id="1_8tod6"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/UI.gd" id="1_cvjfy"]
@@ -77,7 +77,33 @@
 [ext_resource type="Script" path="res://Scripts/UI_scripts/LoadingBattle.gd" id="75_fytsb"]
 [ext_resource type="Shader" path="res://Art/Shaders/MenuScript.gdshader" id="75_oi43j"]
 [ext_resource type="Texture2D" uid="uid://dr6ylkuvmfsqs" path="res://Art/Noise/iChannel2.png" id="77_2vvdw"]
-[ext_resource type="Shader" path="res://Art/Shaders/BgNew1.gdshader" id="78_yhn6x"]
+[ext_resource type="Material" uid="uid://djg1cgtoywnnr" path="res://Art/Shaders/UI_MenuCircle.tres" id="78_1ytav"]
+[ext_resource type="Script" path="res://Scripts/UI_scripts/MenuContent.gd" id="78_3y0fa"]
+[ext_resource type="Script" path="res://Scripts/UI_scripts/MenuVitals.gd" id="78_nwtx8"]
+[ext_resource type="Texture2D" uid="uid://cktm644dagcqk" path="res://Art/UI/UI_MenuName.png" id="79_sjnqr"]
+[ext_resource type="Texture2D" uid="uid://quli6l61do1d" path="res://Art/UI/PlayerIcon.png" id="80_ocgai"]
+[ext_resource type="Texture2D" uid="uid://cbpvb6b33orf1" path="res://Art/UI/UI_MenuDesc.png" id="80_qrnlg"]
+[ext_resource type="Texture2D" uid="uid://bmb1fes7vq7ht" path="res://Art/UI/UI_OptionsBackground.png" id="81_b03g8"]
+[ext_resource type="Texture2D" uid="uid://cei8ch0ai0mgt" path="res://Art/UI/UI_OptionDesc.png" id="81_p1oo8"]
+[ext_resource type="Texture2D" uid="uid://dv3tjowc70n44" path="res://Art/UI/UI_OptionBackground.png" id="82_0d6j3"]
+[ext_resource type="Script" path="res://Scripts/UI_scripts/MenuMap.gd" id="82_jbf6y"]
+[ext_resource type="Texture2D" uid="uid://bvla0j5477nmn" path="res://Art/UI/Back_Arrow.png" id="83_7cxrn"]
+[ext_resource type="Texture2D" uid="uid://cf4ln0lyvqoni" path="res://Art/UI/UI_OptionBackground__Hover.png" id="83_vm4ru"]
+[ext_resource type="Texture2D" uid="uid://br7ya2ldpbkpw" path="res://Art/UI/Back_Arrow__Hover.png" id="84_h4wef"]
+[ext_resource type="Texture2D" uid="uid://cehc4f3ddfrto" path="res://Art/UI/ExclamationMark_1.png" id="91_1mdbk"]
+[ext_resource type="Texture2D" uid="uid://bjgctcmwdgfi2" path="res://Art/UI/QuestButton.png" id="91_h4de0"]
+[ext_resource type="Texture2D" uid="uid://bacaetveesl1q" path="res://Art/UI/QuestButton__Focus.png" id="92_neqdw"]
+[ext_resource type="Texture2D" uid="uid://c53udeq4dvj0n" path="res://Art/UI/QuestionMark.png" id="94_8cfs2"]
+[ext_resource type="Texture2D" uid="uid://dij1tqsvqnk42" path="res://Art/UI/Journal_Tab__Active.png" id="95_wys63"]
+[ext_resource type="Texture2D" uid="uid://lrk1mocsvbjq" path="res://Art/UI/Journal_Tab__Inactive.png" id="96_27g8j"]
+[ext_resource type="Script" path="res://Scripts/UI_scripts/SkillContainer.gd" id="98_f3k8g"]
+[ext_resource type="Texture2D" uid="uid://cvqjk8rpglwpk" path="res://Art/UI/test_skilltree.png" id="98_h33pt"]
+[ext_resource type="Texture2D" uid="uid://blflx073tr8sg" path="res://Art/UI/circle15.png" id="98_ld2nb"]
+[ext_resource type="Script" path="res://Scripts/UI_scripts/ZoomContainer.gd" id="100_8ibmh"]
+[ext_resource type="Texture2D" uid="uid://cbi7r3syw4oje" path="res://Art/UI/skiltree_movin1.png" id="100_khmlx"]
+[ext_resource type="Script" path="res://Scripts/UI_scripts/SkillAnimatedLine.gd" id="100_lemdx"]
+[ext_resource type="Texture2D" uid="uid://bc0v5n8s7qhxk" path="res://Art/UI/ZoomMGlass.png" id="100_rr62r"]
+[ext_resource type="Texture2D" uid="uid://muqk12udbcqv" path="res://Art/UI/skiltree_movin2.png" id="101_lrrqo"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_71ey8"]
 
@@ -408,7 +434,7 @@ noise = SubResource("FastNoiseLite_atnpy")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_flnu7"]
 shader = ExtResource("74_7oajc")
 shader_parameter/progress = 0.149314
-shader_parameter/ratio_scale = 1.0
+shader_parameter/ratio_scale = 0.82
 shader_parameter/speed_scale = 3.0
 shader_parameter/ring_color = Color(0.980392, 0.137255, 1, 1)
 shader_parameter/iChannel1 = SubResource("NoiseTexture2D_locwd")
@@ -423,7 +449,7 @@ height = 320
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_eoehv"]
 shader = ExtResource("75_oi43j")
-shader_parameter/progress = 1.0
+shader_parameter/progress = 100.0
 shader_parameter/diamondPixelSize = 40.0
 shader_parameter/SCALE = Vector2(960, 540)
 shader_parameter/inner = Color(0.372549, 0.364706, 0.568627, 1)
@@ -436,19 +462,19 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect2:material:shader_parameter/scale")
+tracks/0/path = NodePath("MenuBackground:material:shader_parameter/alpha")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [26.356]
+"values": [255.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("TextureRect3:material:shader_parameter/progress")
+tracks/1/path = NodePath("TextureRect2:material:shader_parameter/ratio_scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -457,29 +483,20 @@ tracks/1/keys = {
 "update": 0,
 "values": [1.0]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("TextureRect3:material:shader_parameter/alpha")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+
+[sub_resource type="Animation" id="Animation_vyd1q"]
+resource_name = "menu_startup"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MenuBackground:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [255.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("TextureRect2:material:shader_parameter/ratio_scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.0]
+"values": [0.0, 100.0]
 }
 
 [sub_resource type="Animation" id="Animation_6dveh"]
@@ -488,46 +505,22 @@ length = 2.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect2:material:shader_parameter/progress")
+tracks/0/path = NodePath("MenuBackground:material:shader_parameter/alpha")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.8, 2.2),
-"transitions": PackedFloat32Array(0.999998, 4.43827, 1),
-"update": 0,
-"values": [0.0, 0.01, 1.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("TextureRect3:material:shader_parameter/progress")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.6),
-"transitions": PackedFloat32Array(0.659755, 1),
-"update": 0,
-"values": [0.0, 1.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("TextureRect3:material:shader_parameter/alpha")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0, 1.1),
 "transitions": PackedFloat32Array(0.482968, 1),
 "update": 0,
 "values": [150.0, 255.0]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("TextureRect2:material:shader_parameter/ratio_scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect2:material:shader_parameter/ratio_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.5, 1.6, 2.1),
 "transitions": PackedFloat32Array(1.51572, 1.03526, 0.999998, 1),
 "update": 0,
@@ -537,20 +530,124 @@ tracks/3/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2fqvh"]
 _data = {
 "RESET": SubResource("Animation_l2i6h"),
+"menu_startup": SubResource("Animation_vyd1q"),
 "start": SubResource("Animation_6dveh")
 }
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rws0f"]
-shader = ExtResource("78_yhn6x")
-shader_parameter/color = Color(0.976471, 0.447059, 0.0235294, 1)
-shader_parameter/progress = 100.0
+[sub_resource type="Gradient" id="Gradient_e83fo"]
 
-[sub_resource type="Gradient" id="Gradient_mnewt"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hm1cq"]
+gradient = SubResource("Gradient_e83fo")
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_r3wdp"]
-gradient = SubResource("Gradient_mnewt")
-width = 1
-height = 1
+[sub_resource type="LabelSettings" id="LabelSettings_ixnyt"]
+font = ExtResource("5_ai818")
+font_color = Color(0.690196, 0.65098, 0.792157, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_64yj0"]
+font = ExtResource("5_ai818")
+font_size = 12
+font_color = Color(0.47451, 0.458824, 0.521569, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4tepk"]
+texture = ExtResource("83_7cxrn")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_a60bj"]
+texture = ExtResource("84_h4wef")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_36it5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aeqds"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_befwc"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_2gs5t"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_utudq"]
+font = ExtResource("5_ai818")
+font_size = 12
+font_color = Color(0.65098, 0.615686, 0.760784, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_spwh6"]
+texture = ExtResource("82_0d6j3")
+modulate_color = Color(0.243137, 0.243137, 0.243137, 0.678431)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tv8pw"]
+texture = ExtResource("83_vm4ru")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ro14v"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jnc57"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h7jhu"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ohj1x"]
+line_spacing = 0.0
+font = ExtResource("5_ai818")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_khpm7"]
+content_margin_left = 7.0
+texture = ExtResource("91_h4de0")
+modulate_color = Color(0.160784, 0.160784, 0.160784, 0.721569)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ymnkd"]
+content_margin_left = 7.0
+texture = ExtResource("91_h4de0")
+modulate_color = Color(0.160784, 0.160784, 0.160784, 0.721569)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3j25y"]
+content_margin_left = 7.0
+texture = ExtResource("92_neqdw")
+
+[sub_resource type="LabelSettings" id="LabelSettings_cuem3"]
+font = ExtResource("5_ai818")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7qtyr"]
+content_margin_left = 7.0
+content_margin_right = 7.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gabm8"]
+content_margin_left = 7.0
+content_margin_right = 7.0
+texture = ExtResource("95_wys63")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vacqy"]
+content_margin_left = 7.0
+content_margin_right = 7.0
+texture = ExtResource("96_27g8j")
+
+[sub_resource type="Theme" id="Theme_1yfcc"]
+default_font = ExtResource("5_ai818")
+default_font_size = 16
+TabContainer/constants/side_margin = 1
+TabContainer/styles/tab_disabled = SubResource("StyleBoxTexture_7qtyr")
+TabContainer/styles/tab_selected = SubResource("StyleBoxTexture_gabm8")
+TabContainer/styles/tab_unselected = SubResource("StyleBoxTexture_vacqy")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_u0fij"]
+texture = ExtResource("98_ld2nb")
+
+[sub_resource type="Curve2D" id="Curve2D_15hdv"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 283, 320, 0, 0, 0, 0, 179, 320)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_mwewj"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 283, 320, 0, 0, 0, 0, 179, 269)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_5wqcm"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 283, 320, 0, 0, 0, 0, 179, 370)
+}
+point_count = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_22qdd"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_01sfh"]
+font = ExtResource("5_ai818")
 
 [node name="UI" type="CanvasLayer"]
 layer = 3
@@ -620,10 +717,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 31360.0
-offset_top = 17810.0
-offset_right = 32000.0
-offset_bottom = 17828.0
+offset_left = 31040.0
+offset_top = 17630.0
+offset_right = 31680.0
+offset_bottom = 17648.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(320, 9)
@@ -3867,6 +3964,7 @@ position = Vector2(328, 181)
 texture = SubResource("GradientTexture2D_mvhth")
 
 [node name="LoadingBattle" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 640.0
@@ -3874,7 +3972,6 @@ offset_bottom = 360.0
 script = ExtResource("75_fytsb")
 
 [node name="TextureRect2" type="TextureRect" parent="LoadingBattle"]
-visible = false
 material = SubResource("ShaderMaterial_flnu7")
 layout_mode = 1
 anchors_preset = 15
@@ -3905,15 +4002,893 @@ libraries = {
 "": SubResource("AnimationLibrary_2fqvh")
 }
 
-[node name="TextureRect" type="TextureRect" parent="LoadingBattle"]
-visible = false
-material = SubResource("ShaderMaterial_rws0f")
+[node name="PauseMenu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
+script = ExtResource("75_fytsb")
+
+[node name="MenuBackground" type="TextureRect" parent="PauseMenu"]
+material = SubResource("ShaderMaterial_eoehv")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_fvp6c")
+expand_mode = 2
+
+[node name="MenuContent" type="Control" parent="PauseMenu"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("78_3y0fa")
+
+[node name="MenuHeader" type="Control" parent="PauseMenu/MenuContent"]
+anchors_preset = 0
+offset_right = 223.0
+offset_bottom = 60.0
+
+[node name="Circle" type="TextureRect" parent="PauseMenu/MenuContent/MenuHeader"]
+texture_filter = 1
+texture_repeat = 1
+material = ExtResource("78_1ytav")
 layout_mode = 0
-offset_left = 8.0
-offset_top = 11.0
-offset_right = 618.0
-offset_bottom = 349.0
-texture = SubResource("GradientTexture2D_r3wdp")
+offset_left = 138.0
+offset_top = 4.0
+offset_right = 240.0
+offset_bottom = 60.0
+texture = SubResource("GradientTexture2D_hm1cq")
+expand_mode = 2
+
+[node name="NameRect" type="TextureRect" parent="PauseMenu/MenuContent/MenuHeader"]
+layout_mode = 0
+offset_top = 15.0
+offset_right = 186.0
+offset_bottom = 42.0
+texture = ExtResource("79_sjnqr")
+
+[node name="MenuName" type="Label" parent="PauseMenu/MenuContent/MenuHeader"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 154.0
+offset_bottom = 47.0
+text = "Main menu"
+label_settings = SubResource("LabelSettings_ixnyt")
+
+[node name="DescRect" type="TextureRect" parent="PauseMenu/MenuContent/MenuHeader"]
+layout_mode = 0
+offset_top = 42.0
+offset_right = 155.0
+offset_bottom = 60.0
+texture = ExtResource("80_qrnlg")
+
+[node name="MenuDesc" type="Label" parent="PauseMenu/MenuContent/MenuHeader"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 42.0
+offset_right = 177.0
+offset_bottom = 66.0
+text = "Select an option"
+label_settings = SubResource("LabelSettings_64yj0")
+
+[node name="ReturnButton" type="Button" parent="PauseMenu/MenuContent"]
+visible = false
+layout_mode = 0
+offset_top = 74.0
+offset_right = 31.0
+offset_bottom = 290.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_4tepk")
+theme_override_styles/hover = SubResource("StyleBoxTexture_a60bj")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_36it5")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_aeqds")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_befwc")
+
+[node name="MenuVitals" type="Control" parent="PauseMenu/MenuContent"]
+layout_mode = 1
+anchor_top = -0.00833333
+anchor_bottom = -0.00833333
+offset_left = 18.0
+offset_top = 306.333
+offset_right = 209.0
+offset_bottom = 346.333
+script = ExtResource("78_nwtx8")
+metadata/_edit_use_anchors_ = true
+
+[node name="Status" type="Control" parent="PauseMenu/MenuContent/MenuVitals"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -153.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Inner" type="TextureRect" parent="PauseMenu/MenuContent/MenuVitals/Status"]
+self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.490196)
+layout_mode = 0
+offset_right = 153.0
+offset_bottom = 23.0
+texture = ExtResource("19_mqkio")
+
+[node name="Border" type="TextureRect" parent="PauseMenu/MenuContent/MenuVitals/Status"]
+layout_mode = 0
+offset_right = 153.0
+offset_bottom = 23.0
+texture = ExtResource("20_uddr6")
+
+[node name="HealthBar" type="TextureRect" parent="PauseMenu/MenuContent/MenuVitals/Status"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 2.0
+offset_top = 4.5
+offset_right = -56.0
+offset_bottom = 7.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_fh04w")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="PauseMenu/MenuContent/MenuVitals/Status/HealthBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 40.0
+nine_patch_stretch = true
+texture_progress = SubResource("GradientTexture2D_qtgob")
+
+[node name="StaminaBar" type="TextureRect" parent="PauseMenu/MenuContent/MenuVitals/Status"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 2.0
+offset_top = -6.5
+offset_right = -56.0
+offset_bottom = -3.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_fh04w")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="PauseMenu/MenuContent/MenuVitals/Status/StaminaBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 40.0
+nine_patch_stretch = true
+texture_progress = SubResource("GradientTexture2D_100xk")
+
+[node name="StaminaBackplate" type="TextureProgressBar" parent="PauseMenu/MenuContent/MenuVitals/Status"]
+layout_mode = 0
+offset_top = -9.0
+offset_right = 153.0
+offset_bottom = 10.0
+max_value = 151.0
+value = 95.0
+texture_progress = ExtResource("22_bdig2")
+
+[node name="HealthLabel" type="Label" parent="PauseMenu/MenuContent/MenuVitals/Status"]
+layout_mode = 0
+offset_left = 98.0
+offset_top = 3.0
+offset_right = 152.0
+offset_bottom = 26.0
+theme = ExtResource("3_h5rw7")
+text = "4024/1040"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="PlayerIcon" type="TextureRect" parent="PauseMenu/MenuContent/MenuVitals"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 7.0
+offset_right = 35.0
+offset_bottom = 40.0
+texture = ExtResource("80_ocgai")
+expand_mode = 1
+
+[node name="StaminaContainer" type="HBoxContainer" parent="PauseMenu/MenuContent/MenuVitals"]
+visible = false
+layout_mode = 0
+offset_left = 243.0
+offset_top = 306.0
+offset_right = 364.0
+offset_bottom = 314.0
+theme_override_constants/separation = 3
+
+[node name="StaminaBlock_1" type="TextureRect" parent="PauseMenu/MenuContent/MenuVitals/StaminaContainer"]
+self_modulate = Color(0.960784, 0.960784, 0.960784, 1)
+texture_filter = 1
+texture_repeat = 1
+material = ExtResource("6_a0wlw")
+layout_mode = 2
+texture = ExtResource("4_v6vyg")
+
+[node name="StaminaBlock_2" type="TextureRect" parent="PauseMenu/MenuContent/MenuVitals/StaminaContainer"]
+material = ExtResource("6_a0wlw")
+layout_mode = 2
+texture = ExtResource("4_v6vyg")
+
+[node name="StaminaBlock_3" type="TextureRect" parent="PauseMenu/MenuContent/MenuVitals/StaminaContainer"]
+material = ExtResource("6_a0wlw")
+layout_mode = 2
+texture = ExtResource("4_v6vyg")
+
+[node name="StaminaBlock_4" type="TextureRect" parent="PauseMenu/MenuContent/MenuVitals/StaminaContainer"]
+material = ExtResource("6_a0wlw")
+layout_mode = 2
+texture = ExtResource("4_v6vyg")
+
+[node name="StaminaBlock_5" type="TextureRect" parent="PauseMenu/MenuContent/MenuVitals/StaminaContainer"]
+material = ExtResource("6_a0wlw")
+layout_mode = 2
+texture = ExtResource("4_v6vyg")
+
+[node name="StaminaBlock_6" type="TextureRect" parent="PauseMenu/MenuContent/MenuVitals/StaminaContainer"]
+material = ExtResource("6_a0wlw")
+layout_mode = 2
+texture = ExtResource("4_v6vyg")
+
+[node name="StatusesContainer" type="HBoxContainer" parent="PauseMenu/MenuContent/MenuVitals"]
+visible = false
+layout_mode = 0
+offset_left = 240.0
+offset_top = 280.0
+offset_right = 392.0
+offset_bottom = 302.0
+
+[node name="Status1" type="Control" parent="PauseMenu/MenuContent/MenuVitals/StatusesContainer"]
+visible = false
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="PauseMenu/MenuContent/MenuVitals/StatusesContainer/Status1"]
+layout_mode = 2
+offset_right = 22.0
+offset_bottom = 22.0
+texture = ExtResource("27_5ui8o")
+
+[node name="Status2" type="Control" parent="PauseMenu/MenuContent/MenuVitals/StatusesContainer"]
+visible = false
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="PauseMenu/MenuContent/MenuVitals/StatusesContainer/Status2"]
+layout_mode = 2
+offset_right = 22.0
+offset_bottom = 22.0
+texture = ExtResource("27_5ui8o")
+
+[node name="Status3" type="Control" parent="PauseMenu/MenuContent/MenuVitals/StatusesContainer"]
+visible = false
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="PauseMenu/MenuContent/MenuVitals/StatusesContainer/Status3"]
+layout_mode = 2
+offset_right = 22.0
+offset_bottom = 22.0
+texture = ExtResource("27_5ui8o")
+
+[node name="Status4" type="Control" parent="PauseMenu/MenuContent/MenuVitals/StatusesContainer"]
+visible = false
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="PauseMenu/MenuContent/MenuVitals/StatusesContainer/Status4"]
+layout_mode = 2
+offset_right = 22.0
+offset_bottom = 22.0
+texture = ExtResource("27_5ui8o")
+
+[node name="Status5" type="Control" parent="PauseMenu/MenuContent/MenuVitals/StatusesContainer"]
+visible = false
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="PauseMenu/MenuContent/MenuVitals/StatusesContainer/Status5"]
+layout_mode = 2
+offset_right = 22.0
+offset_bottom = 22.0
+texture = ExtResource("27_5ui8o")
+
+[node name="Status6" type="Control" parent="PauseMenu/MenuContent/MenuVitals/StatusesContainer"]
+visible = false
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="PauseMenu/MenuContent/MenuVitals/StatusesContainer/Status6"]
+layout_mode = 2
+offset_right = 22.0
+offset_bottom = 22.0
+texture = ExtResource("27_5ui8o")
+
+[node name="HideableContent" type="Control" parent="PauseMenu/MenuContent"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MenuMap" type="Control" parent="PauseMenu/MenuContent/HideableContent"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 315.0
+offset_top = 44.0
+offset_right = 596.0
+offset_bottom = 316.0
+script = ExtResource("82_jbf6y")
+
+[node name="MinimapDisplay" type="TextureRect" parent="PauseMenu/MenuContent/HideableContent/MenuMap"]
+texture_filter = 4
+texture_repeat = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_2gs5t")
+expand_mode = 1
+
+[node name="MenuOptionDesc" type="Control" parent="PauseMenu/MenuContent/HideableContent"]
+anchors_preset = 0
+offset_left = 30.0
+offset_top = 235.0
+offset_right = 255.0
+offset_bottom = 295.0
+
+[node name="TextureRect" type="TextureRect" parent="PauseMenu/MenuContent/HideableContent/MenuOptionDesc"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("81_p1oo8")
+
+[node name="Label" type="Label" parent="PauseMenu/MenuContent/HideableContent/MenuOptionDesc"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = 209.0
+offset_bottom = 55.0
+text = "Подсказка: выпейте молоко первее кошки"
+label_settings = SubResource("LabelSettings_utudq")
+autowrap_mode = 2
+
+[node name="OptionsBackground" type="TextureRect" parent="PauseMenu/MenuContent/HideableContent"]
+modulate = Color(0.25098, 0.27451, 0.411765, 0.737255)
+layout_mode = 0
+offset_left = 31.0
+offset_top = 74.0
+offset_right = 259.0
+offset_bottom = 228.0
+texture = ExtResource("81_b03g8")
+
+[node name="MenuOptions" type="VBoxContainer" parent="PauseMenu/MenuContent/HideableContent"]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 74.0
+offset_right = 253.0
+offset_bottom = 218.0
+theme_override_constants/separation = 1
+
+[node name="MenuButtonBlock" type="Control" parent="PauseMenu/MenuContent/HideableContent/MenuOptions"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+
+[node name="Skills" type="Button" parent="PauseMenu/MenuContent/HideableContent/MenuOptions/MenuButtonBlock"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -3.0
+offset_right = 3.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_spwh6")
+theme_override_styles/hover = SubResource("StyleBoxTexture_tv8pw")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ro14v")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_jnc57")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_h7jhu")
+
+[node name="Label" type="Label" parent="PauseMenu/MenuContent/HideableContent/MenuOptions/MenuButtonBlock"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = 1.0
+offset_right = 222.0
+offset_bottom = 29.0
+text = "Skills"
+label_settings = SubResource("LabelSettings_ohj1x")
+horizontal_alignment = 1
+
+[node name="MenuButtonBlock2" type="Control" parent="PauseMenu/MenuContent/HideableContent/MenuOptions"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+
+[node name="Party" type="Button" parent="PauseMenu/MenuContent/HideableContent/MenuOptions/MenuButtonBlock2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -3.0
+offset_right = 3.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_spwh6")
+theme_override_styles/hover = SubResource("StyleBoxTexture_tv8pw")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ro14v")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_jnc57")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_h7jhu")
+
+[node name="Label" type="Label" parent="PauseMenu/MenuContent/HideableContent/MenuOptions/MenuButtonBlock2"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = 1.0
+offset_right = 222.0
+offset_bottom = 29.0
+text = "Party"
+label_settings = SubResource("LabelSettings_ohj1x")
+horizontal_alignment = 1
+
+[node name="MenuButtonBlock3" type="Control" parent="PauseMenu/MenuContent/HideableContent/MenuOptions"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+
+[node name="Journal" type="Button" parent="PauseMenu/MenuContent/HideableContent/MenuOptions/MenuButtonBlock3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -3.0
+offset_right = 3.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_spwh6")
+theme_override_styles/hover = SubResource("StyleBoxTexture_tv8pw")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ro14v")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_jnc57")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_h7jhu")
+
+[node name="Label" type="Label" parent="PauseMenu/MenuContent/HideableContent/MenuOptions/MenuButtonBlock3"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = 1.0
+offset_right = 222.0
+offset_bottom = 29.0
+text = "Journal"
+label_settings = SubResource("LabelSettings_ohj1x")
+horizontal_alignment = 1
+
+[node name="MenuButtonBlock4" type="Control" parent="PauseMenu/MenuContent/HideableContent/MenuOptions"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+
+[node name="DataBank" type="Button" parent="PauseMenu/MenuContent/HideableContent/MenuOptions/MenuButtonBlock4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -3.0
+offset_right = 3.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_spwh6")
+theme_override_styles/hover = SubResource("StyleBoxTexture_tv8pw")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ro14v")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_jnc57")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_h7jhu")
+
+[node name="Label" type="Label" parent="PauseMenu/MenuContent/HideableContent/MenuOptions/MenuButtonBlock4"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = 1.0
+offset_right = 222.0
+offset_bottom = 29.0
+text = "Data Bank"
+label_settings = SubResource("LabelSettings_ohj1x")
+horizontal_alignment = 1
+
+[node name="MenuButtonBlock5" type="Control" parent="PauseMenu/MenuContent/HideableContent/MenuOptions"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+
+[node name="Config" type="Button" parent="PauseMenu/MenuContent/HideableContent/MenuOptions/MenuButtonBlock5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -3.0
+offset_right = 3.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_spwh6")
+theme_override_styles/hover = SubResource("StyleBoxTexture_tv8pw")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ro14v")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_jnc57")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_h7jhu")
+
+[node name="Label" type="Label" parent="PauseMenu/MenuContent/HideableContent/MenuOptions/MenuButtonBlock5"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = 1.0
+offset_right = 222.0
+offset_bottom = 29.0
+text = "Config"
+label_settings = SubResource("LabelSettings_ohj1x")
+horizontal_alignment = 1
+
+[node name="JournalContent" type="Control" parent="PauseMenu/MenuContent"]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="JournalBackground" type="TextureRect" parent="PauseMenu/MenuContent/JournalContent"]
+modulate = Color(0.607843, 0.619608, 0.74902, 0.623529)
+layout_mode = 2
+offset_left = 31.0
+offset_top = 74.0
+offset_right = 259.0
+offset_bottom = 294.0
+texture = ExtResource("81_b03g8")
+
+[node name="Journal" type="VBoxContainer" parent="PauseMenu/MenuContent/JournalContent"]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 74.0
+offset_right = 258.0
+offset_bottom = 294.0
+theme_override_constants/separation = 1
+
+[node name="QuestBlock" type="Control" parent="PauseMenu/MenuContent/JournalContent/Journal"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock"]
+layout_mode = 0
+offset_right = 225.0
+offset_bottom = 25.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_khpm7")
+theme_override_styles/hover = SubResource("StyleBoxTexture_ymnkd")
+theme_override_styles/focus = SubResource("StyleBoxTexture_3j25y")
+icon = ExtResource("91_1mdbk")
+
+[node name="Label" type="Label" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock"]
+layout_mode = 0
+offset_left = 11.0
+offset_right = 227.0
+offset_bottom = 31.0
+text = "Primary mission"
+label_settings = SubResource("LabelSettings_cuem3")
+horizontal_alignment = 1
+
+[node name="QuestBlock2" type="Control" parent="PauseMenu/MenuContent/JournalContent/Journal"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock2"]
+layout_mode = 0
+offset_right = 225.0
+offset_bottom = 25.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_khpm7")
+theme_override_styles/hover = SubResource("StyleBoxTexture_ymnkd")
+theme_override_styles/focus = SubResource("StyleBoxTexture_3j25y")
+icon = ExtResource("94_8cfs2")
+
+[node name="Label" type="Label" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock2"]
+layout_mode = 0
+offset_left = 11.0
+offset_right = 227.0
+offset_bottom = 31.0
+text = "Secondary quest"
+label_settings = SubResource("LabelSettings_cuem3")
+horizontal_alignment = 1
+
+[node name="MenuTabs" type="TabContainer" parent="PauseMenu/MenuContent/JournalContent"]
+layout_mode = 0
+offset_left = 314.0
+offset_top = 16.0
+offset_right = 599.0
+offset_bottom = 320.0
+theme = SubResource("Theme_1yfcc")
+
+[node name="Map" type="TabBar" parent="PauseMenu/MenuContent/JournalContent/MenuTabs"]
+layout_mode = 2
+
+[node name="MenuMap" type="Control" parent="PauseMenu/MenuContent/JournalContent/MenuTabs/Map"]
+anchors_preset = 0
+offset_left = 1.0
+offset_right = 282.0
+offset_bottom = 272.0
+script = ExtResource("82_jbf6y")
+
+[node name="MinimapDisplay" type="TextureRect" parent="PauseMenu/MenuContent/JournalContent/MenuTabs/Map/MenuMap"]
+texture_filter = 4
+texture_repeat = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_2gs5t")
+expand_mode = 1
+
+[node name="Details" type="TabBar" parent="PauseMenu/MenuContent/JournalContent/MenuTabs"]
+visible = false
+layout_mode = 2
+
+[node name="SkillsContent" type="Control" parent="PauseMenu"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SkillContainer" type="Control" parent="PauseMenu/SkillsContent"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = -159.0
+offset_right = 602.0
+offset_bottom = 454.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(320, 320)
+script = ExtResource("98_f3k8g")
+
+[node name="SkillsBackground" type="TextureRect" parent="PauseMenu/SkillsContent/SkillContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -7.0
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("98_h33pt")
+stretch_mode = 2
+
+[node name="Connector" type="TextureRect" parent="PauseMenu/SkillsContent/SkillContainer"]
+layout_mode = 0
+offset_left = 169.0
+offset_top = 109.0
+offset_right = 172.0
+offset_bottom = 145.0
+texture = ExtResource("48_mna44")
+expand_mode = 1
+
+[node name="SkillBlock1" type="Control" parent="PauseMenu/SkillsContent/SkillContainer"]
+anchors_preset = 0
+offset_left = 151.0
+offset_top = 144.0
+offset_right = 191.0
+offset_bottom = 184.0
+
+[node name="SkillButton" type="Button" parent="PauseMenu/SkillsContent/SkillContainer/SkillBlock1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_u0fij")
+
+[node name="SkillBlock2" type="Control" parent="PauseMenu/SkillsContent/SkillContainer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 151.0
+offset_top = 144.0
+offset_right = 191.0
+offset_bottom = 184.0
+
+[node name="SkillButton" type="Button" parent="PauseMenu/SkillsContent/SkillContainer/SkillBlock2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -73.0
+offset_bottom = -73.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_u0fij")
+
+[node name="AnimatedParts" type="Control" parent="PauseMenu/SkillsContent/SkillContainer"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Line2D" type="Path2D" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts"]
+curve = SubResource("Curve2D_15hdv")
+script = ExtResource("100_lemdx")
+
+[node name="LineFollow" type="PathFollow2D" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts/Line2D"]
+position = Vector2(257.975, 320)
+rotation = 3.14159
+progress = 25.0432
+
+[node name="LineFollow2" type="PathFollow2D" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts/Line2D"]
+position = Vector2(257.975, 320)
+rotation = 3.14159
+progress = 25.0432
+
+[node name="LineFollow3" type="PathFollow2D" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts/Line2D"]
+position = Vector2(257.975, 320)
+rotation = 3.14159
+progress = 25.0432
+
+[node name="LineTexture" type="TextureRect" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts/Line2D"]
+offset_left = 279.0
+offset_top = 318.0
+offset_right = 289.0
+offset_bottom = 328.0
+texture = ExtResource("100_khmlx")
+
+[node name="LineTexture2" type="TextureRect" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts/Line2D"]
+offset_left = 279.0
+offset_top = 318.0
+offset_right = 289.0
+offset_bottom = 328.0
+texture = ExtResource("100_khmlx")
+
+[node name="LineTexture3" type="TextureRect" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts/Line2D"]
+offset_left = 279.0
+offset_top = 318.0
+offset_right = 289.0
+offset_bottom = 328.0
+texture = ExtResource("100_khmlx")
+
+[node name="Line2D2" type="Path2D" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts"]
+curve = SubResource("Curve2D_mwewj")
+script = ExtResource("100_lemdx")
+
+[node name="LineFollow" type="PathFollow2D" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts/Line2D2"]
+position = Vector2(184.378, 271.637)
+rotation = -2.68567
+progress = 110.0
+
+[node name="LineFollow2" type="PathFollow2D" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts/Line2D2"]
+position = Vector2(184.378, 271.637)
+rotation = -2.68567
+progress = 110.0
+
+[node name="LineFollow3" type="PathFollow2D" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts/Line2D2"]
+position = Vector2(184.378, 271.637)
+rotation = -2.68567
+progress = 110.0
+
+[node name="LineTexture" type="TextureRect" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts/Line2D2"]
+offset_left = 279.0
+offset_top = 314.0
+offset_right = 289.0
+offset_bottom = 324.0
+texture = ExtResource("101_lrrqo")
+flip_h = true
+
+[node name="LineTexture2" type="TextureRect" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts/Line2D2"]
+offset_left = 279.0
+offset_top = 314.0
+offset_right = 289.0
+offset_bottom = 324.0
+texture = ExtResource("101_lrrqo")
+flip_h = true
+
+[node name="LineTexture3" type="TextureRect" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts/Line2D2"]
+offset_left = 279.0
+offset_top = 314.0
+offset_right = 289.0
+offset_bottom = 324.0
+texture = ExtResource("101_lrrqo")
+flip_h = true
+
+[node name="Line2D3" type="Path2D" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts"]
+curve = SubResource("Curve2D_5wqcm")
+script = ExtResource("100_lemdx")
+
+[node name="LineFollow" type="PathFollow2D" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts/Line2D3"]
+position = Vector2(183.98, 367.606)
+rotation = 2.69345
+progress = 110.0
+
+[node name="LineFollow2" type="PathFollow2D" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts/Line2D3"]
+position = Vector2(183.98, 367.606)
+rotation = 2.69345
+progress = 110.0
+
+[node name="LineFollow3" type="PathFollow2D" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts/Line2D3"]
+position = Vector2(183.98, 367.606)
+rotation = 2.69345
+progress = 110.0
+
+[node name="LineTexture" type="TextureRect" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts/Line2D3"]
+offset_left = 279.0
+offset_top = 318.0
+offset_right = 289.0
+offset_bottom = 328.0
+texture = ExtResource("101_lrrqo")
+
+[node name="LineTexture2" type="TextureRect" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts/Line2D3"]
+offset_left = 279.0
+offset_top = 318.0
+offset_right = 289.0
+offset_bottom = 328.0
+texture = ExtResource("101_lrrqo")
+
+[node name="LineTexture3" type="TextureRect" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts/Line2D3"]
+offset_left = 279.0
+offset_top = 318.0
+offset_right = 289.0
+offset_bottom = 328.0
+texture = ExtResource("101_lrrqo")
+
+[node name="ZoomContainer" type="Control" parent="PauseMenu/SkillsContent"]
+anchors_preset = 0
+offset_left = 597.0
+offset_top = 68.0
+offset_right = 637.0
+offset_bottom = 287.0
+script = ExtResource("100_8ibmh")
+
+[node name="TextureRect" type="TextureRect" parent="PauseMenu/SkillsContent/ZoomContainer"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = -10.0
+offset_right = 40.0
+offset_bottom = 235.0
+
+[node name="VSlider" type="VSlider" parent="PauseMenu/SkillsContent/ZoomContainer"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = -9.0
+offset_right = 37.0
+offset_bottom = 234.0
+theme_override_icons/grabber = ExtResource("100_rr62r")
+theme_override_icons/grabber_highlight = ExtResource("100_rr62r")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_22qdd")
+min_value = 1.0
+max_value = 3.0
+value = 1.0
+tick_count = 2
+
+[node name="Label" type="Label" parent="PauseMenu/SkillsContent/ZoomContainer"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = -35.0
+offset_right = 40.0
+offset_bottom = -4.0
+text = "x1"
+label_settings = SubResource("LabelSettings_01sfh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PauseMenu"]
+reset_on_save = false
+speed_scale = 1.1
+method_call_mode = 1
+libraries = {
+"": SubResource("AnimationLibrary_2fqvh")
+}
 
 [editable path="UI/Character/Equipment/LeftCharacterVBox/AmuletPanel/EquipButton"]
 [editable path="UI/Character/Equipment/LeftCharacterVBox/RingPanel1/EquipButton"]

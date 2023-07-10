@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://djg1cgtoywnnr"]
+
+[ext_resource type="Shader" path="res://Art/Shaders/UI_MenuCircle.gdshader" id="1_kolku"]
+
+[sub_resource type="Gradient" id="Gradient_r0xjk"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8ugwo"]
+gradient = SubResource("Gradient_r0xjk")
+
+[resource]
+shader = ExtResource("1_kolku")
+shader_parameter/color = Color(0.392157, 0.380392, 0.470588, 1)
+shader_parameter/progress = 100.0
+shader_parameter/image = SubResource("GradientTexture2D_8ugwo")

@@ -1,8 +1,8 @@
-
 shader_type canvas_item;
 
 uniform vec4 color : source_color = vec4(0.976, 0.447, 0.023, 1);
 uniform float progress : hint_range(0, 100);
+uniform sampler2D image : source_color;
 
 float ringStep(float outerRadius, float innerRadius, vec2 coord, float rotationOffset) {
     float d = length(coord);
@@ -18,12 +18,13 @@ float noiseish(vec2 coord, vec2 coordMultiplier1, vec2 coordMultiplier2, vec2 co
 
 void fragment()
 {
-	vec2 iResolution = 1.0 / SCREEN_PIXEL_SIZE;
+	vec2 iResolution = vec2(640.0, 360.0);
 	vec2 fragCoord = vec2(FRAGCOORD.x, iResolution.y - FRAGCOORD.y);
+	//vec2 fragCoord = vec2(120.5, 120.5);
 	
 	vec2 uv = fragCoord.xy / iResolution.y;
     //uv.x += 0.04 * cos(0.6 * uv.x + 0.7 * uv.y - 4.0*cos(0.3 * TIME) * (0.3 + 0.02*uv.y));
-    const float cellResolution = 2.0;
+    const float cellResolution = 3.0;
     vec2 localUV = fract(uv * cellResolution) - vec2(0.5);
     const float smoothingWidth = 0.04;
     

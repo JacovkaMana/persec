@@ -34,7 +34,7 @@ class_name NPS
 @export var random_items: int = 0
 var INVENTORY : Array[Item] = []
 @export_category('Skills')
-@export var SKILLS: Array[String] = []
+@export var SKILLS: Array[AttackSkill] = []
 @export var Stamina_max: int = 3
 @export var Stamina_regen: int = 10
 
