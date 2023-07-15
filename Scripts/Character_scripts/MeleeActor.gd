@@ -30,7 +30,7 @@ func use_skill_id(id: int):
 	
 
 	
-func take_damage(skill: BaseSkill, strength):
+func take_damage(skill: Skill, strength):
 	data.hitpoints -= 20
 	self.modulate = Color8(255,0,0,255)
 	

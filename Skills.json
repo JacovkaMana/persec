@@ -1,12 +1,12 @@
 {
 	"Melee" : [{
-		"Slash" : [{
+		"Slashing" : [{
 			"Slash" : {
 				"description": "Slash diagonally in chosen direction.",
 				"cost": 1,
 				"damage": {
 					"value": 70,
-					"count": 1,
+					"multiplier": 1,
 					"type" : "SLASH"
 				},
 				"compatible" : [],
@@ -20,7 +20,7 @@
 					"cost": 1,
 					"damage": {
 						"value": 60,
-						"count": 2,
+						"multiplier": 2,
 						"type" : "SLASH"
 					},
 					"compatible" : [],
@@ -34,12 +34,12 @@
 					"cost": 1,
 					"damage": {
 						"value": 50,
-						"count": 1,
+						"multiplier": 1,
 						"type": "SLASH"
 					},
 					"compatible" : [],
 					"texture": "cleaving_strike",
-					"icon": "single_59",
+					"icon": "cleaving_strike_icon",
 					"locked": false,
 					"requires": []
 				},
@@ -48,12 +48,12 @@
 					"cost": 1,
 					"damage": {
 						"value": 90,
-						"count": 1,
+						"multiplier": 1,
 						"type": "SLASH"
 					},
 					"compatible" : [],
 					"texture": "cleaving_strike",
-					"icon": "single_59",
+					"icon": "cleaving_strike_icon",
 					"locked": true,
 					"requires": ["Cleave"]					
 				},
@@ -62,25 +62,25 @@
 					"cost": 1,
 					"damage": {
 						"value": 90,
-						"count": 1,
+						"multiplier": 1,
 						"type": "SLASH"
 					},
 					"compatible" : [],
 					"texture": "cleaving_strike",
-					"icon": "single_59",
+					"icon": "cleaving_strike_icon",
 					"locked": true,
 					"requires": ["Whirlwind", "Double Slash"]
 				}
 				
 
 		}],
-		"Pierce" : [{
+		"Piercing" : [{
 			"Pierce" : {
 				"description": "Pierce chosen spot on your enemy.",
 				"cost": 1,
 				"damage": {
 					"value": 90,
-					"count": 1,
+					"multiplier": 1,
 					"type" : "PIERCE"
 				},
 				"compatible" : [],
@@ -94,7 +94,7 @@
 				"cost": 1,
 				"damage": {
 					"value": 60,
-					"count": 3,
+					"multiplier": 3,
 					"type" : "PIERCE"
 				},
 				"compatible" : [],
@@ -108,7 +108,7 @@
 				"cost": 1,
 				"damage": {
 					"value": 90,
-					"count": 1,
+					"multiplier": 1,
 					"type" : "PIERCE"
 				},
 				"compatible" : [],
@@ -123,7 +123,7 @@
 				"cost": 1,
 				"damage": {
 					"value": 60,
-					"count": 3,
+					"multiplier": 3,
 					"type" : "PIERCE"
 				},
 				"compatible" : [],
@@ -133,7 +133,7 @@
 				"requires": []
 				}
 		}],
-		"Crush" : [{}]
+		"Bludgeoning" : [{}]
 	}],
 	"Ranged" : [{}],
 	"Magic" : [{
@@ -142,8 +142,9 @@
 			"description": "fireball description",
 			"cost": 1,
 			"damage": {
-				"value": 100,
-				"count": 1,
+				"melee": 100,
+				"ranged": 100,
+				"multiplier": 1,
 				"type" : "FIRE"
 			},
 			"status": {
@@ -162,8 +163,9 @@
 				"description": "ice strike description",
 				"cost": 1,
 				"damage": {
-					"value": 100,
-					"count": 1,
+					"melee": 100,
+					"ranged": 100,
+					"multiplier": 1,
 					"type" : "ICE"
 				},
 				"status": {
@@ -181,8 +183,9 @@
 				"description": "inceslash description",
 				"cost": 2,
 				"damage": {
-					"value": 100,
-					"count": 1,
+					"melee": 100,
+					"ranged": 100,
+					"multiplier": 1,
 					"type" : "ICE"
 				},
 				"status": {
@@ -199,23 +202,20 @@
 		}]
 	}],
 	"General" : [{
-		"Defensive" : [{
-			"Defend" : {
-				"description": "defend description",
-				"cost": 2,
-				"status": {
-					"self": "SHIELD",
-					"enemy": "NONE",
-					"duration": 2
-				},
-				"compatible" : [],
-				"texture": "Shield",
-				"icon": "single_7",
-				"locked" : false,
-				"requires": []
-			}
-		}]
-
+		"Defend" : {
+			"description": "defend description",
+			"cost": 2,
+			"status": {
+				"self": "SHIELD",
+				"enemy": "NONE",
+				"duration": 2
+			},
+			"compatible" : [],
+			"texture": "Shield",
+			"icon": "single_7",
+			"locked" : false,
+			"requires": []
+		}
 	}]
 
 }

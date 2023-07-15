@@ -139,14 +139,13 @@ func shoot(where: Vector2, _animated: bool = false, who = null):
 
 		
 		
-func change_sprite(_skill: BaseSkill):
+func change_sprite(_skill: Skill):
 	#to = skill.projectile
 #	sprite.set_texture(to)
 #	texture_light.set_texture(to)
 	texture_light.color = RandomStats.type_colors[_skill.damage_type] # too many lights
 	sprite.self_modulate = RandomStats.type_colors[_skill.damage_type]
 	light.color = RandomStats.type_colors[_skill.damage_type]
-	
 	if (_skill.type == Enums.ESkillType.MAGIC):
 		
 		sprite.material = GlobalSkills.shaders[_skill.damage_type]

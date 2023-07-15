@@ -34,7 +34,7 @@ class_name NPS
 @export var random_items: int = 0
 var INVENTORY : Array[Item] = []
 @export_category('Skills')
-@export var SKILLS: Array[AttackSkill] = []
+@export var SKILLS: Array[Skill] = []
 @export var Stamina_max: int = 3
 @export var Stamina_regen: int = 10
 
@@ -245,7 +245,7 @@ func _hide_label():
 	label.visible = false
 	
 
-func take_ranged_damage(_skill: AttackSkill, _from: Actor, _strength):
+func take_ranged_damage(_skill: Skill, _from: Actor, _strength):
 	super(_skill, _from, _strength)
 	if (data.hitpoints <= 0):
 		animation_tree.set("parameters/death/transition_request", "true")

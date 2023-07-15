@@ -87,10 +87,21 @@ enum EDamageType {
 
 enum ESkillType {
 	NONE = 0,
-	BLADE,
-	POLEARM,
-	BLUNT,
+	MELEE,
+	RANGED,
 	MAGIC,
+	GENERAL
+}
+
+
+enum ESkillSubtype {
+	NONE = 0,
+	SLASHING,
+	PIERCE,
+	CRUSH,
+	FIRE,
+	ICE,
+	
 }
 
 enum EScalingValue {

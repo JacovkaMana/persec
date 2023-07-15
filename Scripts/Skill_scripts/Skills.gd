@@ -2,7 +2,7 @@ class_name Skills
 extends Resource
 
 
-@export var _skills: Array[BaseSkill]
+@export var _skills: Array[Skill]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,11 +22,11 @@ func get_skill_id(id: int):
 func get_skill_name(_name: String):
 	return 'test'
 	
-func add_skill(skill: BaseSkill):
+func add_skill(skill: Skill):
 	_skills.append(skill)
 	return true
 
-func remove_skill(skill: BaseSkill):
+func remove_skill(skill: Skill):
 	if (skill in _skills):
 		_skills.pop_at(_skills.find(skill))
 		return true

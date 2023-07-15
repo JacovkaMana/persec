@@ -1,5 +1,5 @@
 extends Node
-var skills : Array[AttackSkill]
+var skills : Array[Skill]
 
 var shaders = {
 	Enums.EDamageType.EARTH : preload("res://Art/Shaders/EarthShader.tres"),
@@ -22,34 +22,60 @@ var colors = {
 func _ready():
 	var path = "res://Data/" + "Skills" + '.json'
 	var file = FileAccess.open(path, FileAccess.READ)
-	var skill_list: Array = JSON.parse_string(file.get_as_text())
-	for skill in skill_list:
-		match skill.type:
-			'attack':
-				skills.append(AttackSkill.new(
-				skill.name,
-				skill.description,
-				skill.damage.ranged,
-				skill.moving,
-				skill.damage.melee,
-				skill.damage.multiplier,
-				skill.cost,
-				Enums.EDamageType.get( skill.damage_type ),
-				Enums.ESkillType.get( skill.skill_type ),
-				load("res://PreRendered/Projectiles/" + skill.texture + ".tscn"),
-				skill.icon
-				)) 
-			'status':
-				skills.append(StatusSkill.new(
-				skill.name,
-				skill.description,
-				Enums.EStatus.get( skill.status["self"] ),
-				Enums.EStatus.get( skill.status.enemy ),
-				skill.status.duration,
-				skill.cost,
-				Enums.EDamageType.get( skill.damage_type ),
-				Enums.ESkillType.get( skill.skill_type ),
-				load("res://PreRendered/Projectiles/" + skill.texture + ".tscn"),
-				skill.icon
-			))
+	var json = JSON.parse_string(file.get_as_text())
+	for type in json:
+		
+			print('Type (Tree) - ' + type)
+			print('\n')
+			
+			for json_down in json[type]:
+				for subtype in json_down:
+					
+					print('Subtype (Branch) - ' + subtype)
+					print('\n')
+					
+					for skill_dict in json_down[subtype]:
+						for skill in skill_dict:
+							
+							print(skill)
+							print(skill_dict[skill]['description'])
+							print('\n')
+					
+				#subtype = JSON.parse_string(subtype)
+				#print(subtype)
+							var new = Skill.new(
+								Enums.ESkillType.get(type.to_upper()),
+								Enums.ESkillSubtype.get('NONE'),
+								skill,
+								skill_dict[skill]['description'],
+								skill_dict[skill]['cost'],
+								skill_dict[skill]['compatible'],
+								skill_dict[skill]['texture'],
+								skill_dict[skill]['icon'],
+								skill_dict[skill]['locked'],
+								skill_dict[skill]['requires'],
+								)
+							self.skills.append(new)
+							print(var_to_bytes(new))
+							print(self.skills)
+
+#			Enums.ESkillType.get( tree),
+#			Enums.ESkillType.get( NONE),
+#			skill.name,
+#			skill.description,
+#			skill.damage.ranged,
+#			skill.moving,
+#			skill.damage.melee,
+#			skill.damage.multiplier,
+#			skill.cost,
+#			Enums.EDamageType.get( skill.damage_type ),
+#			Enums.ESkillType.get( skill.skill_type ),
+#			load("res://PreRendered/Projectiles/" + skill.texture + ".tscn"),
+#			skill.icon
+#			)
+#
+#			print(var_to_bytes(new))
+#
+		
+
 

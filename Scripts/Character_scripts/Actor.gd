@@ -103,7 +103,7 @@ func use_skill_id(id: int):
 			'Status':
 				use_status_skill( data.skills.get_skill_id(id))
 	
-func shoot_projectile(skill: BaseSkill, at: CharacterBody2D = null) -> void:
+func shoot_projectile(skill: Skill, at: CharacterBody2D = null) -> void:
 	var proj = skill.projectile
 	var bullet = proj.instantiate()
 	var bullet_rotation
@@ -137,7 +137,7 @@ func shoot_projectile(skill: BaseSkill, at: CharacterBody2D = null) -> void:
 		bullet.shoot(Vector2(0,0), true, self)
 		
 	
-func take_ranged_damage(_skill: AttackSkill, from: Actor,_strength):
+func take_ranged_damage(_skill: Skill, from: Actor,_strength):
 	data.hitpoints -= int(_skill.ranged_damage * from.get_damage() / 100.0)
 	#print(int(_skill.ranged_damage * from.get_damage() / 100.0))
 	self.modulate = Color8(255,0,0,255)
@@ -174,13 +174,13 @@ func get_damage():
 	else:
 		return data.stats[Enums.EStat.STRENGTH]
 		
-func use_status_skill(skill: StatusSkill):
+func use_status_skill(skill: Skill):
 	
 	if (skill.self_status):
 			self.initiate_status(skill, skill.self_status, skill.status_duration)
 
 
-func initiate_status(skill: StatusSkill, status: Enums.EStatus, duration: int):
+func initiate_status(skill: Skill, status: Enums.EStatus, duration: int):
 	
 	var status_timer =  ( self.data.add_status( status, duration) )
 	if (status_timer):
