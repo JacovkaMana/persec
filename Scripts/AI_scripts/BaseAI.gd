@@ -21,7 +21,7 @@ func ai_process(delta):
 		attack()
 		attack_time = 0
 		attack_period = float(attack_pause) + randf_range(-0.5, 0.5) * attack_pause
-		print(attack_period)
+		#print(attack_period)
 		
 
 func setup(_owner, _target):

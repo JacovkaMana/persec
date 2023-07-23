@@ -38,7 +38,7 @@
 						"type": "SLASH"
 					},
 					"compatible" : [],
-					"texture": "cleaving_strike",
+					"texture": "Slash",
 					"icon": "single_59",
 					"locked": false,
 					"requires": []
@@ -52,7 +52,7 @@
 						"type": "SLASH"
 					},
 					"compatible" : [],
-					"texture": "cleaving_strike",
+					"texture": "Slash",
 					"icon": "single_59",
 					"locked": true,
 					"requires": ["Cleave"]					
@@ -66,7 +66,7 @@
 						"type": "SLASH"
 					},
 					"compatible" : [],
-					"texture": "cleaving_strike",
+					"texture": "Slash",
 					"icon": "single_59",
 					"locked": true,
 					"requires": ["Whirlwind", "Double Slash"]

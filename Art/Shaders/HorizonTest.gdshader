@@ -63,16 +63,20 @@ void fragment()
 	//uv = fragCoord.xy / iResolution ;
     //lazy shift, will update later with better implementation
     uv -= elevate;
+	//uv.x += cos(TIME);
     
     //starting color
 	vec2 scale = iResolution.xy / vec2(32., 32.);
 	vec2 uv0 = FRAGCOORD.xy / vec2(32., 32.);
 	uv0 /= float(bg_scale);
+	//uv0.x += TIME;
 	vec4 sampling0 = texture(iChannel0, uv0);
 	
 	vec2 uv1 = FRAGCOORD.xy / vec2(32., 32.);
 	//uv1 /= float(bg_scale);
+	//uv1.x += TIME;
 	vec4 sampling1 = texture(iChannel1, uv1);
+	
 
 	
     vec3 col = sampling0.rgb;
@@ -84,16 +88,19 @@ void fragment()
 		col = starting_color.rgb;
 
         uv.y = 3.0 / (abs(uv.y + 0.2) + .05);
+		
         //uv.y = 2.5 / (abs(uv.y + .2) + .1);
         
         //Pattern multiplication, see Book of Shaders, patterns chapter
         uv.x *= uv.y * 0.5;
+		
 
         //Line creation. 
 		//uv.x -= fract(TIME * 0.2);  
-		//uv.y -= fract(TIME * 0.2); 
-		   
+		uv.y -= fract(TIME * 0.5); 
+		//uv.y += TIME;   
         float gridVal = grid(uv);
+		//uv.y += TIME;
 		col = texture(iChannel1, uv).rgb;
 		
         col = mix(col, edge_color.rgb, gridVal);

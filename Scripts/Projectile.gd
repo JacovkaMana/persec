@@ -1,3 +1,4 @@
+class_name Projectile
 extends StaticBody2D
 
 var start_pos: Vector2
@@ -72,9 +73,8 @@ func move_n_collide(_delta):
 				'HitBox':
 					if collision_object.get_collider().get_parent() == self.projectile_owner:
 						self.add_collision_exception_with(collision_object.get_collider())
-					match skill.get_skill_type(): 
-						'Attack':
-							collision_object.get_collider().get_parent().take_ranged_damage(skill, projectile_owner, null)
+					if skill.is_damage_skill: 
+						collision_object.get_collider().get_parent().take_damage(skill, projectile_owner, null)
 					self.delete()
 				'TileMap':
 					self.delete()
@@ -92,15 +92,15 @@ func move_n_collide(_delta):
 			
 			
 		if is_instance_valid(collision_object):
+			#print(collision_object.get_collider().name)
 			match collision_object.get_collider().name:
 				projectile_owner.name:
 					self.add_collision_exception_with(projectile_owner)
 				'HitBox':
-					match skill.get_skill_type(): 
-						'Attack':
-							collision_object.get_collider().get_parent().take_ranged_damage(skill, projectile_owner, null)
-							print('trigger_melee')
-							trigger_melee()
+					if skill.is_damage_skill: 
+						collision_object.get_collider().get_parent().take_damage(skill, projectile_owner, null)
+						print('trigger_melee')
+						trigger_melee()
 					self.queue_free()
 				'TileMap':
 					pass
@@ -200,7 +200,7 @@ func actually_delete():
 	self.queue_free()
 
 func trigger_melee():
-	SceneManager.add_melee()
+	player.trigger_melee()
 	
 func get_collider_type():
 	return 'Projectile'

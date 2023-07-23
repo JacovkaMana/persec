@@ -20,14 +20,14 @@ func _input(event):
 		Enums.EPlayerState.ROAMING:
 			ui(event)
 			player_movement(event)
-			player_roaming(event)
+			use_skills(event)
 			interact(event)
 		Enums.EPlayerState.TALKING:
 			interact(event)
 		Enums.EPlayerState.RANGE:
 			pass
 		Enums.EPlayerState.MELEE:
-			pass
+			use_skills(event)
 
 
 
@@ -58,7 +58,7 @@ func player_movement(_event):
 			Input.get_action_strength("down") -  Input.get_action_strength("up")
 	)
 
-func player_roaming(_event):
+func use_skills(_event):
 			
 		if _event.is_action_pressed("skill1"):
 			player.use_skill_id(0)

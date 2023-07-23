@@ -1,5 +1,5 @@
 extends Node
-var skills : Array[Skill]
+var skills : Dictionary = {}
 
 var shaders = {
 	Enums.EDamageType.EARTH : preload("res://Art/Shaders/EarthShader.tres"),
@@ -18,6 +18,12 @@ var colors = {
 	Enums.EDamageType.WIND : preload("res://Art/Colors/Fire.tres"),
 	Enums.EDamageType.FIRE : preload("res://Art/Colors/Fire.tres"),
 }
+
+func get_by_name(string):
+	if string in skills.keys():
+		return skills[string]
+	return null
+
 
 func _ready():
 	var path = "res://Data/" + "Skills" + '.json'
@@ -55,9 +61,22 @@ func _ready():
 								skill_dict[skill]['locked'],
 								skill_dict[skill]['requires'],
 								)
-							self.skills.append(new)
-							print(var_to_bytes(new))
-							print(self.skills)
+
+							if skill_dict[skill].has('damage'):
+								new.is_damage_skill = true
+								new.damage_value = skill_dict[skill]['damage']['value']
+								new.damage_count = skill_dict[skill]['damage']['count']
+								new.damage_type = Enums.EDamageType.get(skill_dict[skill]['damage']['type'].to_upper())
+
+							if skill_dict[skill].has('status'):
+								new.is_status_skill = true
+								for status in skill_dict[skill]['status']['self'].split(','):
+									new.status_self.append(Enums.EStatus.get(status.to_upper()))
+								for status in skill_dict[skill]['status']['enemy'].split(','):
+									new.status_enemy.append(Enums.EStatus.get(status.to_upper()))
+								new.status_duration = skill_dict[skill]['status']['duration']						
+							#print(new.status_enemy)
+							self.skills[skill] = new
 
 #			Enums.ESkillType.get( tree),
 #			Enums.ESkillType.get( NONE),

@@ -27,12 +27,18 @@ func _ready():
 func _process(_delta):
 	pass
 
-func add_melee():
+func add_melee(player, enemies):
 	melee_scene = melee.instantiate()
 	
+	next_scene.visible = false
 	next_scene.process_mode = 4
+	ui_scene.visible = false
+	ui_scene.process_mode = 4
 	
 	self.add_child(melee_scene)
+	melee_scene.get_child(0).setup(player, enemies)
+	print(player)
+	print(player.get_script())
 	
 func remove_melee():
 	melee_scene.queue_free()
@@ -42,3 +48,14 @@ func pause_game():
 	
 func unpause_game():
 	next_scene.process_mode = 0
+	
+	
+func save_resource(what, where):
+	var result = ResourceSaver.save(what, where)
+	assert(result == OK)
+	print(result)
+	
+func load_resource(what):
+	if ResourceLoader.exists(what):
+		var object = ResourceLoader.load(what)
+		return object

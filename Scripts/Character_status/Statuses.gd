@@ -15,6 +15,7 @@ func _ready():
 
 
 func show_status(status: Enums.EStatus):
+	#print(Enums.EStatus.find_key(status))
 	if (Status_dict[status]):
 		Status_dict[status].visible = true
 		match Status_dict[status].get_class():

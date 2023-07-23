@@ -12,6 +12,13 @@ signal money_earned(much: int)
 var invincible_timer = null
 var player_state: Enums.EPlayerState = Enums.EPlayerState.ROAMING
 
+@onready var MeleeTriggerArea: Area2D = $MeleeTriggerArea
+@onready var SceneManager = self.get_tree().get_root().find_child("SceneManager", true, false)
+
+
+func save():
+	SceneManager.save_resource(self.data, 'user://player_data.res')
+
 func _ready():
 	super()
 	InputManager.player = self
@@ -60,16 +67,22 @@ func _ready():
 	
 	data.inventory.equip_item(test_item)
 	
-	data.skills.add_skill(GlobalSkills.skills.pick_random())
-	data.skills.add_skill(GlobalSkills.skills.pick_random())
-	data.skills.add_skill(GlobalSkills.skills.pick_random())
-	data.skills.add_skill(GlobalSkills.skills.pick_random())
+	data.skills.add_skill(GlobalSkills.get_by_name('Slash'))
+	data.skills.add_skill(GlobalSkills.get_by_name('Fireball'))
+	data.skills.add_skill(GlobalSkills.get_by_name('Ice Slash'))
+	data.skills.add_skill(GlobalSkills.get_by_name('Defend'))
 
 
 
 
 
 	cooldown(20)
+	
+	save()
+	var loaded_data = SceneManager.load_resource('user://player_data.res')
+	print(loaded_data)
+	if loaded_data is PlayerData: # Check that the data is valid
+		print(';succ')
 
 func _physics_process(_delta):
 	super(_delta)
@@ -85,11 +98,13 @@ func _on_chest_open(chest):
 
 func _on_interaction_zone_entered(what: Area2D):
 	#print(what.get_parent())
-	what.get_parent().on_interact_area()
+	if what.get_parent() != self:
+		what.get_parent().on_interact_area()
 	
 func _on_interaction_zone_exited(what: Area2D):
 	#print(what.get_parent())
-	what.get_parent().off_interact_area()
+	if what.get_parent() != self:
+		what.get_parent().off_interact_area()
 	
 
 func use_skill_id(id: int):
@@ -97,12 +112,15 @@ func use_skill_id(id: int):
 		if (data.skills.get_skill_id(id).get_cost() <= data.stamina):
 			data.stamina -= data.skills.get_skill_id(id).get_cost()
 			emit_signal("skill_used", id)
-			
-			match data.skills.get_skill_id(id).get_skill_type(): 
-				'Attack':
-					shoot_projectile( data.skills.get_skill_id(id))
-				'Status':
-					use_status_skill( data.skills.get_skill_id(id))
+			shoot_projectile( data.skills.get_skill_id(id))
+			for status in data.skills.get_skill_id(id).status_self:
+				self.initiate_status(data.skills.get_skill_id(id), status, data.skills.get_skill_id(id).status_duration)
+
+#			match data.skills.get_skill_id(id).get_skill_type(): 
+#				'Attack':
+#					shoot_projectile( data.skills.get_skill_id(id))
+#				'Status':
+#					use_status_skill( data.skills.get_skill_id(id))
 
 	
 func interact_with_nearest():
@@ -136,3 +154,16 @@ func money_earn(much):
 	
 func get_collider_type():
 	return 'Player'
+	
+	
+func trigger_melee():
+	var melee_enemies = []
+	for obj in MeleeTriggerArea.get_overlapping_areas():
+		if obj.get_parent().get_collider_type() == 'NPS':
+			melee_enemies.append(obj.get_parent())
+	print(melee_enemies)
+	SceneManager.add_melee(self, melee_enemies)
+	player_state = Enums.EPlayerState.MELEE
+	
+	
+

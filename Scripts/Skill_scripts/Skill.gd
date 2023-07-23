@@ -29,8 +29,9 @@ var damage_count: int
 var damage_type: Enums.EDamageType
 
 var is_status_skill: bool = false
-var status_self: Array[Enums.EStatus]
-var status_enemy: Array[Enums.EStatus]
+var status_self: Array[Enums.EStatus] = []
+var status_enemy: Array[Enums.EStatus] = []
+var status_duration: int
 
 
 
@@ -66,3 +67,5 @@ func get_damage_string():
 	else:
 		return null
 
+func get_cost():
+	return self.cost

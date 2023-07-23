@@ -28,10 +28,13 @@ var current_zone : Area2D
 var starting_direction : Vector2 = Vector2(0, 1)
 var move_direction: Vector2 = Vector2(0,0)
 
+
+var look_at: Node2D = null
+
 func _ready():
 	if not (data):
 		data = PlayerData.new()
-	update_animation_parameters(starting_direction)
+	update_animation_parameters(starting_direction, Vector2(0.,0.))
 	
 	
 	animation_tree.connect("animation_finished", _on_anim_finished)
@@ -41,7 +44,7 @@ func _ready():
 	animation_tree.set("parameters/walking/current_state", "walking")
 
 
-func update_animation_parameters (move_input : Vector2):
+func update_animation_parameters (direction: Vector2, velocity):
 	#print(move_input == Vector2.LEFT)
 	#if (move_input != Vector2.ZERO):
 		#animation_tree.set("parameters/Walk/blend_position",move_input)
@@ -60,35 +63,47 @@ func update_animation_parameters (move_input : Vector2):
 #				state_machine.travel("idle_down")
 #		last_move = move_input
 
-	if move_input.x < 0:
+	if direction.x < 0:
 		sprite.flip_h = true
 		cloak.flip_h = true
 		face.flip_h = true
-	elif move_input.x > 0:
+	elif direction.x > 0:
 		sprite.flip_h = false
 		cloak.flip_h = false
 		face.flip_h = false
-
-
-func _process(delta):
-	if (self.data.stamina < self.data.max_stamina):
-		self.data.stamina += delta * self.data.stamina_regen / 20.0
-		if (self.data.stamina > self.data.max_stamina):
-			self.data.stamina = self.data.max_stamina
-
 	
-func _physics_process(_delta):
-	update_animation_parameters(move_direction)
-	velocity = move_direction * move_speed * _delta
-	#move_and_slide()
-	collision = move_and_collide(velocity)
-
-	walking = velocity != Vector2.ZERO
+	walking = (abs(velocity.x) <= 0.0001 and abs(velocity.y) <= 0.0001)
+			
+			
 	if	walking:
 		animation_tree.set("parameters/walking/transition_request", "walking")	
 		animation_tree.set("parameters/walking_speed/scale", 1)
 	else:
 		animation_tree.set("parameters/walking/transition_request", "idle")
+
+
+#func _process(delta):
+#	if (self.data.stamina < self.data.max_stamina):
+#		self.data.stamina += delta * self.data.stamina_regen / 20.0
+#		if (self.data.stamina > self.data.max_stamina):
+#			self.data.stamina = self.data.max_stamina
+
+	
+func _physics_process(_delta):
+	
+	if (self.data.stamina < self.data.max_stamina):
+		self.data.stamina += _delta * self.data.stamina_regen / 20.0
+		if (self.data.stamina > self.data.max_stamina):
+			self.data.stamina = self.data.max_stamina
+			
+			
+	velocity = move_direction * move_speed * _delta
+	if (look_at):
+		update_animation_parameters(Vector2(look_at.position - self.position), velocity)
+	else:
+		update_animation_parameters(move_direction, velocity)
+	#move_and_slide()
+	collision = move_and_collide(velocity)
 	
 	if (head_timer):
 		label.text = "%.2f" % (head_timer.time_left)
@@ -106,39 +121,46 @@ func use_skill_id(id: int):
 func shoot_projectile(skill: Skill, at: CharacterBody2D = null) -> void:
 	var proj = skill.projectile
 	var bullet = proj.instantiate()
-	var bullet_rotation
-	if (at):
-		bullet_rotation = ( at.global_position - self.global_position ).normalized()
-	else:
-		bullet_rotation = ( get_global_mouse_position() - self.global_position ).normalized()
-		
-	if skill.type == Enums.ESkillType.MAGIC:
-		bullet.magic == true
-	
-		
+	match bullet.get_collider_type():
+		'Projectile':
+			#var bullet = proj.instantiate()
+			var bullet_rotation
+			if (at):
+				bullet_rotation = ( at.global_position - self.global_position ).normalized()
+			else:
+				bullet_rotation = ( get_global_mouse_position() - self.global_position ).normalized()
+				
+			if skill.type == Enums.ESkillType.MAGIC:
+				bullet.magic == true
+			
+				
 
-	if (bullet.moving_projectile):
-		Projectiles.add_child(bullet)
-	else:
-		Stationary_Projectiles.add_child(bullet)
-	
-	#bullet.create_shape_owner(self)
-	bullet.add_collision_exception_with(self)
-	bullet.add_collision_exception_with(hitbox)
-	
-	bullet.skill = skill
-	
-	bullet.change_sprite(skill)		
-	bullet.global_position = self.global_position
-	bullet.rotation = bullet_rotation.angle() + PI/2
-	if (bullet.moving_projectile):
-		bullet.shoot(bullet_rotation, true, self)
-	else:
-		bullet.shoot(Vector2(0,0), true, self)
+			if (bullet.moving_projectile):
+				Projectiles.add_child(bullet)
+			else:
+				Stationary_Projectiles.add_child(bullet)
+			
+			#bullet.create_shape_owner(self)
+			bullet.add_collision_exception_with(self)
+			bullet.add_collision_exception_with(hitbox)
+			
+			bullet.skill = skill
+			
+			bullet.change_sprite(skill)		
+			bullet.global_position = self.global_position
+			bullet.rotation = bullet_rotation.angle() + PI/2
+			if (bullet.moving_projectile):
+				bullet.shoot(bullet_rotation, true, self)
+			else:
+				bullet.shoot(Vector2(0,0), true, self)
+				
+		'Aura':
+			pass
+
 		
 	
-func take_ranged_damage(_skill: Skill, from: Actor,_strength):
-	data.hitpoints -= int(_skill.ranged_damage * from.get_damage() / 100.0)
+func take_damage(_skill: Skill, from: Actor, _strength):
+	data.hitpoints -= int(_skill.damage_value * from.get_attack() / 100.0)
 	#print(int(_skill.ranged_damage * from.get_damage() / 100.0))
 	self.modulate = Color8(255,0,0,255)
 	
@@ -168,7 +190,7 @@ func _on_anim_finished(name):
 	pass
 
 
-func get_damage():
+func get_attack():
 	if	data.inventory.get_equipments_slot(Enums.EEquipmentSlot.R_HAND):
 		return data.inventory.get_equipments_slot(Enums.EEquipmentSlot.R_HAND).get_flat_damage()
 	else:
@@ -180,14 +202,18 @@ func use_status_skill(skill: Skill):
 			self.initiate_status(skill, skill.self_status, skill.status_duration)
 
 
+
 func initiate_status(skill: Skill, status: Enums.EStatus, duration: int):
-	
+	if status == Enums.EStatus.NONE:
+		return 0 
+		
 	var status_timer =  ( self.data.add_status( status, duration) )
 	if (status_timer):
 
 		self.add_child(status_timer)
 
 		#self.Statuses.show_status(skill.self_status)
+	print(Enums.EStatus.find_key(status))
 	match status:
 			null:
 				pass
@@ -197,6 +223,8 @@ func initiate_status(skill: Skill, status: Enums.EStatus, duration: int):
 				self.Statuses.shield(skill, status, duration, data.stats[Enums.EStat.INTELLIGENCE] * 10.0)
 #
 	status_timer.timeout.connect( self.Statuses.hide_status.bind(status) ) 
+	
+	
 	status_timer.start()
 
 

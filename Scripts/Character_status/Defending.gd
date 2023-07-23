@@ -1,9 +1,15 @@
+class_name Aura
 extends Area2D
 
 var intercept: bool = false
 var shield: float = 0
 
 @onready var statuses = self.get_parent()
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var particles: GPUParticles2D = $Particles
+@onready var sprite: Sprite2D = $Bullet
+@onready var texture_light: PointLight2D = $TextureLight
+@onready var light: PointLight2D = $PointLight
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -41,3 +47,5 @@ func _on_enter(what):
 #			print('something else')
 
 
+func get_collider_type():
+	return 'Aura'

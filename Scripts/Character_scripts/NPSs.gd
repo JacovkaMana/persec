@@ -209,6 +209,7 @@ func _on_vision_enter(who):
 				self.vision = vision_battle
 				self.fight_ai.setup(self, who)
 				self.current_state = Enums.ECharacterState.FIGHT_RANGE
+				self.look_at = player
 				
 		'Projectile':
 			if (who.projectile_owner != self):
@@ -217,6 +218,7 @@ func _on_vision_enter(who):
 					self.fight_ai.setup(self, who.projectile_owner)
 					self.current_state = Enums.ECharacterState.FIGHT_RANGE
 					self.fight_ai.projectile_coming(who)
+					self.look_at = player
 		
 		
 func _on_vision_exit(who):
@@ -245,7 +247,7 @@ func _hide_label():
 	label.visible = false
 	
 
-func take_ranged_damage(_skill: Skill, _from: Actor, _strength):
+func take_damage(_skill: Skill, _from: Actor, _strength):
 	super(_skill, _from, _strength)
 	if (data.hitpoints <= 0):
 		animation_tree.set("parameters/death/transition_request", "true")
