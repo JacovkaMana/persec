@@ -139,17 +139,17 @@ func shoot(where: Vector2, _animated: bool = false, who = null):
 
 		
 		
-func change_sprite(_skill: Skill):
+func change_sprite(damage_type , type):
 	#to = skill.projectile
 #	sprite.set_texture(to)
 #	texture_light.set_texture(to)
-	texture_light.color = RandomStats.type_colors[_skill.damage_type] # too many lights
-	sprite.self_modulate = RandomStats.type_colors[_skill.damage_type]
-	light.color = RandomStats.type_colors[_skill.damage_type]
-	if (_skill.type == Enums.ESkillType.MAGIC):
+	texture_light.color = RandomStats.type_colors[damage_type] # too many lights
+	sprite.self_modulate = RandomStats.type_colors[damage_type]
+	light.color = RandomStats.type_colors[damage_type]
+	if (type == Enums.ESkillType.MAGIC):
 		
-		sprite.material = GlobalSkills.shaders[_skill.damage_type]
-		particles.process_material.color_ramp = GlobalSkills.colors[_skill.damage_type]
+		sprite.material = GlobalSkills.shaders[damage_type]
+		particles.process_material.color_ramp = GlobalSkills.colors[damage_type]
 		#sprite.self_modulate.a = 150
 		particles.emitting = true
 	else:

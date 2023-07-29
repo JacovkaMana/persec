@@ -70,7 +70,8 @@ enum EStatus {
 	DEFEND,
 	BURN,
 	SHIELD,
-	FREEZE,
+	FREEZE,\
+	FIRE_WEAPON,
 }
 
 enum EDamageType {

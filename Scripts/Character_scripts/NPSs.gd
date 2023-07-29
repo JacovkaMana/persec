@@ -250,8 +250,12 @@ func _hide_label():
 func take_damage(_skill: Skill, _from: Actor, _strength):
 	super(_skill, _from, _strength)
 	if (data.hitpoints <= 0):
-		animation_tree.set("parameters/death/transition_request", "true")
-		player.kill_confirm(self)
+		die()
+		
+func die():
+	animation_tree.set("parameters/death/transition_request", "true")
+	player.kill_confirm(self)
+	print('die')
 
 func _on_anim_finished(name):
 	if (name == "death"):

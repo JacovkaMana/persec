@@ -1,9 +1,9 @@
-[gd_scene load_steps=52 format=3 uid="uid://bp7ewet8u11kj"]
+[gd_scene load_steps=57 format=3 uid="uid://bp7ewet8u11kj"]
 
-[ext_resource type="Texture2D" uid="uid://qjfbulhi2b1d" path="res://Art/Backgrounds/test.jpg" id="1_nfp84"]
 [ext_resource type="Script" path="res://Scripts/MeleeSceneScript.gd" id="1_qadbo"]
 [ext_resource type="Texture2D" uid="uid://bgn8fb6jsnab6" path="res://Art/Character/Mage.png" id="2_e4pxw"]
 [ext_resource type="Shader" path="res://Art/Shaders/HorizonTest.gdshader" id="2_rdfne"]
+[ext_resource type="Shader" path="res://Art/Shaders/TimeStopShaderScript.gdshader" id="2_yy7tj"]
 [ext_resource type="Texture2D" uid="uid://garspyffcbgq" path="res://Art/UI/LightProbe.png" id="3_3n644"]
 [ext_resource type="FontFile" uid="uid://c0s1j1n8esy7x" path="res://Fonts/Minecraftia-Regular.ttf" id="3_fdo2l"]
 [ext_resource type="Texture2D" uid="uid://lqmacfimfcxt" path="res://Art/Backgrounds/DungeonWall.png" id="3_p6voy"]
@@ -34,13 +34,14 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2ob3d"]
 shader = ExtResource("2_rdfne")
-shader_parameter/starting_color = Color(0.0431373, 0.0901961, 0.2, 1)
-shader_parameter/edge_color = Color(0.137255, 0.137255, 0.188235, 1)
+shader_parameter/starting_color = Color(0, 0.101961, 0.2, 1)
+shader_parameter/edge_color = Color(0.105882, 0.0941176, 0.180392, 1)
 shader_parameter/progress = 0.0
 shader_parameter/angle = 0.0
 shader_parameter/elevate = 0.56
-shader_parameter/show = 0.43
+shader_parameter/show = 0.427
 shader_parameter/bg_scale = 2
+shader_parameter/pause = false
 shader_parameter/iChannel0 = ExtResource("3_p6voy")
 shader_parameter/iChannel1 = ExtResource("4_lbalq")
 
@@ -51,14 +52,66 @@ colors = PackedColorArray(0.0784314, 0.231373, 0.427451, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_8mwvv"]
 gradient = SubResource("Gradient_udlcv")
 
-[sub_resource type="Gradient" id="Gradient_vjbtm"]
-offsets = PackedFloat32Array(0, 0.284264, 1)
-colors = PackedColorArray(0, 0.130392, 0.234174, 1, 0, 0.384314, 0.690196, 1, 1, 1, 1, 1)
+[sub_resource type="Animation" id="Animation_q85b8"]
+resource_name = "Damage"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/edge_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(2.63902, 2.14355, 1),
+"update": 0,
+"values": [Color(0.105882, 0.0941176, 0.180392, 1), Color(0.203922, 0.180392, 0.388235, 1), Color(0.105882, 0.0941176, 0.180392, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath(".:material:shader_parameter/show")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.427, 0.409, 0.427]
+}
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_vpx4i"]
-gradient = SubResource("Gradient_vjbtm")
-fill_from = Vector2(0.5, 1)
-fill_to = Vector2(0.5, 0)
+[sub_resource type="Animation" id="Animation_ic22d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/edge_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.105882, 0.0941176, 0.180392, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:material:shader_parameter/show")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.427]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0r11d"]
+_data = {
+"Damage": SubResource("Animation_q85b8"),
+"RESET": SubResource("Animation_ic22d")
+}
 
 [sub_resource type="LabelSettings" id="LabelSettings_c0bht"]
 font = ExtResource("3_fdo2l")
@@ -134,26 +187,82 @@ height = 30
 fill_from = Vector2(0.5, 0)
 fill_to = Vector2(0.5, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_plmlh"]
+shader = ExtResource("2_yy7tj")
+shader_parameter/shader_color = Color(0.741176, 0.458824, 0.188235, 1)
+shader_parameter/time_scale = 0.509
+
+[sub_resource type="Animation" id="Animation_4y5d4"]
+resource_name = "activate"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/time_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.85, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.509, 1.0, 0.509]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Background:material:shader_parameter/pause")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_owoih"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/time_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.509]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Background:material:shader_parameter/pause")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yj027"]
+_data = {
+"RESET": SubResource("Animation_owoih"),
+"activate": SubResource("Animation_4y5d4")
+}
+
 [node name="melee_scene" type="CanvasLayer"]
 layer = 2
 
-[node name="Control" type="Control" parent="."]
+[node name="MeleeScene" type="Control" parent="."]
 custom_minimum_size = Vector2(640, 360)
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_qadbo")
+starting_color = Color(0, 0.101961, 0.2, 1)
 
-[node name="TextureRect" type="TextureRect" parent="Control"]
-visible = false
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_nfp84")
-
-[node name="TextureRect2" type="TextureRect" parent="Control"]
-visible = false
+[node name="Background" type="TextureRect" parent="MeleeScene"]
 material = SubResource("ShaderMaterial_2ob3d")
 custom_minimum_size = Vector2(640, 360)
 layout_mode = 0
@@ -168,33 +277,22 @@ grow_horizontal = 2
 grow_vertical = 0
 texture = SubResource("GradientTexture1D_8mwvv")
 
-[node name="TextureRect4" type="TextureRect" parent="Control"]
-material = SubResource("ShaderMaterial_2ob3d")
-custom_minimum_size = Vector2(640, 360)
-layout_mode = 0
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -320.0
-offset_top = -140.0
-offset_right = 320.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = SubResource("GradientTexture1D_8mwvv")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MeleeScene/Background"]
+libraries = {
+"": SubResource("AnimationLibrary_0r11d")
+}
 
-[node name="TextureRect3" type="TextureRect" parent="Control"]
-visible = false
+[node name="YourBgHere" type="TextureRect" parent="MeleeScene"]
 layout_mode = 0
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -320.0
-offset_right = 320.0
-offset_bottom = 220.0
-grow_horizontal = 2
-texture = SubResource("GradientTexture2D_vpx4i")
+offset_right = 640.0
+offset_bottom = 360.0
 
-[node name="MeleePlayer" type="Control" parent="Control"]
+[node name="MeleeProjectiles" type="Control" parent="MeleeScene"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MeleePlayer" type="Control" parent="MeleeScene"]
 custom_minimum_size = Vector2(32, 64)
 layout_mode = 1
 anchors_preset = 7
@@ -202,16 +300,16 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -25.0
-offset_top = -140.0
-offset_right = 7.0
-offset_bottom = -76.0
+offset_left = -6.0
+offset_top = -112.0
+offset_right = 26.0
+offset_bottom = -48.0
 grow_horizontal = 2
 grow_vertical = 0
 pivot_offset = Vector2(16, 32)
 script = ExtResource("6_jm43n")
 
-[node name="TextureRect" type="TextureRect" parent="Control/MeleePlayer"]
+[node name="TextureRect" type="TextureRect" parent="MeleeScene/MeleePlayer"]
 self_modulate = Color(0.282353, 0.45098, 0.666667, 1)
 layout_mode = 0
 anchor_left = 0.5
@@ -227,12 +325,12 @@ grow_vertical = 2
 scale = Vector2(0.49, 0.222)
 texture = ExtResource("3_3n644")
 
-[node name="Sprite" type="Sprite2D" parent="Control/MeleePlayer"]
+[node name="Sprite" type="Sprite2D" parent="MeleeScene/MeleePlayer"]
 texture = ExtResource("2_e4pxw")
 hframes = 8
 vframes = 9
 
-[node name="Label" type="Label" parent="Control/MeleePlayer"]
+[node name="Label" type="Label" parent="MeleeScene/MeleePlayer"]
 layout_mode = 0
 offset_left = -13.5
 offset_top = -36.0
@@ -241,7 +339,7 @@ offset_bottom = -13.0
 text = "123"
 label_settings = SubResource("LabelSettings_c0bht")
 
-[node name="HUD" type="Control" parent="Control"]
+[node name="HUD" type="Control" parent="MeleeScene"]
 custom_minimum_size = Vector2(200, 300)
 layout_mode = 3
 anchors_preset = 0
@@ -250,7 +348,7 @@ offset_bottom = 360.0
 mouse_filter = 1
 script = ExtResource("9_r3k7c")
 
-[node name="StaminaContainer" type="HBoxContainer" parent="Control/HUD"]
+[node name="StaminaContainer" type="HBoxContainer" parent="MeleeScene/HUD"]
 layout_mode = 0
 offset_left = 243.0
 offset_top = 306.0
@@ -258,7 +356,7 @@ offset_right = 364.0
 offset_bottom = 314.0
 theme_override_constants/separation = 3
 
-[node name="StaminaBlock_1" type="TextureRect" parent="Control/HUD/StaminaContainer"]
+[node name="StaminaBlock_1" type="TextureRect" parent="MeleeScene/HUD/StaminaContainer"]
 self_modulate = Color(0.960784, 0.960784, 0.960784, 1)
 texture_filter = 1
 texture_repeat = 1
@@ -266,38 +364,38 @@ material = ExtResource("9_6shp0")
 layout_mode = 2
 texture = ExtResource("10_tp4p8")
 
-[node name="StaminaBlock_2" type="TextureRect" parent="Control/HUD/StaminaContainer"]
+[node name="StaminaBlock_2" type="TextureRect" parent="MeleeScene/HUD/StaminaContainer"]
 material = ExtResource("9_6shp0")
 layout_mode = 2
 texture = ExtResource("10_tp4p8")
 
-[node name="StaminaBlock_3" type="TextureRect" parent="Control/HUD/StaminaContainer"]
+[node name="StaminaBlock_3" type="TextureRect" parent="MeleeScene/HUD/StaminaContainer"]
 material = ExtResource("9_6shp0")
 layout_mode = 2
 texture = ExtResource("10_tp4p8")
 
-[node name="StaminaBlock_4" type="TextureRect" parent="Control/HUD/StaminaContainer"]
+[node name="StaminaBlock_4" type="TextureRect" parent="MeleeScene/HUD/StaminaContainer"]
 material = ExtResource("9_6shp0")
 layout_mode = 2
 texture = ExtResource("10_tp4p8")
 
-[node name="StaminaBlock_5" type="TextureRect" parent="Control/HUD/StaminaContainer"]
+[node name="StaminaBlock_5" type="TextureRect" parent="MeleeScene/HUD/StaminaContainer"]
 material = ExtResource("9_6shp0")
 layout_mode = 2
 texture = ExtResource("10_tp4p8")
 
-[node name="StaminaBlock_6" type="TextureRect" parent="Control/HUD/StaminaContainer"]
+[node name="StaminaBlock_6" type="TextureRect" parent="MeleeScene/HUD/StaminaContainer"]
 material = ExtResource("9_6shp0")
 layout_mode = 2
 texture = ExtResource("10_tp4p8")
 
-[node name="SkillsHotbar" type="Control" parent="Control/HUD"]
+[node name="SkillsHotbar" type="Control" parent="MeleeScene/HUD"]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
 
-[node name="ColorRect" type="ColorRect" parent="Control/HUD/SkillsHotbar"]
+[node name="ColorRect" type="ColorRect" parent="MeleeScene/HUD/SkillsHotbar"]
 visible = false
 layout_mode = 0
 offset_left = 582.0
@@ -307,7 +405,7 @@ offset_bottom = 333.0
 rotation = 0.785398
 color = Color(0.25098, 0.27451, 0.411765, 1)
 
-[node name="SkillsContainer" type="Control" parent="Control/HUD/SkillsHotbar"]
+[node name="SkillsContainer" type="Control" parent="MeleeScene/HUD/SkillsHotbar"]
 anchors_preset = 0
 offset_left = 550.0
 offset_top = 287.0
@@ -316,7 +414,7 @@ offset_bottom = 352.0
 script = ExtResource("11_8fd10")
 lightup = Color(0.890196, 0, 0, 1)
 
-[node name="Skill1" type="Control" parent="Control/HUD/SkillsHotbar/SkillsContainer"]
+[node name="Skill1" type="Control" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 anchors_preset = 0
@@ -327,7 +425,7 @@ offset_bottom = 33.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="BackRect" type="TextureRect" parent="Control/HUD/SkillsHotbar/SkillsContainer/Skill1"]
+[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill1"]
 self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
 layout_mode = 0
 offset_top = -1.0
@@ -335,7 +433,7 @@ offset_right = 30.0
 offset_bottom = 29.0
 texture = ExtResource("12_3lnoq")
 
-[node name="ColorRect" type="TextureRect" parent="Control/HUD/SkillsHotbar/SkillsContainer/Skill1"]
+[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill1"]
 self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
 clip_children = 2
 layout_mode = 0
@@ -343,7 +441,7 @@ offset_right = 30.0
 offset_bottom = 30.0
 texture = ExtResource("12_3lnoq")
 
-[node name="SkillRect" type="TextureRect" parent="Control/HUD/SkillsHotbar/SkillsContainer/Skill1/ColorRect"]
+[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill1/ColorRect"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 0
 offset_left = 4.0
@@ -351,7 +449,7 @@ offset_top = 4.0
 offset_right = 26.0
 offset_bottom = 26.0
 
-[node name="Skill2" type="Control" parent="Control/HUD/SkillsHotbar/SkillsContainer"]
+[node name="Skill2" type="Control" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 anchors_preset = 0
@@ -361,7 +459,7 @@ offset_bottom = 51.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="BackRect" type="TextureRect" parent="Control/HUD/SkillsHotbar/SkillsContainer/Skill2"]
+[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill2"]
 self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
 layout_mode = 0
 offset_top = -1.0
@@ -369,7 +467,7 @@ offset_right = 30.0
 offset_bottom = 29.0
 texture = ExtResource("12_3lnoq")
 
-[node name="ColorRect" type="TextureRect" parent="Control/HUD/SkillsHotbar/SkillsContainer/Skill2"]
+[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill2"]
 self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
 clip_children = 2
 layout_mode = 0
@@ -377,7 +475,7 @@ offset_right = 30.0
 offset_bottom = 30.0
 texture = ExtResource("12_3lnoq")
 
-[node name="SkillRect" type="TextureRect" parent="Control/HUD/SkillsHotbar/SkillsContainer/Skill2/ColorRect"]
+[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill2/ColorRect"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 0
 offset_left = 4.0
@@ -385,7 +483,7 @@ offset_top = 4.0
 offset_right = 26.0
 offset_bottom = 26.0
 
-[node name="Skill3" type="Control" parent="Control/HUD/SkillsHotbar/SkillsContainer"]
+[node name="Skill3" type="Control" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 anchors_preset = 0
@@ -396,7 +494,7 @@ offset_bottom = 51.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="BackRect" type="TextureRect" parent="Control/HUD/SkillsHotbar/SkillsContainer/Skill3"]
+[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill3"]
 self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
 layout_mode = 0
 offset_top = -1.0
@@ -404,7 +502,7 @@ offset_right = 30.0
 offset_bottom = 29.0
 texture = ExtResource("12_3lnoq")
 
-[node name="ColorRect" type="TextureRect" parent="Control/HUD/SkillsHotbar/SkillsContainer/Skill3"]
+[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill3"]
 self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
 clip_children = 2
 layout_mode = 0
@@ -412,7 +510,7 @@ offset_right = 30.0
 offset_bottom = 30.0
 texture = ExtResource("12_3lnoq")
 
-[node name="SkillRect" type="TextureRect" parent="Control/HUD/SkillsHotbar/SkillsContainer/Skill3/ColorRect"]
+[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill3/ColorRect"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 0
 offset_left = 4.0
@@ -420,7 +518,7 @@ offset_top = 4.0
 offset_right = 26.0
 offset_bottom = 26.0
 
-[node name="Skill4" type="Control" parent="Control/HUD/SkillsHotbar/SkillsContainer"]
+[node name="Skill4" type="Control" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 anchors_preset = 0
@@ -431,7 +529,7 @@ offset_bottom = 69.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="BackRect" type="TextureRect" parent="Control/HUD/SkillsHotbar/SkillsContainer/Skill4"]
+[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill4"]
 self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
 layout_mode = 0
 offset_top = -1.0
@@ -439,7 +537,7 @@ offset_right = 30.0
 offset_bottom = 29.0
 texture = ExtResource("12_3lnoq")
 
-[node name="ColorRect" type="TextureRect" parent="Control/HUD/SkillsHotbar/SkillsContainer/Skill4"]
+[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill4"]
 self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
 clip_children = 2
 layout_mode = 0
@@ -447,7 +545,7 @@ offset_right = 30.0
 offset_bottom = 30.0
 texture = ExtResource("12_3lnoq")
 
-[node name="SkillRect" type="TextureRect" parent="Control/HUD/SkillsHotbar/SkillsContainer/Skill4/ColorRect"]
+[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill4/ColorRect"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 0
 offset_left = 4.0
@@ -455,7 +553,7 @@ offset_top = 4.0
 offset_right = 26.0
 offset_bottom = 26.0
 
-[node name="Skill5" type="Control" parent="Control/HUD/SkillsHotbar/SkillsContainer"]
+[node name="Skill5" type="Control" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer"]
 visible = false
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
@@ -466,7 +564,7 @@ offset_bottom = 104.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="BackRect" type="TextureRect" parent="Control/HUD/SkillsHotbar/SkillsContainer/Skill5"]
+[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill5"]
 self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
 layout_mode = 0
 offset_top = -1.0
@@ -474,21 +572,21 @@ offset_right = 30.0
 offset_bottom = 29.0
 texture = ExtResource("12_3lnoq")
 
-[node name="ColorRect" type="TextureRect" parent="Control/HUD/SkillsHotbar/SkillsContainer/Skill5"]
+[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill5"]
 modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
 layout_mode = 0
 offset_right = 30.0
 offset_bottom = 30.0
 texture = ExtResource("12_3lnoq")
 
-[node name="SkillRect" type="TextureRect" parent="Control/HUD/SkillsHotbar/SkillsContainer/Skill5"]
+[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill5"]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 5.0
 offset_right = 20.0
 offset_bottom = 21.0
 
-[node name="Skill6" type="Control" parent="Control/HUD/SkillsHotbar/SkillsContainer"]
+[node name="Skill6" type="Control" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer"]
 visible = false
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
@@ -500,7 +598,7 @@ offset_bottom = 104.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="BackRect" type="TextureRect" parent="Control/HUD/SkillsHotbar/SkillsContainer/Skill6"]
+[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill6"]
 self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
 layout_mode = 0
 offset_top = -1.0
@@ -508,28 +606,27 @@ offset_right = 30.0
 offset_bottom = 29.0
 texture = ExtResource("12_3lnoq")
 
-[node name="ColorRect" type="TextureRect" parent="Control/HUD/SkillsHotbar/SkillsContainer/Skill6"]
+[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill6"]
 modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
 layout_mode = 0
 offset_right = 30.0
 offset_bottom = 30.0
 texture = ExtResource("12_3lnoq")
 
-[node name="SkillRect" type="TextureRect" parent="Control/HUD/SkillsHotbar/SkillsContainer/Skill6"]
+[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill6"]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 5.0
 offset_right = 20.0
 offset_bottom = 21.0
 
-[node name="ItemsHotbar" type="Control" parent="Control/HUD"]
+[node name="SkillsHotbar2" type="Control" parent="MeleeScene/HUD"]
 anchors_preset = 0
-offset_left = -523.0
-offset_right = -483.0
+offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
 
-[node name="ColorRect" type="ColorRect" parent="Control/HUD/ItemsHotbar"]
+[node name="ColorRect" type="ColorRect" parent="MeleeScene/HUD/SkillsHotbar2"]
 visible = false
 layout_mode = 0
 offset_left = 582.0
@@ -539,15 +636,16 @@ offset_bottom = 333.0
 rotation = 0.785398
 color = Color(0.25098, 0.27451, 0.411765, 1)
 
-[node name="ItemsContainer" type="Control" parent="Control/HUD/ItemsHotbar"]
+[node name="SkillsContainer" type="Control" parent="MeleeScene/HUD/SkillsHotbar2"]
 anchors_preset = 0
 offset_left = 550.0
 offset_top = 287.0
 offset_right = 616.0
 offset_bottom = 352.0
+script = ExtResource("11_8fd10")
+lightup = Color(0.890196, 0, 0, 1)
 
-[node name="Item1" type="Control" parent="Control/HUD/ItemsHotbar/ItemsContainer"]
-visible = false
+[node name="Skill1" type="Control" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 anchors_preset = 0
@@ -558,7 +656,7 @@ offset_bottom = 33.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="BackRect" type="TextureRect" parent="Control/HUD/ItemsHotbar/ItemsContainer/Item1"]
+[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer/Skill1"]
 self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
 layout_mode = 0
 offset_top = -1.0
@@ -566,7 +664,7 @@ offset_right = 30.0
 offset_bottom = 29.0
 texture = ExtResource("12_3lnoq")
 
-[node name="ColorRect" type="TextureRect" parent="Control/HUD/ItemsHotbar/ItemsContainer/Item1"]
+[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer/Skill1"]
 self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
 clip_children = 2
 layout_mode = 0
@@ -574,7 +672,7 @@ offset_right = 30.0
 offset_bottom = 30.0
 texture = ExtResource("12_3lnoq")
 
-[node name="SkillRect" type="TextureRect" parent="Control/HUD/ItemsHotbar/ItemsContainer/Item1/ColorRect"]
+[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer/Skill1/ColorRect"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 0
 offset_left = 4.0
@@ -582,8 +680,7 @@ offset_top = 4.0
 offset_right = 26.0
 offset_bottom = 26.0
 
-[node name="Item2" type="Control" parent="Control/HUD/ItemsHotbar/ItemsContainer"]
-visible = false
+[node name="Skill2" type="Control" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 anchors_preset = 0
@@ -593,7 +690,7 @@ offset_bottom = 51.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="BackRect" type="TextureRect" parent="Control/HUD/ItemsHotbar/ItemsContainer/Item2"]
+[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer/Skill2"]
 self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
 layout_mode = 0
 offset_top = -1.0
@@ -601,7 +698,7 @@ offset_right = 30.0
 offset_bottom = 29.0
 texture = ExtResource("12_3lnoq")
 
-[node name="ColorRect" type="TextureRect" parent="Control/HUD/ItemsHotbar/ItemsContainer/Item2"]
+[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer/Skill2"]
 self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
 clip_children = 2
 layout_mode = 0
@@ -609,7 +706,7 @@ offset_right = 30.0
 offset_bottom = 30.0
 texture = ExtResource("12_3lnoq")
 
-[node name="SkillRect" type="TextureRect" parent="Control/HUD/ItemsHotbar/ItemsContainer/Item2/ColorRect"]
+[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer/Skill2/ColorRect"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 0
 offset_left = 4.0
@@ -617,8 +714,7 @@ offset_top = 4.0
 offset_right = 26.0
 offset_bottom = 26.0
 
-[node name="Item3" type="Control" parent="Control/HUD/ItemsHotbar/ItemsContainer"]
-visible = false
+[node name="Skill3" type="Control" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 anchors_preset = 0
@@ -629,7 +725,7 @@ offset_bottom = 51.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="BackRect" type="TextureRect" parent="Control/HUD/ItemsHotbar/ItemsContainer/Item3"]
+[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer/Skill3"]
 self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
 layout_mode = 0
 offset_top = -1.0
@@ -637,7 +733,7 @@ offset_right = 30.0
 offset_bottom = 29.0
 texture = ExtResource("12_3lnoq")
 
-[node name="ColorRect" type="TextureRect" parent="Control/HUD/ItemsHotbar/ItemsContainer/Item3"]
+[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer/Skill3"]
 self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
 clip_children = 2
 layout_mode = 0
@@ -645,7 +741,7 @@ offset_right = 30.0
 offset_bottom = 30.0
 texture = ExtResource("12_3lnoq")
 
-[node name="SkillRect" type="TextureRect" parent="Control/HUD/ItemsHotbar/ItemsContainer/Item3/ColorRect"]
+[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer/Skill3/ColorRect"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 0
 offset_left = 4.0
@@ -653,8 +749,7 @@ offset_top = 4.0
 offset_right = 26.0
 offset_bottom = 26.0
 
-[node name="Item4" type="Control" parent="Control/HUD/ItemsHotbar/ItemsContainer"]
-visible = false
+[node name="Skill4" type="Control" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 anchors_preset = 0
@@ -665,7 +760,7 @@ offset_bottom = 69.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="BackRect" type="TextureRect" parent="Control/HUD/ItemsHotbar/ItemsContainer/Item4"]
+[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer/Skill4"]
 self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
 layout_mode = 0
 offset_top = -1.0
@@ -673,7 +768,7 @@ offset_right = 30.0
 offset_bottom = 29.0
 texture = ExtResource("12_3lnoq")
 
-[node name="ColorRect" type="TextureRect" parent="Control/HUD/ItemsHotbar/ItemsContainer/Item4"]
+[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer/Skill4"]
 self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
 clip_children = 2
 layout_mode = 0
@@ -681,7 +776,7 @@ offset_right = 30.0
 offset_bottom = 30.0
 texture = ExtResource("12_3lnoq")
 
-[node name="SkillRect" type="TextureRect" parent="Control/HUD/ItemsHotbar/ItemsContainer/Item4/ColorRect"]
+[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer/Skill4/ColorRect"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 0
 offset_left = 4.0
@@ -689,7 +784,7 @@ offset_top = 4.0
 offset_right = 26.0
 offset_bottom = 26.0
 
-[node name="Skill5" type="Control" parent="Control/HUD/ItemsHotbar/ItemsContainer"]
+[node name="Skill5" type="Control" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer"]
 visible = false
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
@@ -700,7 +795,7 @@ offset_bottom = 104.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="BackRect" type="TextureRect" parent="Control/HUD/ItemsHotbar/ItemsContainer/Skill5"]
+[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer/Skill5"]
 self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
 layout_mode = 0
 offset_top = -1.0
@@ -708,21 +803,21 @@ offset_right = 30.0
 offset_bottom = 29.0
 texture = ExtResource("12_3lnoq")
 
-[node name="ColorRect" type="TextureRect" parent="Control/HUD/ItemsHotbar/ItemsContainer/Skill5"]
+[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer/Skill5"]
 modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
 layout_mode = 0
 offset_right = 30.0
 offset_bottom = 30.0
 texture = ExtResource("12_3lnoq")
 
-[node name="SkillRect" type="TextureRect" parent="Control/HUD/ItemsHotbar/ItemsContainer/Skill5"]
+[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer/Skill5"]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 5.0
 offset_right = 20.0
 offset_bottom = 21.0
 
-[node name="Skill6" type="Control" parent="Control/HUD/ItemsHotbar/ItemsContainer"]
+[node name="Skill6" type="Control" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer"]
 visible = false
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
@@ -734,7 +829,7 @@ offset_bottom = 104.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="BackRect" type="TextureRect" parent="Control/HUD/ItemsHotbar/ItemsContainer/Skill6"]
+[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer/Skill6"]
 self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
 layout_mode = 0
 offset_top = -1.0
@@ -742,21 +837,255 @@ offset_right = 30.0
 offset_bottom = 29.0
 texture = ExtResource("12_3lnoq")
 
-[node name="ColorRect" type="TextureRect" parent="Control/HUD/ItemsHotbar/ItemsContainer/Skill6"]
+[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer/Skill6"]
 modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
 layout_mode = 0
 offset_right = 30.0
 offset_bottom = 30.0
 texture = ExtResource("12_3lnoq")
 
-[node name="SkillRect" type="TextureRect" parent="Control/HUD/ItemsHotbar/ItemsContainer/Skill6"]
+[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer/Skill6"]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 5.0
 offset_right = 20.0
 offset_bottom = 21.0
 
-[node name="SkillsMenu" type="Control" parent="Control/HUD"]
+[node name="ItemsHotbar" type="Control" parent="MeleeScene/HUD"]
+anchors_preset = 0
+offset_left = -523.0
+offset_right = -483.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="MeleeScene/HUD/ItemsHotbar"]
+visible = false
+layout_mode = 0
+offset_left = 582.0
+offset_top = 288.0
+offset_right = 627.0
+offset_bottom = 333.0
+rotation = 0.785398
+color = Color(0.25098, 0.27451, 0.411765, 1)
+
+[node name="ItemsContainer" type="Control" parent="MeleeScene/HUD/ItemsHotbar"]
+anchors_preset = 0
+offset_left = 550.0
+offset_top = 287.0
+offset_right = 616.0
+offset_bottom = 352.0
+
+[node name="Item1" type="Control" parent="MeleeScene/HUD/ItemsHotbar/ItemsContainer"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+anchors_preset = 0
+offset_left = 17.0
+offset_top = 1.0
+offset_right = 49.0
+offset_bottom = 33.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/ItemsHotbar/ItemsContainer/Item1"]
+self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
+layout_mode = 0
+offset_top = -1.0
+offset_right = 30.0
+offset_bottom = 29.0
+texture = ExtResource("12_3lnoq")
+
+[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/ItemsHotbar/ItemsContainer/Item1"]
+self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
+clip_children = 2
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+texture = ExtResource("12_3lnoq")
+
+[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/ItemsHotbar/ItemsContainer/Item1/ColorRect"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 26.0
+offset_bottom = 26.0
+
+[node name="Item2" type="Control" parent="MeleeScene/HUD/ItemsHotbar/ItemsContainer"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+anchors_preset = 0
+offset_top = 19.0
+offset_right = 32.0
+offset_bottom = 51.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/ItemsHotbar/ItemsContainer/Item2"]
+self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
+layout_mode = 0
+offset_top = -1.0
+offset_right = 30.0
+offset_bottom = 29.0
+texture = ExtResource("12_3lnoq")
+
+[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/ItemsHotbar/ItemsContainer/Item2"]
+self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
+clip_children = 2
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+texture = ExtResource("12_3lnoq")
+
+[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/ItemsHotbar/ItemsContainer/Item2/ColorRect"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 26.0
+offset_bottom = 26.0
+
+[node name="Item3" type="Control" parent="MeleeScene/HUD/ItemsHotbar/ItemsContainer"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+anchors_preset = 0
+offset_left = 34.0
+offset_top = 19.0
+offset_right = 66.0
+offset_bottom = 51.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/ItemsHotbar/ItemsContainer/Item3"]
+self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
+layout_mode = 0
+offset_top = -1.0
+offset_right = 30.0
+offset_bottom = 29.0
+texture = ExtResource("12_3lnoq")
+
+[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/ItemsHotbar/ItemsContainer/Item3"]
+self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
+clip_children = 2
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+texture = ExtResource("12_3lnoq")
+
+[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/ItemsHotbar/ItemsContainer/Item3/ColorRect"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 26.0
+offset_bottom = 26.0
+
+[node name="Item4" type="Control" parent="MeleeScene/HUD/ItemsHotbar/ItemsContainer"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+anchors_preset = 0
+offset_left = 17.0
+offset_top = 37.0
+offset_right = 49.0
+offset_bottom = 69.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/ItemsHotbar/ItemsContainer/Item4"]
+self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
+layout_mode = 0
+offset_top = -1.0
+offset_right = 30.0
+offset_bottom = 29.0
+texture = ExtResource("12_3lnoq")
+
+[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/ItemsHotbar/ItemsContainer/Item4"]
+self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
+clip_children = 2
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+texture = ExtResource("12_3lnoq")
+
+[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/ItemsHotbar/ItemsContainer/Item4/ColorRect"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 26.0
+offset_bottom = 26.0
+
+[node name="Skill5" type="Control" parent="MeleeScene/HUD/ItemsHotbar/ItemsContainer"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+anchors_preset = 0
+offset_top = 72.0
+offset_right = 32.0
+offset_bottom = 104.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/ItemsHotbar/ItemsContainer/Skill5"]
+self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
+layout_mode = 0
+offset_top = -1.0
+offset_right = 30.0
+offset_bottom = 29.0
+texture = ExtResource("12_3lnoq")
+
+[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/ItemsHotbar/ItemsContainer/Skill5"]
+modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+texture = ExtResource("12_3lnoq")
+
+[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/ItemsHotbar/ItemsContainer/Skill5"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 5.0
+offset_right = 20.0
+offset_bottom = 21.0
+
+[node name="Skill6" type="Control" parent="MeleeScene/HUD/ItemsHotbar/ItemsContainer"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+anchors_preset = 0
+offset_left = 36.0
+offset_top = 72.0
+offset_right = 68.0
+offset_bottom = 104.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/ItemsHotbar/ItemsContainer/Skill6"]
+self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
+layout_mode = 0
+offset_top = -1.0
+offset_right = 30.0
+offset_bottom = 29.0
+texture = ExtResource("12_3lnoq")
+
+[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/ItemsHotbar/ItemsContainer/Skill6"]
+modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+texture = ExtResource("12_3lnoq")
+
+[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/ItemsHotbar/ItemsContainer/Skill6"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 5.0
+offset_right = 20.0
+offset_bottom = 21.0
+
+[node name="SkillsMenu" type="Control" parent="MeleeScene/HUD"]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -767,7 +1096,7 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="Control/HUD/SkillsMenu"]
+[node name="TextureRect" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu"]
 self_modulate = Color(1, 1, 1, 0.607843)
 material = ExtResource("13_xbf88")
 layout_mode = 1
@@ -784,7 +1113,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("14_bdvr0")
 
-[node name="TextureRect2" type="TextureRect" parent="Control/HUD/SkillsMenu"]
+[node name="TextureRect2" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -799,18 +1128,18 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("15_wudpy")
 
-[node name="SkillTypeContainer" type="VBoxContainer" parent="Control/HUD/SkillsMenu"]
+[node name="SkillTypeContainer" type="VBoxContainer" parent="MeleeScene/HUD/SkillsMenu"]
 layout_mode = 0
 offset_left = -84.0
 offset_top = -102.0
 offset_right = 84.0
 offset_bottom = 114.0
 
-[node name="SkillType" type="Control" parent="Control/HUD/SkillsMenu/SkillTypeContainer"]
+[node name="SkillType" type="Control" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer"]
 custom_minimum_size = Vector2(168, 33)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType"]
 custom_minimum_size = Vector2(168, 22)
 layout_mode = 0
 offset_top = 11.0
@@ -818,115 +1147,115 @@ offset_right = 168.0
 offset_bottom = 33.0
 alignment = 1
 
-[node name="Skill" type="Control" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer"]
+[node name="Skill" type="Control" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="TextureRect" type="TextureRect" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer/Skill"]
+[node name="TextureRect" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer/Skill"]
 layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("16_sw5p8")
 
-[node name="TextureRect2" type="TextureRect" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer/Skill"]
+[node name="TextureRect2" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer/Skill"]
 self_modulate = Color(1, 1, 1, 0.607843)
 layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("17_jteos")
 
-[node name="Skill2" type="Control" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer"]
+[node name="Skill2" type="Control" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="TextureRect" type="TextureRect" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer/Skill2"]
+[node name="TextureRect" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer/Skill2"]
 layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("16_sw5p8")
 
-[node name="TextureRect2" type="TextureRect" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer/Skill2"]
+[node name="TextureRect2" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer/Skill2"]
 self_modulate = Color(1, 1, 1, 0.607843)
 layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("17_jteos")
 
-[node name="Skill3" type="Control" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer"]
+[node name="Skill3" type="Control" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="TextureRect" type="TextureRect" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer/Skill3"]
+[node name="TextureRect" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer/Skill3"]
 layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("16_sw5p8")
 
-[node name="TextureRect2" type="TextureRect" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer/Skill3"]
+[node name="TextureRect2" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer/Skill3"]
 self_modulate = Color(1, 1, 1, 0.607843)
 layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("17_jteos")
 
-[node name="Skill4" type="Control" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer"]
+[node name="Skill4" type="Control" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="TextureRect" type="TextureRect" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer/Skill4"]
+[node name="TextureRect" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer/Skill4"]
 layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("16_sw5p8")
 
-[node name="TextureRect2" type="TextureRect" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer/Skill4"]
+[node name="TextureRect2" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer/Skill4"]
 self_modulate = Color(1, 1, 1, 0.607843)
 layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("17_jteos")
 
-[node name="Skill5" type="Control" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer"]
+[node name="Skill5" type="Control" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="TextureRect" type="TextureRect" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer/Skill5"]
+[node name="TextureRect" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer/Skill5"]
 layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("16_sw5p8")
 
-[node name="TextureRect2" type="TextureRect" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer/Skill5"]
+[node name="TextureRect2" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer/Skill5"]
 self_modulate = Color(1, 1, 1, 0.607843)
 layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("17_jteos")
 
-[node name="Skill6" type="Control" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer"]
+[node name="Skill6" type="Control" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="TextureRect" type="TextureRect" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer/Skill6"]
+[node name="TextureRect" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer/Skill6"]
 layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("16_sw5p8")
 
-[node name="TextureRect2" type="TextureRect" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer/Skill6"]
+[node name="TextureRect2" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType/HBoxContainer/Skill6"]
 self_modulate = Color(1, 1, 1, 0.607843)
 layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("17_jteos")
 
-[node name="Label" type="Label" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType"]
+[node name="Label" type="Label" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType"]
 layout_mode = 0
 offset_left = 16.0
 offset_right = 142.0
@@ -935,11 +1264,11 @@ size_flags_vertical = 0
 text = "Sword"
 label_settings = SubResource("LabelSettings_y4kir")
 
-[node name="SkillType2" type="Control" parent="Control/HUD/SkillsMenu/SkillTypeContainer"]
+[node name="SkillType2" type="Control" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer"]
 custom_minimum_size = Vector2(168, 33)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType2"]
 custom_minimum_size = Vector2(168, 22)
 layout_mode = 0
 offset_top = 11.0
@@ -947,115 +1276,115 @@ offset_right = 168.0
 offset_bottom = 33.0
 alignment = 1
 
-[node name="Skill" type="Control" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer"]
+[node name="Skill" type="Control" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="TextureRect" type="TextureRect" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer/Skill"]
+[node name="TextureRect" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer/Skill"]
 layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("16_sw5p8")
 
-[node name="TextureRect2" type="TextureRect" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer/Skill"]
+[node name="TextureRect2" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer/Skill"]
 self_modulate = Color(1, 1, 1, 0.607843)
 layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("17_jteos")
 
-[node name="Skill2" type="Control" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer"]
+[node name="Skill2" type="Control" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="TextureRect" type="TextureRect" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer/Skill2"]
+[node name="TextureRect" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer/Skill2"]
 layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("16_sw5p8")
 
-[node name="TextureRect2" type="TextureRect" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer/Skill2"]
+[node name="TextureRect2" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer/Skill2"]
 self_modulate = Color(1, 1, 1, 0.607843)
 layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("17_jteos")
 
-[node name="Skill3" type="Control" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer"]
+[node name="Skill3" type="Control" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="TextureRect" type="TextureRect" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer/Skill3"]
+[node name="TextureRect" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer/Skill3"]
 layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("16_sw5p8")
 
-[node name="TextureRect2" type="TextureRect" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer/Skill3"]
+[node name="TextureRect2" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer/Skill3"]
 self_modulate = Color(1, 1, 1, 0.607843)
 layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("17_jteos")
 
-[node name="Skill4" type="Control" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer"]
+[node name="Skill4" type="Control" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="TextureRect" type="TextureRect" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer/Skill4"]
+[node name="TextureRect" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer/Skill4"]
 layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("16_sw5p8")
 
-[node name="TextureRect2" type="TextureRect" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer/Skill4"]
+[node name="TextureRect2" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer/Skill4"]
 self_modulate = Color(1, 1, 1, 0.607843)
 layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("17_jteos")
 
-[node name="Skill5" type="Control" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer"]
+[node name="Skill5" type="Control" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="TextureRect" type="TextureRect" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer/Skill5"]
+[node name="TextureRect" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer/Skill5"]
 layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("16_sw5p8")
 
-[node name="TextureRect2" type="TextureRect" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer/Skill5"]
+[node name="TextureRect2" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer/Skill5"]
 self_modulate = Color(1, 1, 1, 0.607843)
 layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("17_jteos")
 
-[node name="Skill6" type="Control" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer"]
+[node name="Skill6" type="Control" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="TextureRect" type="TextureRect" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer/Skill6"]
+[node name="TextureRect" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer/Skill6"]
 layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("16_sw5p8")
 
-[node name="TextureRect2" type="TextureRect" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer/Skill6"]
+[node name="TextureRect2" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType2/HBoxContainer/Skill6"]
 self_modulate = Color(1, 1, 1, 0.607843)
 layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("17_jteos")
 
-[node name="Label" type="Label" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType2"]
+[node name="Label" type="Label" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType2"]
 layout_mode = 0
 offset_left = 16.0
 offset_right = 142.0
@@ -1064,11 +1393,11 @@ size_flags_vertical = 0
 text = "Sword"
 label_settings = SubResource("LabelSettings_y4kir")
 
-[node name="SkillType3" type="Control" parent="Control/HUD/SkillsMenu/SkillTypeContainer"]
+[node name="SkillType3" type="Control" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer"]
 custom_minimum_size = Vector2(168, 33)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType3"]
 custom_minimum_size = Vector2(168, 22)
 layout_mode = 0
 offset_top = 11.0
@@ -1076,115 +1405,115 @@ offset_right = 168.0
 offset_bottom = 33.0
 alignment = 1
 
-[node name="Skill" type="Control" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer"]
+[node name="Skill" type="Control" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="TextureRect" type="TextureRect" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer/Skill"]
+[node name="TextureRect" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer/Skill"]
 layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("16_sw5p8")
 
-[node name="TextureRect2" type="TextureRect" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer/Skill"]
+[node name="TextureRect2" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer/Skill"]
 self_modulate = Color(1, 1, 1, 0.607843)
 layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("17_jteos")
 
-[node name="Skill2" type="Control" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer"]
+[node name="Skill2" type="Control" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="TextureRect" type="TextureRect" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer/Skill2"]
+[node name="TextureRect" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer/Skill2"]
 layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("16_sw5p8")
 
-[node name="TextureRect2" type="TextureRect" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer/Skill2"]
+[node name="TextureRect2" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer/Skill2"]
 self_modulate = Color(1, 1, 1, 0.607843)
 layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("17_jteos")
 
-[node name="Skill3" type="Control" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer"]
+[node name="Skill3" type="Control" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="TextureRect" type="TextureRect" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer/Skill3"]
+[node name="TextureRect" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer/Skill3"]
 layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("16_sw5p8")
 
-[node name="TextureRect2" type="TextureRect" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer/Skill3"]
+[node name="TextureRect2" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer/Skill3"]
 self_modulate = Color(1, 1, 1, 0.607843)
 layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("17_jteos")
 
-[node name="Skill4" type="Control" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer"]
+[node name="Skill4" type="Control" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="TextureRect" type="TextureRect" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer/Skill4"]
+[node name="TextureRect" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer/Skill4"]
 layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("16_sw5p8")
 
-[node name="TextureRect2" type="TextureRect" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer/Skill4"]
+[node name="TextureRect2" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer/Skill4"]
 self_modulate = Color(1, 1, 1, 0.607843)
 layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("17_jteos")
 
-[node name="Skill5" type="Control" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer"]
+[node name="Skill5" type="Control" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="TextureRect" type="TextureRect" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer/Skill5"]
+[node name="TextureRect" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer/Skill5"]
 layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("16_sw5p8")
 
-[node name="TextureRect2" type="TextureRect" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer/Skill5"]
+[node name="TextureRect2" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer/Skill5"]
 self_modulate = Color(1, 1, 1, 0.607843)
 layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("17_jteos")
 
-[node name="Skill6" type="Control" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer"]
+[node name="Skill6" type="Control" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="TextureRect" type="TextureRect" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer/Skill6"]
+[node name="TextureRect" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer/Skill6"]
 layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("16_sw5p8")
 
-[node name="TextureRect2" type="TextureRect" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer/Skill6"]
+[node name="TextureRect2" type="TextureRect" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType3/HBoxContainer/Skill6"]
 self_modulate = Color(1, 1, 1, 0.607843)
 layout_mode = 0
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("17_jteos")
 
-[node name="Label" type="Label" parent="Control/HUD/SkillsMenu/SkillTypeContainer/SkillType3"]
+[node name="Label" type="Label" parent="MeleeScene/HUD/SkillsMenu/SkillTypeContainer/SkillType3"]
 layout_mode = 0
 offset_left = 16.0
 offset_right = 142.0
@@ -1193,7 +1522,7 @@ size_flags_vertical = 0
 text = "Sword"
 label_settings = SubResource("LabelSettings_y4kir")
 
-[node name="Label" type="Label" parent="Control/HUD/SkillsMenu"]
+[node name="Label" type="Label" parent="MeleeScene/HUD/SkillsMenu"]
 layout_mode = 0
 offset_left = -88.0
 offset_top = -131.0
@@ -1205,27 +1534,27 @@ text = "Skills
 label_settings = SubResource("LabelSettings_j0e1u")
 horizontal_alignment = 1
 
-[node name="Status" type="Control" parent="Control/HUD"]
+[node name="Status" type="Control" parent="MeleeScene/HUD"]
 anchors_preset = 0
 offset_left = 240.0
 offset_top = 315.0
 offset_right = 393.0
 offset_bottom = 338.0
 
-[node name="Inner" type="TextureRect" parent="Control/HUD/Status"]
+[node name="Inner" type="TextureRect" parent="MeleeScene/HUD/Status"]
 self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.490196)
 layout_mode = 0
 offset_right = 153.0
 offset_bottom = 23.0
 texture = ExtResource("18_mragj")
 
-[node name="Border" type="TextureRect" parent="Control/HUD/Status"]
+[node name="Border" type="TextureRect" parent="MeleeScene/HUD/Status"]
 layout_mode = 0
 offset_right = 153.0
 offset_bottom = 23.0
 texture = ExtResource("19_2uryh")
 
-[node name="HealthBar" type="TextureRect" parent="Control/HUD/Status"]
+[node name="HealthBar" type="TextureRect" parent="MeleeScene/HUD/Status"]
 custom_minimum_size = Vector2(0, 3)
 layout_mode = 1
 anchors_preset = 14
@@ -1240,7 +1569,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture1D_dhn35")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="Control/HUD/Status/HealthBar"]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="MeleeScene/HUD/Status/HealthBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1253,7 +1582,7 @@ value = 40.0
 nine_patch_stretch = true
 texture_progress = SubResource("GradientTexture2D_winsb")
 
-[node name="StaminaBar" type="TextureRect" parent="Control/HUD/Status"]
+[node name="StaminaBar" type="TextureRect" parent="MeleeScene/HUD/Status"]
 custom_minimum_size = Vector2(0, 3)
 layout_mode = 1
 anchors_preset = 14
@@ -1268,7 +1597,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture1D_dhn35")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="Control/HUD/Status/StaminaBar"]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="MeleeScene/HUD/Status/StaminaBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1281,7 +1610,7 @@ value = 40.0
 nine_patch_stretch = true
 texture_progress = SubResource("GradientTexture2D_rk7uj")
 
-[node name="StaminaBackplate" type="TextureProgressBar" parent="Control/HUD/Status"]
+[node name="StaminaBackplate" type="TextureProgressBar" parent="MeleeScene/HUD/Status"]
 layout_mode = 0
 offset_top = -9.0
 offset_right = 153.0
@@ -1290,7 +1619,7 @@ max_value = 151.0
 value = 95.0
 texture_progress = ExtResource("20_c5nxv")
 
-[node name="HealthLabel" type="Label" parent="Control/HUD/Status"]
+[node name="HealthLabel" type="Label" parent="MeleeScene/HUD/Status"]
 layout_mode = 0
 offset_left = 98.0
 offset_top = 3.0
@@ -1301,7 +1630,7 @@ text = "4024/1040"
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="Coins" type="TextureRect" parent="Control/HUD"]
+[node name="Coins" type="TextureRect" parent="MeleeScene/HUD"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_top = 5.0
@@ -1309,14 +1638,14 @@ offset_right = 80.0
 offset_bottom = 28.0
 texture = ExtResource("22_u7njv")
 
-[node name="Inner" type="TextureRect" parent="Control/HUD/Coins"]
+[node name="Inner" type="TextureRect" parent="MeleeScene/HUD/Coins"]
 self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.784314)
 layout_mode = 0
 offset_right = 60.0
 offset_bottom = 23.0
 texture = ExtResource("23_o7bp8")
 
-[node name="Label" type="Label" parent="Control/HUD/Coins"]
+[node name="Label" type="Label" parent="MeleeScene/HUD/Coins"]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -1333,7 +1662,7 @@ text = "102444"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Icon" type="TextureRect" parent="Control/HUD/Coins"]
+[node name="Icon" type="TextureRect" parent="MeleeScene/HUD/Coins"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -1348,143 +1677,148 @@ grow_horizontal = 0
 grow_vertical = 2
 texture = ExtResource("24_a3nmk")
 
-[node name="StatusesContainer" type="HBoxContainer" parent="Control/HUD"]
+[node name="StatusesContainer" type="HBoxContainer" parent="MeleeScene/HUD"]
 layout_mode = 0
 offset_left = 240.0
 offset_top = 280.0
 offset_right = 392.0
 offset_bottom = 302.0
 
-[node name="Status1" type="Control" parent="Control/HUD/StatusesContainer"]
+[node name="Status1" type="Control" parent="MeleeScene/HUD/StatusesContainer"]
 visible = false
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="Control/HUD/StatusesContainer/Status1"]
+[node name="Icon" type="TextureRect" parent="MeleeScene/HUD/StatusesContainer/Status1"]
 layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("25_db1w2")
 
-[node name="Status2" type="Control" parent="Control/HUD/StatusesContainer"]
+[node name="Status2" type="Control" parent="MeleeScene/HUD/StatusesContainer"]
 visible = false
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="Control/HUD/StatusesContainer/Status2"]
+[node name="Icon" type="TextureRect" parent="MeleeScene/HUD/StatusesContainer/Status2"]
 layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("25_db1w2")
 
-[node name="Status3" type="Control" parent="Control/HUD/StatusesContainer"]
+[node name="Status3" type="Control" parent="MeleeScene/HUD/StatusesContainer"]
 visible = false
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="Control/HUD/StatusesContainer/Status3"]
+[node name="Icon" type="TextureRect" parent="MeleeScene/HUD/StatusesContainer/Status3"]
 layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("25_db1w2")
 
-[node name="Status4" type="Control" parent="Control/HUD/StatusesContainer"]
+[node name="Status4" type="Control" parent="MeleeScene/HUD/StatusesContainer"]
 visible = false
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="Control/HUD/StatusesContainer/Status4"]
+[node name="Icon" type="TextureRect" parent="MeleeScene/HUD/StatusesContainer/Status4"]
 layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("25_db1w2")
 
-[node name="Status5" type="Control" parent="Control/HUD/StatusesContainer"]
+[node name="Status5" type="Control" parent="MeleeScene/HUD/StatusesContainer"]
 visible = false
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="Control/HUD/StatusesContainer/Status5"]
+[node name="Icon" type="TextureRect" parent="MeleeScene/HUD/StatusesContainer/Status5"]
 layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("25_db1w2")
 
-[node name="Status6" type="Control" parent="Control/HUD/StatusesContainer"]
+[node name="Status6" type="Control" parent="MeleeScene/HUD/StatusesContainer"]
 visible = false
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="Control/HUD/StatusesContainer/Status6"]
+[node name="Icon" type="TextureRect" parent="MeleeScene/HUD/StatusesContainer/Status6"]
 layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("25_db1w2")
 
-[node name="EnemiesContainer" type="HBoxContainer" parent="Control"]
-layout_mode = 0
-offset_left = 19.0
-offset_top = 95.0
-offset_right = 619.0
-offset_bottom = 195.0
-theme_override_constants/separation = 150
-alignment = 1
+[node name="EnemiesContainer" type="Control" parent="MeleeScene"]
+anchors_preset = 0
+offset_left = 32.0
+offset_top = 115.0
+offset_right = 632.0
+offset_bottom = 215.0
 
-[node name="Enemy" type="Control" parent="Control/EnemiesContainer"]
+[node name="Enemy" type="Control" parent="MeleeScene/EnemiesContainer"]
 layout_mode = 2
+anchors_preset = 0
+offset_left = 360.0
+offset_top = -2.0
+offset_right = 360.0
+offset_bottom = 98.0
 script = ExtResource("28_q5nhc")
 
-[node name="TextureRect" type="TextureRect" parent="Control/EnemiesContainer/Enemy"]
+[node name="TextureRect" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy"]
 self_modulate = Color(0.282353, 0.45098, 0.666667, 1)
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -54.0
-offset_top = -20.0
-offset_right = 96.0
-offset_bottom = 130.0
+offset_left = -75.0
+offset_top = -75.0
+offset_right = 75.0
+offset_bottom = 75.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.49, 0.222)
+pivot_offset = Vector2(75, 75)
 texture = ExtResource("3_3n644")
 
-[node name="Sprite" type="Sprite2D" parent="Control/EnemiesContainer/Enemy"]
-position = Vector2(-14, 15)
+[node name="Sprite" type="Sprite2D" parent="MeleeScene/EnemiesContainer/Enemy"]
+position = Vector2(1, 20)
 texture = ExtResource("2_e4pxw")
 hframes = 8
 vframes = 9
 
-[node name="EnemyHUD" type="Control" parent="Control/EnemiesContainer/Enemy"]
+[node name="EnemyHUD" type="Control" parent="MeleeScene/EnemiesContainer/Enemy"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -61.0
-offset_top = -43.0
-offset_right = -61.0
-offset_bottom = -43.0
+offset_left = -48.0
+offset_top = -35.0
+offset_right = -48.0
+offset_bottom = -35.0
 mouse_filter = 1
 script = ExtResource("27_hvtr5")
 
-[node name="Status" type="Control" parent="Control/EnemiesContainer/Enemy/EnemyHUD"]
+[node name="Status" type="Control" parent="MeleeScene/EnemiesContainer/Enemy/EnemyHUD"]
 anchors_preset = 0
 offset_right = 153.0
 offset_bottom = 23.0
 
-[node name="Inner" type="TextureRect" parent="Control/EnemiesContainer/Enemy/EnemyHUD/Status"]
+[node name="Inner" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy/EnemyHUD/Status"]
 self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.490196)
 layout_mode = 0
 offset_right = 99.0
 offset_bottom = 23.0
 texture = ExtResource("27_nwi3a")
 
-[node name="Border" type="TextureRect" parent="Control/EnemiesContainer/Enemy/EnemyHUD/Status"]
+[node name="Border" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy/EnemyHUD/Status"]
 layout_mode = 0
 offset_right = 99.0
 offset_bottom = 23.0
 texture = ExtResource("28_gphsv")
 
-[node name="HealthBar" type="TextureRect" parent="Control/EnemiesContainer/Enemy/EnemyHUD/Status"]
+[node name="HealthBar" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy/EnemyHUD/Status"]
 custom_minimum_size = Vector2(0, 3)
 layout_mode = 1
 anchors_preset = 14
@@ -1499,7 +1833,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture1D_8xn4g")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="Control/EnemiesContainer/Enemy/EnemyHUD/Status/HealthBar"]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="MeleeScene/EnemiesContainer/Enemy/EnemyHUD/Status/HealthBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1512,7 +1846,7 @@ value = 40.0
 nine_patch_stretch = true
 texture_progress = SubResource("GradientTexture2D_5i86w")
 
-[node name="StaminaBar" type="TextureRect" parent="Control/EnemiesContainer/Enemy/EnemyHUD/Status"]
+[node name="StaminaBar" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy/EnemyHUD/Status"]
 custom_minimum_size = Vector2(0, 3)
 layout_mode = 1
 anchors_preset = 14
@@ -1527,7 +1861,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture1D_8xn4g")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="Control/EnemiesContainer/Enemy/EnemyHUD/Status/StaminaBar"]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="MeleeScene/EnemiesContainer/Enemy/EnemyHUD/Status/StaminaBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1540,7 +1874,7 @@ value = 40.0
 nine_patch_stretch = true
 texture_progress = SubResource("GradientTexture2D_6papl")
 
-[node name="StaminaBackplate" type="TextureProgressBar" parent="Control/EnemiesContainer/Enemy/EnemyHUD/Status"]
+[node name="StaminaBackplate" type="TextureProgressBar" parent="MeleeScene/EnemiesContainer/Enemy/EnemyHUD/Status"]
 layout_mode = 0
 offset_top = -9.0
 offset_right = 153.0
@@ -1549,133 +1883,141 @@ max_value = 151.0
 value = 95.0
 texture_progress = ExtResource("20_c5nxv")
 
-[node name="StatusesContainer" type="HBoxContainer" parent="Control/EnemiesContainer/Enemy/EnemyHUD"]
+[node name="StatusesContainer" type="HBoxContainer" parent="MeleeScene/EnemiesContainer/Enemy/EnemyHUD"]
 layout_mode = 0
 offset_top = -23.0
 offset_right = 152.0
 offset_bottom = -1.0
 
-[node name="Status1" type="Control" parent="Control/EnemiesContainer/Enemy/EnemyHUD/StatusesContainer"]
+[node name="Status1" type="Control" parent="MeleeScene/EnemiesContainer/Enemy/EnemyHUD/StatusesContainer"]
 visible = false
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="Control/EnemiesContainer/Enemy/EnemyHUD/StatusesContainer/Status1"]
+[node name="Icon" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy/EnemyHUD/StatusesContainer/Status1"]
 layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("25_db1w2")
 
-[node name="Status2" type="Control" parent="Control/EnemiesContainer/Enemy/EnemyHUD/StatusesContainer"]
+[node name="Status2" type="Control" parent="MeleeScene/EnemiesContainer/Enemy/EnemyHUD/StatusesContainer"]
 visible = false
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="Control/EnemiesContainer/Enemy/EnemyHUD/StatusesContainer/Status2"]
+[node name="Icon" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy/EnemyHUD/StatusesContainer/Status2"]
 layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("25_db1w2")
 
-[node name="Status3" type="Control" parent="Control/EnemiesContainer/Enemy/EnemyHUD/StatusesContainer"]
+[node name="Status3" type="Control" parent="MeleeScene/EnemiesContainer/Enemy/EnemyHUD/StatusesContainer"]
 visible = false
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="Control/EnemiesContainer/Enemy/EnemyHUD/StatusesContainer/Status3"]
+[node name="Icon" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy/EnemyHUD/StatusesContainer/Status3"]
 layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("25_db1w2")
 
-[node name="Status4" type="Control" parent="Control/EnemiesContainer/Enemy/EnemyHUD/StatusesContainer"]
+[node name="Status4" type="Control" parent="MeleeScene/EnemiesContainer/Enemy/EnemyHUD/StatusesContainer"]
 visible = false
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="Control/EnemiesContainer/Enemy/EnemyHUD/StatusesContainer/Status4"]
+[node name="Icon" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy/EnemyHUD/StatusesContainer/Status4"]
 layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("25_db1w2")
 
-[node name="Status5" type="Control" parent="Control/EnemiesContainer/Enemy/EnemyHUD/StatusesContainer"]
+[node name="Status5" type="Control" parent="MeleeScene/EnemiesContainer/Enemy/EnemyHUD/StatusesContainer"]
 visible = false
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="Control/EnemiesContainer/Enemy/EnemyHUD/StatusesContainer/Status5"]
+[node name="Icon" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy/EnemyHUD/StatusesContainer/Status5"]
 layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("25_db1w2")
 
-[node name="Status6" type="Control" parent="Control/EnemiesContainer/Enemy/EnemyHUD/StatusesContainer"]
+[node name="Status6" type="Control" parent="MeleeScene/EnemiesContainer/Enemy/EnemyHUD/StatusesContainer"]
 visible = false
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="Control/EnemiesContainer/Enemy/EnemyHUD/StatusesContainer/Status6"]
+[node name="Icon" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy/EnemyHUD/StatusesContainer/Status6"]
 layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("25_db1w2")
 
-[node name="Enemy2" type="Control" parent="Control/EnemiesContainer"]
+[node name="Enemy2" type="Control" parent="MeleeScene/EnemiesContainer"]
 layout_mode = 2
+anchors_preset = 0
+offset_left = 225.0
+offset_top = -2.0
+offset_right = 225.0
+offset_bottom = 98.0
+pivot_offset = Vector2(0, 25)
 script = ExtResource("28_q5nhc")
 
-[node name="TextureRect" type="TextureRect" parent="Control/EnemiesContainer/Enemy2"]
+[node name="TextureRect" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy2"]
 self_modulate = Color(0.282353, 0.45098, 0.666667, 1)
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -54.0
-offset_top = -20.0
-offset_right = 96.0
-offset_bottom = 130.0
+offset_left = -75.0
+offset_top = -75.0
+offset_right = 75.0
+offset_bottom = 75.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.49, 0.222)
+pivot_offset = Vector2(75, 75)
 texture = ExtResource("3_3n644")
 
-[node name="Sprite" type="Sprite2D" parent="Control/EnemiesContainer/Enemy2"]
-position = Vector2(-14, 15)
+[node name="Sprite" type="Sprite2D" parent="MeleeScene/EnemiesContainer/Enemy2"]
+position = Vector2(1, 20)
 texture = ExtResource("2_e4pxw")
 hframes = 8
 vframes = 9
 
-[node name="EnemyHUD" type="Control" parent="Control/EnemiesContainer/Enemy2"]
+[node name="EnemyHUD" type="Control" parent="MeleeScene/EnemiesContainer/Enemy2"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -61.0
-offset_top = -43.0
-offset_right = -61.0
-offset_bottom = -43.0
+offset_left = -48.0
+offset_top = -35.0
+offset_right = -48.0
+offset_bottom = -35.0
 mouse_filter = 1
 script = ExtResource("27_hvtr5")
 
-[node name="Status" type="Control" parent="Control/EnemiesContainer/Enemy2/EnemyHUD"]
+[node name="Status" type="Control" parent="MeleeScene/EnemiesContainer/Enemy2/EnemyHUD"]
 anchors_preset = 0
 offset_right = 153.0
 offset_bottom = 23.0
 
-[node name="Inner" type="TextureRect" parent="Control/EnemiesContainer/Enemy2/EnemyHUD/Status"]
+[node name="Inner" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy2/EnemyHUD/Status"]
 self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.490196)
 layout_mode = 0
 offset_right = 99.0
 offset_bottom = 23.0
 texture = ExtResource("27_nwi3a")
 
-[node name="Border" type="TextureRect" parent="Control/EnemiesContainer/Enemy2/EnemyHUD/Status"]
+[node name="Border" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy2/EnemyHUD/Status"]
 layout_mode = 0
 offset_right = 99.0
 offset_bottom = 23.0
 texture = ExtResource("28_gphsv")
 
-[node name="HealthBar" type="TextureRect" parent="Control/EnemiesContainer/Enemy2/EnemyHUD/Status"]
+[node name="HealthBar" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy2/EnemyHUD/Status"]
 custom_minimum_size = Vector2(0, 3)
 layout_mode = 1
 anchors_preset = 14
@@ -1690,7 +2032,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture1D_8xn4g")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="Control/EnemiesContainer/Enemy2/EnemyHUD/Status/HealthBar"]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="MeleeScene/EnemiesContainer/Enemy2/EnemyHUD/Status/HealthBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1703,7 +2045,7 @@ value = 40.0
 nine_patch_stretch = true
 texture_progress = SubResource("GradientTexture2D_5i86w")
 
-[node name="StaminaBar" type="TextureRect" parent="Control/EnemiesContainer/Enemy2/EnemyHUD/Status"]
+[node name="StaminaBar" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy2/EnemyHUD/Status"]
 custom_minimum_size = Vector2(0, 3)
 layout_mode = 1
 anchors_preset = 14
@@ -1718,7 +2060,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture1D_8xn4g")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="Control/EnemiesContainer/Enemy2/EnemyHUD/Status/StaminaBar"]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="MeleeScene/EnemiesContainer/Enemy2/EnemyHUD/Status/StaminaBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1731,7 +2073,7 @@ value = 40.0
 nine_patch_stretch = true
 texture_progress = SubResource("GradientTexture2D_6papl")
 
-[node name="StaminaBackplate" type="TextureProgressBar" parent="Control/EnemiesContainer/Enemy2/EnemyHUD/Status"]
+[node name="StaminaBackplate" type="TextureProgressBar" parent="MeleeScene/EnemiesContainer/Enemy2/EnemyHUD/Status"]
 layout_mode = 0
 offset_top = -9.0
 offset_right = 153.0
@@ -1740,133 +2082,141 @@ max_value = 151.0
 value = 95.0
 texture_progress = ExtResource("20_c5nxv")
 
-[node name="StatusesContainer" type="HBoxContainer" parent="Control/EnemiesContainer/Enemy2/EnemyHUD"]
+[node name="StatusesContainer" type="HBoxContainer" parent="MeleeScene/EnemiesContainer/Enemy2/EnemyHUD"]
 layout_mode = 0
 offset_top = -23.0
 offset_right = 152.0
 offset_bottom = -1.0
 
-[node name="Status1" type="Control" parent="Control/EnemiesContainer/Enemy2/EnemyHUD/StatusesContainer"]
+[node name="Status1" type="Control" parent="MeleeScene/EnemiesContainer/Enemy2/EnemyHUD/StatusesContainer"]
 visible = false
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="Control/EnemiesContainer/Enemy2/EnemyHUD/StatusesContainer/Status1"]
+[node name="Icon" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy2/EnemyHUD/StatusesContainer/Status1"]
 layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("25_db1w2")
 
-[node name="Status2" type="Control" parent="Control/EnemiesContainer/Enemy2/EnemyHUD/StatusesContainer"]
+[node name="Status2" type="Control" parent="MeleeScene/EnemiesContainer/Enemy2/EnemyHUD/StatusesContainer"]
 visible = false
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="Control/EnemiesContainer/Enemy2/EnemyHUD/StatusesContainer/Status2"]
+[node name="Icon" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy2/EnemyHUD/StatusesContainer/Status2"]
 layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("25_db1w2")
 
-[node name="Status3" type="Control" parent="Control/EnemiesContainer/Enemy2/EnemyHUD/StatusesContainer"]
+[node name="Status3" type="Control" parent="MeleeScene/EnemiesContainer/Enemy2/EnemyHUD/StatusesContainer"]
 visible = false
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="Control/EnemiesContainer/Enemy2/EnemyHUD/StatusesContainer/Status3"]
+[node name="Icon" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy2/EnemyHUD/StatusesContainer/Status3"]
 layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("25_db1w2")
 
-[node name="Status4" type="Control" parent="Control/EnemiesContainer/Enemy2/EnemyHUD/StatusesContainer"]
+[node name="Status4" type="Control" parent="MeleeScene/EnemiesContainer/Enemy2/EnemyHUD/StatusesContainer"]
 visible = false
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="Control/EnemiesContainer/Enemy2/EnemyHUD/StatusesContainer/Status4"]
+[node name="Icon" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy2/EnemyHUD/StatusesContainer/Status4"]
 layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("25_db1w2")
 
-[node name="Status5" type="Control" parent="Control/EnemiesContainer/Enemy2/EnemyHUD/StatusesContainer"]
+[node name="Status5" type="Control" parent="MeleeScene/EnemiesContainer/Enemy2/EnemyHUD/StatusesContainer"]
 visible = false
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="Control/EnemiesContainer/Enemy2/EnemyHUD/StatusesContainer/Status5"]
+[node name="Icon" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy2/EnemyHUD/StatusesContainer/Status5"]
 layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("25_db1w2")
 
-[node name="Status6" type="Control" parent="Control/EnemiesContainer/Enemy2/EnemyHUD/StatusesContainer"]
+[node name="Status6" type="Control" parent="MeleeScene/EnemiesContainer/Enemy2/EnemyHUD/StatusesContainer"]
 visible = false
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="Control/EnemiesContainer/Enemy2/EnemyHUD/StatusesContainer/Status6"]
+[node name="Icon" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy2/EnemyHUD/StatusesContainer/Status6"]
 layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("25_db1w2")
 
-[node name="Enemy3" type="Control" parent="Control/EnemiesContainer"]
+[node name="Enemy3" type="Control" parent="MeleeScene/EnemiesContainer"]
 layout_mode = 2
+anchors_preset = 0
+offset_left = 512.0
+offset_top = -3.0
+offset_right = 512.0
+offset_bottom = 97.0
+pivot_offset = Vector2(0, 25)
 script = ExtResource("28_q5nhc")
 
-[node name="TextureRect" type="TextureRect" parent="Control/EnemiesContainer/Enemy3"]
+[node name="TextureRect" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy3"]
 self_modulate = Color(0.282353, 0.45098, 0.666667, 1)
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -54.0
-offset_top = -20.0
-offset_right = 96.0
-offset_bottom = 130.0
+offset_left = -75.0
+offset_top = -75.0
+offset_right = 75.0
+offset_bottom = 75.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.49, 0.222)
+pivot_offset = Vector2(75, 75)
 texture = ExtResource("3_3n644")
 
-[node name="Sprite" type="Sprite2D" parent="Control/EnemiesContainer/Enemy3"]
-position = Vector2(-14, 15)
+[node name="Sprite" type="Sprite2D" parent="MeleeScene/EnemiesContainer/Enemy3"]
+position = Vector2(1, 20)
 texture = ExtResource("2_e4pxw")
 hframes = 8
 vframes = 9
 
-[node name="EnemyHUD" type="Control" parent="Control/EnemiesContainer/Enemy3"]
+[node name="EnemyHUD" type="Control" parent="MeleeScene/EnemiesContainer/Enemy3"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -61.0
-offset_top = -43.0
-offset_right = -61.0
-offset_bottom = -43.0
+offset_left = -48.0
+offset_top = -35.0
+offset_right = -48.0
+offset_bottom = -35.0
 mouse_filter = 1
 script = ExtResource("27_hvtr5")
 
-[node name="Status" type="Control" parent="Control/EnemiesContainer/Enemy3/EnemyHUD"]
+[node name="Status" type="Control" parent="MeleeScene/EnemiesContainer/Enemy3/EnemyHUD"]
 anchors_preset = 0
 offset_right = 153.0
 offset_bottom = 23.0
 
-[node name="Inner" type="TextureRect" parent="Control/EnemiesContainer/Enemy3/EnemyHUD/Status"]
+[node name="Inner" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy3/EnemyHUD/Status"]
 self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.490196)
 layout_mode = 0
 offset_right = 99.0
 offset_bottom = 23.0
 texture = ExtResource("27_nwi3a")
 
-[node name="Border" type="TextureRect" parent="Control/EnemiesContainer/Enemy3/EnemyHUD/Status"]
+[node name="Border" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy3/EnemyHUD/Status"]
 layout_mode = 0
 offset_right = 99.0
 offset_bottom = 23.0
 texture = ExtResource("28_gphsv")
 
-[node name="HealthBar" type="TextureRect" parent="Control/EnemiesContainer/Enemy3/EnemyHUD/Status"]
+[node name="HealthBar" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy3/EnemyHUD/Status"]
 custom_minimum_size = Vector2(0, 3)
 layout_mode = 1
 anchors_preset = 14
@@ -1881,7 +2231,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture1D_8xn4g")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="Control/EnemiesContainer/Enemy3/EnemyHUD/Status/HealthBar"]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="MeleeScene/EnemiesContainer/Enemy3/EnemyHUD/Status/HealthBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1894,7 +2244,7 @@ value = 40.0
 nine_patch_stretch = true
 texture_progress = SubResource("GradientTexture2D_5i86w")
 
-[node name="StaminaBar" type="TextureRect" parent="Control/EnemiesContainer/Enemy3/EnemyHUD/Status"]
+[node name="StaminaBar" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy3/EnemyHUD/Status"]
 custom_minimum_size = Vector2(0, 3)
 layout_mode = 1
 anchors_preset = 14
@@ -1909,7 +2259,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture1D_8xn4g")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="Control/EnemiesContainer/Enemy3/EnemyHUD/Status/StaminaBar"]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="MeleeScene/EnemiesContainer/Enemy3/EnemyHUD/Status/StaminaBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1922,7 +2272,7 @@ value = 40.0
 nine_patch_stretch = true
 texture_progress = SubResource("GradientTexture2D_6papl")
 
-[node name="StaminaBackplate" type="TextureProgressBar" parent="Control/EnemiesContainer/Enemy3/EnemyHUD/Status"]
+[node name="StaminaBackplate" type="TextureProgressBar" parent="MeleeScene/EnemiesContainer/Enemy3/EnemyHUD/Status"]
 layout_mode = 0
 offset_top = -9.0
 offset_right = 153.0
@@ -1931,133 +2281,141 @@ max_value = 151.0
 value = 95.0
 texture_progress = ExtResource("20_c5nxv")
 
-[node name="StatusesContainer" type="HBoxContainer" parent="Control/EnemiesContainer/Enemy3/EnemyHUD"]
+[node name="StatusesContainer" type="HBoxContainer" parent="MeleeScene/EnemiesContainer/Enemy3/EnemyHUD"]
 layout_mode = 0
 offset_top = -23.0
 offset_right = 152.0
 offset_bottom = -1.0
 
-[node name="Status1" type="Control" parent="Control/EnemiesContainer/Enemy3/EnemyHUD/StatusesContainer"]
+[node name="Status1" type="Control" parent="MeleeScene/EnemiesContainer/Enemy3/EnemyHUD/StatusesContainer"]
 visible = false
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="Control/EnemiesContainer/Enemy3/EnemyHUD/StatusesContainer/Status1"]
+[node name="Icon" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy3/EnemyHUD/StatusesContainer/Status1"]
 layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("25_db1w2")
 
-[node name="Status2" type="Control" parent="Control/EnemiesContainer/Enemy3/EnemyHUD/StatusesContainer"]
+[node name="Status2" type="Control" parent="MeleeScene/EnemiesContainer/Enemy3/EnemyHUD/StatusesContainer"]
 visible = false
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="Control/EnemiesContainer/Enemy3/EnemyHUD/StatusesContainer/Status2"]
+[node name="Icon" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy3/EnemyHUD/StatusesContainer/Status2"]
 layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("25_db1w2")
 
-[node name="Status3" type="Control" parent="Control/EnemiesContainer/Enemy3/EnemyHUD/StatusesContainer"]
+[node name="Status3" type="Control" parent="MeleeScene/EnemiesContainer/Enemy3/EnemyHUD/StatusesContainer"]
 visible = false
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="Control/EnemiesContainer/Enemy3/EnemyHUD/StatusesContainer/Status3"]
+[node name="Icon" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy3/EnemyHUD/StatusesContainer/Status3"]
 layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("25_db1w2")
 
-[node name="Status4" type="Control" parent="Control/EnemiesContainer/Enemy3/EnemyHUD/StatusesContainer"]
+[node name="Status4" type="Control" parent="MeleeScene/EnemiesContainer/Enemy3/EnemyHUD/StatusesContainer"]
 visible = false
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="Control/EnemiesContainer/Enemy3/EnemyHUD/StatusesContainer/Status4"]
+[node name="Icon" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy3/EnemyHUD/StatusesContainer/Status4"]
 layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("25_db1w2")
 
-[node name="Status5" type="Control" parent="Control/EnemiesContainer/Enemy3/EnemyHUD/StatusesContainer"]
+[node name="Status5" type="Control" parent="MeleeScene/EnemiesContainer/Enemy3/EnemyHUD/StatusesContainer"]
 visible = false
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="Control/EnemiesContainer/Enemy3/EnemyHUD/StatusesContainer/Status5"]
+[node name="Icon" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy3/EnemyHUD/StatusesContainer/Status5"]
 layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("25_db1w2")
 
-[node name="Status6" type="Control" parent="Control/EnemiesContainer/Enemy3/EnemyHUD/StatusesContainer"]
+[node name="Status6" type="Control" parent="MeleeScene/EnemiesContainer/Enemy3/EnemyHUD/StatusesContainer"]
 visible = false
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="Control/EnemiesContainer/Enemy3/EnemyHUD/StatusesContainer/Status6"]
+[node name="Icon" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy3/EnemyHUD/StatusesContainer/Status6"]
 layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("25_db1w2")
 
-[node name="Enemy4" type="Control" parent="Control/EnemiesContainer"]
+[node name="Enemy4" type="Control" parent="MeleeScene/EnemiesContainer"]
 layout_mode = 2
+anchors_preset = 0
+offset_left = 75.0
+offset_top = -3.0
+offset_right = 75.0
+offset_bottom = 97.0
+pivot_offset = Vector2(0, 25)
 script = ExtResource("28_q5nhc")
 
-[node name="TextureRect" type="TextureRect" parent="Control/EnemiesContainer/Enemy4"]
+[node name="TextureRect" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy4"]
 self_modulate = Color(0.282353, 0.45098, 0.666667, 1)
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -54.0
-offset_top = -20.0
-offset_right = 96.0
-offset_bottom = 130.0
+offset_left = -75.0
+offset_top = -75.0
+offset_right = 75.0
+offset_bottom = 75.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.49, 0.222)
+pivot_offset = Vector2(75, 75)
 texture = ExtResource("3_3n644")
 
-[node name="Sprite" type="Sprite2D" parent="Control/EnemiesContainer/Enemy4"]
-position = Vector2(-14, 15)
+[node name="Sprite" type="Sprite2D" parent="MeleeScene/EnemiesContainer/Enemy4"]
+position = Vector2(1, 20)
 texture = ExtResource("2_e4pxw")
 hframes = 8
 vframes = 9
 
-[node name="EnemyHUD" type="Control" parent="Control/EnemiesContainer/Enemy4"]
+[node name="EnemyHUD" type="Control" parent="MeleeScene/EnemiesContainer/Enemy4"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -61.0
-offset_top = -43.0
-offset_right = -61.0
-offset_bottom = -43.0
+offset_left = -48.0
+offset_top = -35.0
+offset_right = -48.0
+offset_bottom = -35.0
 mouse_filter = 1
 script = ExtResource("27_hvtr5")
 
-[node name="Status" type="Control" parent="Control/EnemiesContainer/Enemy4/EnemyHUD"]
+[node name="Status" type="Control" parent="MeleeScene/EnemiesContainer/Enemy4/EnemyHUD"]
 anchors_preset = 0
 offset_right = 153.0
 offset_bottom = 23.0
 
-[node name="Inner" type="TextureRect" parent="Control/EnemiesContainer/Enemy4/EnemyHUD/Status"]
+[node name="Inner" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy4/EnemyHUD/Status"]
 self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.490196)
 layout_mode = 0
 offset_right = 99.0
 offset_bottom = 23.0
 texture = ExtResource("27_nwi3a")
 
-[node name="Border" type="TextureRect" parent="Control/EnemiesContainer/Enemy4/EnemyHUD/Status"]
+[node name="Border" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy4/EnemyHUD/Status"]
 layout_mode = 0
 offset_right = 99.0
 offset_bottom = 23.0
 texture = ExtResource("28_gphsv")
 
-[node name="HealthBar" type="TextureRect" parent="Control/EnemiesContainer/Enemy4/EnemyHUD/Status"]
+[node name="HealthBar" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy4/EnemyHUD/Status"]
 custom_minimum_size = Vector2(0, 3)
 layout_mode = 1
 anchors_preset = 14
@@ -2072,7 +2430,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture1D_8xn4g")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="Control/EnemiesContainer/Enemy4/EnemyHUD/Status/HealthBar"]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="MeleeScene/EnemiesContainer/Enemy4/EnemyHUD/Status/HealthBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2085,7 +2443,7 @@ value = 40.0
 nine_patch_stretch = true
 texture_progress = SubResource("GradientTexture2D_5i86w")
 
-[node name="StaminaBar" type="TextureRect" parent="Control/EnemiesContainer/Enemy4/EnemyHUD/Status"]
+[node name="StaminaBar" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy4/EnemyHUD/Status"]
 custom_minimum_size = Vector2(0, 3)
 layout_mode = 1
 anchors_preset = 14
@@ -2100,7 +2458,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture1D_8xn4g")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="Control/EnemiesContainer/Enemy4/EnemyHUD/Status/StaminaBar"]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="MeleeScene/EnemiesContainer/Enemy4/EnemyHUD/Status/StaminaBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2113,7 +2471,7 @@ value = 40.0
 nine_patch_stretch = true
 texture_progress = SubResource("GradientTexture2D_6papl")
 
-[node name="StaminaBackplate" type="TextureProgressBar" parent="Control/EnemiesContainer/Enemy4/EnemyHUD/Status"]
+[node name="StaminaBackplate" type="TextureProgressBar" parent="MeleeScene/EnemiesContainer/Enemy4/EnemyHUD/Status"]
 layout_mode = 0
 offset_top = -9.0
 offset_right = 153.0
@@ -2122,77 +2480,105 @@ max_value = 151.0
 value = 95.0
 texture_progress = ExtResource("20_c5nxv")
 
-[node name="StatusesContainer" type="HBoxContainer" parent="Control/EnemiesContainer/Enemy4/EnemyHUD"]
+[node name="StatusesContainer" type="HBoxContainer" parent="MeleeScene/EnemiesContainer/Enemy4/EnemyHUD"]
 layout_mode = 0
 offset_top = -23.0
 offset_right = 152.0
 offset_bottom = -1.0
 
-[node name="Status1" type="Control" parent="Control/EnemiesContainer/Enemy4/EnemyHUD/StatusesContainer"]
+[node name="Status1" type="Control" parent="MeleeScene/EnemiesContainer/Enemy4/EnemyHUD/StatusesContainer"]
 visible = false
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="Control/EnemiesContainer/Enemy4/EnemyHUD/StatusesContainer/Status1"]
+[node name="Icon" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy4/EnemyHUD/StatusesContainer/Status1"]
 layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("25_db1w2")
 
-[node name="Status2" type="Control" parent="Control/EnemiesContainer/Enemy4/EnemyHUD/StatusesContainer"]
+[node name="Status2" type="Control" parent="MeleeScene/EnemiesContainer/Enemy4/EnemyHUD/StatusesContainer"]
 visible = false
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="Control/EnemiesContainer/Enemy4/EnemyHUD/StatusesContainer/Status2"]
+[node name="Icon" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy4/EnemyHUD/StatusesContainer/Status2"]
 layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("25_db1w2")
 
-[node name="Status3" type="Control" parent="Control/EnemiesContainer/Enemy4/EnemyHUD/StatusesContainer"]
+[node name="Status3" type="Control" parent="MeleeScene/EnemiesContainer/Enemy4/EnemyHUD/StatusesContainer"]
 visible = false
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="Control/EnemiesContainer/Enemy4/EnemyHUD/StatusesContainer/Status3"]
+[node name="Icon" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy4/EnemyHUD/StatusesContainer/Status3"]
 layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("25_db1w2")
 
-[node name="Status4" type="Control" parent="Control/EnemiesContainer/Enemy4/EnemyHUD/StatusesContainer"]
+[node name="Status4" type="Control" parent="MeleeScene/EnemiesContainer/Enemy4/EnemyHUD/StatusesContainer"]
 visible = false
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="Control/EnemiesContainer/Enemy4/EnemyHUD/StatusesContainer/Status4"]
+[node name="Icon" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy4/EnemyHUD/StatusesContainer/Status4"]
 layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("25_db1w2")
 
-[node name="Status5" type="Control" parent="Control/EnemiesContainer/Enemy4/EnemyHUD/StatusesContainer"]
+[node name="Status5" type="Control" parent="MeleeScene/EnemiesContainer/Enemy4/EnemyHUD/StatusesContainer"]
 visible = false
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="Control/EnemiesContainer/Enemy4/EnemyHUD/StatusesContainer/Status5"]
+[node name="Icon" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy4/EnemyHUD/StatusesContainer/Status5"]
 layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("25_db1w2")
 
-[node name="Status6" type="Control" parent="Control/EnemiesContainer/Enemy4/EnemyHUD/StatusesContainer"]
+[node name="Status6" type="Control" parent="MeleeScene/EnemiesContainer/Enemy4/EnemyHUD/StatusesContainer"]
 visible = false
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="Control/EnemiesContainer/Enemy4/EnemyHUD/StatusesContainer/Status6"]
+[node name="Icon" type="TextureRect" parent="MeleeScene/EnemiesContainer/Enemy4/EnemyHUD/StatusesContainer/Status6"]
 layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("25_db1w2")
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="MeleeScene"]
+light_mask = 0
+position = Vector2(1, 0)
+color = Color(0.360784, 0.360784, 0.360784, 1)
+blend_mode = 2
+range_item_cull_mask = 3
+
+[node name="TimeStop" type="TextureRect" parent="MeleeScene"]
+visible = false
+material = SubResource("ShaderMaterial_plmlh")
+custom_minimum_size = Vector2(640, 360)
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -360.0
+offset_right = 320.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = SubResource("GradientTexture1D_8mwvv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MeleeScene/TimeStop"]
+libraries = {
+"": SubResource("AnimationLibrary_yj027")
+}
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(320, 180)

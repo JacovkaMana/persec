@@ -138,6 +138,20 @@
 	"Ranged" : [{}],
 	"Magic" : [{
 		"Fire" : [{			
+			"Fire Armament" : {
+			"description": "Imbue weapon with fire",
+			"cost": 2,
+			"status": {
+				"self": "FIRE_WEAPON",
+				"enemy": "NONE",
+				"duration": 10
+			},
+			"compatible" : [],
+			"texture": "Shield",
+			"icon": "single_42",
+			"locked" : true,
+			"requires": []
+			},
 			"Fireball" : {
 			"description": "fireball description",
 			"cost": 1,
@@ -156,7 +170,8 @@
 			"icon": "single_41",
 			"locked" : true,
 			"requires": []
-		}}],
+			}			
+		}],
 		"Ice" : [{			
 			"Ice Strike" : {
 				"description": "ice strike description",

@@ -69,7 +69,7 @@ func _ready():
 	
 	data.skills.add_skill(GlobalSkills.get_by_name('Slash'))
 	data.skills.add_skill(GlobalSkills.get_by_name('Fireball'))
-	data.skills.add_skill(GlobalSkills.get_by_name('Ice Slash'))
+	data.skills.add_skill(GlobalSkills.get_by_name('Fire Armament'))
 	data.skills.add_skill(GlobalSkills.get_by_name('Defend'))
 
 

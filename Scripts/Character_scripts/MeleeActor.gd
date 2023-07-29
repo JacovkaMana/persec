@@ -4,15 +4,19 @@ class_name MeleeActor
 @onready var animation_tree = $AnimationTree
 @onready var label = $HeadLabel
 @onready var sprite = $Sprite
+
+
+@onready var MeleeScene = self.get_tree().get_root().find_child("MeleeScene", true, false)
 #@onready var state_machine = animation_tree.get("parameters/playback")
 
 
 var data : PlayerData = null
 var instantiated: bool = false
 
+var test_melee_proj = load('res://PreRendered/MeleeProjectiles/Slash.tscn')
 
-
-@onready var Projectiles: Node2D = self.get_tree().get_root().find_child("NeutralProjectiles", true, false)
+var in_skill_animation: bool = false
+@onready var Projectiles = self.get_tree().get_root().find_child("MeleeProjectiles", true, false)
 @onready var Statuses = $Statuses
 
 
@@ -46,7 +50,36 @@ func _physics_process(_delta):
 				self.data.stamina = self.data.max_stamina
 				
 		
+
+
+func shoot_melee_projectile(skill: Skill, at) -> void:
 	
+	
+	var proj = skill.projectile
+	#var bullet = proj.instantiate()
+	var bullet = test_melee_proj.instantiate()
+				
+	if skill.type == Enums.ESkillType.MAGIC:
+		bullet.magic == true
+	
+		
+
+	if skill.is_damage_skill:
+		Projectiles.add_child(bullet)
+
+		
+		
+		bullet.skill = skill
+		bullet.enemies = [at]
+		bullet.projectile_owner = self
+		bullet.change_sprite(skill)		
+		bullet.global_position = at.global_position
+		bullet.global_position.y += 32
+
+
+
+
+
 func use_skill_id(id: int):
 	if id < data.skills.get_skills().size():
 		if (data.skills.get_skill_id(id).get_cost() <= data.stamina):
@@ -61,10 +94,15 @@ func use_skill_id(id: int):
 	
 		
 	
-func take_damage(_skill: Skill, from: Actor, _strength):
+func take_damage(_skill: Skill, from, _strength):
 	data.hitpoints -= int(_skill.damage_value * from.get_attack() / 100.0)
 	#print(int(_skill.ranged_damage * from.get_damage() / 100.0))
 	self.modulate = Color8(255,0,0,255)
+	if (data.hitpoints <= 0):
+		self.visible = false
+		MeleeScene.check_for_melee_end()
+		#animation_tree.set("parameters/death/transition_request", "true")
+		#player.kill_confirm(self)
 	
 	#cooldown(1)
 

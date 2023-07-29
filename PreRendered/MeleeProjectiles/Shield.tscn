@@ -1,0 +1,100 @@
+[gd_scene load_steps=9 format=3 uid="uid://cqeo5rffh8mwe"]
+
+[ext_resource type="Script" path="res://Scripts/Character_status/Defending.gd" id="1_2y1ot"]
+[ext_resource type="Material" uid="uid://d1rup2825ejku" path="res://Art/Shaders/ShieldShader.tres" id="2_4slnm"]
+
+[sub_resource type="Gradient" id="Gradient_416hx"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rost0"]
+gradient = SubResource("Gradient_416hx")
+width = 70
+height = 80
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_36a42"]
+radius = 33.0
+height = 81.72
+
+[sub_resource type="Animation" id="Animation_ia35t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Collision:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bullet:material:shader_parameter/Color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_mcqqs"]
+resource_name = "delete"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Collision:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bullet:material:shader_parameter/Color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qddvi"]
+_data = {
+"RESET": SubResource("Animation_ia35t"),
+"delete": SubResource("Animation_mcqqs")
+}
+
+[node name="Defend" type="Area2D"]
+collision_layer = 0
+collision_mask = 8
+input_pickable = false
+script = ExtResource("1_2y1ot")
+
+[node name="Bullet" type="Sprite2D" parent="."]
+texture_filter = 2
+texture_repeat = 2
+material = ExtResource("2_4slnm")
+texture = SubResource("GradientTexture2D_rost0")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CapsuleShape2D_36a42")
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qddvi")
+}

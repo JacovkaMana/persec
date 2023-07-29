@@ -27,6 +27,26 @@ func _ready():
 func _process(_delta):
 	pass
 
+
+func setup_level(player_data, next_scene, melee_scene):
+	var player_level = next_scene.find_child("Player", true, false)
+	player_level.data = player_data
+	player_level.player_state = Enums.EPlayerState.ROAMING
+	InputManager.player = player_level
+	
+	
+	next_scene.visible = true
+	next_scene.process_mode = 0
+	
+	
+	ui_scene.visible = true
+	ui_scene.process_mode = 0
+	
+	for enemy in melee_scene.enemies_on_level:
+		enemy.die()
+	
+	
+	
 func add_melee(player, enemies):
 	melee_scene = melee.instantiate()
 	
@@ -41,6 +61,9 @@ func add_melee(player, enemies):
 	print(player.get_script())
 	
 func remove_melee():
+	var player_melee = melee_scene.find_child("MeleePlayer", true, false)
+	setup_level(player_melee.data, next_scene, melee_scene.get_child(0))
+	
 	melee_scene.queue_free()
 	
 func pause_game():

@@ -16,6 +16,8 @@ var player_state: Enums.EPlayerState = Enums.EPlayerState.MELEE
 @onready var SceneManager = self.get_tree().get_root().find_child("SceneManager", true, false)
 
 
+
+
 func save():
 	SceneManager.save_resource(self.data, 'user://player_data.res')
 
@@ -34,21 +36,26 @@ func _physics_process(_delta):
 	
 
 func use_skill_id(id: int):
+	print(in_skill_animation)
+	if in_skill_animation:
+		return false
+	
+	
 	if id < data.skills.get_skills().size():
 		if (data.skills.get_skill_id(id).get_cost() <= data.stamina):
 			data.stamina -= data.skills.get_skill_id(id).get_cost()
 			emit_signal("skill_used", id)
 			print(data.skills.get_skill_id(id))
-#			shoot_projectile( data.skills.get_skill_id(id))
-#			for status in data.skills.get_skill_id(id).status_self:
-#				self.initiate_status(data.skills.get_skill_id(id), status, data.skills.get_skill_id(id).status_duration)
+			
+			if data.skills.get_skill_id(id).is_damage_skill:
+				shoot_melee_projectile( data.skills.get_skill_id(id), MeleeScene.get_enemy_node(0) )
 
-#			match data.skills.get_skill_id(id).get_skill_type(): 
-#				'Attack':
-#					shoot_projectile( data.skills.get_skill_id(id))
-#				'Status':
-#					use_status_skill( data.skills.get_skill_id(id))
 
+func take_damage(_skill: Skill, from, _strength):
+	data.hitpoints -= int(_skill.damage_value * from.get_attack() / 100.0)
+	#print(int(_skill.ranged_damage * from.get_damage() / 100.0))
+	self.modulate = Color8(255,0,0,255)
+	
 	
 #func trigger_dialogue(with):
 #	var dialogue_text = with.get_dialogue()

@@ -20,10 +20,21 @@ uniform float angle : hint_range(0, 1.) = 0.5;
 uniform float elevate : hint_range(0, 1.) = 0.35;
 uniform float show : hint_range(0, 1.) = 0.4;
 uniform int bg_scale: hint_range(1, 10) = 3;
+uniform bool pause = false;
 
 uniform sampler2D iChannel0: filter_nearest, repeat_enable;
 uniform sampler2D iChannel1: filter_nearest, repeat_enable;
 
+vec2 curve(vec2 uv)
+{
+	uv = (uv - 0.5) * 2.0;
+	uv *= 1.1;	
+	uv.x *= 1.0 + pow((abs(uv.y) / 5.0), 2.0);
+	uv.y *= 1.0 + pow((abs(uv.x) / 4.0), 2.0);
+	uv  = (uv / 2.0) + 0.5;
+	uv =  uv *0.92 + 0.04;
+	return uv;
+}
 
 float grid(vec2 uv){
 
@@ -59,7 +70,12 @@ void fragment()
 	vec2 iResolution = 1.0 / SCREEN_PIXEL_SIZE;
 	vec2 fragCoord = vec2(FRAGCOORD.x, iResolution.y - FRAGCOORD.y);
 	
-    vec2 uv = (fragCoord -.5 * iResolution.xy) / iResolution.y;
+	vec2 uv = fragCoord.xy / iResolution ;
+	
+    uv = (fragCoord - 0.5 * iResolution.xy) / iResolution.y;
+
+	
+	
 	//uv = fragCoord.xy / iResolution ;
     //lazy shift, will update later with better implementation
     uv -= elevate;
@@ -86,10 +102,12 @@ void fragment()
     {
 //Messy, just experiment
 		col = starting_color.rgb;
-
-        uv.y = 3.0 / (abs(uv.y + 0.2) + .05);
+		uv.x += 0.26;	
+        uv.y = 4.0 / (abs(uv.y + 0.2 * uv.y + 0.2) + .05) - 0.0;
 		
-        //uv.y = 2.5 / (abs(uv.y + .2) + .1);
+		//uv.y *= 1.0 - pow((abs(uv.x) / 4.0), 2.0);  //curve
+        
+		//uv.y = 2.5 / (abs(uv.y + .2) + .1);
         
         //Pattern multiplication, see Book of Shaders, patterns chapter
         uv.x *= uv.y * 0.5;
@@ -97,7 +115,10 @@ void fragment()
 
         //Line creation. 
 		//uv.x -= fract(TIME * 0.2);  
-		uv.y -= fract(TIME * 0.5); 
+		uv.y += fract(TIME * 0.5); 
+		if (pause) {
+			uv.y -= fract(TIME * 0.5); 
+		}
 		//uv.y += TIME;   
         float gridVal = grid(uv);
 		//uv.y += TIME;

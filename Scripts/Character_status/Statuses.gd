@@ -6,7 +6,8 @@ extends Node2D
 @onready var Status_dict = {
 	Enums.EStatus.DEFEND : $Defend,
 	Enums.EStatus.SHIELD : $Shield,
-	Enums.EStatus.BURN : $Burn
+	Enums.EStatus.BURN : $Burn,
+	Enums.EStatus.FIRE_WEAPON : $Armament
 }
 
 func _ready():

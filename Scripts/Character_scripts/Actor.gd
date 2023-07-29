@@ -20,6 +20,8 @@ class_name Actor
 
 @onready var Statuses = $Statuses
 
+
+var in_skill_animation: bool = false
 var asd: ParticleProcessMaterial
 var last_move
 var head_timer
@@ -121,6 +123,16 @@ func use_skill_id(id: int):
 func shoot_projectile(skill: Skill, at: CharacterBody2D = null) -> void:
 	var proj = skill.projectile
 	var bullet = proj.instantiate()
+	var damage_type = skill.damage_type
+	var skill_type = skill.type
+	
+	
+	if skill.type == Enums.ESkillType.MELEE:
+		if Enums.EStatus.FIRE_WEAPON in data.statuses:
+			damage_type = Enums.EDamageType.FIRE
+			print('fire branding make more optimized')
+			skill_type = Enums.ESkillType.MAGIC
+	
 	match bullet.get_collider_type():
 		'Projectile':
 			#var bullet = proj.instantiate()
@@ -146,7 +158,7 @@ func shoot_projectile(skill: Skill, at: CharacterBody2D = null) -> void:
 			
 			bullet.skill = skill
 			
-			bullet.change_sprite(skill)		
+			bullet.change_sprite(damage_type, skill_type)		
 			bullet.global_position = self.global_position
 			bullet.rotation = bullet_rotation.angle() + PI/2
 			if (bullet.moving_projectile):
@@ -196,6 +208,8 @@ func get_attack():
 	else:
 		return data.stats[Enums.EStat.STRENGTH]
 		
+	
+		
 func use_status_skill(skill: Skill):
 	
 	if (skill.self_status):
@@ -221,6 +235,8 @@ func initiate_status(skill: Skill, status: Enums.EStatus, duration: int):
 				self.Statuses.show_status(status)
 			Enums.EStatus.SHIELD:
 				self.Statuses.shield(skill, status, duration, data.stats[Enums.EStat.INTELLIGENCE] * 10.0)
+			Enums.EStatus.FIRE_WEAPON:
+				self.Statuses.show_status(status)
 #
 	status_timer.timeout.connect( self.Statuses.hide_status.bind(status) ) 
 	
