@@ -19,6 +19,8 @@ input_name = "uv"
 
 [resource]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 uniform vec4 PlayerCloak : source_color = vec4(1.000000, 1.000000, 1.000000, 1.000000);
 
 

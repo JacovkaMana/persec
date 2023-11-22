@@ -11,6 +11,11 @@ signal money_earned(much: int)
 
 var invincible_timer = null
 var player_state: Enums.EPlayerState = Enums.EPlayerState.ROAMING
+var interaction_target = null
+
+@onready var viewer_manager = ViewerManager.new()
+
+var battle_timer = null
 
 @onready var MeleeTriggerArea: Area2D = $MeleeTriggerArea
 @onready var SceneManager = self.get_tree().get_root().find_child("SceneManager", true, false)
@@ -67,10 +72,11 @@ func _ready():
 	
 	data.inventory.equip_item(test_item)
 	
-	data.skills.add_skill(GlobalSkills.get_by_name('Slash'))
-	data.skills.add_skill(GlobalSkills.get_by_name('Fireball'))
+	data.skills.add_skill(GlobalSkills.get_by_name('Javelin'))
+	data.skills.add_skill(GlobalSkills.get_by_name('Pierce'))
 	data.skills.add_skill(GlobalSkills.get_by_name('Fire Armament'))
 	data.skills.add_skill(GlobalSkills.get_by_name('Defend'))
+	data.skills.add_skill(GlobalSkills.get_by_name('Double Slash'))
 
 
 
@@ -84,10 +90,31 @@ func _ready():
 	if loaded_data is PlayerData: # Check that the data is valid
 		print(';succ')
 
+
+	reload_battle_timer()
+	
+	
 func _physics_process(_delta):
 	super(_delta)
+	#print(battle_timer.time_left)
+	#print(viewer_manager.get_overall_satisfaction())
+	if battle_timer.time_left <= 2.0:
+		battle_timer.start()
 	
+
 					
+func reload_battle_timer():
+	if not self.battle_timer:
+		battle_timer = Timer.new()
+		battle_timer.set_wait_time(5)
+		battle_timer.set_one_shot(true)
+		battle_timer.connect("timeout", _on_battle_timer_end)  
+		self.add_child(battle_timer)
+		battle_timer.start()
+		
+func _on_battle_timer_end():
+	print('end')
+	#battle_timer.start()
 
 func set_zone(to):
 	current_zone = to
@@ -124,27 +151,33 @@ func use_skill_id(id: int):
 
 	
 func interact_with_nearest():
-	if (interaction_area.get_overlapping_areas()):
+	if interaction_target:
+		interaction_target.interact()
+	elif (interaction_area.get_overlapping_areas()):
 		interaction_area.get_overlapping_areas()[0].get_parent().interact()
 #		if interaction_area.get_overlapping_areas()[0].get_parent().get_class() == "CharacterBody2D":
 #			trigger_dialogue(interaction_area.get_overlapping_areas()[0].get_parent())
 
 func trigger_dialogue(with):
+	interaction_target = with
+	
 	var dialogue_text = with.get_dialogue()
-	print(dialogue_text)
+	
 	if dialogue_text == null:
+		interaction_target = null
 		player_state = Enums.EPlayerState.ROAMING
 		with.current_state = Enums.ECharacterState.ROAMING
-		emit_signal("dialogue_ended")
+		self.emit_signal("dialogue_ended")
 	else:
 		print("Dialogue with " + str(with))
-		emit_signal("dialogue_started", with.npc_name, dialogue_text)
+		self.emit_signal("dialogue_started", with.npc_name, dialogue_text)
 		self.player_state = Enums.EPlayerState.TALKING
 		with.current_state = Enums.ECharacterState.TALKING
 	
 
 
 func kill_confirm(who):
+	self.viewer_manager.action_to_viewers(Enums.EViewerAction.SLAY, 1)
 	emit_signal("kill_confirmed", who)
 	money_earn(20)
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://bp7ewet8u11kj"]
+[gd_scene load_steps=58 format=3 uid="uid://bp7ewet8u11kj"]
 
 [ext_resource type="Script" path="res://Scripts/MeleeSceneScript.gd" id="1_qadbo"]
 [ext_resource type="Texture2D" uid="uid://bgn8fb6jsnab6" path="res://Art/Character/Mage.png" id="2_e4pxw"]
@@ -29,6 +29,7 @@
 [ext_resource type="Texture2D" uid="uid://bijpbur8p3jeb" path="res://Art/Icons/Skills/single_7.png" id="25_db1w2"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/EnemyMeleeHUD.gd" id="27_hvtr5"]
 [ext_resource type="Texture2D" uid="uid://cakrcglfti7vm" path="res://Art/UI/Status_inner2.png" id="27_nwi3a"]
+[ext_resource type="Script" path="res://Scripts/UI_scripts/SkillButtonUI.gd" id="27_qnm8d"]
 [ext_resource type="Texture2D" uid="uid://ddasyjnhoy1m6" path="res://Art/UI/Status_border2.png" id="28_gphsv"]
 [ext_resource type="Script" path="res://Scripts/Character_scripts/MeleeActor.gd" id="28_q5nhc"]
 
@@ -190,34 +191,8 @@ fill_to = Vector2(0.5, 1)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_plmlh"]
 shader = ExtResource("2_yy7tj")
 shader_parameter/shader_color = Color(0.741176, 0.458824, 0.188235, 1)
+shader_parameter/sec_color = Color(0.5, 1, 0.96, 1)
 shader_parameter/time_scale = 0.509
-
-[sub_resource type="Animation" id="Animation_4y5d4"]
-resource_name = "activate"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:material:shader_parameter/time_scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.85, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.509, 1.0, 0.509]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../Background:material:shader_parameter/pause")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="Animation" id="Animation_owoih"]
 length = 0.001
@@ -244,6 +219,33 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_4y5d4"]
+resource_name = "activate"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/time_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.85, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.509, 1.0, 0.509]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Background:material:shader_parameter/pause")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yj027"]
@@ -388,468 +390,6 @@ texture = ExtResource("10_tp4p8")
 material = ExtResource("9_6shp0")
 layout_mode = 2
 texture = ExtResource("10_tp4p8")
-
-[node name="SkillsHotbar" type="Control" parent="MeleeScene/HUD"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-mouse_filter = 2
-
-[node name="ColorRect" type="ColorRect" parent="MeleeScene/HUD/SkillsHotbar"]
-visible = false
-layout_mode = 0
-offset_left = 582.0
-offset_top = 288.0
-offset_right = 627.0
-offset_bottom = 333.0
-rotation = 0.785398
-color = Color(0.25098, 0.27451, 0.411765, 1)
-
-[node name="SkillsContainer" type="Control" parent="MeleeScene/HUD/SkillsHotbar"]
-anchors_preset = 0
-offset_left = 550.0
-offset_top = 287.0
-offset_right = 616.0
-offset_bottom = 352.0
-script = ExtResource("11_8fd10")
-lightup = Color(0.890196, 0, 0, 1)
-
-[node name="Skill1" type="Control" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-anchors_preset = 0
-offset_left = 17.0
-offset_top = 1.0
-offset_right = 49.0
-offset_bottom = 33.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill1"]
-self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
-layout_mode = 0
-offset_top = -1.0
-offset_right = 30.0
-offset_bottom = 29.0
-texture = ExtResource("12_3lnoq")
-
-[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill1"]
-self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
-clip_children = 2
-layout_mode = 0
-offset_right = 30.0
-offset_bottom = 30.0
-texture = ExtResource("12_3lnoq")
-
-[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill1/ColorRect"]
-custom_minimum_size = Vector2(22, 22)
-layout_mode = 0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 26.0
-offset_bottom = 26.0
-
-[node name="Skill2" type="Control" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-anchors_preset = 0
-offset_top = 19.0
-offset_right = 32.0
-offset_bottom = 51.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill2"]
-self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
-layout_mode = 0
-offset_top = -1.0
-offset_right = 30.0
-offset_bottom = 29.0
-texture = ExtResource("12_3lnoq")
-
-[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill2"]
-self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
-clip_children = 2
-layout_mode = 0
-offset_right = 30.0
-offset_bottom = 30.0
-texture = ExtResource("12_3lnoq")
-
-[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill2/ColorRect"]
-custom_minimum_size = Vector2(22, 22)
-layout_mode = 0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 26.0
-offset_bottom = 26.0
-
-[node name="Skill3" type="Control" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-anchors_preset = 0
-offset_left = 34.0
-offset_top = 19.0
-offset_right = 66.0
-offset_bottom = 51.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill3"]
-self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
-layout_mode = 0
-offset_top = -1.0
-offset_right = 30.0
-offset_bottom = 29.0
-texture = ExtResource("12_3lnoq")
-
-[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill3"]
-self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
-clip_children = 2
-layout_mode = 0
-offset_right = 30.0
-offset_bottom = 30.0
-texture = ExtResource("12_3lnoq")
-
-[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill3/ColorRect"]
-custom_minimum_size = Vector2(22, 22)
-layout_mode = 0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 26.0
-offset_bottom = 26.0
-
-[node name="Skill4" type="Control" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-anchors_preset = 0
-offset_left = 17.0
-offset_top = 37.0
-offset_right = 49.0
-offset_bottom = 69.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill4"]
-self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
-layout_mode = 0
-offset_top = -1.0
-offset_right = 30.0
-offset_bottom = 29.0
-texture = ExtResource("12_3lnoq")
-
-[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill4"]
-self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
-clip_children = 2
-layout_mode = 0
-offset_right = 30.0
-offset_bottom = 30.0
-texture = ExtResource("12_3lnoq")
-
-[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill4/ColorRect"]
-custom_minimum_size = Vector2(22, 22)
-layout_mode = 0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 26.0
-offset_bottom = 26.0
-
-[node name="Skill5" type="Control" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer"]
-visible = false
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-anchors_preset = 0
-offset_top = 72.0
-offset_right = 32.0
-offset_bottom = 104.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill5"]
-self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
-layout_mode = 0
-offset_top = -1.0
-offset_right = 30.0
-offset_bottom = 29.0
-texture = ExtResource("12_3lnoq")
-
-[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill5"]
-modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
-layout_mode = 0
-offset_right = 30.0
-offset_bottom = 30.0
-texture = ExtResource("12_3lnoq")
-
-[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill5"]
-layout_mode = 0
-offset_left = 4.0
-offset_top = 5.0
-offset_right = 20.0
-offset_bottom = 21.0
-
-[node name="Skill6" type="Control" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer"]
-visible = false
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-anchors_preset = 0
-offset_left = 36.0
-offset_top = 72.0
-offset_right = 68.0
-offset_bottom = 104.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill6"]
-self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
-layout_mode = 0
-offset_top = -1.0
-offset_right = 30.0
-offset_bottom = 29.0
-texture = ExtResource("12_3lnoq")
-
-[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill6"]
-modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
-layout_mode = 0
-offset_right = 30.0
-offset_bottom = 30.0
-texture = ExtResource("12_3lnoq")
-
-[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill6"]
-layout_mode = 0
-offset_left = 4.0
-offset_top = 5.0
-offset_right = 20.0
-offset_bottom = 21.0
-
-[node name="SkillsHotbar2" type="Control" parent="MeleeScene/HUD"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-mouse_filter = 2
-
-[node name="ColorRect" type="ColorRect" parent="MeleeScene/HUD/SkillsHotbar2"]
-visible = false
-layout_mode = 0
-offset_left = 582.0
-offset_top = 288.0
-offset_right = 627.0
-offset_bottom = 333.0
-rotation = 0.785398
-color = Color(0.25098, 0.27451, 0.411765, 1)
-
-[node name="SkillsContainer" type="Control" parent="MeleeScene/HUD/SkillsHotbar2"]
-anchors_preset = 0
-offset_left = 550.0
-offset_top = 287.0
-offset_right = 616.0
-offset_bottom = 352.0
-script = ExtResource("11_8fd10")
-lightup = Color(0.890196, 0, 0, 1)
-
-[node name="Skill1" type="Control" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-anchors_preset = 0
-offset_left = 17.0
-offset_top = 1.0
-offset_right = 49.0
-offset_bottom = 33.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer/Skill1"]
-self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
-layout_mode = 0
-offset_top = -1.0
-offset_right = 30.0
-offset_bottom = 29.0
-texture = ExtResource("12_3lnoq")
-
-[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer/Skill1"]
-self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
-clip_children = 2
-layout_mode = 0
-offset_right = 30.0
-offset_bottom = 30.0
-texture = ExtResource("12_3lnoq")
-
-[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer/Skill1/ColorRect"]
-custom_minimum_size = Vector2(22, 22)
-layout_mode = 0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 26.0
-offset_bottom = 26.0
-
-[node name="Skill2" type="Control" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-anchors_preset = 0
-offset_top = 19.0
-offset_right = 32.0
-offset_bottom = 51.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer/Skill2"]
-self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
-layout_mode = 0
-offset_top = -1.0
-offset_right = 30.0
-offset_bottom = 29.0
-texture = ExtResource("12_3lnoq")
-
-[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer/Skill2"]
-self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
-clip_children = 2
-layout_mode = 0
-offset_right = 30.0
-offset_bottom = 30.0
-texture = ExtResource("12_3lnoq")
-
-[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer/Skill2/ColorRect"]
-custom_minimum_size = Vector2(22, 22)
-layout_mode = 0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 26.0
-offset_bottom = 26.0
-
-[node name="Skill3" type="Control" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-anchors_preset = 0
-offset_left = 34.0
-offset_top = 19.0
-offset_right = 66.0
-offset_bottom = 51.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer/Skill3"]
-self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
-layout_mode = 0
-offset_top = -1.0
-offset_right = 30.0
-offset_bottom = 29.0
-texture = ExtResource("12_3lnoq")
-
-[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer/Skill3"]
-self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
-clip_children = 2
-layout_mode = 0
-offset_right = 30.0
-offset_bottom = 30.0
-texture = ExtResource("12_3lnoq")
-
-[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer/Skill3/ColorRect"]
-custom_minimum_size = Vector2(22, 22)
-layout_mode = 0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 26.0
-offset_bottom = 26.0
-
-[node name="Skill4" type="Control" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-anchors_preset = 0
-offset_left = 17.0
-offset_top = 37.0
-offset_right = 49.0
-offset_bottom = 69.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer/Skill4"]
-self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
-layout_mode = 0
-offset_top = -1.0
-offset_right = 30.0
-offset_bottom = 29.0
-texture = ExtResource("12_3lnoq")
-
-[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer/Skill4"]
-self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
-clip_children = 2
-layout_mode = 0
-offset_right = 30.0
-offset_bottom = 30.0
-texture = ExtResource("12_3lnoq")
-
-[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer/Skill4/ColorRect"]
-custom_minimum_size = Vector2(22, 22)
-layout_mode = 0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 26.0
-offset_bottom = 26.0
-
-[node name="Skill5" type="Control" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer"]
-visible = false
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-anchors_preset = 0
-offset_top = 72.0
-offset_right = 32.0
-offset_bottom = 104.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer/Skill5"]
-self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
-layout_mode = 0
-offset_top = -1.0
-offset_right = 30.0
-offset_bottom = 29.0
-texture = ExtResource("12_3lnoq")
-
-[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer/Skill5"]
-modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
-layout_mode = 0
-offset_right = 30.0
-offset_bottom = 30.0
-texture = ExtResource("12_3lnoq")
-
-[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer/Skill5"]
-layout_mode = 0
-offset_left = 4.0
-offset_top = 5.0
-offset_right = 20.0
-offset_bottom = 21.0
-
-[node name="Skill6" type="Control" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer"]
-visible = false
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-anchors_preset = 0
-offset_left = 36.0
-offset_top = 72.0
-offset_right = 68.0
-offset_bottom = 104.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer/Skill6"]
-self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
-layout_mode = 0
-offset_top = -1.0
-offset_right = 30.0
-offset_bottom = 29.0
-texture = ExtResource("12_3lnoq")
-
-[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer/Skill6"]
-modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
-layout_mode = 0
-offset_right = 30.0
-offset_bottom = 30.0
-texture = ExtResource("12_3lnoq")
-
-[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar2/SkillsContainer/Skill6"]
-layout_mode = 0
-offset_left = 4.0
-offset_top = 5.0
-offset_right = 20.0
-offset_bottom = 21.0
 
 [node name="ItemsHotbar" type="Control" parent="MeleeScene/HUD"]
 anchors_preset = 0
@@ -1749,6 +1289,343 @@ layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("25_db1w2")
+
+[node name="SkillsHotbar" type="Control" parent="MeleeScene/HUD"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 139.0
+offset_top = 285.0
+offset_right = 205.0
+offset_bottom = 351.0
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="MeleeScene/HUD/SkillsHotbar"]
+visible = false
+layout_mode = 0
+offset_left = 32.0
+offset_top = 2.0
+offset_right = 77.0
+offset_bottom = 47.0
+rotation = 0.785398
+color = Color(0.25098, 0.27451, 0.411765, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="MeleeScene/HUD/SkillsHotbar"]
+visible = false
+layout_mode = 0
+offset_left = 32.0
+offset_top = -6.0
+offset_right = 77.0
+offset_bottom = 39.0
+rotation = 0.785398
+color = Color(0.25098, 0.27451, 0.411765, 1)
+
+[node name="SkillsContainer" type="Control" parent="MeleeScene/HUD/SkillsHotbar"]
+anchors_preset = 0
+offset_right = 66.0
+offset_bottom = 65.0
+script = ExtResource("11_8fd10")
+lightup = Color(0.890196, 0, 0, 1)
+
+[node name="Skill8" type="Control" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+anchors_preset = 0
+offset_left = 17.0
+offset_top = -3.0
+offset_right = 49.0
+offset_bottom = 29.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("27_qnm8d")
+skill_id = 7
+skill_order = "Secondary"
+
+[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill8"]
+self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
+layout_mode = 0
+offset_top = -1.0
+offset_right = 30.0
+offset_bottom = 29.0
+texture = ExtResource("12_3lnoq")
+
+[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill8"]
+self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
+clip_children = 2
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+texture = ExtResource("12_3lnoq")
+
+[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill8/ColorRect"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 26.0
+offset_bottom = 26.0
+
+[node name="Skill7" type="Control" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+anchors_preset = 0
+offset_left = 34.0
+offset_top = 14.0
+offset_right = 66.0
+offset_bottom = 46.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("27_qnm8d")
+skill_id = 6
+skill_order = "Secondary"
+
+[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill7"]
+self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
+layout_mode = 0
+offset_top = -1.0
+offset_right = 30.0
+offset_bottom = 29.0
+texture = ExtResource("12_3lnoq")
+
+[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill7"]
+self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
+clip_children = 2
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+texture = ExtResource("12_3lnoq")
+
+[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill7/ColorRect"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 26.0
+offset_bottom = 26.0
+
+[node name="Skill6" type="Control" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+anchors_preset = 0
+offset_top = 14.0
+offset_right = 32.0
+offset_bottom = 46.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("27_qnm8d")
+skill_id = 5
+skill_order = "Secondary"
+
+[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill6"]
+self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
+layout_mode = 0
+offset_top = -1.0
+offset_right = 30.0
+offset_bottom = 29.0
+texture = ExtResource("12_3lnoq")
+
+[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill6"]
+self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
+clip_children = 2
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+texture = ExtResource("12_3lnoq")
+
+[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill6/ColorRect"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 26.0
+offset_bottom = 26.0
+
+[node name="Skill5" type="Control" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+anchors_preset = 0
+offset_left = 17.0
+offset_top = 32.0
+offset_right = 49.0
+offset_bottom = 64.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("27_qnm8d")
+skill_id = 4
+skill_order = "Secondary"
+
+[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill5"]
+self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
+layout_mode = 0
+offset_top = -1.0
+offset_right = 30.0
+offset_bottom = 29.0
+texture = ExtResource("12_3lnoq")
+
+[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill5"]
+self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
+clip_children = 2
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+texture = ExtResource("12_3lnoq")
+
+[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill5/ColorRect"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 26.0
+offset_bottom = 26.0
+
+[node name="Skill4" type="Control" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+anchors_preset = 0
+offset_left = 17.0
+offset_top = 2.0
+offset_right = 49.0
+offset_bottom = 34.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("27_qnm8d")
+skill_id = 3
+skill_order = "Primary"
+
+[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill4"]
+self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
+layout_mode = 0
+offset_top = -1.0
+offset_right = 30.0
+offset_bottom = 29.0
+texture = ExtResource("12_3lnoq")
+
+[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill4"]
+self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
+clip_children = 2
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+texture = ExtResource("12_3lnoq")
+
+[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill4/ColorRect"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 26.0
+offset_bottom = 26.0
+
+[node name="Skill3" type="Control" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+anchors_preset = 0
+offset_left = 34.0
+offset_top = 19.0
+offset_right = 66.0
+offset_bottom = 51.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("27_qnm8d")
+skill_id = 2
+skill_order = "Primary"
+
+[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill3"]
+self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
+layout_mode = 0
+offset_top = -1.0
+offset_right = 30.0
+offset_bottom = 29.0
+texture = ExtResource("12_3lnoq")
+
+[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill3"]
+self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
+clip_children = 2
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+texture = ExtResource("12_3lnoq")
+
+[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill3/ColorRect"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 26.0
+offset_bottom = 26.0
+
+[node name="Skill2" type="Control" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+anchors_preset = 0
+offset_top = 19.0
+offset_right = 32.0
+offset_bottom = 51.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("27_qnm8d")
+skill_id = 1
+skill_order = "Primary"
+
+[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill2"]
+self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
+layout_mode = 0
+offset_top = -1.0
+offset_right = 30.0
+offset_bottom = 29.0
+texture = ExtResource("12_3lnoq")
+
+[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill2"]
+self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
+clip_children = 2
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+texture = ExtResource("12_3lnoq")
+
+[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill2/ColorRect"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 26.0
+offset_bottom = 26.0
+
+[node name="Skill1" type="Control" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+anchors_preset = 0
+offset_left = 17.0
+offset_top = 37.0
+offset_right = 49.0
+offset_bottom = 69.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("27_qnm8d")
+skill_order = "Primary"
+
+[node name="BackRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill1"]
+self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
+layout_mode = 0
+offset_top = -1.0
+offset_right = 30.0
+offset_bottom = 29.0
+texture = ExtResource("12_3lnoq")
+
+[node name="ColorRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill1"]
+self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
+clip_children = 2
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+texture = ExtResource("12_3lnoq")
+
+[node name="SkillRect" type="TextureRect" parent="MeleeScene/HUD/SkillsHotbar/SkillsContainer/Skill1/ColorRect"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 26.0
+offset_bottom = 26.0
 
 [node name="EnemiesContainer" type="Control" parent="MeleeScene"]
 anchors_preset = 0

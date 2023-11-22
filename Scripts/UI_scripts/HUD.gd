@@ -9,6 +9,7 @@ var tween
 @onready var stamina_bar: TextureProgressBar = $Status/StaminaBar/TextureProgressBar
 @onready var stamina_container: TextureRect = $Status/StaminaBar
 @onready var stamina_backplate: TextureProgressBar = $Status/StaminaBackplate
+@onready var sound_bar = $SoundBar
 
 @onready var health_bar: TextureProgressBar = $Status/HealthBar/TextureProgressBar
 @onready var health_label: Label = $Status/HealthLabel
@@ -32,7 +33,8 @@ func _process(delta):
 	for i in range(stamina_blocks.get_child_count()):
 		if (i + 1) <= player.data.max_stamina:
 			if (min(player.data.stamina, i + 1) / (i + 1) == 1):
-				stamina_blocks.get_child(i).visible = true
+				# visible true 
+				stamina_blocks.get_child(i).visible = false
 				stamina_blocks.get_child(i).material = full_material
 			else:
 				stamina_blocks.get_child(i).visible = false
@@ -60,3 +62,7 @@ func _process(delta):
 	
 	money_label.text = str(player.data.money)
 	
+	
+	
+	
+	sound_bar.get_child(0).material.set("shader_param/power", player.viewer_manager.get_overall_satisfaction());

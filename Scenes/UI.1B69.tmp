@@ -1,4 +1,4 @@
-[gd_scene load_steps=223 format=3 uid="uid://dbksnam8cuw3o"]
+[gd_scene load_steps=206 format=3 uid="uid://dbksnam8cuw3o"]
 
 [ext_resource type="Script" path="res://Scripts/UI_scripts/CharacterUI.gd" id="1_8tod6"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/UI.gd" id="1_cvjfy"]
@@ -27,7 +27,6 @@
 [ext_resource type="Script" path="res://Scripts/UI_scripts/CloseButton.gd" id="9_lvtlu"]
 [ext_resource type="PackedScene" uid="uid://bqs52knrqlm2t" path="res://Scenes/Objects/notification.tscn" id="9_ovihv"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/HUD.gd" id="10_ktk10"]
-[ext_resource type="PackedScene" uid="uid://ydo3yobq6wp" path="res://Scenes/Objects/journal_quest.tscn" id="10_wr0ui"]
 [ext_resource type="Material" uid="uid://bxfvh5qaxweye" path="res://Art/Shaders/UI_BlurShader.tres" id="11_3hf22"]
 [ext_resource type="Texture2D" uid="uid://cxsmrfblvux75" path="res://Art/UI/Amulet.png" id="11_72ij6"]
 [ext_resource type="Texture2D" uid="uid://bs3yn2n4cgxgk" path="res://Art/UI/Ring.png" id="12_k2607"]
@@ -61,8 +60,6 @@
 [ext_resource type="Script" path="res://Scripts/UI_scripts/CoverPanel.gd" id="29_5vimk"]
 [ext_resource type="Texture2D" uid="uid://cpp7ou6piu4r0" path="res://Art/UI/SkillSlot.png" id="34_f6u2n"]
 [ext_resource type="Texture2D" uid="uid://vcslh0481xu1" path="res://Art/UI/UI_Stats.png" id="36_t4wn0"]
-[ext_resource type="PackedScene" uid="uid://dmsq6lvyo406x" path="res://Scenes/Objects/dialogue_choice.tscn" id="36_xro35"]
-[ext_resource type="Script" path="res://Scripts/UI_scripts/DialogueActionHover.gd" id="37_hhtxk"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/StatsContainer.gd" id="38_ord84"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/CharacterSkillsContainer.gd" id="38_q48wp"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/DroppedItemsUI.gd" id="39_4oyr2"]
@@ -109,8 +106,6 @@
 [ext_resource type="Script" path="res://Scripts/UI_scripts/SkillAnimatedLine.gd" id="100_lemdx"]
 [ext_resource type="Texture2D" uid="uid://bc0v5n8s7qhxk" path="res://Art/UI/ZoomMGlass.png" id="100_rr62r"]
 [ext_resource type="Texture2D" uid="uid://muqk12udbcqv" path="res://Art/UI/skiltree_movin2.png" id="101_lrrqo"]
-[ext_resource type="Shader" path="res://Art/Shaders/TimeStopShaderScript.gdshader" id="110_5x0ev"]
-[ext_resource type="Shader" path="res://Art/Shaders/SoundBar.gdshader" id="111_egqb6"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_71ey8"]
 
@@ -230,47 +225,6 @@ _data = {
 "Fade": SubResource("Animation_31af4"),
 "RESET": SubResource("Animation_s4jx2")
 }
-
-[sub_resource type="Gradient" id="Gradient_cxhlq"]
-offsets = PackedFloat32Array(0.0129032, 1)
-colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_np2vn"]
-gradient = SubResource("Gradient_cxhlq")
-fill_from = Vector2(0, 1)
-fill_to = Vector2(0.655963, 0)
-
-[sub_resource type="Gradient" id="Gradient_5q1je"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_2hh44"]
-gradient = SubResource("Gradient_5q1je")
-width = 40
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5841r"]
-shader = ExtResource("111_egqb6")
-shader_parameter/power = 50.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_n22do"]
-shader = ExtResource("111_egqb6")
-shader_parameter/power = 100.0
-
-[sub_resource type="Gradient" id="Gradient_txmt1"]
-colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_1r3dc"]
-gradient = SubResource("Gradient_txmt1")
-width = 153
-height = 11
-fill_from = Vector2(0.495413, 0)
-fill_to = Vector2(0.536697, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_pfhc6"]
-font = ExtResource("5_ai818")
-font_size = 8
-outline_color = Color(0.921569, 0.854902, 0.894118, 1)
-shadow_offset = Vector2(0, 0)
 
 [sub_resource type="LabelSettings" id="LabelSettings_u8o8f"]
 font = ExtResource("5_ai818")
@@ -697,19 +651,6 @@ point_count = 2
 [sub_resource type="LabelSettings" id="LabelSettings_01sfh"]
 font = ExtResource("5_ai818")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jfs2f"]
-shader = ExtResource("110_5x0ev")
-shader_parameter/shader_color = Color(1, 0.682353, 0.501961, 1)
-shader_parameter/sec_color = Color(0.470588, 0.0117647, 1, 1)
-shader_parameter/time_scale = 0.562
-
-[sub_resource type="Gradient" id="Gradient_6130l"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_ris2g"]
-gradient = SubResource("Gradient_6130l")
-
 [node name="UI" type="CanvasLayer"]
 layer = 3
 script = ExtResource("1_v0356")
@@ -778,10 +719,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 41280.0
-offset_top = 23390.0
-offset_right = 41920.0
-offset_bottom = 23408.0
+offset_left = 35200.0
+offset_top = 19970.0
+offset_right = 35840.0
+offset_bottom = 19988.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(320, 9)
@@ -835,56 +776,6 @@ theme_override_constants/separation = 1
 visible = false
 layout_mode = 2
 
-[node name="Journal" type="Control" parent="."]
-visible = false
-custom_minimum_size = Vector2(106, 200)
-layout_mode = 3
-anchors_preset = 0
-offset_left = 534.0
-offset_top = 105.0
-offset_right = 640.0
-offset_bottom = 305.0
-mouse_filter = 1
-
-[node name="Bg" type="TextureRect" parent="Journal"]
-self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.784314)
-show_behind_parent = true
-clip_children = 2
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -1.0
-offset_bottom = -1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture2D_np2vn")
-
-[node name="TextureRect" type="TextureRect" parent="Journal/Bg"]
-self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.784314)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture1D_2hh44")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Journal"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -106.0
-offset_top = 7.0
-offset_bottom = 207.0
-grow_horizontal = 0
-theme_override_constants/separation = 1
-
-[node name="Quest" parent="Journal/VBoxContainer" instance=ExtResource("10_wr0ui")]
-layout_mode = 2
-
 [node name="HUD" type="Control" parent="."]
 custom_minimum_size = Vector2(200, 300)
 layout_mode = 3
@@ -894,26 +785,6 @@ offset_bottom = 360.0
 mouse_filter = 1
 script = ExtResource("10_ktk10")
 full_material = ExtResource("6_a0wlw")
-
-[node name="SoundBar" type="Control" parent="HUD"]
-material = SubResource("ShaderMaterial_5841r")
-layout_mode = 3
-anchors_preset = 0
-offset_left = 240.0
-offset_top = 293.0
-offset_right = 393.0
-offset_bottom = 315.0
-
-[node name="ColorRect" type="TextureRect" parent="HUD/SoundBar"]
-material = SubResource("ShaderMaterial_n22do")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(1.5, 27)
-texture = SubResource("GradientTexture2D_1r3dc")
 
 [node name="StaminaContainer" type="HBoxContainer" parent="HUD"]
 layout_mode = 0
@@ -1300,7 +1171,6 @@ offset_bottom = 40.0
 mouse_filter = 2
 
 [node name="ColorRect" type="ColorRect" parent="HUD/ItemsHotbar"]
-visible = false
 layout_mode = 0
 offset_left = 586.0
 offset_top = 280.0
@@ -1316,9 +1186,9 @@ offset_top = 285.0
 offset_right = 620.0
 offset_bottom = 350.0
 script = ExtResource("16_pvt2r")
+lightup = null
 
 [node name="Item1" type="Control" parent="HUD/ItemsHotbar/ItemsContainer"]
-z_index = 1
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 anchors_preset = 0
@@ -1353,24 +1223,7 @@ offset_top = 4.0
 offset_right = 26.0
 offset_bottom = 26.0
 
-[node name="ItemCount" type="Label" parent="HUD/ItemsHotbar/ItemsContainer/Item1"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -9.0
-offset_top = -1.0
-offset_right = -9.0
-offset_bottom = -1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "2"
-label_settings = SubResource("LabelSettings_pfhc6")
-horizontal_alignment = 2
-vertical_alignment = 2
-
 [node name="Item2" type="Control" parent="HUD/ItemsHotbar/ItemsContainer"]
-z_index = 1
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 anchors_preset = 0
@@ -1404,25 +1257,7 @@ offset_top = 4.0
 offset_right = 26.0
 offset_bottom = 26.0
 
-[node name="ItemCount" type="Label" parent="HUD/ItemsHotbar/ItemsContainer/Item2"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -8.0
-offset_top = -6.0
-offset_right = -8.0
-offset_bottom = -6.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "2"
-label_settings = SubResource("LabelSettings_pfhc6")
-horizontal_alignment = 2
-vertical_alignment = 2
-
 [node name="Item3" type="Control" parent="HUD/ItemsHotbar/ItemsContainer"]
-z_index = 1
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 anchors_preset = 0
@@ -1457,25 +1292,7 @@ offset_top = 4.0
 offset_right = 26.0
 offset_bottom = 26.0
 
-[node name="ItemCount" type="Label" parent="HUD/ItemsHotbar/ItemsContainer/Item3"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -8.0
-offset_top = -6.0
-offset_right = -8.0
-offset_bottom = -6.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "2"
-label_settings = SubResource("LabelSettings_pfhc6")
-horizontal_alignment = 2
-vertical_alignment = 2
-
 [node name="Item4" type="Control" parent="HUD/ItemsHotbar/ItemsContainer"]
-z_index = 1
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 anchors_preset = 0
@@ -1503,166 +1320,6 @@ offset_bottom = 30.0
 texture = ExtResource("34_f6u2n")
 
 [node name="SkillRect" type="TextureRect" parent="HUD/ItemsHotbar/ItemsContainer/Item4/ColorRect"]
-custom_minimum_size = Vector2(22, 22)
-layout_mode = 0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 26.0
-offset_bottom = 26.0
-
-[node name="ItemCount" type="Label" parent="HUD/ItemsHotbar/ItemsContainer/Item4"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -8.0
-offset_top = -6.0
-offset_right = -8.0
-offset_bottom = -6.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "2"
-label_settings = SubResource("LabelSettings_pfhc6")
-horizontal_alignment = 2
-vertical_alignment = 2
-
-[node name="Item5" type="Control" parent="HUD/ItemsHotbar/ItemsContainer"]
-modulate = Color(1, 1, 1, 0.498039)
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-anchors_preset = 0
-offset_left = 17.0
-offset_top = -4.0
-offset_right = 49.0
-offset_bottom = 28.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="BackRect" type="TextureRect" parent="HUD/ItemsHotbar/ItemsContainer/Item5"]
-self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
-layout_mode = 0
-offset_top = -1.0
-offset_right = 30.0
-offset_bottom = 29.0
-texture = ExtResource("34_f6u2n")
-
-[node name="ColorRect" type="TextureRect" parent="HUD/ItemsHotbar/ItemsContainer/Item5"]
-self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
-clip_children = 2
-layout_mode = 0
-offset_right = 30.0
-offset_bottom = 30.0
-texture = ExtResource("34_f6u2n")
-
-[node name="SkillRect" type="TextureRect" parent="HUD/ItemsHotbar/ItemsContainer/Item5/ColorRect"]
-custom_minimum_size = Vector2(22, 22)
-layout_mode = 0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 26.0
-offset_bottom = 26.0
-
-[node name="Item6" type="Control" parent="HUD/ItemsHotbar/ItemsContainer"]
-modulate = Color(1, 1, 1, 0.498039)
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-anchors_preset = 0
-offset_top = 14.0
-offset_right = 32.0
-offset_bottom = 46.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="BackRect" type="TextureRect" parent="HUD/ItemsHotbar/ItemsContainer/Item6"]
-self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
-layout_mode = 0
-offset_top = -1.0
-offset_right = 30.0
-offset_bottom = 29.0
-texture = ExtResource("34_f6u2n")
-
-[node name="ColorRect" type="TextureRect" parent="HUD/ItemsHotbar/ItemsContainer/Item6"]
-self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
-clip_children = 2
-layout_mode = 0
-offset_right = 30.0
-offset_bottom = 30.0
-texture = ExtResource("34_f6u2n")
-
-[node name="SkillRect" type="TextureRect" parent="HUD/ItemsHotbar/ItemsContainer/Item6/ColorRect"]
-custom_minimum_size = Vector2(22, 22)
-layout_mode = 0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 26.0
-offset_bottom = 26.0
-
-[node name="Item7" type="Control" parent="HUD/ItemsHotbar/ItemsContainer"]
-modulate = Color(1, 1, 1, 0.498039)
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-anchors_preset = 0
-offset_left = 34.0
-offset_top = 14.0
-offset_right = 66.0
-offset_bottom = 46.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="BackRect" type="TextureRect" parent="HUD/ItemsHotbar/ItemsContainer/Item7"]
-self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
-layout_mode = 0
-offset_top = -1.0
-offset_right = 30.0
-offset_bottom = 29.0
-texture = ExtResource("34_f6u2n")
-
-[node name="ColorRect" type="TextureRect" parent="HUD/ItemsHotbar/ItemsContainer/Item7"]
-self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
-clip_children = 2
-layout_mode = 0
-offset_right = 30.0
-offset_bottom = 30.0
-texture = ExtResource("34_f6u2n")
-
-[node name="SkillRect" type="TextureRect" parent="HUD/ItemsHotbar/ItemsContainer/Item7/ColorRect"]
-custom_minimum_size = Vector2(22, 22)
-layout_mode = 0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 26.0
-offset_bottom = 26.0
-
-[node name="Item8" type="Control" parent="HUD/ItemsHotbar/ItemsContainer"]
-modulate = Color(1, 1, 1, 0.498039)
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-anchors_preset = 0
-offset_left = 17.0
-offset_top = 32.0
-offset_right = 49.0
-offset_bottom = 64.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="BackRect" type="TextureRect" parent="HUD/ItemsHotbar/ItemsContainer/Item8"]
-self_modulate = Color(0.537255, 0.54902, 0.611765, 1)
-layout_mode = 0
-offset_top = -1.0
-offset_right = 30.0
-offset_bottom = 29.0
-texture = ExtResource("34_f6u2n")
-
-[node name="ColorRect" type="TextureRect" parent="HUD/ItemsHotbar/ItemsContainer/Item8"]
-self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.960784)
-clip_children = 2
-layout_mode = 0
-offset_right = 30.0
-offset_bottom = 30.0
-texture = ExtResource("34_f6u2n")
-
-[node name="SkillRect" type="TextureRect" parent="HUD/ItemsHotbar/ItemsContainer/Item8/ColorRect"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 0
 offset_left = 4.0
@@ -2334,6 +1991,86 @@ layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("27_5ui8o")
+
+[node name="Dialogue" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
+script = ExtResource("40_bt3bl")
+
+[node name="Variant3" type="TextureRect" parent="Dialogue"]
+layout_mode = 0
+offset_left = 121.0
+offset_top = 289.0
+offset_right = 521.0
+offset_bottom = 352.0
+
+[node name="Border" type="TextureRect" parent="Dialogue/Variant3"]
+layout_mode = 1
+offset_right = 400.0
+offset_bottom = 63.0
+texture = ExtResource("22_uev2u")
+
+[node name="Inner" type="TextureRect" parent="Dialogue/Variant3"]
+self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.784314)
+layout_mode = 1
+offset_right = 400.0
+offset_bottom = 63.0
+texture = ExtResource("23_js3lx")
+
+[node name="Portrait" type="TextureRect" parent="Dialogue/Variant3"]
+layout_mode = 0
+offset_left = -46.0
+offset_right = -3.0
+offset_bottom = 63.0
+texture = ExtResource("24_wbwd0")
+
+[node name="TextureRect" type="TextureRect" parent="Dialogue/Variant3"]
+layout_mode = 0
+offset_left = -17.0
+offset_top = -17.0
+offset_right = 14.0
+offset_bottom = 14.0
+texture = ExtResource("25_70son")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Dialogue"]
+layout_mode = 1
+offset_left = 131.0
+offset_top = 298.0
+offset_right = 511.0
+offset_bottom = 340.0
+theme = ExtResource("3_h5rw7")
+text = "asddddddddasdd dddddddddddd dddddddd dddssssssssssssffffffffffffffffffffffffffssssssssssssssssssssssssssssssssssssssssss"
+fit_content = true
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+
+[node name="Label" type="Label" parent="Dialogue"]
+layout_mode = 1
+offset_left = 135.0
+offset_top = 275.0
+offset_right = 161.0
+offset_bottom = 292.0
+theme = ExtResource("3_h5rw7")
+text = " Test "
+vertical_alignment = 2
+
+[node name="Shadow" type="ColorRect" parent="Dialogue/Label"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.784314)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -4.5
+offset_bottom = 4.5
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0588235, 0.0705882, 0.141176, 0.784314)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 visible = false
@@ -3985,6 +3722,7 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_11eno")
 script = ExtResource("9_lvtlu")
 
 [node name="ItemDescPanel" type="Panel" parent="UI/DroppedItems"]
+visible = false
 self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.784314)
 layout_mode = 0
 offset_left = 180.0
@@ -4222,102 +3960,6 @@ label_settings = SubResource("LabelSettings_5fpuk")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Dialogue" type="Control" parent="UI"]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 640.0
-offset_bottom = 360.0
-mouse_filter = 1
-script = ExtResource("40_bt3bl")
-
-[node name="Variant3" type="TextureRect" parent="UI/Dialogue"]
-layout_mode = 0
-offset_left = 121.0
-offset_top = 289.0
-offset_right = 521.0
-offset_bottom = 352.0
-
-[node name="Border" type="TextureRect" parent="UI/Dialogue/Variant3"]
-layout_mode = 1
-offset_right = 400.0
-offset_bottom = 63.0
-texture = ExtResource("22_uev2u")
-
-[node name="Inner" type="TextureRect" parent="UI/Dialogue/Variant3"]
-self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.784314)
-layout_mode = 1
-offset_right = 400.0
-offset_bottom = 63.0
-texture = ExtResource("23_js3lx")
-
-[node name="Portrait" type="TextureRect" parent="UI/Dialogue/Variant3"]
-layout_mode = 0
-offset_left = -46.0
-offset_right = -3.0
-offset_bottom = 63.0
-texture = ExtResource("24_wbwd0")
-
-[node name="RectButton" type="TextureRect" parent="UI/Dialogue/Variant3"]
-layout_mode = 0
-offset_left = -17.0
-offset_top = -17.0
-offset_right = 14.0
-offset_bottom = 14.0
-mouse_filter = 0
-texture = ExtResource("25_70son")
-script = ExtResource("37_hhtxk")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/Dialogue"]
-layout_mode = 1
-offset_left = 131.0
-offset_top = 298.0
-offset_right = 511.0
-offset_bottom = 340.0
-mouse_filter = 1
-theme = ExtResource("3_h5rw7")
-text = "asddddddddasdd dddddddddddd dddddddd dddssssssssssssffffffffffffffffffffffffffssssssssssssssssssssssssssssssssssssssssss"
-fit_content = true
-shortcut_keys_enabled = false
-deselect_on_focus_loss_enabled = false
-
-[node name="Label" type="Label" parent="UI/Dialogue"]
-layout_mode = 1
-offset_left = 135.0
-offset_top = 275.0
-offset_right = 161.0
-offset_bottom = 292.0
-mouse_filter = 1
-theme = ExtResource("3_h5rw7")
-text = " Test "
-vertical_alignment = 2
-
-[node name="Shadow" type="ColorRect" parent="UI/Dialogue/Label"]
-visible = false
-self_modulate = Color(1, 1, 1, 0.784314)
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -4.5
-offset_bottom = 4.5
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.0588235, 0.0705882, 0.141176, 0.784314)
-
-[node name="Choices" type="Control" parent="UI/Dialogue"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="DialogueChoice" parent="UI/Dialogue" instance=ExtResource("36_xro35")]
-visible = false
-offset_top = 270.0
-offset_bottom = 301.0
-mouse_filter = 1
-
 [node name="TestText" type="Control" parent="."]
 visible = false
 custom_minimum_size = Vector2(640, 360)
@@ -4360,6 +4002,7 @@ position = Vector2(328, 181)
 texture = SubResource("GradientTexture2D_mvhth")
 
 [node name="LoadingBattle" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 640.0
@@ -4367,7 +4010,6 @@ offset_bottom = 360.0
 script = ExtResource("75_fytsb")
 
 [node name="TextureRect2" type="TextureRect" parent="LoadingBattle"]
-visible = false
 material = SubResource("ShaderMaterial_flnu7")
 layout_mode = 1
 anchors_preset = 15
@@ -5287,16 +4929,6 @@ method_call_mode = 1
 libraries = {
 "": SubResource("AnimationLibrary_2fqvh")
 }
-
-[node name="TimeStop" type="TextureRect" parent="."]
-visible = false
-material = SubResource("ShaderMaterial_jfs2f")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture1D_ris2g")
 
 [editable path="UI/Character/Equipment/LeftCharacterVBox/AmuletPanel/EquipButton"]
 [editable path="UI/Character/Equipment/LeftCharacterVBox/RingPanel1/EquipButton"]

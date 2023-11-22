@@ -21,8 +21,10 @@ var animation_tree: AnimationTree = null
 @export var moving_projectile: bool = false
 @export var animated: bool = false
 @export var magic: bool = false
+@export var always_show_particles: bool = false
+@export var pierce_throught: bool = false
 var projectile_owner = null
-
+var hitboxes_hit = []
 var skill = null
 var collision_object = null
 var test_color = preload("res://Art/Colors/Ice.tres")
@@ -65,7 +67,7 @@ func _physics_process(_delta):
 func move_n_collide(_delta):
 	if (moving):
 		collision_object = move_and_collide(direction*_delta*move_speed)
-		if is_instance_valid(collision_object):
+		if is_instance_valid(collision_object) and (collision_object not in hitboxes_hit):
 			#print( collision_object.get_collider() )
 			match collision_object.get_collider().name:
 				projectile_owner.name:
@@ -75,7 +77,11 @@ func move_n_collide(_delta):
 						self.add_collision_exception_with(collision_object.get_collider())
 					if skill.is_damage_skill: 
 						collision_object.get_collider().get_parent().take_damage(skill, projectile_owner, null)
-					self.delete()
+						self.add_collision_exception_with(collision_object.get_collider())
+					if not pierce_throught:
+						self.delete()
+						
+					
 				'TileMap':
 					self.delete()
 				_:
@@ -85,11 +91,15 @@ func move_n_collide(_delta):
 						self.delete()
 	else:
 		collision_object = move_and_collide(direction*_delta*move_speed)
-		if (projectile_owner == player):
-			self.rotation = ( get_global_mouse_position() - projectile_owner.global_position ).normalized().angle() + PI/2
-		else:
-			self.rotation = ( player.global_position - projectile_owner.global_position ).normalized().angle() + PI/2
+		
+		
+		#if (projectile_owner == player):
+		#	self.rotation = ( get_global_mouse_position() - projectile_owner.global_position ).normalized().angle() + PI/2
+		#else:
+		#	self.rotation = ( player.global_position - projectile_owner.global_position ).normalized().angle() + PI/2
 			
+		
+		
 			
 		if is_instance_valid(collision_object):
 			#print(collision_object.get_collider().name)
@@ -116,8 +126,11 @@ func shoot(where: Vector2, _animated: bool = false, who = null):
 	var where_y = Vector2(cos(self.rotation + PI/2), sin(self.rotation + PI/2))
 	#var where_x = Vector2(cos(self.rotation), sin(self.rotation))
 	#state_machine.travel("Start")
+	
+	#particles.process_material.direction = Vector3(where_y.x * 10.0,where_y.y * -10.0 ,0)
+	
 	if (where == Vector2.ZERO):
-		particles.process_material.direction = Vector3(where_y.x * 10.0,where_y.y * -10.0 ,0)
+		#particles.process_material.direction = Vector3(where_y.x * 10.0,where_y.y * -10.0 ,0)
 		#self.position =- (where_y * 25.0)
 		moving = false
 	else:
@@ -143,18 +156,44 @@ func change_sprite(damage_type , type):
 	#to = skill.projectile
 #	sprite.set_texture(to)
 #	texture_light.set_texture(to)
-	texture_light.color = RandomStats.type_colors[damage_type] # too many lights
-	sprite.self_modulate = RandomStats.type_colors[damage_type]
+	
+	#texture_light.color = RandomStats.type_colors[damage_type] # too many lights
+	
+	#sprite.self_modulate = RandomStats.type_colors[damage_type]
+	
 	light.color = RandomStats.type_colors[damage_type]
 	if (type == Enums.ESkillType.MAGIC):
-		
+
 		sprite.material = GlobalSkills.shaders[damage_type]
-		particles.process_material.color_ramp = GlobalSkills.colors[damage_type]
-		#sprite.self_modulate.a = 150
+		
+		
+		particles.emitting = false
+		
+		particles.process_material.color_ramp = null
+		particles.process_material.color = RandomStats.type_colors[damage_type]
+		particles.process_material.color_initial_ramp = null# GlobalSkills.colors[damage_type]
+
+		particles.emitting = true
+	elif self.always_show_particles:
+		particles.emitting = false
+		
+		particles.process_material.color_initial_ramp = null
+		particles.process_material.color_ramp = null
+		particles.process_material.color = Color8(225,225,225)
+		
 		particles.emitting = true
 	else:
+		particles.emitting = false
+		
+		particles.process_material.color_ramp = null
+		particles.process_material.color = Color8(225,225,225)
+		particles.process_material.color_initial_ramp = null
+		
+		
 		sprite.material = null
 		particles.emitting = false
+		
+
 
 	#print(particles.emission_shape)
 	#print(particles.process_material.emission_point_texture)

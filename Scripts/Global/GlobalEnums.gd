@@ -30,6 +30,15 @@ enum ECharacterBattleTrait{
 	RECKLES,
 }
 
+enum EViewerAction{
+	FIGHT,
+	SLAY,
+	BETRAY,
+	FORGIVE,
+	TRUST,
+}
+
+
 enum ECharacterActions{
 	NONE = 0,
 	TALK,
@@ -78,7 +87,7 @@ enum EDamageType {
 	NONE = 0,
 	SLASH,
 	PIERCE,
-	BLUNT,
+	STRIKE,
 	FIRE,
 	ICE,
 	WIND,
@@ -161,6 +170,7 @@ enum EEquipmentSlot {
 	ACCESSORY_1,
 	ACCESSORY_2,
 	CHARACTER,
+	CONSUMABLE,
 }
 
 enum EStat {

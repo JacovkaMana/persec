@@ -16,7 +16,7 @@
 				"requires": []
 				},
 			"Double Slash" : {
-					"description": "Slash diagonally in chosen direction.",
+					"description": "Strike twice in chosen direction.",
 					"cost": 1,
 					"damage": {
 						"value": 60,
@@ -27,7 +27,7 @@
 					"texture": "Slash",
 					"icon": "single_59",
 					"locked" : true,
-					"requires": ["Cleave"]
+					"requires": []
 					},
 			"Cleave": {
 					"description": "Perform a powerful cleaving strike, dealing damage to multiple enemies in a wide arc.",
@@ -43,7 +43,7 @@
 					"locked": false,
 					"requires": []
 				},
-			"Whirlwind": {
+			"Whirling Blade": {
 					"description": "Perform a powerful spinning attack, hitting enemies in all directions around you.",
 					"cost": 1,
 					"damage": {
@@ -84,27 +84,27 @@
 					"type" : "PIERCE"
 				},
 				"compatible" : [],
-				"texture": "Slash",
+				"texture": "SpearThrust",
 				"icon": "single_59",
 				"locked" : false,
 				"requires": []	
 			},
-			"Perforate" : {
-				"description": "Deal three quick piercing attacks.",
+			"Javelin" : {
+				"description": "Throw your weapon, piercing everything you hit.",
 				"cost": 1,
 				"damage": {
-					"value": 60,
-					"count": 3,
+					"value": 90,
+					"count": 1,
 					"type" : "PIERCE"
 				},
 				"compatible" : [],
-				"texture": "Slash",
+				"texture": "Spear",
 				"icon": "single_59",
 				"locked" : false,
 				"requires": ["Pierce"]
 			},
-			"Pierce2" : {
-				"description": "Pierce chosen spot on your enemy.",
+			"Sweep" : {
+				"description": "Sweep the legs of you enemies, causing them to fall.",
 				"cost": 1,
 				"damage": {
 					"value": 90,
@@ -118,6 +118,20 @@
 				"requires": []	
 				
 				},
+			"Perforate" : {
+				"description": "Deal three quick piercing attacks.",
+				"cost": 1,
+				"damage": {
+					"value": 60,
+					"count": 3,
+					"type" : "PIERCE"
+				},
+				"compatible" : [],
+				"texture": "Slash",
+				"icon": "single_59",
+				"locked" : false,
+				"requires": ["Sweep"]
+			},
 			"Skewer" : {
 				"description": "Deal three quick piercing attacks.",
 				"cost": 1,
@@ -130,10 +144,81 @@
 				"texture": "Slash",
 				"icon": "single_59",
 				"locked" : false,
-				"requires": []
+				"requires": ["Javelin", "Perforate"]
 				}
 		}],
-		"Crush" : [{}]
+		"Crush" : [{
+			"Strike" : {
+				"description": "Perform a powerful strike in front of you",
+				"cost": 1,
+				"damage": {
+					"value": 90,
+					"count": 1,
+					"type" : "STRIKE"
+				},
+				"compatible" : [],
+				"texture": "Slash",
+				"icon": "single_59",
+				"locked" : false,
+				"requires": []	
+			},
+			"Jump" : {
+				"description": "Jump strike",
+				"cost": 2,
+				"damage": { 
+					"value": 90,
+					"count": 1,
+					"type" : "STRIKE"
+				},
+				"compatible" : [],
+				"texture": "Slash",
+				"icon": "single_59",
+				"locked" : false,
+				"requires": ["Crush"]	
+			},
+			"Cleave" : {
+				"description": "Knockback enemies",
+				"cost": 2,
+				"damage": { 
+					"value": 90,
+					"count": 1,
+					"type" : "STRIKE"
+				},
+				"compatible" : [],
+				"texture": "Slash",
+				"icon": "single_59",
+				"locked" : false,
+				"requires": []	
+			},
+			"Ground path" : {
+				"description": "Ground strike that erupts a linear wave of energy",
+				"cost": 2,
+				"damage": { 
+					"value": 90,
+					"count": 1,
+					"type" : "STRIKE"
+				},
+				"compatible" : [],
+				"texture": "Slash",
+				"icon": "single_59",
+				"locked" : false,
+				"requires": ["Crush"]	
+			},
+			"Shockwave" : {
+				"description": "Strike the ground, collapsing everything around",
+				"cost": 2,
+				"damage": { 
+					"value": 90,
+					"count": 1,
+					"type" : "STRIKE"
+				},
+				"compatible" : [],
+				"texture": "Slash",
+				"icon": "single_59",
+				"locked" : false,
+				"requires": ["Crush"]	
+			}
+		}]
 	}],
 	"Ranged" : [{}],
 	"Magic" : [{

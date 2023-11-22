@@ -2,6 +2,7 @@ shader_type canvas_item;
 #define S(a, b, t) smoothstep(a, b, t)
 #define NUM_LAYERS 4.
 uniform vec4 shader_color : source_color = vec4(0.5, 1.0, 0.96, 1.0);
+uniform vec4 sec_color : source_color = vec4(0.5, 1.0, 0.96, 1.0);
 uniform float time_scale: hint_range(-1.0, 1.0) = 0.0;
 //#define SIMPLE
 
@@ -82,7 +83,7 @@ float NetLayer(vec2 st, float n, float t) {
 
         float s = (.005/(d*d));
         s *= S(1., .7, d);
-        float pulse = sin((fract(p[i].x)+fract(p[i].y)+t)*5.)*.4+.6;
+        float pulse = sin((fract(p[i].x)+fract(p[i].y) + t)*5.)*.4+.6;
         pulse = pow(pulse, 20.);
 
         s *= pulse;
@@ -94,10 +95,14 @@ float NetLayer(vec2 st, float n, float t) {
     m += line(p[7], p[5], st);
     m += line(p[7], p[3], st);
     
-    float sPhase = (sin(t+n)+sin(t*.1))*.25+.5;
-    sPhase += pow(sin(t*.1)*.5+.5, 50.)*5.;
-    m += sparkle*sPhase;//(*.5+.5);
+    float sPhase = (sin(t))*.25+.5;
+    sPhase += pow(sin(t)*.5+.5, 50.)*5.;
+    m += (.5);
+	
+	//sparkles
+	//m += sparkle*sPhase;//(*.5+.5);
     
+	
     return m;
 }
 
@@ -110,7 +115,7 @@ void fragment()
 	vec2 iMouse = vec2(0., 0.);
 	vec2 M = iMouse.xy/iResolution.xy-.5;
     
-    float t = TIME*.05;
+    float t = TIME*1.00;
     //t *= time_scale;
 	
     float s = sin(t);
@@ -123,23 +128,25 @@ void fragment()
     
     float m = 0.;
     for(float i=0.; i<1.; i+=1./NUM_LAYERS) {
-        float z = fract(i) + fract(t / 10.);
+        float z = fract(i);// + fract(t / 10.);
         float size = mix(15., 1., z * time_scale);
         float fade = S(0., .6, z)*S(1., .8, z);
         
-        m += fade * NetLayer(st*size-M*z, i, t);
+        m = NetLayer(st*size-M*z, i, t);
     }
     
 	//float fft  = texelFetch( iChannel0, ivec2(.7,0), 0 ).x;
-    //float glow = -uv.y*fft*2.;
+    
 	
-	float glow = -uv.y * sin(t);
+	float glow = 0.2;
+	//float glow = -uv.y * sin(t);
     
     vec3 baseCol = vec3(s, cos(t*.4), -sin(t*.24))*.4+.6;
+	//baseCol = vec3(s, cos(.4), -sin(.24)) *.4+.6;
 	baseCol = shader_color.xyz;
-    vec3 col = baseCol*m;
-	float alph = rgb2v(col) * 0.3;
-    col += baseCol*glow;
+    vec3 col = baseCol * m;
+	float alph = rgb2v(col) * 0.8;
+    col += sec_color.xyz *glow;
     
     #ifdef SIMPLE
     uv *= 10.;
@@ -148,11 +155,11 @@ void fragment()
     //if(uv.x>.98 || uv.y>.98) col += 1.;
     #else
     col *= 1.-dot(uv,uv);
-    float t_2 = mod(TIME, 230.) + 20.;
-    col *= S(0., 20., t_2)*S(224., 200., t_2);
+    //float t_2 = mod(TIME, 230.) + 20.;
+    //col *= S(0., 20., t_2)*S(224., 200., t_2);
     #endif
     float dist_to_center = pow(uv.x, 2) + pow(uv.y, 2);
 	alph *= pow(dist_to_center, 1.0);
-	alph *= 5.;
+	alph *= 2.;
     COLOR = vec4(col, alph);
 }

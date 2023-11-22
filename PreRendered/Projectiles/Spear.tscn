@@ -1,0 +1,156 @@
+[gd_scene load_steps=11 format=3 uid="uid://mcb1r3b1ncbv"]
+
+[ext_resource type="Script" path="res://Scripts/Projectile.gd" id="1_ctiwb"]
+[ext_resource type="Texture2D" uid="uid://2cp3s2mm2x5b" path="res://Art/Masks/Spear_mask.png" id="2_pnhuk"]
+[ext_resource type="Texture2D" uid="uid://l72iu1ipn60t" path="res://Art/UI/HugeProbe.png" id="4_e707a"]
+[ext_resource type="Texture2D" uid="uid://bmw2s4ps8kfm8" path="res://Art/Textures/particle_examples/floaty_32.png" id="5_auskp"]
+
+[sub_resource type="Animation" id="Animation_ge0hq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Collision:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_gx0sp"]
+resource_name = "delete"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Collision:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bullet:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y0yx3"]
+_data = {
+"RESET": SubResource("Animation_ge0hq"),
+"delete": SubResource("Animation_gx0sp")
+}
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7kovn"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 7
+particles_anim_v_frames = 7
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8jeeq"]
+emission_shape = 1
+emission_sphere_radius = 2.0
+particle_flag_disable_z = true
+direction = Vector3(0, 1, 0)
+spread = 55.0
+gravity = Vector3(0, 20, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+radial_accel_min = 10.0
+radial_accel_max = 10.0
+hue_variation_min = -0.01
+hue_variation_max = 0.01
+turbulence_noise_scale = 7.0
+turbulence_noise_speed = Vector3(0.4, 1, 0.4)
+turbulence_noise_speed_random = 0.24
+turbulence_influence_min = 1.0
+turbulence_influence_max = 1.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gjxtk"]
+radius = 2.0
+height = 40.0
+
+[node name="Projectile" type="StaticBody2D"]
+z_index = 20
+disable_mode = 1
+collision_layer = 24
+collision_mask = 24
+script = ExtResource("1_ctiwb")
+move_speed = 600.0
+moving_projectile = true
+always_show_particles = true
+pierce_throught = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_y0yx3")
+}
+
+[node name="Bullet" type="Sprite2D" parent="."]
+self_modulate = Color(0.478431, 0.168627, 0, 1)
+light_mask = 0
+z_index = 4
+z_as_relative = false
+texture = ExtResource("2_pnhuk")
+
+[node name="Particles" type="GPUParticles2D" parent="."]
+z_index = 4
+z_as_relative = false
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_7kovn")
+position = Vector2(0, -34)
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_8jeeq")
+texture = ExtResource("5_auskp")
+preprocess = 1.0
+randomness = 0.21
+interpolate = false
+visibility_rect = Rect2(-226.097, -228.15, 452.912, 461.388)
+local_coords = true
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(2.84217e-14, -5)
+scale = Vector2(1.47, 1.47)
+shape = SubResource("CapsuleShape2D_gjxtk")
+one_way_collision_margin = 20.0
+
+[node name="TextureLight" type="PointLight2D" parent="."]
+visible = false
+light_mask = 3
+color = Color(0.65098, 0.345098, 0, 1)
+blend_mode = 2
+shadow_color = Color(0, 0, 0, 1)
+shadow_filter_smooth = 44.0
+shadow_item_cull_mask = 3
+texture = ExtResource("2_pnhuk")
+
+[node name="PointLight" type="PointLight2D" parent="."]
+visible = false
+position = Vector2(-1, -16)
+color = Color(0.980392, 0.803922, 0.713726, 1)
+energy = 10.0
+range_item_cull_mask = 3
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+shadow_filter_smooth = 44.0
+shadow_item_cull_mask = 3
+texture = ExtResource("4_e707a")
+texture_scale = 0.2

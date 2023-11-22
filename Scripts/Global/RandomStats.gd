@@ -47,8 +47,8 @@ var rarity_colors: Dictionary = {
 
 var type_colors: Dictionary = {
 	Enums.EDamageType.SLASH : Color8(225,225,225),
-	Enums.EDamageType.PIERCE : Color8(225,225,225),
-	Enums.EDamageType.BLUNT : Color8(225,225,225),
+	Enums.EDamageType.PIERCE : Color8(10,10,10),
+	Enums.EDamageType.STRIKE : Color8(225,225,225),
 	Enums.EDamageType.FIRE : Color8(255,70,70),
 	Enums.EDamageType.ICE : Color8(70,160,225),
 	Enums.EDamageType.WIND : Color8(225,225,255),
@@ -63,8 +63,8 @@ var weapon_damagetype: Dictionary= {
 	Enums.EWeaponSubtype.SPEAR : Enums.EDamageType.PIERCE,
 	Enums.EWeaponSubtype.BOW : Enums.EDamageType.PIERCE,
 	Enums.EWeaponSubtype.CROSSBOW : Enums.EDamageType.PIERCE,
-	Enums.EWeaponSubtype.SHIELD : Enums.EDamageType.BLUNT,
-	Enums.EWeaponSubtype.FISTS : Enums.EDamageType.BLUNT,
+	Enums.EWeaponSubtype.SHIELD : Enums.EDamageType.STRIKE,
+	Enums.EWeaponSubtype.FISTS : Enums.EDamageType.STRIKE,
 }
 
 var weapon_damage_gap: Dictionary= {

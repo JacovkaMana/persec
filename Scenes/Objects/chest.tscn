@@ -7,18 +7,17 @@
 [ext_resource type="Texture2D" uid="uid://c6h2556xyk5g5" path="res://Art/Sprites/Boots/Boots1.png" id="5_uh7t7"]
 [ext_resource type="Material" uid="uid://bkei5kjj1v3mx" path="res://Art/Shaders/HighlightShader.tres" id="6_00w2a"]
 [ext_resource type="Texture2D" uid="uid://bns3dhl31q6cl" path="res://Art/Textures/treasure_chests_32x32.png" id="7_8u626"]
-[ext_resource type="FontFile" uid="uid://bv3p1twxqpx6p" path="res://Fonts/Minecraftia-Regular.ttf" id="8_ie8m8"]
+[ext_resource type="FontFile" uid="uid://c0s1j1n8esy7x" path="res://Fonts/Minecraftia-Regular.ttf" id="8_ie8m8"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ugfnx"]
 
 [sub_resource type="Resource" id="Resource_gbw4d"]
 script = ExtResource("2_s1dj0")
-physical_defence = 0.0
-magic_defence = 0.0
-fire_defence = 0.0
-ice_defence = 0.0
+armor_type = 0
 max_durability = 1.0
 modifiers = Array[Resource("res://Scripts/Item_scripts/ModifierScript.gd")]([])
+item_stats = {}
+item_level = 1
 name = "ChestArmor"
 sprite = ExtResource("3_iac4y")
 description = "INITIALIZED"
@@ -29,8 +28,11 @@ base_cost = 0.0
 
 [sub_resource type="Resource" id="Resource_c1cno"]
 script = ExtResource("4_avi7e")
+armor_type = 0
 max_durability = 1.0
 modifiers = Array[Resource("res://Scripts/Item_scripts/ModifierScript.gd")]([])
+item_stats = {}
+item_level = 1
 name = "ChestBoots"
 sprite = ExtResource("5_uh7t7")
 description = "INITIALIZED"
@@ -176,6 +178,7 @@ visible = false
 shape = SubResource("RectangleShape2D_qdoy3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 33
 material = ExtResource("6_00w2a")
 texture = ExtResource("7_8u626")
 hframes = 10

@@ -9,6 +9,9 @@ extends Item
 func get_item_actions():
 	return [Enums.EItemActions.EQUIP, Enums.EItemActions.DROP]
 
+func get_type_text()->String:
+		return "Equipable"
+		
 func generate_modifiers():
 	#print(self.rarity, Enums.ERarity.keys()[self.rarity])
 	for i in range(self.rarity - 1):

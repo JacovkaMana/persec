@@ -10,13 +10,17 @@ extends CanvasLayer
 @onready var Menu_Animation = $PauseMenu/AnimationPlayer
 @onready var DroppedItems_UI = $UI/DroppedItems
 @onready var UI_Control = $UI
+@onready var HUD_Control = $HUD
 @onready var SceneManager = self.get_tree().get_root().find_child("SceneManager", true, false)
+@onready var player: PlayerScript = get_tree().get_root().find_child("Player", true, false)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	InputManager.UI_Global = self
 	
 	var bg_children = find_children("Background", "TextureRect", true, false)
 	#var Background_children = self.find_children("Background", "TextureRect", true, false)
+	player.connect("dialogue_started", dialogue_start)
+	player.connect("dialogue_ended", show_hud)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -28,6 +32,17 @@ func close_everything():
 	Inventory_UI.visible = false
 	Character_UI.visible = false
 
+
+	
+func hide_hud():
+	HUD_Control.visible = false
+	
+func dialogue_start(with, text):
+	self.hide_hud()
+
+func show_hud():
+	HUD_Control.visible = true
+	
 func pause_game():
 	self.get_parent().pause_game()
 
