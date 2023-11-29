@@ -4,6 +4,8 @@ shader_type canvas_item;
 uniform vec4 shader_color : source_color = vec4(0.5, 1.0, 0.96, 1.0);
 uniform vec4 sec_color : source_color = vec4(0.5, 1.0, 0.96, 1.0);
 uniform float time_scale: hint_range(-1.0, 1.0) = 0.0;
+uniform float speed: hint_range(0.0, 1.0) = 1.0;
+uniform float progress: hint_range(0.0, 100.0) = 0.0;
 //#define SIMPLE
 
 
@@ -132,7 +134,8 @@ void fragment()
         float size = mix(15., 1., z * time_scale);
         float fade = S(0., .6, z)*S(1., .8, z);
         
-        m = NetLayer(st*size-M*z, i, t);
+        //m = NetLayer(st*size-M*z, i, t - speed);
+		m = NetLayer(st*size-M*z, i, t * progress );	
     }
     
 	//float fft  = texelFetch( iChannel0, ivec2(.7,0), 0 ).x;

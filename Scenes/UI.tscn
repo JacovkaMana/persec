@@ -1,4 +1,4 @@
-[gd_scene load_steps=223 format=3 uid="uid://dbksnam8cuw3o"]
+[gd_scene load_steps=228 format=3 uid="uid://dbksnam8cuw3o"]
 
 [ext_resource type="Script" path="res://Scripts/UI_scripts/CharacterUI.gd" id="1_8tod6"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/UI.gd" id="1_cvjfy"]
@@ -111,6 +111,8 @@
 [ext_resource type="Texture2D" uid="uid://muqk12udbcqv" path="res://Art/UI/skiltree_movin2.png" id="101_lrrqo"]
 [ext_resource type="Shader" path="res://Art/Shaders/TimeStopShaderScript.gdshader" id="110_5x0ev"]
 [ext_resource type="Shader" path="res://Art/Shaders/SoundBar.gdshader" id="111_egqb6"]
+[ext_resource type="Script" path="res://Scenes/Anim.gd" id="112_ofk0a"]
+[ext_resource type="Texture2D" uid="uid://27ha0akqqexa" path="res://Art/Animations/pipo-btleffect214_192.png" id="112_owock"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_71ey8"]
 
@@ -697,11 +699,74 @@ point_count = 2
 [sub_resource type="LabelSettings" id="LabelSettings_01sfh"]
 font = ExtResource("5_ai818")
 
+[sub_resource type="Animation" id="Animation_kppei"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Test_anim:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TimeStop:material:shader_parameter/progress")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [10.0]
+}
+
+[sub_resource type="Animation" id="Animation_nynud"]
+resource_name = "test"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Test_anim:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [4, 14]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TimeStop:material:shader_parameter/progress")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.3),
+"transitions": PackedFloat32Array(0.406126, 1),
+"update": 1,
+"values": [10.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b3oai"]
+_data = {
+"RESET": SubResource("Animation_kppei"),
+"test": SubResource("Animation_nynud")
+}
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jfs2f"]
 shader = ExtResource("110_5x0ev")
 shader_parameter/shader_color = Color(1, 0.682353, 0.501961, 1)
 shader_parameter/sec_color = Color(0.470588, 0.0117647, 1, 1)
-shader_parameter/time_scale = 0.562
+shader_parameter/time_scale = 0.535
+shader_parameter/speed = 0.100001
+shader_parameter/progress = 10.0
 
 [sub_resource type="Gradient" id="Gradient_6130l"]
 offsets = PackedFloat32Array(1)
@@ -778,10 +843,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 41280.0
-offset_top = 23390.0
-offset_right = 41920.0
-offset_bottom = 23408.0
+offset_left = 41600.0
+offset_top = 23570.0
+offset_right = 42240.0
+offset_bottom = 23588.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(320, 9)
@@ -5288,9 +5353,32 @@ libraries = {
 "": SubResource("AnimationLibrary_2fqvh")
 }
 
-[node name="TimeStop" type="TextureRect" parent="."]
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("112_ofk0a")
+
+[node name="Test_anim" type="Sprite2D" parent="Control"]
+visible = false
+position = Vector2(326, 182)
+texture = ExtResource("112_owock")
+hframes = 5
+vframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control"]
+libraries = {
+"": SubResource("AnimationLibrary_b3oai")
+}
+
+[node name="TimeStop" type="TextureRect" parent="Control"]
 visible = false
 material = SubResource("ShaderMaterial_jfs2f")
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
