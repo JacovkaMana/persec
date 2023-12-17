@@ -1,11 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://ds80tmmdn33bb"]
+[gd_scene load_steps=15 format=3 uid="uid://djoaiesde0wqm"]
 
-[ext_resource type="Script" path="res://Scripts/Projectile.gd" id="1_g7ej1"]
-[ext_resource type="Texture2D" uid="uid://2cp3s2mm2x5b" path="res://Art/Masks/Spear_mask.png" id="2_dxmoo"]
-[ext_resource type="Texture2D" uid="uid://28g7ujqgpkoj" path="res://Art/Masks/Spear_thrust.png" id="2_va1ap"]
-[ext_resource type="Texture2D" uid="uid://xf4yj6iacl1t" path="res://Art/Colors/Gold.tres" id="3_8ydnb"]
-[ext_resource type="Texture2D" uid="uid://bmw2s4ps8kfm8" path="res://Art/Textures/particle_examples/floaty_32.png" id="4_dw0sc"]
-[ext_resource type="Texture2D" uid="uid://l72iu1ipn60t" path="res://Art/UI/HugeProbe.png" id="5_166by"]
+[ext_resource type="Script" path="res://Scripts/Projectile.gd" id="1_dxb3w"]
+[ext_resource type="Texture2D" uid="uid://5tdgmlx4mu5c" path="res://Art/Masks/Strike_forward.png" id="2_ixrww"]
+[ext_resource type="Texture2D" uid="uid://bmw2s4ps8kfm8" path="res://Art/Textures/particle_examples/floaty_32.png" id="4_3waww"]
+[ext_resource type="Texture2D" uid="uid://2cp3s2mm2x5b" path="res://Art/Masks/Spear_mask.png" id="5_0juv5"]
+[ext_resource type="Texture2D" uid="uid://l72iu1ipn60t" path="res://Art/UI/HugeProbe.png" id="6_om2tb"]
 
 [sub_resource type="Animation" id="Animation_ge0hq"]
 length = 0.001
@@ -45,13 +44,25 @@ tracks/2/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Bullet:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gjxtk"]
 radius = 3.5
 
 [sub_resource type="Animation" id="Animation_x1df3"]
 resource_name = "Start"
-length = 0.4
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -59,10 +70,10 @@ tracks/0/path = NodePath("Bullet:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [4, 0]
+"values": [4, 3, 2, 1]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -107,7 +118,7 @@ tracks/4/path = NodePath("Particles:emitting")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.1),
+"times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -119,7 +130,7 @@ tracks/5/path = NodePath("Particles:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.1),
+"times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -155,7 +166,14 @@ particles_anim_h_frames = 7
 particles_anim_v_frames = 7
 particles_anim_loop = false
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_feroe"]
+[sub_resource type="Gradient" id="Gradient_crfqd"]
+offsets = PackedFloat32Array(0.137652, 0.88664)
+colors = PackedColorArray(0.44, 0.240827, 0.0132, 1, 0.88, 0.6336, 0.1408, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hlpu8"]
+gradient = SubResource("Gradient_crfqd")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_iv13n"]
 emission_shape = 6
 emission_ring_axis = Vector3(0, -3, 1)
 emission_ring_height = 1.0
@@ -164,13 +182,14 @@ emission_ring_inner_radius = 4.0
 particle_flag_rotate_y = true
 particle_flag_disable_z = true
 direction = Vector3(0, -40, 0)
+spread = 180.0
 flatness = 0.56
 gravity = Vector3(0, 0, 0)
 initial_velocity_min = 40.0
 initial_velocity_max = 60.0
 orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
-color_ramp = ExtResource("3_8ydnb")
+color_ramp = SubResource("GradientTexture1D_hlpu8")
 hue_variation_min = -0.01
 hue_variation_max = 0.01
 turbulence_noise_scale = 7.0
@@ -185,7 +204,7 @@ z_index = 20
 disable_mode = 1
 collision_layer = 24
 collision_mask = 24
-script = ExtResource("1_g7ej1")
+script = ExtResource("1_dxb3w")
 move_speed = 200.0
 always_show_particles = true
 pierce_throught = true
@@ -201,7 +220,7 @@ light_mask = 0
 z_index = 4
 z_as_relative = false
 position = Vector2(0, -49)
-texture = ExtResource("2_va1ap")
+texture = ExtResource("2_ixrww")
 vframes = 5
 
 [node name="Particles" type="GPUParticles2D" parent="."]
@@ -210,11 +229,11 @@ z_as_relative = false
 texture_filter = 1
 texture_repeat = 2
 material = SubResource("CanvasItemMaterial_7kovn")
-position = Vector2(0, -81.33)
+position = Vector2(0, -66)
 emitting = false
-amount = 20
-process_material = SubResource("ParticleProcessMaterial_feroe")
-texture = ExtResource("4_dw0sc")
+amount = 40
+process_material = SubResource("ParticleProcessMaterial_iv13n")
+texture = ExtResource("4_3waww")
 lifetime = 0.5
 one_shot = true
 speed_scale = 2.0
@@ -236,7 +255,7 @@ blend_mode = 2
 shadow_color = Color(0, 0, 0, 1)
 shadow_filter_smooth = 44.0
 shadow_item_cull_mask = 3
-texture = ExtResource("2_dxmoo")
+texture = ExtResource("5_0juv5")
 
 [node name="PointLight" type="PointLight2D" parent="."]
 visible = false
@@ -248,5 +267,5 @@ shadow_enabled = true
 shadow_color = Color(0, 0, 0, 1)
 shadow_filter_smooth = 44.0
 shadow_item_cull_mask = 3
-texture = ExtResource("5_166by")
+texture = ExtResource("6_om2tb")
 texture_scale = 0.2

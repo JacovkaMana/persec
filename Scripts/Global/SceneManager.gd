@@ -10,6 +10,9 @@ var ui_scene = null
 var melee_scene = null
 
 
+@onready var scene_animator = $SceneAnimator
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
@@ -49,12 +52,12 @@ func setup_level(player_data, next_scene, melee_scene):
 	
 func add_melee(player, enemies):
 	melee_scene = melee.instantiate()
-	
+
 	next_scene.visible = false
 	next_scene.process_mode = 4
 	ui_scene.visible = false
 	ui_scene.process_mode = 4
-	
+
 	self.add_child(melee_scene)
 	melee_scene.get_child(0).setup(player, enemies)
 	print(player)

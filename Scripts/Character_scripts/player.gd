@@ -2,8 +2,9 @@ extends Actor
 class_name PlayerScript
 
 signal dropped_inventory_opened(item_array: Array[Item])
-signal dialogue_started(with: String, text: String)
+signal dialogue_started(with: String)
 signal dialogue_ended()
+signal dialogue_continue(choice: int)
 signal skill_used(skill_id: int)
 signal kill_confirmed(who: Actor)
 signal money_earned(much: int)
@@ -75,7 +76,7 @@ func _ready():
 	data.skills.add_skill(GlobalSkills.get_by_name('Javelin'))
 	data.skills.add_skill(GlobalSkills.get_by_name('Pierce'))
 	data.skills.add_skill(GlobalSkills.get_by_name('Fire Armament'))
-	data.skills.add_skill(GlobalSkills.get_by_name('Defend'))
+	data.skills.add_skill(GlobalSkills.get_by_name('Strike'))
 	data.skills.add_skill(GlobalSkills.get_by_name('Double Slash'))
 
 
@@ -151,28 +152,32 @@ func use_skill_id(id: int):
 
 	
 func interact_with_nearest():
-	if interaction_target:
-		interaction_target.interact()
-	elif (interaction_area.get_overlapping_areas()):
-		interaction_area.get_overlapping_areas()[0].get_parent().interact()
+	match self.player_state:
+		Enums.EPlayerState.ROAMING:
+			if interaction_target:
+				interaction_target.interact()
+			elif (interaction_area.get_overlapping_areas()):
+				interaction_area.get_overlapping_areas()[0].get_parent().interact()
+		Enums.EPlayerState.TALKING:
+			self.emit_signal("dialogue_continue", 0)
 #		if interaction_area.get_overlapping_areas()[0].get_parent().get_class() == "CharacterBody2D":
 #			trigger_dialogue(interaction_area.get_overlapping_areas()[0].get_parent())
 
-func trigger_dialogue(with):
-	interaction_target = with
-	
-	var dialogue_text = with.get_dialogue()
-	
-	if dialogue_text == null:
-		interaction_target = null
-		player_state = Enums.EPlayerState.ROAMING
-		with.current_state = Enums.ECharacterState.ROAMING
-		self.emit_signal("dialogue_ended")
-	else:
-		print("Dialogue with " + str(with))
-		self.emit_signal("dialogue_started", with.npc_name, dialogue_text)
-		self.player_state = Enums.EPlayerState.TALKING
-		with.current_state = Enums.ECharacterState.TALKING
+#func trigger_dialogue(with):
+#	interaction_target = with
+#
+#	var dialogue_text = with.get_dialogue()
+#
+#	if dialogue_text == null:
+#		interaction_target = null
+#		player_state = Enums.EPlayerState.ROAMING
+#		with.current_state = Enums.ECharacterState.ROAMING
+#		self.emit_signal("dialogue_ended")
+#	else:
+#		print("Dialogue with " + str(with))
+#		self.emit_signal("dialogue_started", with.npc_name, dialogue_text)
+#		self.player_state = Enums.EPlayerState.TALKING
+#		with.current_state = Enums.ECharacterState.TALKING
 	
 
 

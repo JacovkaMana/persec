@@ -16,7 +16,7 @@ extends CanvasLayer
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	InputManager.UI_Global = self
-	
+	self.close_everything()
 	var bg_children = find_children("Background", "TextureRect", true, false)
 	#var Background_children = self.find_children("Background", "TextureRect", true, false)
 	player.connect("dialogue_started", dialogue_start)

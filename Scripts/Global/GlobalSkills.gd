@@ -7,7 +7,7 @@ var shaders = {
 	Enums.EDamageType.THUNDER: preload("res://Art/Shaders/ThunderShader.tres"),
 	Enums.EDamageType.WATER : preload("res://Art/Shaders/WaterShader.tres"),
 	Enums.EDamageType.WIND : preload("res://Art/Shaders/WindShader.tres"),
-	Enums.EDamageType.FIRE : preload("res://Art/Shaders/SkillShader.tres"),
+	Enums.EDamageType.FIRE : preload("res://Art/Shaders/FireShader.tres"),
 }
 
 var colors = {

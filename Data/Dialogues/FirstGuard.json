@@ -1,0 +1,32 @@
+{
+	"Vision_Trigger": [
+		{
+			"text": "What are you doing here?",
+			"answers": {
+				"Idk": "1",
+				"Strolling": "1",
+				"Fight": "Fight"
+			}
+		},
+		{
+			"text": "Do you even know where you are?",
+			"answers": {
+				"Of course": "2",
+				"No, where?": "3"
+			}
+		},
+		{
+			"text": "So? Where do you think this is?",
+			"answers": {
+				"...": "Fight",
+				"Dungeons": "Locked(Cleared once) Then pass one"
+			}
+		},
+		{
+			"text": "Kill yourself",
+			"answers": {
+				"Fight": "Fight"
+			}
+		}
+	]
+}

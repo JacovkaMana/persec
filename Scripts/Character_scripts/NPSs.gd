@@ -1,7 +1,7 @@
 extends Actor
 class_name NPS
 
-@export var npc_name: String = ""
+@export var npc_name: String = "FirstGuard"
 @export var behaviuor: Enums.ECharacterBehaviour
 @export var fight_ai : BaseAI
 #stats
@@ -269,7 +269,10 @@ func _on_anim_finished(name):
 
 func interact():
 	if Enums.ECharacterActions.TALK in self.interaction_list:
-			player.trigger_dialogue(self)
+			#player.trigger_dialogue(self)
+			player.emit_signal("dialogue_started", self.npc_name)
+			player.player_state = Enums.EPlayerState.TALKING
+			self.current_state = Enums.ECharacterState.TALKING
 	return null
 
 func use_skill_id(id: int):

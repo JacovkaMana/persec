@@ -157,7 +157,7 @@
 					"type" : "STRIKE"
 				},
 				"compatible" : [],
-				"texture": "Slash",
+				"texture": "StrikeForward",
 				"icon": "single_59",
 				"locked" : false,
 				"requires": []	
