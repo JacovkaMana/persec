@@ -253,19 +253,24 @@ func take_damage(_skill: Skill, _from: Actor, _strength):
 		die()
 		
 func die():
+	self.move_direction = Vector2(0, 0)
+	self.look_at = null
 	animation_tree.set("parameters/death/transition_request", "true")
 	player.kill_confirm(self)
 	print('die')
 
 func _on_anim_finished(name):
-	if (name == "death"):
-		var death_chest = Chest.instantiate()
-		
-		self.get_parent().add_child(death_chest)
-		death_chest.created_by = self
-		death_chest.global_position = self.global_position
-		death_chest.chest_inventory = self.data.inventory.get_inventory_items()
-		self.queue_free()
+	match name:
+		"death":
+			var death_chest = Chest.instantiate()
+			
+			self.move_direction = Vector2(0, 0)
+			self.look_at = null
+			self.get_parent().add_child(death_chest)
+			death_chest.created_by = self
+			death_chest.global_position = self.global_position
+			death_chest.chest_inventory = self.data.inventory.get_inventory_items()
+			self.queue_free()
 
 func interact():
 	if Enums.ECharacterActions.TALK in self.interaction_list:

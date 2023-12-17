@@ -48,6 +48,8 @@ func get_enemy_node(id: int):
 	return enemy_node
 	
 func end_melee():
+	for enemy in enemies:		
+		enemy.current_state = Enums.ECharacterState.IDLE
 	SceneManager.remove_melee()
 	
 func play_damage(skill: Skill):

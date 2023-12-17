@@ -13,21 +13,21 @@ func _process(delta):
 	pass
 
 func _input(event):
-	
-	match (player.player_state):
-		Enums.EPlayerState.NONE:
-			pass
-		Enums.EPlayerState.ROAMING:
-			ui(event)
-			player_movement(event)
-			use_skills(event)
-			interact(event)
-		Enums.EPlayerState.TALKING:
-			interact(event)
-		Enums.EPlayerState.RANGE:
-			pass
-		Enums.EPlayerState.MELEE:
-			use_skills(event)
+	if is_instance_valid(player):
+		match (player.player_state):
+			Enums.EPlayerState.NONE:
+				pass
+			Enums.EPlayerState.ROAMING:
+				ui(event)
+				player_movement(event)
+				use_skills(event)
+				interact(event)
+			Enums.EPlayerState.TALKING:
+				interact(event)
+			Enums.EPlayerState.RANGE:
+				pass
+			Enums.EPlayerState.MELEE:
+				use_skills(event)
 
 
 

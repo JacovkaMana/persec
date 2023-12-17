@@ -51,11 +51,13 @@ func projectile_coming(which):
 
 		
 func check_projectiles():
-	for proj in visible_projectiles:
-		var check_distance = owner.global_position.distance_to(proj.global_position)
-		var check_time = check_distance / proj.move_speed
-		if (check_time < 0.3):
-			use_defence()
+	if is_instance_valid(owner):
+		for proj in visible_projectiles:
+			if is_instance_valid(proj):
+				var check_distance = owner.global_position.distance_to(proj.global_position)
+				var check_time = check_distance / proj.move_speed
+				if (check_time < 0.3):
+					use_defence()
 	#owner.move_direction += Vector2(cos(_angle - PI/2),sin(_angle - PI/2))
 
 func projectile_exited(which):

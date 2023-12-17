@@ -10,11 +10,16 @@ var ui_scene = null
 var melee_scene = null
 
 
-@onready var scene_animator = $SceneAnimator
+@onready var scene_animator: AnimationPlayer = $SceneTransitionLayer/AnimationPlayer
 
+
+var player = null
+var enemies = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
+	scene_animator.connect("animation_finished", _on_animation_finished)
 	
 	next_scene = next_level_resource.instantiate()
 	self.add_child(next_scene)
@@ -51,23 +56,35 @@ func setup_level(player_data, next_scene, melee_scene):
 	
 	
 func add_melee(player, enemies):
-	melee_scene = melee.instantiate()
+	
+	scene_animator.queue("into_battle")
+	self.player = player
+	self.enemies = enemies
+	
+func _on_animation_finished(_anim):
+	scene_animator.queue("RESET")
+	match _anim:
+		"into_battle":
+				
+			melee_scene = melee.instantiate()
 
-	next_scene.visible = false
-	next_scene.process_mode = 4
-	ui_scene.visible = false
-	ui_scene.process_mode = 4
+			next_scene.visible = false
+			next_scene.process_mode = 4
+			ui_scene.visible = false
+			ui_scene.process_mode = 4
 
-	self.add_child(melee_scene)
-	melee_scene.get_child(0).setup(player, enemies)
-	print(player)
-	print(player.get_script())
+			self.add_child(melee_scene)
+			melee_scene.get_child(0).setup(player, enemies)
+			print(player)
+			print(player.get_script())
+		
+		"out_of_battle":
+			var player_melee = melee_scene.find_child("MeleePlayer", true, false)
+			setup_level(player_melee.data, next_scene, melee_scene.get_child(0))
+			melee_scene.queue_free()
 	
 func remove_melee():
-	var player_melee = melee_scene.find_child("MeleePlayer", true, false)
-	setup_level(player_melee.data, next_scene, melee_scene.get_child(0))
-	
-	melee_scene.queue_free()
+	scene_animator.queue("out_of_battle")
 	
 func pause_game():
 	next_scene.process_mode = 4
