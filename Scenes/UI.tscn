@@ -1,4 +1,4 @@
-[gd_scene load_steps=236 format=3 uid="uid://dbksnam8cuw3o"]
+[gd_scene load_steps=233 format=3 uid="uid://dbksnam8cuw3o"]
 
 [ext_resource type="Script" path="res://Scripts/UI_scripts/CharacterUI.gd" id="1_8tod6"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/UI.gd" id="1_cvjfy"]
@@ -81,7 +81,6 @@
 [ext_resource type="Shader" path="res://Art/Shaders/BgScript.gdshader" id="74_7oajc"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/LoadingBattle.gd" id="75_fytsb"]
 [ext_resource type="Shader" path="res://Art/Shaders/MenuScript.gdshader" id="75_oi43j"]
-[ext_resource type="Texture2D" uid="uid://dr6ylkuvmfsqs" path="res://Art/Noise/iChannel2.png" id="77_2vvdw"]
 [ext_resource type="Material" uid="uid://djg1cgtoywnnr" path="res://Art/Shaders/UI_MenuCircle.tres" id="78_1ytav"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/MenuContent.gd" id="78_3y0fa"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/MenuVitals.gd" id="78_nwtx8"]
@@ -475,22 +474,11 @@ gradient = SubResource("Gradient_mqklq")
 width = 640
 height = 320
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_atnpy"]
-noise_type = 0
-seed = 6
-frequency = 0.02
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_locwd"]
-noise = SubResource("FastNoiseLite_atnpy")
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_flnu7"]
-shader = ExtResource("74_7oajc")
-shader_parameter/progress = 0.149314
-shader_parameter/ratio_scale = 0.82
-shader_parameter/speed_scale = 3.0
-shader_parameter/ring_color = Color(0.980392, 0.137255, 1, 1)
-shader_parameter/iChannel1 = SubResource("NoiseTexture2D_locwd")
-shader_parameter/iChannel2 = ExtResource("77_2vvdw")
+shader = ExtResource("114_ta6d8")
+shader_parameter/scale = 0.16
+shader_parameter/time = 6.41
+shader_parameter/show_grid = false
 
 [sub_resource type="Gradient" id="Gradient_niu05"]
 
@@ -766,7 +754,7 @@ _data = {
 shader = ExtResource("110_5x0ev")
 shader_parameter/shader_color = Color(1, 0.682353, 0.501961, 1)
 shader_parameter/sec_color = Color(0.470588, 0.0117647, 1, 1)
-shader_parameter/time_scale = 0.535
+shader_parameter/time_scale = 0.445
 shader_parameter/speed = 0.100001
 shader_parameter/progress = 10.0
 
@@ -873,10 +861,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 43840.0
-offset_top = 24830.0
-offset_right = 44480.0
-offset_bottom = 24848.0
+offset_left = 44160.0
+offset_top = 25010.0
+offset_right = 44800.0
+offset_bottom = 25028.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(320, 9)
@@ -4462,6 +4450,18 @@ offset_bottom = 360.0
 script = ExtResource("75_fytsb")
 
 [node name="TextureRect2" type="TextureRect" parent="LoadingBattle"]
+visible = false
+material = SubResource("ShaderMaterial_flnu7")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_fvp6c")
+expand_mode = 2
+
+[node name="TextureRect4" type="TextureRect" parent="LoadingBattle"]
 visible = false
 material = SubResource("ShaderMaterial_flnu7")
 layout_mode = 1

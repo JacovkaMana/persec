@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dmsq6lvyo406x"]
+[gd_scene load_steps=7 format=3 uid="uid://brwn02vxj6hba"]
 
-[ext_resource type="Theme" uid="uid://l3ac6jr0hvrq" path="res://Themes/ui_theme.tres" id="1_06kb1"]
+[ext_resource type="Theme" uid="uid://l3ac6jr0hvrq" path="res://Themes/ui_theme.tres" id="1_8idm3"]
+[ext_resource type="Texture2D" uid="uid://bgtg5vu2hb3gt" path="res://Art/UI/test_romb.png" id="2_dgs36"]
 
 [sub_resource type="Gradient" id="Gradient_1gbcx"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
@@ -23,17 +24,20 @@ anchors_preset = 0
 offset_left = 104.0
 offset_top = 239.0
 offset_right = 204.0
-offset_bottom = 253.0
+offset_bottom = 270.0
 
 [node name="Label" type="Label" parent="."]
-layout_mode = 1
-offset_right = 380.0
-offset_bottom = 14.0
-theme = ExtResource("1_06kb1")
+layout_mode = 0
+offset_left = -4.0
+offset_top = 3.0
+offset_right = 376.0
+offset_bottom = 34.0
+theme = ExtResource("1_8idm3")
 text = "                  Trade"
 vertical_alignment = 1
 
 [node name="Bg" type="TextureRect" parent="Label"]
+visible = false
 self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.784314)
 show_behind_parent = true
 clip_children = 2
@@ -54,3 +58,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture1D_na7hh")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_top = 2.0
+offset_right = 31.0
+offset_bottom = 33.0
+texture = ExtResource("2_dgs36")

@@ -1,12 +1,14 @@
 {
-	"Vision_Trigger": [
+	"Trade": "Have something?",
+	"Fight": "Bring it on",
+	"Talk": [
 		{
 			"text": "What are you doing here?",
 			"answers": {
 				"Idk": 1,
 				"Strolling": 1,
-				"Fight": "Fight",
-				"Trade": "Have something?"
+				"Strollin2g": 1,
+				"Strollin3g": 1
 			}
 		},
 		{

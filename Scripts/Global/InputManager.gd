@@ -70,9 +70,9 @@ func use_skills(_event):
 			player.use_skill_id(3)
 		if _event.is_action_pressed("skill5"):
 			player.use_skill_id(4)
-		if _event.is_action_pressed("skill6"):
-			player.use_skill_id(5)
-		if _event.is_action_pressed("skill7"):
-			player.use_skill_id(6)
-		if _event.is_action_pressed("skill8"):
-			player.use_skill_id(7)
+#		if _event.is_action_pressed("skill6"):
+#			player.use_skill_id(5)
+#		if _event.is_action_pressed("skill7"):
+#			player.use_skill_id(6)
+#		if _event.is_action_pressed("skill8"):
+#			player.use_skill_id(7)

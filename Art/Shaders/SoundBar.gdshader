@@ -2,15 +2,15 @@ shader_type canvas_item;
 
 uniform float power : hint_range(1., 100., 1.) = 5.;
 
-#define NB_BARS		8
-#define NB_SAMPLES	16
+const int NB_BARS = 8;
+const int NB_SAMPLES = 16;
 // WARNING : NB_BARS x NB_SAMPLES must be 512
 
 // space between bars (relative to bar width)
-#define SPACE		0.15
+const float SPACE = 0.15;
 
 // space without bars, left and right (relative to window size)
-#define SIDE_SPACE  0.04
+const float SIDE_SPACE = 0.04;
 
 // from here: www.shadertoy.com/view/XtjBzG
 vec3 heatColorMap(float t)

@@ -74,4 +74,4 @@ func _process(delta):
 	
 	
 	
-	sound_bar.get_child(0).material.set("shader_param/power", player.viewer_manager.get_overall_satisfaction());
+	sound_bar.get_child(0).material.set("shader_parameter/power", player.viewer_manager.get_overall_satisfaction());
