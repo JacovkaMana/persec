@@ -21,6 +21,15 @@ var tween
 @onready var statuses_container = $StatusesContainer
 
 # Called when the node enters the scene tree for the first time.
+
+func close_lower():
+	$SoundBar.visible = false
+	$StaminaContainer.visible = false
+	$SkillsHotbar.visible = false
+	$ItemsHotbar.visible = false
+	$Status.visible = false
+	$StatusesContainer.visible = false
+	
 func _ready():
 	
 	for i in range(stamina_blocks.get_child_count()):

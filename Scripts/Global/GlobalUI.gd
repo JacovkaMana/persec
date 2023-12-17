@@ -9,6 +9,7 @@ extends CanvasLayer
 @onready var Menu_Content = $PauseMenu/MenuContent
 @onready var Menu_Animation = $PauseMenu/AnimationPlayer
 @onready var DroppedItems_UI = $UI/DroppedItems
+@onready var SoundBar = $HUD/SoundBar
 @onready var UI_Control = $UI
 @onready var HUD_Control = $HUD
 @onready var SceneManager = self.get_tree().get_root().find_child("SceneManager", true, false)
@@ -32,7 +33,11 @@ func close_everything():
 	Inventory_UI.visible = false
 	Character_UI.visible = false
 
-
+func close_for_dialogue():
+	DroppedItems_UI.visible = false
+	Inventory_UI.visible = false
+	Character_UI.visible = false
+	HUD_Control.close_lower()	
 	
 func hide_hud():
 	HUD_Control.visible = false

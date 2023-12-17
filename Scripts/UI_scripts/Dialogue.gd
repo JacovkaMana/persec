@@ -15,7 +15,8 @@ var ItemButton = preload("res://Scenes/Inventory/ItemButton.tscn")
 @onready var tween = self.create_tween()
 var _item_inventory = null
 
-@onready var ui_settings = get_parent().get_parent()
+@onready var ui_settings = $"../.."
+@onready var hud_settings = $"../../HUD"
 @onready var bground = $Background
 @onready var shadow = $Shadow
 @onready var name_label = $Label
@@ -28,6 +29,10 @@ var dialogue_json = null
 var current_id = null
 var current_answers = null
 
+
+var fight_choice_icon = preload("res://Art/UI/choice_fight.png")
+var speak_choice_icon = preload("res://Art/UI/choice_speak.png")
+var trade_choice_icon = preload("res://Art/UI/choice_trade.png")
 
 
 func _ready():
@@ -44,7 +49,7 @@ func _on_dialogue(with):
 	current_id = 0
 	current_answers = dialogue_json.data['Vision_Trigger'][current_id]['answers']
 	self._on_choice(current_answers.keys())
-	ui_settings.close_everything()
+	ui_settings.close_for_dialogue()
 	text_label.text = dialogue_json.data['Vision_Trigger'][current_id]['text']
 	name_label.text = ' ' + with + ' '
 	self.visible = true
@@ -64,6 +69,8 @@ func _remove_choise():
 func _on_choice(choices):
 	if len(choices_array.get_children()) != 0:
 		return 2
+		
+		
 	var i = 1
 	var tween = self.find_child('tween')
 	if tween:
@@ -72,12 +79,34 @@ func _on_choice(choices):
 	
 	var last_position = Vector2(104, 270)
 	var new_position = Vector2(104, 270)
+	
+	var _i = 2
+	for one in ['Fight', 'Trade']:
+		
+		if one in choices:
+			choices.erase(one)
+			choices.insert(i, one)
+			i += 2 
+	
 	for one in choices:
 		
 		var choise = dialogue_choice.instantiate()
 		choise.position = Vector2(104, 270)
 		choise.get_child(0).text = one
+		
+		match one:
+			'Fight' : 
+				choise.get_child(1).texture = fight_choice_icon
+				choise.get_child(0).visible = false
+			'Trade' : 
+				choise.get_child(1).texture = trade_choice_icon
+				choise.get_child(0).visible = false
+			_: 
+				choise.get_child(1).texture = speak_choice_icon
+				
+				
 		choices_array.add_child(choise)
+		
 		
 		
 		if (i % 2) == 0:

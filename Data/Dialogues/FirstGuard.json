@@ -3,16 +3,17 @@
 		{
 			"text": "What are you doing here?",
 			"answers": {
-				"Idk": "1",
-				"Strolling": "1",
-				"Fight": "Fight"
+				"Idk": 1,
+				"Strolling": 1,
+				"Fight": "Fight",
+				"Trade": "Have something?"
 			}
 		},
 		{
 			"text": "Do you even know where you are?",
 			"answers": {
-				"Of course": "2",
-				"No, where?": "3"
+				"Of course": 2,
+				"No, where?": 3
 			}
 		},
 		{
