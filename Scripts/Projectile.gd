@@ -11,7 +11,7 @@ var animation_tree: AnimationTree = null
 @onready var texture_light: PointLight2D = $TextureLight
 @onready var light: PointLight2D = $PointLight
 @onready var player = get_tree().get_root().find_child("Player", true, false)
-
+@onready var scene_manager = get_tree().get_root().get_child(-1)
 
 #@onready var particles = $GPUParticles2D
 #@onready var state_machine = animation_tree.get("parameters/playback")
@@ -78,6 +78,10 @@ func move_n_collide(_delta):
 					if skill.is_damage_skill: 
 						collision_object.get_collider().get_parent().take_damage(skill, projectile_owner, null)
 						self.add_collision_exception_with(collision_object.get_collider())
+						
+						## vfx and sound
+						scene_manager.do_vfx(collision_object.get_position(), 'that one')
+						
 					if not pierce_throught:
 						self.delete()
 						

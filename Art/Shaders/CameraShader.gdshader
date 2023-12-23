@@ -47,14 +47,16 @@ void fragment() {
     vec3 col = vec3(1.0, 0.0, 0.0);
     float d = 0.;
     for (float i = 0.; i < 10.; i++) {
-        uv = fract(uv * 1.) - .5;
-
-        d = length(uv) * exp(-length(uv0));
-
-        d = sin(d*8. + iTime)/8.;
-        d = abs(d);
-
-        d = pow(.001 / d, 3.0);
+		  d = fract( abs(uv0.x * progress) + abs(uv0.y * progress)   );
+		  d = d / 0.5;
+//        uv = fract(uv * 1.) - .5;
+//
+//        d = length(uv) * exp(-length(uv0));
+//
+//        d = sin(d*8. + iTime)/8.;
+//        d = abs(d);
+//
+//        d = pow(.001 / d, 3.0);
 
         finalColor += main_color * d;
     }

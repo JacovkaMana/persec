@@ -12,17 +12,21 @@ var melee_scene = null
 
 @onready var scene_animator: AnimationPlayer = $SceneTransitionLayer/AnimationPlayer
 
+@onready var vfx_layer = null
 
 var player = null
 var enemies = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
+	#scene_animator.queue("RESET")
 	scene_animator.connect("animation_finished", _on_animation_finished)
 	
 	next_scene = next_level_resource.instantiate()
 	self.add_child(next_scene)
+	
+	player = next_scene.find_child("Player", true, false)
+	vfx_layer = next_scene.find_child("VFX", true, false)
 	
 	ui_scene = ui.instantiate()
 	self.add_child(ui_scene)
@@ -115,3 +119,18 @@ func load_resource(what):
 	if ResourceLoader.exists(what):
 		var object = ResourceLoader.load(what)
 		return object
+
+
+
+func do_vfx(where, which):
+	var obj = load("res://PreRendered/VFX/Impact.tscn")
+	var new_obj = obj.instantiate()
+	
+
+	vfx_layer.add_child(new_obj)
+	
+	
+	new_obj.global_position = where
+	
+	
+	new_obj.get_child(1).queue('start')
