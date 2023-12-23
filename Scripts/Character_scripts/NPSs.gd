@@ -1,44 +1,34 @@
 extends Actor
 class_name NPS
 
+
 @export var npc_name: String = "FirstGuard"
 @export var behaviuor: Enums.ECharacterBehaviour
 @export var fight_ai : BaseAI
-#stats
+@export var interaction_list: Array[Enums.ECharacterActions] = []
+
+
+
 @export_category('Stats')
-@export var STRENGTH: int = 0
-@export var DEXTERITY: int = 0
-@export var CONSTITUTION: int = 0
-@export var INTELLIGENCE: int = 0
-@export var PERCEPTION: int = 0
-#@export var CHARISMA: int = 0
-
-
-#weapons
-@export_category('Equipment')
-@export var L_HAND: WeaponItem = null
-@export var R_HAND: WeaponItem = null
-
-#right armor
-@export var HELM: HelmItem = null
-@export var ARMOR: ArmorItem = null
-@export var PANTS: PantsItem = null
-@export var BOOTS: BootsItem = null
-#left armor
-@export var AMULET: Item = null
-@export var BELT: Item = null
-@export var ACCESSORY_1: Item = null
-@export var ACCESSORY_2: Item = null
+@export var max_hitpoins: int = 100
+@export var hitpoints: int = 100
+@export var Stamina_max: int = 3
+@export var Stamina_regen: int = 10
+@export var nps_stats: Dictionary = {
+	Enums.EStat.STRENGTH: 5,
+	Enums.EStat.DEXTERITY: 5,
+	Enums.EStat.CONSTITUTION: 5,
+	Enums.EStat.INTELLIGENCE: 5,
+	Enums.EStat.PERCEPTION: 5,	
+	Enums.EStat.CHARISMA: 5,	
+}
 
 @export_category('Inventory')
 @export var random_items: int = 0
-var INVENTORY : Array[Item] = []
+@export var static_items : Array[Item] = []
 @export_category('Skills')
 @export var SKILLS: Array[Skill] = []
-@export var Stamina_max: int = 3
-@export var Stamina_regen: int = 10
 
-@export var interaction_list: Array[Enums.ECharacterActions] = []
 
 var walk_radius: float = 50
 var last_direction_change: float = 0
@@ -66,12 +56,11 @@ var Chest = preload("res://Scenes/Objects/chest.tscn")
 
 var last_vision = []
 
-
 func _ready():
 	super()
-	add_to_group('interactable')
+	if len(interaction_list) > 0:
+		self.add_to_group('interactable')
 	
-	#self.connect("mouse_entered", _mouse_entered)
 	self.connect("mouse_entered", _on_mouse_entered)
 	self.connect("mouse_exited", _on_mouse_exited)
 
@@ -111,19 +100,30 @@ func _ready():
 	vision = vision_idle
 	
 	
+	
+	# Initiate NPS Data
+	data = PlayerData.new()
+	
+	data.stats = nps_stats
+	data.hitpoints = hitpoints
+	data.max_hitpoints = max_hitpoins
+	data.stamina_regen = Stamina_regen
+	data.max_stamina = Stamina_max
+	
+	
 	for skill_string in SKILLS:
 		data.skills.add_skill(GlobalSkills.skills[skill_string])
-		
-		
-	data.max_stamina = Stamina_max
-	data.stamina_regen = Stamina_regen
-	self.fight_ai = MageAI.new()
-	print(self.data.inventory._inventory)
-	print(self.data.inventory._equipment)
+
 
 	
 func _physics_process(_delta):
 	super(_delta)
+	
+	if self.global_position.y < player.global_position.y:
+		self.z_index = 4
+	else:
+		self.z_index = 6
+	
 	
 	match (current_state):
 		Enums.ECharacterState.IDLE:
@@ -131,15 +131,17 @@ func _physics_process(_delta):
 		Enums.ECharacterState.ROAMING:
 			if(current_zone):
 				if (current_zone.follow_position - self.global_position).length() < 2.0:
-					move_speed = 0
+					move_direction = Vector2(0, 0)
 				else:
 					move_direction = (current_zone.follow_position - self.global_position).normalized()
-					move_speed = 70
 		Enums.ECharacterState.TALKING:
 			self.move_direction = Vector2(0, 0);
 		Enums.ECharacterState.FIGHT_RANGE:
 			#self.fight_ai.ai_vision_process(vision.get_overlapping_bodies())
-			self.fight_ai.ai_process(_delta)
+			
+			self.move_direction = Vector2(0, 0);
+			
+			#self.fight_ai.ai_process(_delta)
 		Enums.ECharacterState.SEARCHING:
 			#self.move_direction = Vector2(0, 0);
 			pass
@@ -255,6 +257,8 @@ func take_damage(_skill: Skill, _from: Actor, _strength):
 func die():
 	self.move_direction = Vector2(0, 0)
 	self.look_at = null
+	self.move_speed = 0
+	self.freeze = true
 	animation_tree.set("parameters/death/transition_request", "true")
 	player.kill_confirm(self)
 	print('die')

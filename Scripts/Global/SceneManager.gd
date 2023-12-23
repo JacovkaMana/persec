@@ -59,10 +59,12 @@ func add_melee(player, enemies):
 	
 	scene_animator.queue("into_battle")
 	self.player = player
+	player.freeze = true
 	self.enemies = enemies
+	for enemy in enemies:
+		enemy.freeze = true
 	
 func _on_animation_finished(_anim):
-	scene_animator.queue("RESET")
 	match _anim:
 		"into_battle":
 				
@@ -77,14 +79,25 @@ func _on_animation_finished(_anim):
 			melee_scene.get_child(0).setup(player, enemies)
 			print(player)
 			print(player.get_script())
+			
+			scene_animator.queue("finish_battleanim")
 		
 		"out_of_battle":
 			var player_melee = melee_scene.find_child("MeleePlayer", true, false)
 			setup_level(player_melee.data, next_scene, melee_scene.get_child(0))
 			melee_scene.queue_free()
+			
+			scene_animator.queue("finish_battleanim")
+			
+		"finish_battleanim":
+			scene_animator.queue("RESET")
+			
+			player.freeze = false
+			
 	
 func remove_melee():
 	scene_animator.queue("out_of_battle")
+	
 	
 func pause_game():
 	next_scene.process_mode = 4

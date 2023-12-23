@@ -193,6 +193,8 @@ shader = ExtResource("2_yy7tj")
 shader_parameter/shader_color = Color(0.741176, 0.458824, 0.188235, 1)
 shader_parameter/sec_color = Color(0.5, 1, 0.96, 1)
 shader_parameter/time_scale = 0.509
+shader_parameter/speed = 1.0
+shader_parameter/progress = 0.0
 
 [sub_resource type="Animation" id="Animation_owoih"]
 length = 0.001

@@ -14,9 +14,9 @@ class_name Actor
 @onready var hitbox = $HitBox
 
 @export var move_speed : float = 100.0
-@export var data: PlayerData# = PlayerData.new()
-@export var walking = false
-@export var dsds: int
+@export var animatable_arts: Array[Sprite2D] = []
+var data: PlayerData# = PlayerData.new()
+var walking = false
 
 @onready var Statuses = $Statuses
 
@@ -30,6 +30,7 @@ var current_zone : Area2D
 var starting_direction : Vector2 = Vector2(0, 1)
 var move_direction: Vector2 = Vector2(0,0)
 
+var freeze: bool = false
 
 var look_at: Node2D = null
 
@@ -66,13 +67,12 @@ func update_animation_parameters (direction: Vector2, velocity):
 #		last_move = move_input
 
 	if direction.x < 0:
-		sprite.flip_h = true
-		cloak.flip_h = true
-		face.flip_h = true
+		
+		for one in animatable_arts:
+			one.flip_h = true
 	elif direction.x > 0:
-		sprite.flip_h = false
-		cloak.flip_h = false
-		face.flip_h = false
+		for one in animatable_arts:
+			one.flip_h = false
 	
 	walking = (abs(velocity.x) <= 0.0001 and abs(velocity.y) <= 0.0001)
 			
@@ -92,7 +92,10 @@ func update_animation_parameters (direction: Vector2, velocity):
 
 	
 func _physics_process(_delta):
-	
+	if freeze:
+		return 2
+		
+		
 	if (self.data.stamina < self.data.max_stamina):
 		self.data.stamina += _delta * self.data.stamina_regen / 20.0
 		if (self.data.stamina > self.data.max_stamina):

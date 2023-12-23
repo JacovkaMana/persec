@@ -99,6 +99,8 @@ func _physics_process(_delta):
 	super(_delta)
 	#print(battle_timer.time_left)
 	#print(viewer_manager.get_overall_satisfaction())
+	
+
 	if battle_timer.time_left <= 2.0:
 		battle_timer.start()
 	

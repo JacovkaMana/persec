@@ -1,44 +1,45 @@
-[gd_scene load_steps=44 format=3 uid="uid://chku42sa88b0g"]
+[gd_scene load_steps=63 format=3 uid="uid://dxgvjd50fp5qe"]
 
-[ext_resource type="Script" path="res://Scripts/Character_scripts/NPSs.gd" id="1_81pvv"]
-[ext_resource type="Shader" path="res://Art/Shaders/OutlineTest.gdshader" id="1_hatnr"]
-[ext_resource type="Texture2D" uid="uid://bgn8fb6jsnab6" path="res://Art/Character/Mage.png" id="2_k8ds2"]
-[ext_resource type="Shader" uid="uid://bna8w8wik6u0h" path="res://Art/Shaders/PlayerVisualShader.tres" id="3_4e4ep"]
-[ext_resource type="FontFile" uid="uid://c0s1j1n8esy7x" path="res://Fonts/Minecraftia-Regular.ttf" id="3_35dde"]
-[ext_resource type="Texture2D" uid="uid://85m7q3fj3yqw" path="res://Art/Character/MageCloak.png" id="3_lgs3t"]
-[ext_resource type="Script" path="res://Scripts/Character_scripts/HitBox.gd" id="3_m2t84"]
-[ext_resource type="Texture2D" uid="uid://dm1531nlm22l5" path="res://Art/Masks/Ball.png" id="4_8am1b"]
-[ext_resource type="Texture2D" uid="uid://brk6fgd2qanql" path="res://Art/Character/MageFace.png" id="4_8lg8s"]
-[ext_resource type="Texture2D" uid="uid://garspyffcbgq" path="res://Art/UI/LightProbe.png" id="6_3ita2"]
-[ext_resource type="Script" path="res://Scripts/UI_scripts/Enemy_HUD.gd" id="11_xr2j0"]
-[ext_resource type="Texture2D" uid="uid://cakrcglfti7vm" path="res://Art/UI/Status_inner2.png" id="12_e8mg1"]
-[ext_resource type="Texture2D" uid="uid://ddasyjnhoy1m6" path="res://Art/UI/Status_border2.png" id="13_ryyc3"]
-[ext_resource type="Texture2D" uid="uid://bcqrape83qe7c" path="res://Art/UI/Stamina_backplate.png" id="15_8231q"]
-[ext_resource type="Texture2D" uid="uid://bijpbur8p3jeb" path="res://Art/Icons/Skills/single_7.png" id="17_qseee"]
+[ext_resource type="Shader" path="res://Art/Shaders/OutlineTest.gdshader" id="1_8uedp"]
+[ext_resource type="Script" path="res://Scripts/Character_scripts/NPSs.gd" id="2_k3d5b"]
+[ext_resource type="Script" path="res://Scripts/AI_scripts/MageAI.gd" id="3_et2vc"]
+[ext_resource type="Script" path="res://Scripts/Character_scripts/HitBox.gd" id="5_8l84s"]
+[ext_resource type="Texture2D" uid="uid://dhhbp6hweowl" path="res://Art/Character/Slimes1.png" id="6_aijg2"]
+[ext_resource type="Texture2D" uid="uid://garspyffcbgq" path="res://Art/UI/LightProbe.png" id="7_838q8"]
+[ext_resource type="FontFile" uid="uid://c0s1j1n8esy7x" path="res://Fonts/Minecraftia-Regular.ttf" id="8_0nwmr"]
+[ext_resource type="Texture2D" uid="uid://dm1531nlm22l5" path="res://Art/Masks/Ball.png" id="9_nue0d"]
+[ext_resource type="Script" path="res://Scripts/UI_scripts/Enemy_HUD.gd" id="10_l7akr"]
+[ext_resource type="Texture2D" uid="uid://cakrcglfti7vm" path="res://Art/UI/Status_inner2.png" id="11_lpu4c"]
+[ext_resource type="Texture2D" uid="uid://ddasyjnhoy1m6" path="res://Art/UI/Status_border2.png" id="12_y41oq"]
+[ext_resource type="Texture2D" uid="uid://bcqrape83qe7c" path="res://Art/UI/Stamina_backplate.png" id="13_xwl6g"]
+[ext_resource type="Texture2D" uid="uid://bijpbur8p3jeb" path="res://Art/Icons/Skills/single_7.png" id="14_6cjmx"]
+[ext_resource type="Script" path="res://Scripts/Character_status/Statuses.gd" id="15_ek6dd"]
+[ext_resource type="Texture2D" uid="uid://bmw2s4ps8kfm8" path="res://Art/Textures/particle_examples/floaty_32.png" id="16_op44e"]
+[ext_resource type="Script" path="res://Scripts/Character_status/Defending.gd" id="17_t0u2a"]
+[ext_resource type="Material" uid="uid://d1rup2825ejku" path="res://Art/Shaders/ShieldShader.tres" id="18_4lf1u"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3juty"]
-shader = ExtResource("1_hatnr")
+shader = ExtResource("1_8uedp")
 shader_parameter/outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1mfgp"]
-size = Vector2(32, 56)
+[sub_resource type="Resource" id="Resource_xttkj"]
+script = ExtResource("3_et2vc")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_edpkx"]
-shader = ExtResource("3_4e4ep")
-shader_parameter/PlayerCloak = Color(0.2, 0.788235, 1, 1)
+[sub_resource type="CircleShape2D" id="CircleShape2D_ooqki"]
+radius = 12.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rbf11"]
-size = Vector2(31, 10)
+size = Vector2(30, 28)
 
 [sub_resource type="LabelSettings" id="LabelSettings_h4cy4"]
-font = ExtResource("3_35dde")
+font = ExtResource("8_0nwmr")
 font_size = 8
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_qwcsy"]
-radius = 120.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_73mba"]
+radius = 72.15
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_n5svg"]
-radius = 200.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_dlo3f"]
+radius = 94.73
 
 [sub_resource type="Animation" id="Animation_uhobr"]
 length = 0.001
@@ -152,26 +153,14 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Face:frame")
+tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6),
+"times": PackedFloat32Array(0, 0.4, 0.763508),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [0, 8, 0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Cloak:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 8, 0]
+"values": [0, 2, 0]
 }
 
 [sub_resource type="Animation" id="Animation_u4sir"]
@@ -184,34 +173,10 @@ tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.7, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [16, 17, 18, 19]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Face:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.7, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [16, 17, 18, 19]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Cloak:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.7, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [16, 17, 18, 19]
+"values": [0, 2, 0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ygp6v"]
@@ -257,7 +222,7 @@ input_1/reset = true
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_e3t6g"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_hjofk"]
-graph_offset = Vector2(-327.312, 57.408)
+graph_offset = Vector2(-473.122, -28.9846)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_5c0ga")
 nodes/Animation/position = Vector2(-20, 140)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_i0gjw")
@@ -307,54 +272,165 @@ height = 30
 fill_from = Vector2(0.5, 0)
 fill_to = Vector2(0.5, 1)
 
-[node name="NPS" type="CharacterBody2D" node_paths=PackedStringArray("animatable_arts")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_up74c"]
+radius = 40.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_be5ms"]
+light_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_1dqqu"]
+offsets = PackedFloat32Array(0.518519)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_y3h8i"]
+gradient = SubResource("Gradient_1dqqu")
+width = 16
+
+[sub_resource type="Gradient" id="Gradient_be85a"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5dee4"]
+gradient = SubResource("Gradient_be85a")
+width = 16
+
+[sub_resource type="LabelSettings" id="LabelSettings_mivoc"]
+font = ExtResource("8_0nwmr")
+font_size = 8
+font_color = Color(0.0784314, 0.231373, 0.427451, 1)
+shadow_size = 0
+
+[sub_resource type="Animation" id="Animation_fx51y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(25, -30)]
+}
+
+[sub_resource type="Animation" id="Animation_l50q1"]
+resource_name = "float"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(25, -30), Vector2(25, -27), Vector2(25, -30)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5aio4"]
+_data = {
+"RESET": SubResource("Animation_fx51y"),
+"float": SubResource("Animation_l50q1")
+}
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0xgk2"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 7
+particles_anim_v_frames = 7
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_6ofee"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0.815686)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ojri6"]
+gradient = SubResource("Gradient_6ofee")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o45n4"]
+emission_shape = 3
+emission_box_extents = Vector3(14.974, 16.17, 1)
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+gravity = Vector3(0, -30, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
+angular_velocity_min = -20.0
+angular_velocity_max = 20.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+linear_accel_max = 2.11
+radial_accel_max = 2.11
+angle_min = -90.0
+angle_max = 90.0
+scale_min = 0.7
+color = Color(1, 0.552941, 0.188235, 1)
+color_ramp = SubResource("GradientTexture1D_ojri6")
+hue_variation_min = -0.04
+hue_variation_max = 0.06
+turbulence_enabled = true
+turbulence_noise_scale = 7.0
+turbulence_noise_speed = Vector3(0.4, -1, 0.4)
+turbulence_noise_speed_random = 0.32
+turbulence_influence_min = 1.0
+turbulence_influence_max = 1.0
+
+[sub_resource type="Gradient" id="Gradient_kqltx"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ycvq3"]
+gradient = SubResource("Gradient_kqltx")
+width = 70
+height = 80
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7kve0"]
+radius = 33.0
+height = 81.72
+
+[node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("animatable_arts")]
+light_mask = 33
 material = SubResource("ShaderMaterial_3juty")
+position = Vector2(161, 294)
 collision_layer = 65
-script = ExtResource("1_81pvv")
-animatable_arts = [NodePath("Sprite"), NodePath("Cloak"), NodePath("Face")]
+input_pickable = true
+script = ExtResource("2_k3d5b")
+npc_name = "Slime"
+behaviuor = 2
+fight_ai = SubResource("Resource_xttkj")
+random_items = 2
+move_speed = 40.0
+animatable_arts = [NodePath("Sprite")]
 
 [node name="HitBox" type="CharacterBody2D" parent="."]
 visible = false
 collision_layer = 8
 collision_mask = 0
-script = ExtResource("3_m2t84")
+script = ExtResource("5_8l84s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(-2, 4)
-shape = SubResource("RectangleShape2D_1mfgp")
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_ooqki")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-visible = false
 light_mask = 33
-texture = ExtResource("2_k8ds2")
-hframes = 8
-vframes = 9
+texture = ExtResource("6_aijg2")
+hframes = 12
+vframes = 8
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 light_mask = 2
 visibility_layer = 2
 energy = 0.0
 range_item_cull_mask = 2
-texture = ExtResource("6_3ita2")
+texture = ExtResource("7_838q8")
 texture_scale = 0.5
 
-[node name="Cloak" type="Sprite2D" parent="."]
-light_mask = 33
-material = SubResource("ShaderMaterial_edpkx")
-texture = ExtResource("3_lgs3t")
-hframes = 8
-vframes = 9
-frame = 8
-
-[node name="Face" type="Sprite2D" parent="."]
-light_mask = 33
-texture = ExtResource("4_8lg8s")
-hframes = 8
-vframes = 9
-frame = 8
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-3, 27)
 shape = SubResource("RectangleShape2D_rbf11")
 
 [node name="HeadLabel" type="Label" parent="."]
@@ -373,13 +449,12 @@ collision_layer = 80
 collision_mask = 80
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VisionIdle"]
-position = Vector2(-80, 0)
-shape = SubResource("CircleShape2D_qwcsy")
+shape = SubResource("CircleShape2D_73mba")
 
 [node name="Sprite2D" type="Sprite2D" parent="VisionIdle"]
 visible = false
 position = Vector2(-80, 17)
-texture = ExtResource("4_8am1b")
+texture = ExtResource("9_nue0d")
 
 [node name="VisionBattle" type="Area2D" parent="."]
 visible = false
@@ -388,12 +463,12 @@ collision_layer = 80
 collision_mask = 80
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VisionBattle"]
-shape = SubResource("CircleShape2D_n5svg")
+shape = SubResource("CircleShape2D_dlo3f")
 
 [node name="Sprite2D" type="Sprite2D" parent="VisionBattle"]
 visible = false
 position = Vector2(-80, 17)
-texture = ExtResource("4_8am1b")
+texture = ExtResource("9_nue0d")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 method_call_mode = 1
@@ -411,9 +486,9 @@ parameters/death/current_state = "false"
 parameters/death/transition_request = ""
 parameters/death/current_index = 1
 parameters/glow/add_amount = 0.0
-parameters/walking/current_state = "idle"
+parameters/walking/current_state = "walking"
 parameters/walking/transition_request = ""
-parameters/walking/current_index = 0
+parameters/walking/current_index = 1
 parameters/walking_speed/scale = 1.0
 
 [node name="HUD" type="Control" parent="."]
@@ -424,7 +499,7 @@ offset_top = -54.0
 offset_right = -53.0
 offset_bottom = -54.0
 mouse_filter = 1
-script = ExtResource("11_xr2j0")
+script = ExtResource("10_l7akr")
 
 [node name="Status" type="Control" parent="HUD"]
 anchors_preset = 0
@@ -436,13 +511,13 @@ self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.490196)
 layout_mode = 0
 offset_right = 99.0
 offset_bottom = 23.0
-texture = ExtResource("12_e8mg1")
+texture = ExtResource("11_lpu4c")
 
 [node name="Border" type="TextureRect" parent="HUD/Status"]
 layout_mode = 0
 offset_right = 99.0
 offset_bottom = 23.0
-texture = ExtResource("13_ryyc3")
+texture = ExtResource("12_y41oq")
 
 [node name="HealthBar" type="TextureRect" parent="HUD/Status"]
 custom_minimum_size = Vector2(0, 3)
@@ -507,7 +582,7 @@ offset_right = 153.0
 offset_bottom = 10.0
 max_value = 151.0
 value = 95.0
-texture_progress = ExtResource("15_8231q")
+texture_progress = ExtResource("13_xwl6g")
 
 [node name="StatusesContainer" type="HBoxContainer" parent="HUD"]
 layout_mode = 0
@@ -524,7 +599,7 @@ layout_mode = 2
 layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
-texture = ExtResource("17_qseee")
+texture = ExtResource("14_6cjmx")
 
 [node name="Status2" type="Control" parent="HUD/StatusesContainer"]
 visible = false
@@ -535,7 +610,7 @@ layout_mode = 2
 layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
-texture = ExtResource("17_qseee")
+texture = ExtResource("14_6cjmx")
 
 [node name="Status3" type="Control" parent="HUD/StatusesContainer"]
 visible = false
@@ -546,7 +621,7 @@ layout_mode = 2
 layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
-texture = ExtResource("17_qseee")
+texture = ExtResource("14_6cjmx")
 
 [node name="Status4" type="Control" parent="HUD/StatusesContainer"]
 visible = false
@@ -557,7 +632,7 @@ layout_mode = 2
 layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
-texture = ExtResource("17_qseee")
+texture = ExtResource("14_6cjmx")
 
 [node name="Status5" type="Control" parent="HUD/StatusesContainer"]
 visible = false
@@ -568,7 +643,7 @@ layout_mode = 2
 layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
-texture = ExtResource("17_qseee")
+texture = ExtResource("14_6cjmx")
 
 [node name="Status6" type="Control" parent="HUD/StatusesContainer"]
 visible = false
@@ -579,4 +654,116 @@ layout_mode = 2
 layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
-texture = ExtResource("17_qseee")
+texture = ExtResource("14_6cjmx")
+
+[node name="InteractionArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("CircleShape2D_up74c")
+
+[node name="InteractionHint" type="Node2D" parent="."]
+visible = false
+light_mask = 0
+z_index = 30
+material = SubResource("CanvasItemMaterial_be5ms")
+position = Vector2(25, -30)
+
+[node name="TextureRect" type="TextureRect" parent="InteractionHint"]
+self_modulate = Color(0.0784314, 0.231373, 0.427451, 0.666667)
+light_mask = 0
+use_parent_material = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -9.0
+offset_top = -9.0
+offset_right = 9.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(9, 9)
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture = SubResource("GradientTexture1D_y3h8i")
+
+[node name="InteractHint" type="TextureRect" parent="InteractionHint"]
+self_modulate = Color(1, 1, 1, 0.666667)
+light_mask = 0
+use_parent_material = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(8, 8)
+texture = SubResource("GradientTexture1D_5dee4")
+
+[node name="Label" type="Label" parent="InteractionHint"]
+self_modulate = Color(0.682353, 0.741176, 0.807843, 0.921569)
+light_mask = 0
+use_parent_material = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.5
+offset_top = -7.5
+offset_right = 7.5
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+text = " e"
+label_settings = SubResource("LabelSettings_mivoc")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="InteractionHint"]
+libraries = {
+"": SubResource("AnimationLibrary_5aio4")
+}
+
+[node name="Projectiles" type="Node2D" parent="."]
+
+[node name="Statuses" type="Node2D" parent="."]
+script = ExtResource("15_ek6dd")
+
+[node name="Burn" type="Node2D" parent="Statuses"]
+visible = false
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Statuses/Burn"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_0xgk2")
+position = Vector2(-2, 16)
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_o45n4")
+texture = ExtResource("16_op44e")
+
+[node name="Shield" type="Area2D" parent="Statuses"]
+visible = false
+disable_mode = 2
+collision_layer = 0
+collision_mask = 8
+input_pickable = false
+script = ExtResource("17_t0u2a")
+
+[node name="Sprite2D" type="Sprite2D" parent="Statuses/Shield"]
+texture_filter = 2
+texture_repeat = 2
+material = ExtResource("18_4lf1u")
+texture = SubResource("GradientTexture2D_ycvq3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Statuses/Shield"]
+shape = SubResource("CapsuleShape2D_7kve0")
