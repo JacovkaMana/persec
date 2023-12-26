@@ -1,6 +1,10 @@
 extends Node2D
 
-@onready var next_level_resource = load("res://Levels/game_level.tscn")
+
+@onready var main_camera = $MainCamera
+
+
+@onready var next_level_resource = load("res://Levels/Dungeon.tscn")
 var next_scene = null
 
 @onready var ui = load("res://Scenes/UI.tscn")
@@ -26,6 +30,14 @@ func _ready():
 	self.add_child(next_scene)
 	
 	player = next_scene.find_child("Player", true, false)
+	
+	main_camera.global_position = player.global_position
+	player.find_child('RemoteTransform2D').remote_path = main_camera.get_path()
+	print(player.find_child('RemoteTransform2D').remote_path)
+
+	#main_camera.global_position = player.global_position
+
+	
 	vfx_layer = next_scene.find_child("VFX", true, false)
 	
 	ui_scene = ui.instantiate()
@@ -34,11 +46,11 @@ func _ready():
 	#self.add_melee()
 
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+	#main_camera.global_position = player.global_position
+	#print(main_camera.global_position)
 	pass
-
 
 func setup_level(player_data, next_scene, melee_scene):
 	var player_level = next_scene.find_child("Player", true, false)

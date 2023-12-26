@@ -43,6 +43,33 @@ func setup(_owner, _target):
 func deactivate():
 	_timer.queue_free()
 
+
+func is_in_zone(zone, point):
+	return zone.shape.get_rect().has_point(point.global_position - point.current_zone.global_position)
+	
+func roam():
+	
+	var additional_position = owner.move_direction * 20
+	var in_zone = true
+
+	if owner.current_zone:
+		print(owner.current_zone.name)
+		in_zone = false
+		
+		var _in_zones = owner.current_zone.collision_shapes.any(
+			func(zone) : 
+				#return zone.shape.get_rect().has_point(owner.global_position - owner.current_zone.global_position)
+				return zone.shape.get_rect().has_point(owner.global_position - zone.global_position + additional_position)
+				) 
+		if not _in_zones:
+			owner.move_direction = Vector2(0, 0)
+		
+#		for zone in owner.current_zone.collision_shapes:
+#			var shape = zone.shape.get_rect()
+#			print(owner.current_zone.name)
+#			in_zone = is_in_zone(shape, owner.global_position - owner.current_zone.global_position)
+			#print(shape.has_point(owner.position))
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass

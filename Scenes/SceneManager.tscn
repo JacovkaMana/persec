@@ -239,6 +239,9 @@ _data = {
 [node name="SceneManager" type="Node2D"]
 script = ExtResource("1_clvx6")
 
+[node name="MainCamera" type="Camera2D" parent="."]
+ignore_rotation = false
+
 [node name="SceneTransitionLayer" type="CanvasLayer" parent="."]
 layer = 128
 

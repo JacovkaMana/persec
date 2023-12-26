@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://chku42sa88b0g"]
+[gd_scene load_steps=66 format=3 uid="uid://chku42sa88b0g"]
 
 [ext_resource type="Script" path="res://Scripts/Character_scripts/NPSs.gd" id="1_81pvv"]
 [ext_resource type="Shader" path="res://Art/Shaders/OutlineTest.gdshader" id="1_hatnr"]
@@ -14,11 +14,18 @@
 [ext_resource type="Texture2D" uid="uid://cakrcglfti7vm" path="res://Art/UI/Status_inner2.png" id="12_e8mg1"]
 [ext_resource type="Texture2D" uid="uid://ddasyjnhoy1m6" path="res://Art/UI/Status_border2.png" id="13_ryyc3"]
 [ext_resource type="Texture2D" uid="uid://bcqrape83qe7c" path="res://Art/UI/Stamina_backplate.png" id="15_8231q"]
+[ext_resource type="Script" path="res://Scripts/Character_status/Statuses.gd" id="16_o0sng"]
+[ext_resource type="Texture2D" uid="uid://bmw2s4ps8kfm8" path="res://Art/Textures/particle_examples/floaty_32.png" id="17_ehx2y"]
 [ext_resource type="Texture2D" uid="uid://bijpbur8p3jeb" path="res://Art/Icons/Skills/single_7.png" id="17_qseee"]
+[ext_resource type="Script" path="res://Scripts/Character_status/Defending.gd" id="18_w27d8"]
+[ext_resource type="Material" uid="uid://d1rup2825ejku" path="res://Art/Shaders/ShieldShader.tres" id="19_ori1k"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3juty"]
 shader = ExtResource("1_hatnr")
 shader_parameter/outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n4am5"]
+size = Vector2(32, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1mfgp"]
 size = Vector2(32, 56)
@@ -307,14 +314,141 @@ height = 30
 fill_from = Vector2(0.5, 0)
 fill_to = Vector2(0.5, 1)
 
-[node name="NPS" type="CharacterBody2D" node_paths=PackedStringArray("animatable_arts")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_25ifj"]
+radius = 40.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3fpdb"]
+light_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_1dqqu"]
+offsets = PackedFloat32Array(0.518519)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_tlcyu"]
+gradient = SubResource("Gradient_1dqqu")
+width = 16
+
+[sub_resource type="Gradient" id="Gradient_be85a"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qc38y"]
+gradient = SubResource("Gradient_be85a")
+width = 16
+
+[sub_resource type="LabelSettings" id="LabelSettings_svxhj"]
+font = ExtResource("3_35dde")
+font_size = 8
+font_color = Color(0.0784314, 0.231373, 0.427451, 1)
+shadow_size = 0
+
+[sub_resource type="Animation" id="Animation_fx51y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(25, -30)]
+}
+
+[sub_resource type="Animation" id="Animation_l50q1"]
+resource_name = "float"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(25, -30), Vector2(25, -27), Vector2(25, -30)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5aio4"]
+_data = {
+"RESET": SubResource("Animation_fx51y"),
+"float": SubResource("Animation_l50q1")
+}
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w7rkg"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 7
+particles_anim_v_frames = 7
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_r6am8"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0.815686)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ojri6"]
+gradient = SubResource("Gradient_r6am8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mhsm4"]
+emission_shape = 3
+emission_box_extents = Vector3(14.974, 16.17, 1)
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+gravity = Vector3(0, -30, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
+angular_velocity_min = -20.0
+angular_velocity_max = 20.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+linear_accel_max = 2.11
+radial_accel_max = 2.11
+angle_min = -90.0
+angle_max = 90.0
+scale_min = 0.7
+color = Color(1, 0.552941, 0.188235, 1)
+color_ramp = SubResource("GradientTexture1D_ojri6")
+hue_variation_min = -0.04
+hue_variation_max = 0.06
+turbulence_enabled = true
+turbulence_noise_scale = 7.0
+turbulence_noise_speed = Vector3(0.4, -1, 0.4)
+turbulence_noise_speed_random = 0.32
+turbulence_influence_min = 1.0
+turbulence_influence_max = 1.0
+
+[sub_resource type="Gradient" id="Gradient_kqltx"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jia52"]
+gradient = SubResource("Gradient_kqltx")
+width = 70
+height = 80
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n5n10"]
+radius = 33.0
+height = 81.72
+
+[node name="NPS" type="CharacterBody2D"]
 material = SubResource("ShaderMaterial_3juty")
 collision_layer = 65
 script = ExtResource("1_81pvv")
-animatable_arts = [NodePath("Sprite"), NodePath("Cloak"), NodePath("Face")]
+
+[node name="AreaTracker" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 64
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaTracker"]
+position = Vector2(-2, 27)
+shape = SubResource("RectangleShape2D_n4am5")
 
 [node name="HitBox" type="CharacterBody2D" parent="."]
-visible = false
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("3_m2t84")
@@ -344,14 +478,12 @@ material = SubResource("ShaderMaterial_edpkx")
 texture = ExtResource("3_lgs3t")
 hframes = 8
 vframes = 9
-frame = 8
 
 [node name="Face" type="Sprite2D" parent="."]
 light_mask = 33
 texture = ExtResource("4_8lg8s")
 hframes = 8
 vframes = 9
-frame = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-3, 27)
@@ -371,6 +503,7 @@ visible = false
 disable_mode = 2
 collision_layer = 80
 collision_mask = 80
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VisionIdle"]
 position = Vector2(-80, 0)
@@ -386,6 +519,7 @@ visible = false
 disable_mode = 2
 collision_layer = 80
 collision_mask = 80
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VisionBattle"]
 shape = SubResource("CircleShape2D_n5svg")
@@ -580,3 +714,114 @@ layout_mode = 2
 offset_right = 22.0
 offset_bottom = 22.0
 texture = ExtResource("17_qseee")
+
+[node name="InteractionArea" type="Area2D" parent="."]
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("CircleShape2D_25ifj")
+
+[node name="InteractionHint" type="Node2D" parent="."]
+visible = false
+light_mask = 0
+z_index = 30
+material = SubResource("CanvasItemMaterial_3fpdb")
+position = Vector2(25, -30)
+
+[node name="TextureRect" type="TextureRect" parent="InteractionHint"]
+self_modulate = Color(0.0784314, 0.231373, 0.427451, 0.666667)
+light_mask = 0
+use_parent_material = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -9.0
+offset_top = -9.0
+offset_right = 9.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(9, 9)
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture = SubResource("GradientTexture1D_tlcyu")
+
+[node name="InteractHint" type="TextureRect" parent="InteractionHint"]
+self_modulate = Color(1, 1, 1, 0.666667)
+light_mask = 0
+use_parent_material = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(8, 8)
+texture = SubResource("GradientTexture1D_qc38y")
+
+[node name="Label" type="Label" parent="InteractionHint"]
+self_modulate = Color(0.682353, 0.741176, 0.807843, 0.921569)
+light_mask = 0
+use_parent_material = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.5
+offset_top = -7.5
+offset_right = 7.5
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+text = " e"
+label_settings = SubResource("LabelSettings_svxhj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="InteractionHint"]
+libraries = {
+"": SubResource("AnimationLibrary_5aio4")
+}
+
+[node name="Projectiles" type="Node2D" parent="."]
+
+[node name="Statuses" type="Node2D" parent="."]
+script = ExtResource("16_o0sng")
+
+[node name="Burn" type="Node2D" parent="Statuses"]
+visible = false
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Statuses/Burn"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_w7rkg")
+position = Vector2(-2, 16)
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_mhsm4")
+texture = ExtResource("17_ehx2y")
+
+[node name="Shield" type="Area2D" parent="Statuses"]
+visible = false
+disable_mode = 2
+collision_layer = 0
+collision_mask = 8
+input_pickable = false
+script = ExtResource("18_w27d8")
+
+[node name="Sprite2D" type="Sprite2D" parent="Statuses/Shield"]
+texture_filter = 2
+texture_repeat = 2
+material = ExtResource("19_ori1k")
+texture = SubResource("GradientTexture2D_jia52")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Statuses/Shield"]
+shape = SubResource("CapsuleShape2D_n5n10")

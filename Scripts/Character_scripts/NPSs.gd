@@ -4,7 +4,7 @@ class_name NPS
 
 @export var npc_name: String = "FirstGuard"
 @export var behaviuor: Enums.ECharacterBehaviour
-@export var fight_ai : BaseAI
+@export var fight_ai : BaseAI = BaseAI.new()
 @export var interaction_list: Array[Enums.ECharacterActions] = []
 
 
@@ -38,6 +38,7 @@ var last_direction_change: float = 0
 #@onready var path_player = $PathPlayer
 @onready var vision_idle: Area2D = $VisionIdle
 @onready var vision_battle: Area2D = $VisionBattle
+
 var vision
 
 @onready var interaction_hint = $InteractionHint
@@ -48,6 +49,7 @@ var vision
 
 var current_state : Enums.ECharacterState = Enums.ECharacterState.ROAMING
 var start_pos: Vector2 = Vector2.ZERO
+var start_rotation: Vector2 = Vector2.from_angle( randi_range(0, 360) )
 var dialogue_number: int = 0
 
 
@@ -113,6 +115,9 @@ func _ready():
 	
 	for skill_string in SKILLS:
 		data.skills.add_skill(GlobalSkills.skills[skill_string])
+		
+	self.move_direction = self.start_rotation
+	self.fight_ai.owner = self
 
 
 	
@@ -134,6 +139,7 @@ func _physics_process(_delta):
 					move_direction = Vector2(0, 0)
 				else:
 					move_direction = (current_zone.follow_position - self.global_position).normalized()
+			self.fight_ai.roam()
 		Enums.ECharacterState.TALKING:
 			self.move_direction = Vector2(0, 0);
 		Enums.ECharacterState.FIGHT_RANGE:
@@ -198,9 +204,6 @@ func _on_mouse_exited():
 	nps_hud.visible = false
 	
 	
-func set_zone(to : Area2D):
-	current_zone = to
-	#print('nps at ' + str(current_zone))
 	
 func _on_vision_enter(who):
 	match who.get_collider_type():

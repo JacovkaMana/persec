@@ -12,9 +12,11 @@ class_name Actor
 @onready var Projectiles: Node2D = self.get_tree().get_root().find_child("NeutralProjectiles", true, false)
 @onready var Stationary_Projectiles: Node2D = $Projectiles
 @onready var hitbox = $HitBox
+@onready var area_tracker: Area2D = $AreaTracker
 
 @export var move_speed : float = 100.0
-@export var animatable_arts: Array[Sprite2D] = []
+
+var animatable_arts: Array[Sprite2D] = []
 var data: PlayerData# = PlayerData.new()
 var walking = false
 
@@ -26,7 +28,10 @@ var asd: ParticleProcessMaterial
 var last_move
 var head_timer
 var collision
+
 var current_zone : Area2D
+var current_zone_shape: Rect2
+
 var starting_direction : Vector2 = Vector2(0, 1)
 var move_direction: Vector2 = Vector2(0,0)
 
@@ -39,13 +44,20 @@ func _ready():
 		data = PlayerData.new()
 	update_animation_parameters(starting_direction, Vector2(0.,0.))
 	
-	
+	area_tracker.connect('area_entered', _on_area_entered)
 	animation_tree.connect("animation_finished", _on_anim_finished)
 	
 	#animation_player.connect("animation_finished", _on_anim_finished)
 	
 	animation_tree.set("parameters/walking/current_state", "walking")
-
+	
+	
+	for one in self.get_children():
+		if one is Sprite2D:
+			animatable_arts.append(one)
+	
+	
+	
 
 func update_animation_parameters (direction: Vector2, velocity):
 	#print(move_input == Vector2.LEFT)
@@ -122,7 +134,14 @@ func use_skill_id(id: int):
 				shoot_projectile( data.skills.get_skill_id(id))
 			'Status':
 				use_status_skill( data.skills.get_skill_id(id))
-	
+
+
+
+func _on_area_entered(area : Area2D):
+	pass
+#	print(area.name)
+#	print(area.shape_owner_get_owner(0) )
+
 func shoot_projectile(skill: Skill, at: CharacterBody2D = null) -> void:
 	var proj = skill.projectile
 	var bullet = proj.instantiate()

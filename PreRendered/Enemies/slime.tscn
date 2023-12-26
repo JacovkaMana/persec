@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://dxgvjd50fp5qe"]
+[gd_scene load_steps=64 format=3 uid="uid://dxgvjd50fp5qe"]
 
 [ext_resource type="Shader" path="res://Art/Shaders/OutlineTest.gdshader" id="1_8uedp"]
 [ext_resource type="Script" path="res://Scripts/Character_scripts/NPSs.gd" id="2_k3d5b"]
@@ -24,6 +24,9 @@ shader_parameter/outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Resource" id="Resource_xttkj"]
 script = ExtResource("3_et2vc")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7yxfl"]
+size = Vector2(29, 21)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ooqki"]
 radius = 12.0
@@ -392,7 +395,7 @@ height = 80
 radius = 33.0
 height = 81.72
 
-[node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("animatable_arts")]
+[node name="Slime" type="CharacterBody2D"]
 light_mask = 33
 material = SubResource("ShaderMaterial_3juty")
 position = Vector2(161, 294)
@@ -404,7 +407,14 @@ behaviuor = 2
 fight_ai = SubResource("Resource_xttkj")
 random_items = 2
 move_speed = 40.0
-animatable_arts = [NodePath("Sprite")]
+
+[node name="AreaTracker" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaTracker"]
+position = Vector2(-0.5, 3.5)
+shape = SubResource("RectangleShape2D_7yxfl")
 
 [node name="HitBox" type="CharacterBody2D" parent="."]
 visible = false
@@ -447,6 +457,7 @@ visible = false
 disable_mode = 2
 collision_layer = 80
 collision_mask = 80
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VisionIdle"]
 shape = SubResource("CircleShape2D_73mba")
@@ -461,6 +472,7 @@ visible = false
 disable_mode = 2
 collision_layer = 80
 collision_mask = 80
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VisionBattle"]
 shape = SubResource("CircleShape2D_dlo3f")

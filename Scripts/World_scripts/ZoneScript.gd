@@ -7,12 +7,15 @@ extends Area2D
 @onready var path : Path2D = $Path2D
 @onready var path_follow : PathFollow2D = $Path2D/PathFollow2D
 var follow_position = Vector2(0,0)
-
+var collision_shapes = []
 var curr_obj
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.connect("body_entered", _on_enter) 
 	
+	for one in self.get_children():
+		if one is CollisionShape2D:
+			collision_shapes.append(one)
 	#print(self.name)
 	#path_player.set_root(Rooms/Second)
 	#print(path_player.root_node)
@@ -27,6 +30,7 @@ func _physics_process(_delta):
 
 
 func _on_enter(what: Node2D):
-	if (what.get_class() == "CharacterBody2D"):
+	if what is Actor:
 		what.set_zone(self)
+		print(what, 'set zone', self)
 

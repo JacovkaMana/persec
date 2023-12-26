@@ -119,9 +119,6 @@ func _on_battle_timer_end():
 	print('end')
 	#battle_timer.start()
 
-func set_zone(to):
-	current_zone = to
-	#print('player in ' + str(to))
 	
 func _on_chest_open(chest):
 	emit_signal("dropped_inventory_opened", chest.chest_inventory)
