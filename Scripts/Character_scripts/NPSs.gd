@@ -58,6 +58,9 @@ var Chest = preload("res://Scenes/Objects/chest.tscn")
 
 var last_vision = []
 
+@onready var raycast = $RayCast2D
+@onready var collision_map = $"../CollisionMap"
+
 func _ready():
 	super()
 	if len(interaction_list) > 0:
@@ -119,27 +122,32 @@ func _ready():
 	self.move_direction = self.start_rotation
 	self.fight_ai.owner = self
 
+	self.move_direction = Vector2(1, 0)
 
+
+	self.raycast.add_exception(self)
+	self.raycast.add_exception(player)
 	
 func _physics_process(_delta):
 	super(_delta)
 	
-	if self.global_position.y < player.global_position.y:
-		self.z_index = 4
-	else:
-		self.z_index = 6
+#	if self.global_position.y < player.global_position.y:
+#		self.z_index = 4
+#	else:
+#		self.z_index = 6
 	
-	
+	#print(current_state)
 	match (current_state):
 		Enums.ECharacterState.IDLE:
 			pass
 		Enums.ECharacterState.ROAMING:
-			if(current_zone):
-				if (current_zone.follow_position - self.global_position).length() < 2.0:
-					move_direction = Vector2(0, 0)
-				else:
-					move_direction = (current_zone.follow_position - self.global_position).normalized()
+#			if(current_zone):
+#				if (current_zone.follow_position - self.global_position).length() < 2.0:
+#					move_direction = Vector2(0, 0)
+#				else:
+#					move_direction = (current_zone.follow_position - self.global_position).normalized()
 			self.fight_ai.roam()
+#			print('roam')
 		Enums.ECharacterState.TALKING:
 			self.move_direction = Vector2(0, 0);
 		Enums.ECharacterState.FIGHT_RANGE:

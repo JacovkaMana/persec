@@ -50,25 +50,35 @@ func is_in_zone(zone, point):
 func roam():
 	
 	var additional_position = owner.move_direction * 20
-	var in_zone = true
+	
+	
+	## TODO Rail System (NPC unique from export)
+	
+	
+	
+	## random raycast-based walk FAILED too random (gets stuck)
+	if owner.raycast.get_collider(0):
+		if owner.raycast.get_collider(0).get_collider_type() == 'TileMap':
+			owner.move_direction = owner.move_direction * -1
+			owner.move_direction = owner.move_direction.rotated(randf_range(-PI / 2, PI / 2)).normalized()
+			
+			owner.raycast.target_position = owner.move_direction * 20
+			owner.raycast.force_shapecast_update()
 
-	if owner.current_zone:
-		print(owner.current_zone.name)
-		in_zone = false
-		
-		var _in_zones = owner.current_zone.collision_shapes.any(
-			func(zone) : 
-				#return zone.shape.get_rect().has_point(owner.global_position - owner.current_zone.global_position)
-				return zone.shape.get_rect().has_point(owner.global_position - zone.global_position + additional_position)
-				) 
-		if not _in_zones:
-			owner.move_direction = Vector2(0, 0)
-		
-#		for zone in owner.current_zone.collision_shapes:
-#			var shape = zone.shape.get_rect()
-#			print(owner.current_zone.name)
-#			in_zone = is_in_zone(shape, owner.global_position - owner.current_zone.global_position)
-			#print(shape.has_point(owner.position))
+	## random area-based walk FAILED too random + can't detect shit
+	
+#	if owner.current_zone:
+#		print(owner.current_zone.name)
+#		in_zone = false
+#
+#		var _in_zones = owner.current_zone.collision_shapes.any(
+#			func(zone) : 
+#				#return zone.shape.get_rect().has_point(owner.global_position - owner.current_zone.global_position)
+#				return zone.shape.get_rect().has_point(owner.global_position - zone.global_position + additional_position)
+#				) 
+#		if not _in_zones:
+#			owner.move_direction = Vector2(0, 0)
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

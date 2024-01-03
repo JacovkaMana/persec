@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://dxgvjd50fp5qe"]
+[gd_scene load_steps=66 format=3 uid="uid://dxgvjd50fp5qe"]
 
 [ext_resource type="Shader" path="res://Art/Shaders/OutlineTest.gdshader" id="1_8uedp"]
 [ext_resource type="Script" path="res://Scripts/Character_scripts/NPSs.gd" id="2_k3d5b"]
@@ -43,6 +43,9 @@ radius = 72.15
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dlo3f"]
 radius = 94.73
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1h8fx"]
+radius = 66.65
 
 [sub_resource type="Animation" id="Animation_uhobr"]
 length = 0.001
@@ -395,6 +398,8 @@ height = 80
 radius = 33.0
 height = 81.72
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_jw6f3"]
+
 [node name="Slime" type="CharacterBody2D"]
 light_mask = 33
 material = SubResource("ShaderMaterial_3juty")
@@ -478,6 +483,20 @@ monitorable = false
 shape = SubResource("CircleShape2D_dlo3f")
 
 [node name="Sprite2D" type="Sprite2D" parent="VisionBattle"]
+visible = false
+position = Vector2(-80, 17)
+texture = ExtResource("9_nue0d")
+
+[node name="VisionCollision" type="Area2D" parent="."]
+disable_mode = 2
+collision_mask = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VisionCollision"]
+position = Vector2(-48, 1)
+shape = SubResource("CircleShape2D_1h8fx")
+
+[node name="Sprite2D" type="Sprite2D" parent="VisionCollision"]
 visible = false
 position = Vector2(-80, 17)
 texture = ExtResource("9_nue0d")
@@ -779,3 +798,7 @@ texture = SubResource("GradientTexture2D_ycvq3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Statuses/Shield"]
 shape = SubResource("CapsuleShape2D_7kve0")
+
+[node name="RayCast2D" type="ShapeCast2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_jw6f3")

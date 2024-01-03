@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://chku42sa88b0g"]
+[gd_scene load_steps=67 format=3 uid="uid://chku42sa88b0g"]
 
 [ext_resource type="Script" path="res://Scripts/Character_scripts/NPSs.gd" id="1_81pvv"]
 [ext_resource type="Shader" path="res://Art/Shaders/OutlineTest.gdshader" id="1_hatnr"]
@@ -42,10 +42,10 @@ font = ExtResource("3_35dde")
 font_size = 8
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qwcsy"]
-radius = 120.0
+radius = 86.24
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n5svg"]
-radius = 200.0
+radius = 76.22
 
 [sub_resource type="Animation" id="Animation_uhobr"]
 length = 0.001
@@ -434,12 +434,18 @@ height = 80
 radius = 33.0
 height = 81.72
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_gdihu"]
+radius = 38.71
+
 [node name="NPS" type="CharacterBody2D"]
+texture_filter = 1
+texture_repeat = 1
 material = SubResource("ShaderMaterial_3juty")
 collision_layer = 65
 script = ExtResource("1_81pvv")
 
 [node name="AreaTracker" type="Area2D" parent="."]
+visible = false
 collision_layer = 64
 collision_mask = 64
 monitorable = false
@@ -449,6 +455,7 @@ position = Vector2(-2, 27)
 shape = SubResource("RectangleShape2D_n4am5")
 
 [node name="HitBox" type="CharacterBody2D" parent="."]
+visible = false
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("3_m2t84")
@@ -465,6 +472,7 @@ hframes = 8
 vframes = 9
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
 light_mask = 2
 visibility_layer = 2
 energy = 0.0
@@ -551,6 +559,7 @@ parameters/walking/current_index = 0
 parameters/walking_speed/scale = 1.0
 
 [node name="HUD" type="Control" parent="."]
+z_index = 1
 layout_mode = 3
 anchors_preset = 0
 offset_left = -53.0
@@ -825,3 +834,11 @@ texture = SubResource("GradientTexture2D_jia52")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Statuses/Shield"]
 shape = SubResource("CapsuleShape2D_n5n10")
+
+[node name="RayCast2D" type="ShapeCast2D" parent="."]
+visible = false
+position = Vector2(0, 26)
+scale = Vector2(1.18, 1.18)
+shape = SubResource("CircleShape2D_gdihu")
+target_position = Vector2(0, 21.445)
+collision_mask = 65
