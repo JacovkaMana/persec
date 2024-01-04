@@ -134,9 +134,12 @@ func load_resource(what):
 
 
 
-func do_vfx(where, which):
+func do_vfx(where, which, color = NAN):
 	var obj = load("res://PreRendered/VFX/Impact.tscn")
 	var new_obj = obj.instantiate()
+	
+	if color:
+		new_obj.get_child(0).modulate = color
 	
 
 	vfx_layer.add_child(new_obj)

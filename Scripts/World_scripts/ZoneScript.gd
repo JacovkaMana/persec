@@ -6,6 +6,9 @@ extends Area2D
 @onready var path_player : AnimationPlayer = $PathPlayer
 @onready var path : Path2D = $Path2D
 @onready var path_follow : PathFollow2D = $Path2D/PathFollow2D
+@onready var mist = $Mist
+@onready var anim_player = $AnimationPlayer
+
 var follow_position = Vector2(0,0)
 var collision_shapes = []
 var curr_obj
@@ -22,6 +25,8 @@ func _ready():
 	
 	path_player.queue("path")
 
+	if mist:
+		self.mist.visible = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
@@ -33,4 +38,8 @@ func _on_enter(what: Node2D):
 	if what is Actor:
 		what.set_zone(self)
 		print(what, 'set zone', self)
+	
+	if what is PlayerScript:
+		#self.mist.visible = false
+		anim_player.queue("remove_mist")
 

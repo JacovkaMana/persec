@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://lm3x3j0l8lpd"]
 
 [ext_resource type="Script" path="res://Scripts/VFX.gd" id="1_0h0vy"]
-[ext_resource type="Texture2D" uid="uid://d368ksjclconm" path="res://Art/Textures/Retro Impact Effect Pack 3 C.png" id="1_rnn54"]
+[ext_resource type="Texture2D" uid="uid://dt1aymkfne5iv" path="res://Art/Sprites/FX/spark.png" id="2_mdjee"]
 
 [sub_resource type="Animation" id="Animation_mrpfy"]
 length = 0.001
@@ -42,10 +42,12 @@ _data = {
 }
 
 [node name="Impact" type="Node2D"]
+z_index = 10
 script = ExtResource("1_0h0vy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_rnn54")
+light_mask = 3
+texture = ExtResource("2_mdjee")
 hframes = 6
 vframes = 24
 frame = 123

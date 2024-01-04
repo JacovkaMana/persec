@@ -80,7 +80,7 @@ func move_n_collide(_delta):
 						self.add_collision_exception_with(collision_object.get_collider())
 						
 						## vfx and sound
-						scene_manager.do_vfx(collision_object.get_position(), 'that one')
+						scene_manager.do_vfx(collision_object.get_position(), 'that one', light.color)
 						
 					if not pierce_throught:
 						self.delete()

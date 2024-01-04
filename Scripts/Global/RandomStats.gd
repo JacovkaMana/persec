@@ -46,9 +46,9 @@ var rarity_colors: Dictionary = {
 }
 
 var type_colors: Dictionary = {
-	Enums.EDamageType.SLASH : Color8(225,225,225),
-	Enums.EDamageType.PIERCE : Color8(10,10,10),
-	Enums.EDamageType.STRIKE : Color8(225,225,225),
+	Enums.EDamageType.SLASH : Color8(240,240,240),
+	Enums.EDamageType.PIERCE : Color8(240,240,240),
+	Enums.EDamageType.STRIKE : Color8(240,240,240),
 	Enums.EDamageType.FIRE : Color8(255,70,70),
 	Enums.EDamageType.ICE : Color8(70,160,225),
 	Enums.EDamageType.WIND : Color8(225,225,255),
