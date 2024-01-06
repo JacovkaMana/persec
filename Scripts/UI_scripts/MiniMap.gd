@@ -2,7 +2,7 @@ extends Sprite2D
 
 @onready var player = get_tree().get_root().find_child("Player", true, false)
 @onready var tilemap: TileMap = get_tree().get_root().find_child("TileMap", true, false)
-@onready var capture_viewport = get_tree().get_root().find_child("CaptureViewport", true, false)
+@onready var capture_viewport = get_tree().get_root().find_child("MapViewport", true, false)
 @onready var viewport_camera: Camera2D = capture_viewport.find_child('Camera')
 @onready var player_marker = $PlayerMarker
 @onready var player_line: Line2D = capture_viewport.find_child('PlayerLine')

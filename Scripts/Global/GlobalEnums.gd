@@ -136,6 +136,7 @@ enum EItemType {
 	AMULET,
 	CONSUMABLE,
 	NOTE,
+	KEY,
 }
 
 

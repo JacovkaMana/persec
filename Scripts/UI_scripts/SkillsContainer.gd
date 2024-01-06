@@ -70,7 +70,7 @@ func swap_orders(to):
 			skill_button.modulate.a = 0.5
 			tween.tween_property(skill_button, "position", Vector2(crds.x, crds.y - 5), 0.15).set_trans(Tween.TRANS_SINE)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 func reset_after_hit(skill_i:int):

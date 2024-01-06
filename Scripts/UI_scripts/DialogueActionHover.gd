@@ -11,7 +11,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 func _on_gui_input(event):
@@ -27,5 +27,5 @@ func _on_mouse_entered():
 		['asd','asd','asd','asd']
 	)
 
-func gui_input(event):
+func gui_input(_event):
 	print('raw')

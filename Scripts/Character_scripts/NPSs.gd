@@ -8,6 +8,8 @@ class_name NPS
 @export var interaction_list: Array[Enums.ECharacterActions] = []
 
 
+@export var starting_zone: ZoneScript
+
 
 @export_category('Stats')
 @export var max_hitpoins: int = 100
@@ -27,7 +29,7 @@ class_name NPS
 @export var random_items: int = 0
 @export var static_items : Array[Item] = []
 @export_category('Skills')
-@export var SKILLS: Array[Skill] = []
+@export var SKILLS: Array[String] = []
 
 
 var walk_radius: float = 50
@@ -60,6 +62,10 @@ var last_vision = []
 
 @onready var raycast = $RayCast2D
 @onready var collision_map = $"../CollisionMap"
+
+
+@onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
+
 
 func _ready():
 	super()
@@ -117,7 +123,7 @@ func _ready():
 	
 	
 	for skill_string in SKILLS:
-		data.skills.add_skill(GlobalSkills.skills[skill_string])
+		data.skills.add_skill(GlobalSkills.get_by_name(skill_string))
 		
 	self.move_direction = self.start_rotation
 	self.fight_ai.owner = self
@@ -127,6 +133,11 @@ func _ready():
 
 	self.raycast.add_exception(self)
 	self.raycast.add_exception(player)
+	
+	
+	
+	self.nav_agent.target_position = self.starting_zone.get_random_pos()
+	self.nav_agent.connect("target_reached", self.fight_ai.set_roam_timer) 
 	
 func _physics_process(_delta):
 	super(_delta)
@@ -146,16 +157,24 @@ func _physics_process(_delta):
 #					move_direction = Vector2(0, 0)
 #				else:
 #					move_direction = (current_zone.follow_position - self.global_position).normalized()
+			
+			
+
+			#else:
+			#	print(self.name, self.nav_agent.get_current_navigation_result().path)
+			#if current_zone:
+				#print(current_zone.collision_shapes[0].shape.extents)
 			self.fight_ai.roam()
-#			print('roam')
+			#print('roam')
 		Enums.ECharacterState.TALKING:
 			self.move_direction = Vector2(0, 0);
 		Enums.ECharacterState.FIGHT_RANGE:
+			
+			
+			#self.move_direction = Vector2(0, 0);
+			
+			self.fight_ai.ai_process(_delta)
 			#self.fight_ai.ai_vision_process(vision.get_overlapping_bodies())
-			
-			self.move_direction = Vector2(0, 0);
-			
-			#self.fight_ai.ai_process(_delta)
 		Enums.ECharacterState.SEARCHING:
 			#self.move_direction = Vector2(0, 0);
 			pass
@@ -274,8 +293,8 @@ func die():
 	player.kill_confirm(self)
 	print('die')
 
-func _on_anim_finished(name):
-	match name:
+func _on_anim_finished(_name):
+	match _name:
 		"death":
 			var death_chest = Chest.instantiate()
 			
@@ -285,6 +304,9 @@ func _on_anim_finished(name):
 			death_chest.created_by = self
 			death_chest.global_position = self.global_position
 			death_chest.chest_inventory = self.data.inventory.get_inventory_items()
+			death_chest.chest_inventory.append_array(self.static_items)
+			if len(death_chest.chest_inventory) == 0:
+				death_chest.queue_free()
 			self.queue_free()
 
 func interact():

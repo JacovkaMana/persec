@@ -30,9 +30,9 @@ func hide_status(status: Enums.EStatus):
 			'Area2D': 
 				Status_dict[status].intercept = false
 			
-func shield(skill, status, duration, shield):
+func shield(_skill, _status, _duration, _shield):
 	Status_dict[Enums.EStatus.SHIELD].visible = true
 	Status_dict[Enums.EStatus.SHIELD].intercept = true
-	Status_dict[Enums.EStatus.SHIELD].shield = shield
+	Status_dict[Enums.EStatus.SHIELD].shield = _shield
 	
 	

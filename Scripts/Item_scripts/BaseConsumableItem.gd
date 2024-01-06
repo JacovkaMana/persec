@@ -1,6 +1,7 @@
 class_name BaseConsumableItem
 extends BaseStackableItem
 
+@export var effects: Array[Enums.EItemEffectType]
 
 func get_item_type()->int: #Enums.EItemType:
 	return Enums.EItemType.CONSUMABLE

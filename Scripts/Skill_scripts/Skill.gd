@@ -37,28 +37,28 @@ var status_duration: int
 
 
 func _init(
-	type: Enums.ESkillType,
-	subtype: Enums.ESkillSubtype,
-	name: String, 
-	description: String,
-	cost: int,
-	compatible: Array,
-	texture,
-	icon,
-	locked: bool,
-	requires: Array,
+	_type: Enums.ESkillType,
+	_subtype: Enums.ESkillSubtype,
+	_name: String, 
+	_description: String,
+	_cost: int,
+	_compatible: Array,
+	_texture,
+	_icon,
+	_locked: bool,
+	_requires: Array,
 	):
-		self.type = type
-		self.subtype = subtype
-		self.name = name
-		self.description = description
-		self.cost = cost
-		self.compatible = compatible
-		self.projectile = load("res://PreRendered/Projectiles/" + texture + ".tscn")
+		self.type = _type
+		self.subtype = _subtype
+		self.name = _name
+		self.description = _description
+		self.cost = _cost
+		self.compatible = _compatible
+		self.projectile = load("res://PreRendered/Projectiles/" + _texture + ".tscn")
 		#self.icon = GlobalSprites.skill_icons[icon]
-		self.icon =  load("res://Art/Icons/Skills/" + icon + ".png")
-		self.locked = locked
-		self.requires = requires
+		self.icon =  load("res://Art/Icons/Skills/" + _icon + ".png")
+		self.locked = _locked
+		self.requires = _requires
 		
 
 func get_damage_string():

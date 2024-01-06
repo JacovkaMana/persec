@@ -7,43 +7,60 @@ var visible_projectiles = []
 
 var distance_to_target = 200.0
 
+
 func ai_process(delta):
 	super(delta)
-
-	check_projectiles()
-
-	if (not active):
-		pass
-	owner.move_speed = 70
-	var angle_enemy = owner.global_position.angle_to(target.global_position)
-	var direction_enemy = owner.global_position.direction_to(target.global_position)
-	var angle = angle_enemy
 	
-	if (abs(owner.global_position.distance_to(target.global_position) - distance_to_target) <= distance_to_target*0.1):
-		if (dodge_direction == Vector2.ZERO):
-			owner.move_direction = 0.00001 * owner.global_position.direction_to(target.global_position)
-		else:
-			owner.move_direction = dodge_direction
-		#ranged_attack()
-	elif (owner.global_position.distance_to(target.global_position) > distance_to_target):
-		owner.move_direction = (direction_enemy + dodge_direction).normalized()
-	elif (owner.global_position.distance_to(target.global_position) < distance_to_target):
-		owner.move_direction = -1 *  (direction_enemy + dodge_direction).normalized()
+## MOVED TO TIMER
+#	owner.nav_agent.target_desired_distance = 100.0
+#	owner.nav_agent.path_desired_distance = 10.0
+#	owner.nav_agent.pathfinding_algorithm = 1
+#	owner.nav_agent.target_position = target.global_position
+	if owner.global_position.distance_to(target.global_position) > 300.0:
+		print('deactivate fight')
+		owner.current_state = Enums.ECharacterState.ROAMING
+		self.deactivate()
+		return 3
+		
+			
+	if owner.global_position.distance_to(target.global_position) > 100.0:
+		owner.move_direction = (owner.nav_agent.get_next_path_position() - owner.global_position).normalized()
+	else:
+	#if owner.nav_agent.is_target_reached():
+		owner.move_direction = Vector2.ZERO
+		
+
+		
+
+## OLD FIGHT ROAM SYSTEM
+#	check_projectiles()
+#
+#	if (not active):
+#		pass
+#	owner.move_speed = 70
+#	var angle_enemy = owner.global_position.angle_to(target.global_position)
+#	var direction_enemy = owner.global_position.direction_to(target.global_position)
+#	var _angle = angle_enemy
+#
+#	if (abs(owner.global_position.distance_to(target.global_position) - distance_to_target) <= distance_to_target*0.1):
+#		if (dodge_direction == Vector2.ZERO):
+#			owner.move_direction = 0.00001 * owner.global_position.direction_to(target.global_position)
+#		else:
+#			owner.move_direction = dodge_direction
+#		#ranged_attack()
+#	elif (owner.global_position.distance_to(target.global_position) > distance_to_target):
+#		owner.move_direction = (direction_enemy + dodge_direction).normalized()
+#	elif (owner.global_position.distance_to(target.global_position) < distance_to_target):
+#		owner.move_direction = -1 *  (direction_enemy + dodge_direction).normalized()
 	
-	#print( owner.global_position.direction_to(target.global_position) )
 
 
-#func ai_vision_process(objects):
-#	for what in objects:
-#		match what.get_collider_type():
-#			'Projectile':
-#				projectile_coming(what)
 
 func projectile_coming(which):
-	var angle = owner.global_position.angle_to(which.global_position)
+	var _angle = owner.global_position.angle_to(which.global_position)
 	var distance = owner.global_position.distance_to(which.global_position)
 	var direction = owner.global_position.direction_to(which.global_position)
-	var time = distance / which.move_speed
+	var _time = distance / which.move_speed
 	dodge_direction = Vector2(direction.x - 0.5, direction.y - 0.5).normalized()
 
 

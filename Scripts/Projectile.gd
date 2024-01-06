@@ -67,7 +67,7 @@ func _physics_process(_delta):
 func move_n_collide(_delta):
 	if (moving):
 		collision_object = move_and_collide(direction*_delta*move_speed)
-		if is_instance_valid(collision_object) and (collision_object not in hitboxes_hit):
+		if is_instance_valid(collision_object) and is_instance_valid(projectile_owner) and (collision_object not in hitboxes_hit):
 			#print( collision_object.get_collider() )
 			match collision_object.get_collider().name:
 				projectile_owner.name:
@@ -127,7 +127,7 @@ func move_n_collide(_delta):
 	
 func shoot(where: Vector2, _animated: bool = false, who = null):
 	
-	var where_y = Vector2(cos(self.rotation + PI/2), sin(self.rotation + PI/2))
+	var _where_y = Vector2(cos(self.rotation + PI/2), sin(self.rotation + PI/2))
 	#var where_x = Vector2(cos(self.rotation), sin(self.rotation))
 	#state_machine.travel("Start")
 	

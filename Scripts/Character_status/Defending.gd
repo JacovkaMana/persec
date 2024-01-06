@@ -5,21 +5,26 @@ var intercept: bool = false
 var shield: float = 0
 
 @onready var statuses = self.get_parent()
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var particles: GPUParticles2D = $Particles
-@onready var sprite: Sprite2D = $Bullet
-@onready var texture_light: PointLight2D = $TextureLight
-@onready var light: PointLight2D = $PointLight
+@onready var animation_player: AnimationPlayer
+@onready var particles: GPUParticles2D 
+@onready var sprite: Sprite2D 
+@onready var texture_light: PointLight2D
+@onready var light: PointLight2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#self.connect("body_entered", _on_enter) 
+	animation_player = $AnimationPlayer
+	particles = $Particles
+	sprite = $Bullet
+	texture_light = $TextureLight
+	light = $PointLight
 	pass
 
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if (intercept):
 		for body in self.get_overlapping_bodies():
 			if body.get_collider_type() == 'Projectile':
@@ -31,7 +36,7 @@ func _process(delta):
 						statuses.hide_status(Enums.EStatus.SHIELD)
 
 
-func _on_enter(what):
+func _on_enter(_what):
 	pass
 #	print(what)
 #	print(self.get_overlapping_bodies())

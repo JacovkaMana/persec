@@ -20,21 +20,21 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 
-func setup(old_player, enemies):
-	self.enemies_on_level = enemies
+func setup(old_player, _enemies):
+	self.enemies_on_level = _enemies
 	
-	var player_data = SceneManager.load_resource('user://player_data.res')
+	var _player_data = SceneManager.load_resource('user://player_data.res')
 	self.player.data = old_player.data
 	self.player.instantiated = true
 	player_hud.player = self.player
 	
 	var enemy_count = 0 
-	for enemy in enemies:		
-		var enemy_node = enemies_container.get_child(enemy_count).find_child("EnemyHUD", true, false)
+	for enemy in _enemies:		
+		var _enemy_node = enemies_container.get_child(enemy_count).find_child("EnemyHUD", true, false)
 		enemies_container.get_child(enemy_count).data = enemy.data
 		enemies_container.get_child(enemy_count).instantiated = true
 		enemy_count += 1

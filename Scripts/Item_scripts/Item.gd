@@ -7,7 +7,6 @@ extends Resource
 @export var description: String = "INITIALIZED"
 @export var rarity: Enums.ERarity = Enums.ERarity.Common
 
-@export var effects: Array[Enums.EItemEffectType]
 
 @export var weight: float = 0.0
 @export var base_cost: float = 0.0

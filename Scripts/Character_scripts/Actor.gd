@@ -4,9 +4,9 @@ class_name Actor
 @onready var animation_tree = $AnimationTree
 @onready var animation_player = $AnimationPlayer
 @onready var label = $HeadLabel
-@onready var sprite: Sprite2D = $Sprite
-@onready var cloak: Sprite2D = $Cloak
-@onready var face: Sprite2D = $Face
+#@onready var sprite: Sprite2D = $Sprite
+#@onready var cloak: Sprite2D = $Cloak
+#@onready var face: Sprite2D = $Face
 @onready var interaction_area: Area2D = $InteractionArea
 @onready var state_machine = animation_tree.get("parameters/playback")
 @onready var Projectiles: Node2D = self.get_tree().get_root().find_child("NeutralProjectiles", true, false)
@@ -59,7 +59,7 @@ func _ready():
 	
 	
 
-func update_animation_parameters (direction: Vector2, velocity):
+func update_animation_parameters (direction: Vector2, _velocity):
 	#print(move_input == Vector2.LEFT)
 	#if (move_input != Vector2.ZERO):
 		#animation_tree.set("parameters/Walk/blend_position",move_input)
@@ -86,7 +86,7 @@ func update_animation_parameters (direction: Vector2, velocity):
 		for one in animatable_arts:
 			one.flip_h = false
 	
-	walking = (abs(velocity.x) <= 0.0001 and abs(velocity.y) <= 0.0001)
+	walking = (abs(_velocity.x) <= 0.0001 and abs(_velocity.y) <= 0.0001)
 			
 			
 	if	walking:
@@ -137,7 +137,7 @@ func use_skill_id(id: int):
 
 
 
-func _on_area_entered(area : Area2D):
+func _on_area_entered(_area : Area2D):
 	pass
 #	print(area.name)
 #	print(area.shape_owner_get_owner(0) )
@@ -220,7 +220,7 @@ func cooldown(time):
 func set_zone(to):
 	current_zone = to
 
-func _on_anim_finished(name):
+func _on_anim_finished(_name):
 	pass
 
 

@@ -7,27 +7,29 @@ var tween
 
 
 @onready var stamina_bar: TextureProgressBar = $Status/StaminaBar/TextureProgressBar
-@onready var stamina_container: TextureRect = $Status/StaminaBar
+@onready var stamina_container: TextureRect
 @onready var stamina_backplate: TextureProgressBar = $Status/StaminaBackplate
 
 @onready var health_bar: TextureProgressBar = $Status/HealthBar/TextureProgressBar
-@onready var health_label: Label = $Status/HealthLabel
+@onready var health_label: Label
 
-@onready var stamina_blocks = $StaminaContainer
+@onready var stamina_blocks = self.get_node('StaminaContainer')
 
-@onready var money_label = $Coins/Label
+@onready var money_label
 
 @onready var statuses_container = $StatusesContainer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass	
+	stamina_container = self.get_node('Status/StaminaBar')#$Status/StaminaBar 
+	health_label = $Status/HealthLabel
+	money_label = $Coins/Label
 #	for i in range(stamina_blocks.get_child_count()):
 #		stamina_blocks.get_child(i).material = full_material
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	
 #	for i in range(stamina_blocks.get_child_count()):
 #		if (i + 1) <= player.data.max_stamina:

@@ -1,8 +1,7 @@
-[gd_scene load_steps=233 format=3 uid="uid://b7d15i5cwex1y"]
+[gd_scene load_steps=232 format=3 uid="uid://b7d15i5cwex1y"]
 
 [ext_resource type="Script" path="res://Scripts/Global/GlobalUI.gd" id="1_7pbd5"]
 [ext_resource type="Texture2D" uid="uid://d0g2mydsmvops" path="res://Art/Masks/Circle95.png" id="2_mrqlk"]
-[ext_resource type="Script" path="res://Scripts/UI_scripts/MiniMap.gd" id="3_nd3yl"]
 [ext_resource type="PackedScene" uid="uid://ct3v7p6aip4py" path="res://Scenes/Maps/player_marker.tscn" id="4_kpmio"]
 [ext_resource type="Texture2D" uid="uid://620p5t3jo6py" path="res://Art/UI/border97.png" id="5_0ouu2"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/ScreenLabel.gd" id="6_4yws3"]
@@ -253,7 +252,7 @@ width = 40
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5841r"]
 shader = ExtResource("13_dsmnk")
-shader_parameter/power = 50.0
+shader_parameter/power = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n22do"]
 shader = ExtResource("13_dsmnk")
@@ -808,13 +807,13 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 
 [node name="MiniMap" type="Sprite2D" parent="MinimapUI"]
 self_modulate = Color(1, 1, 1, 0.784314)
 clip_children = 1
 position = Vector2(583, 56)
 texture = ExtResource("2_mrqlk")
-script = ExtResource("3_nd3yl")
 
 [node name="MinimapDisplay" type="TextureRect" parent="MinimapUI/MiniMap"]
 texture_filter = 4
@@ -854,6 +853,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 640.0
 offset_bottom = 360.0
+mouse_filter = 2
 script = ExtResource("6_4yws3")
 
 [node name="TextureRect" type="TextureRect" parent="ScreenLabel"]
@@ -865,10 +865,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 52480.0
-offset_top = 29690.0
-offset_right = 53120.0
-offset_bottom = 29708.0
+offset_left = 54720.0
+offset_top = 30950.0
+offset_right = 55360.0
+offset_bottom = 30968.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(320, 9)
@@ -931,7 +931,7 @@ offset_left = 534.0
 offset_top = 105.0
 offset_right = 640.0
 offset_bottom = 305.0
-mouse_filter = 1
+mouse_filter = 2
 
 [node name="Bg" type="TextureRect" parent="Journal"]
 self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.784314)
@@ -4450,6 +4450,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 640.0
 offset_bottom = 360.0
+mouse_filter = 2
 script = ExtResource("81_c26dp")
 
 [node name="TextureRect2" type="TextureRect" parent="LoadingBattle"]
@@ -4502,6 +4503,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 640.0
 offset_bottom = 360.0
+mouse_filter = 2
 script = ExtResource("81_c26dp")
 
 [node name="MenuBackground" type="TextureRect" parent="PauseMenu"]
@@ -4834,16 +4836,17 @@ offset_bottom = 316.0
 script = ExtResource("92_k0jro")
 
 [node name="MinimapDisplay" type="TextureRect" parent="PauseMenu/MenuContent/HideableContent/MenuMap"]
-texture_filter = 4
+texture_filter = 3
 texture_repeat = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -25.0
+offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("ViewportTexture_2gs5t")
-expand_mode = 1
 
 [node name="MenuOptionDesc" type="Control" parent="PauseMenu/MenuContent/HideableContent"]
 anchors_preset = 0
@@ -5393,7 +5396,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
+mouse_filter = 2
 script = ExtResource("111_ctxxf")
 
 [node name="Test_anim" type="Sprite2D" parent="Control"]

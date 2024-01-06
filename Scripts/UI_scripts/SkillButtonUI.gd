@@ -7,7 +7,7 @@ func _ready():
 	connect("gui_input", _on_gui_input)
 	pass # Replace with function body.
 	
-func _process(delta):
+func _process(_delta):
 	pass
 
 
@@ -30,6 +30,6 @@ func _on_gui_input(event):
 #			if event.button_index == 2:
 		#print(event)
 		
-func on_left_click(cursor):
+func on_left_click(_cursor):
 	print("skill click")
 	

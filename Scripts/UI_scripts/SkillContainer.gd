@@ -17,7 +17,7 @@ func _ready():
 		last_rand = randi_range(0, 10)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 

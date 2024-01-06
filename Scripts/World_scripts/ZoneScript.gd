@@ -1,5 +1,5 @@
 extends Area2D
-
+class_name ZoneScript
 
 
 @onready var player = get_tree().get_root().find_child("Player", true, false)
@@ -23,14 +23,33 @@ func _ready():
 	#path_player.set_root(Rooms/Second)
 	#print(path_player.root_node)
 	
-	path_player.queue("path")
+	if path_player:
+		path_player.queue("path")
 
 	if mist:
 		self.mist.visible = true
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
+
+func get_random_pos():
+	print(self.collision_shapes)
+	var shape = self.collision_shapes.pick_random()
+	var shape_area = shape.shape.extents
+	var shape_origin = shape.global_position - shape_area
+	print(shape_area, shape_origin)
+
+	#var x = randi_range(min(shape_origin.x, shape_area.x), max(shape_origin.x, shape_area.x) )
+	#var y = randi_range(min(shape_origin.y, shape_area.y), max(shape_origin.y, shape_area.y) )
+	var x = randi_range(shape.global_position.x - shape.shape.size.x / 2, shape.global_position.x + shape.shape.size.x / 2)
+	var y = randi_range(shape.global_position.y - shape.shape.size.y / 2, shape.global_position.y + shape.shape.size.y / 2)
+	print(Vector2(x, y))
+	print(shape.shape.get_rect())
+	return Vector2(x, y)
+	
+
 func _physics_process(_delta):
-	follow_position = path_follow.global_position
+	if path_follow:
+		follow_position = path_follow.global_position
 
 
 
@@ -41,5 +60,6 @@ func _on_enter(what: Node2D):
 	
 	if what is PlayerScript:
 		#self.mist.visible = false
-		anim_player.queue("remove_mist")
+		if self.mist.visible:
+			anim_player.queue("remove_mist")
 

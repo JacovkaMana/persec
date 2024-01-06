@@ -52,9 +52,9 @@ func _process(_delta):
 	#print(main_camera.global_position)
 	pass
 
-func setup_level(player_data, next_scene, melee_scene):
-	var player_level = next_scene.find_child("Player", true, false)
-	player_level.data = player_data
+func setup_level(_player_data, _next_scene, _melee_scene):
+	var player_level = _next_scene.find_child("Player", true, false)
+	player_level.data = _player_data
 	player_level.player_state = Enums.EPlayerState.ROAMING
 	InputManager.player = player_level
 	
@@ -66,18 +66,18 @@ func setup_level(player_data, next_scene, melee_scene):
 	ui_scene.visible = true
 	ui_scene.process_mode = 0
 	
-	for enemy in melee_scene.enemies_on_level:
+	for enemy in _melee_scene.enemies_on_level:
 		enemy.die()
 	
 	
 	
-func add_melee(player, enemies):
+func add_melee(_player, _enemies):
 	
 	scene_animator.queue("into_battle")
-	self.player = player
+	self.player = _player
 	player.freeze = true
-	self.enemies = enemies
-	for enemy in enemies:
+	self.enemies = _enemies
+	for enemy in self.enemies:
 		enemy.freeze = true
 	
 func _on_animation_finished(_anim):
@@ -134,18 +134,18 @@ func load_resource(what):
 
 
 
-func do_vfx(where, which, color = NAN):
+func do_vfx(_where, _which, _color = NAN):
 	var obj = load("res://PreRendered/VFX/Impact.tscn")
 	var new_obj = obj.instantiate()
 	
-	if color:
-		new_obj.get_child(0).modulate = color
+	if _color:
+		new_obj.get_child(0).modulate = _color
 	
 
 	vfx_layer.add_child(new_obj)
 	
 	
-	new_obj.global_position = where
+	new_obj.global_position = _where
 	
 	
 	new_obj.get_child(1).queue('start')

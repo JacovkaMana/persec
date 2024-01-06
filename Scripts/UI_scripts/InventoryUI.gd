@@ -23,7 +23,7 @@ func _ready():
 	inventory_container.get_child(0).connect("pressed", update_inventory.bind([Enums.EItemType.NONE]))
 	inventory_container.get_child(1).connect("pressed", update_inventory.bind([Enums.EItemType.WEAPON]))
 	inventory_container.get_child(2).connect("pressed", update_inventory.bind([Enums.EItemType.ARMOR, Enums.EItemType.HELM, Enums.EItemType.BOOTS]))
-	inventory_container.get_child(3).connect("pressed", update_inventory.bind([Enums.EItemType.AMULET]))
+	inventory_container.get_child(3).connect("pressed", update_inventory.bind([Enums.EItemType.KEY]))
 	inventory_container.get_child(4).connect("pressed", update_inventory.bind([Enums.EItemType.CONSUMABLE]))
 	
 	#print('Player test node')

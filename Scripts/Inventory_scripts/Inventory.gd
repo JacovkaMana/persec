@@ -91,7 +91,8 @@ func equip_item(item: Item)->bool:
 				return false
 			
 			if item.get_equip_type() == Enums.EEquipType.WEAPON:
-				item.twohanded
+				pass
+				#item.twohanded
 				
 			
 			
@@ -155,7 +156,12 @@ func get_inventory_items_by_type(item_type: Enums.EItemType)->Array: #[Inventory
 	return out
 	
 
-
+func has_key_item(item_name: String, _item_count: int = -1) -> bool:
+	for item in _inventory:
+		if item.get_item_type() == Enums.EItemType.KEY:
+			if item.keyitem_name == item_name:
+				return true
+	return false
 
 
 

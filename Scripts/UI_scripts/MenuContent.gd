@@ -20,7 +20,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 
@@ -57,5 +57,5 @@ func option_hovered(option_name: String):
 			option_desc.text = "Configure game settings"
 				
 
-func quest_clicked(quest_n: int):
+func quest_clicked(_quest_n: int):
 	journal_tab.set_tab_disabled(1, false)

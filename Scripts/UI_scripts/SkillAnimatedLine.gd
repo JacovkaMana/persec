@@ -13,7 +13,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	follow.progress_ratio += speed
 	follow_2.progress_ratio += speed
 	follow_3.progress_ratio += speed

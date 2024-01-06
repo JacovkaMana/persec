@@ -3,6 +3,7 @@ extends Control
 @onready var player = get_tree().get_root().find_child("Player", true, false)
 @onready var tilemap: TileMap = get_tree().get_root().find_child("TileMap", true, false)
 @onready var capture_viewport = get_tree().get_root().find_child("MapViewport", true, false)
+@onready var rooms = get_tree().get_root().find_child("Rooms", true, false)
 @onready var viewport_camera: Camera2D = capture_viewport.find_child('Camera')
 @onready var player_marker = $PlayerMarker
 @onready var player_line: Line2D = capture_viewport.find_child('PlayerLine')
@@ -20,9 +21,17 @@ func _ready():
 
 	var tilemap_copy = tilemap.duplicate()
 	capture_viewport.get_child(0).add_sibling(tilemap_copy)
+	
+#	tilemap_copy.visible = false
+#	for room in rooms.get_children():
+#		var new_mist = room.find_child('Mist')
+#		new_mist.modulate = Color8(240,240,240)
+#		capture_viewport.find_child('Zones').add_child(room.duplicate())
+
+		
 	display.texture.viewport_path = NodePath(capture_viewport.get_path())
 	viewport_camera.zoom = Vector2((1.0 / zoom_float),(1.0 / zoom_float))
-	viewport_camera.global_position = player.global_position
+	#viewport_camera.global_position = player.global_position
 	
 	var interactables = get_tree().get_nodes_in_group("interactable")
 	for object in interactables:
@@ -45,7 +54,7 @@ func _ready():
 	add_child(_timer)
 	_timer.start()
 
-func _process(delta):
+func _process(_delta):
 	viewport_camera.global_position = player.global_position
 	for marker in markers:
 		if (is_instance_valid(marker)):

@@ -12,14 +12,18 @@ var created_by = null
 
 @export var interactable: bool = true
 
+@export var need_key: String
 
+func get_collider_type():
+	return 'Object'
+	
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	anim.play('RESET')
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 func on_interact_area():
@@ -33,8 +37,15 @@ func off_interact_area():
 		interaction_hint.visible = false
 	
 func interact():
+	print(player.data.inventory.has_key_item(need_key))
 	if (interactable):
-		anim.play('open_door')
-		
-		self.off_interact_area()
-		interactable = false
+		if not need_key:
+			self.open_door()
+		elif player.data.inventory.has_key_item(need_key):
+			self.open_door()
+			
+func open_door():
+	anim.play('open_door')
+	
+	self.off_interact_area()
+	interactable = false

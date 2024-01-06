@@ -38,7 +38,7 @@ func _ready():
 #	animation_tree.set("parameters/walking/current_state", "walking")
 
 
-func update_animation_parameters (direction: Vector2, velocity):
+func update_animation_parameters (_direction: Vector2, _velocity):
 	pass
 
 	
@@ -55,12 +55,12 @@ func _physics_process(_delta):
 func shoot_melee_projectile(skill: Skill, at) -> void:
 	
 	
-	var proj = skill.projectile
+	var _proj = skill.projectile
 	#var bullet = proj.instantiate()
 	var bullet = test_melee_proj.instantiate()
 				
 	if skill.type == Enums.ESkillType.MAGIC:
-		bullet.magic == true
+		bullet.magic = true
 	
 		
 
@@ -126,7 +126,7 @@ func take_damage(_skill: Skill, from, _strength):
 #func set_zone(to):
 #	current_zone = to
 
-func _on_anim_finished(name):
+func _on_anim_finished(_name):
 	pass
 
 

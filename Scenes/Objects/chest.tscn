@@ -22,7 +22,7 @@ name = "ChestArmor"
 sprite = ExtResource("3_iac4y")
 description = "INITIALIZED"
 rarity = 1
-effects = Array[int]([])
+effects = null
 weight = 0.0
 base_cost = 0.0
 
@@ -37,7 +37,7 @@ name = "ChestBoots"
 sprite = ExtResource("5_uh7t7")
 description = "INITIALIZED"
 rarity = 1
-effects = Array[int]([])
+effects = null
 weight = 0.0
 base_cost = 0.0
 
@@ -165,6 +165,8 @@ _data = {
 }
 
 [node name="Chest" type="StaticBody2D" groups=["interactable"]]
+z_index = 5
+y_sort_enabled = true
 position = Vector2(-77, 96)
 collision_layer = 513
 collision_mask = 513

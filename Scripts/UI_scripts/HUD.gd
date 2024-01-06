@@ -37,7 +37,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	
 	for i in range(stamina_blocks.get_child_count()):
 		if (i + 1) <= player.data.max_stamina:

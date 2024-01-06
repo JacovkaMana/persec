@@ -19,8 +19,8 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	var signs = Vector2(sign(container.position.x), sign(container.position.y))
+func _process(_delta):
+	var _signs = Vector2(sign(container.position.x), sign(container.position.y))
 	#print(container.position + container_size * signs / 16 * (container_scale - 1))
 	#print(container_size)
 	pass

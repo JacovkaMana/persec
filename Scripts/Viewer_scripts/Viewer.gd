@@ -9,9 +9,9 @@ var satisfaction: float
 var min_satisfaction = 0
 var max_satisfaction = 100
 
-func _init(type: String, loves):
-		self.type = type
-		self.loves = loves
+func _init(_type: String, _loves):
+		self.type = _type
+		self.loves = _loves
 		self.satisfaction = 50
 		
 func add_satisfaction(power):

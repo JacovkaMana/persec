@@ -1,4 +1,4 @@
-[gd_scene load_steps=109 format=3 uid="uid://bmciyy80yfbpn"]
+[gd_scene load_steps=116 format=3 uid="uid://bmciyy80yfbpn"]
 
 [ext_resource type="Texture2D" uid="uid://b28ckc8cbay00" path="res://Art/UI/LargeProbe.png" id="1_5ht6c"]
 [ext_resource type="Texture2D" uid="uid://cilrxml7big3t" path="res://Art/DungeonNew.png" id="2_bh7og"]
@@ -13,8 +13,11 @@
 [ext_resource type="PackedScene" uid="uid://chku42sa88b0g" path="res://Scenes/Characters/NPS.tscn" id="9_m85ul"]
 [ext_resource type="PackedScene" uid="uid://dsyukixpu7tpu" path="res://Scenes/Characters/player.tscn" id="10_je7pe"]
 [ext_resource type="Texture2D" uid="uid://l72iu1ipn60t" path="res://Art/UI/HugeProbe.png" id="11_gvya5"]
+[ext_resource type="Script" path="res://Scripts/AI_scripts/MageAI.gd" id="12_ib2jn"]
 [ext_resource type="FontFile" uid="uid://c0s1j1n8esy7x" path="res://Fonts/Minecraftia-Regular.ttf" id="12_jcsrw"]
+[ext_resource type="Script" path="res://Scripts/Item_scripts/KeyItem.gd" id="12_t714x"]
 [ext_resource type="PackedScene" uid="uid://ds3vau6cpwq73" path="res://Scenes/Objects/torch.tscn" id="13_6fppy"]
+[ext_resource type="Texture2D" uid="uid://cusrjh20xpnvy" path="res://Art/Sprites/Stackable/HealthPotion1.png" id="13_fgri3"]
 [ext_resource type="Material" uid="uid://ceqvsphq6qsfq" path="res://Art/Shaders/IceShader.tres" id="14_4aet2"]
 [ext_resource type="Texture2D" uid="uid://c35jevunk55x" path="res://Art/Masks/test_mask.png" id="15_sfabm"]
 [ext_resource type="Texture2D" uid="uid://chpni1hbnyyby" path="res://Art/Colors/Ice.tres" id="16_yvcgs"]
@@ -31,6 +34,114 @@
 [ext_resource type="Texture2D" uid="uid://b3lp5belmvayk" path="res://Art/Sprites/FX/hitspark.png" id="27_ejv0l"]
 [ext_resource type="Script" path="res://Scripts/World_scripts/DoorScript.gd" id="29_2pequ"]
 [ext_resource type="Texture2D" uid="uid://bl3jbn477c4ay" path="res://Art/Sprite sheets/DungeonDoor.png" id="29_ury1d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h1jk1"]
+size = Vector2(542, 219)
+
+[sub_resource type="Animation" id="Animation_di3bd"]
+length = 40.0
+loop_mode = 1
+
+[sub_resource type="Animation" id="Animation_adspf"]
+resource_name = "path"
+length = 40.0
+loop_mode = 1
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oq3ep"]
+_data = {
+"RESET": SubResource("Animation_di3bd"),
+"path": SubResource("Animation_adspf")
+}
+
+[sub_resource type="Curve2D" id="Curve2D_76fdv"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -131, 23, 0, 0, 0, 0, -246, 0, 0, 0, 0, 0, -261, -116, 0, 0, 0, 0, -57, -118, 0, 0, 0, 0, 83, -118, 0, 0, 0, 0, 192, -66, 0, 0, 0, 0, 325, -61, 0, 0, 0, 0, 544, -59, 0, 0, 0, 0, 546, 71, 0, 0, 0, 0, 204, 89, 0, 0, 0, 0, -111, 75, 0, 0, 0, 0, -131, 23)
+}
+point_count = 12
+
+[sub_resource type="Gradient" id="Gradient_lknwc"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_a2dq2"]
+gradient = SubResource("Gradient_lknwc")
+
+[sub_resource type="Animation" id="Animation_1bx4a"]
+resource_name = "remove_mist"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mist:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Mist:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_j4rmc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mist:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Mist:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3rs5v"]
+_data = {
+"RESET": SubResource("Animation_j4rmc"),
+"remove_mist": SubResource("Animation_1bx4a")
+}
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_7vbyg"]
+vertices = PackedVector2Array(280, -52, 280, 206, -248, 206, -249, -53)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-249, -53, -248, 206, 280, 206, 280, -52)])
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x4sy3"]
+size = Vector2(539, 250)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k427i"]
+size = Vector2(385, 190)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_r8mfs"]
+vertices = PackedVector2Array(-323, -132, 216, -133, 216, -71, -323, 118, 601, 117, 601, -71)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 3, 2, 5)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-323, 118, -323, -132, 216, -133, 216, -71, 601, -71, 601, 117)])
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xeopb"]
 polygon = PackedVector2Array(10, -16, 16, -16, 16, 16, 10, 16)
@@ -1532,6 +1643,20 @@ sources/1 = SubResource("TileSetAtlasSource_b7om1")
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_gcavq"]
 gradient = SubResource("Gradient_jqsvw")
 
+[sub_resource type="Resource" id="Resource_juo7t"]
+script = ExtResource("12_ib2jn")
+
+[sub_resource type="Resource" id="Resource_e55hv"]
+script = ExtResource("12_t714x")
+stackable = false
+keyitem_name = "dungeon_armory_key"
+name = "Key"
+sprite = ExtResource("13_fgri3")
+description = "Found from the guard"
+rarity = 1
+weight = 0.0
+base_cost = 0.0
+
 [sub_resource type="LabelSettings" id="LabelSettings_2t76h"]
 font = ExtResource("12_jcsrw")
 font_size = 8
@@ -1625,128 +1750,6 @@ orbit_velocity_max = 0.0
 scale_min = 0.1
 scale_max = 0.5
 color = Color(0.937255, 1, 0.0509804, 1)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_h1jk1"]
-size = Vector2(542, 219)
-
-[sub_resource type="Animation" id="Animation_di3bd"]
-length = 40.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Path2D/PathFollow2D:progress_ratio")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 40),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.0]
-}
-
-[sub_resource type="Animation" id="Animation_adspf"]
-resource_name = "path"
-length = 40.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Path2D/PathFollow2D:progress_ratio")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 8.4, 24.5, 40),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0.0, 0.125, 0.375, 0.7]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_oq3ep"]
-_data = {
-"RESET": SubResource("Animation_di3bd"),
-"path": SubResource("Animation_adspf")
-}
-
-[sub_resource type="Curve2D" id="Curve2D_76fdv"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, -131, 23, 0, 0, 0, 0, -246, 0, 0, 0, 0, 0, -261, -116, 0, 0, 0, 0, -57, -118, 0, 0, 0, 0, 83, -118, 0, 0, 0, 0, 192, -66, 0, 0, 0, 0, 325, -61, 0, 0, 0, 0, 544, -59, 0, 0, 0, 0, 546, 71, 0, 0, 0, 0, 204, 89, 0, 0, 0, 0, -111, 75, 0, 0, 0, 0, -131, 23)
-}
-point_count = 12
-
-[sub_resource type="Gradient" id="Gradient_lknwc"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_a2dq2"]
-gradient = SubResource("Gradient_lknwc")
-
-[sub_resource type="Animation" id="Animation_1bx4a"]
-resource_name = "remove_mist"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Mist:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Mist:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-
-[sub_resource type="Animation" id="Animation_j4rmc"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Mist:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Mist:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_3rs5v"]
-_data = {
-"RESET": SubResource("Animation_j4rmc"),
-"remove_mist": SubResource("Animation_1bx4a")
-}
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_x4sy3"]
-size = Vector2(542, 252)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_k427i"]
-size = Vector2(383, 190)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ayl18"]
 seed = 11
@@ -2022,12 +2025,141 @@ position = Vector2(-18, 1)
 scale = Vector2(15, 15.926)
 texture = ExtResource("1_5ht6c")
 
+[node name="Rooms" type="Node2D" parent="."]
+
+[node name="Spawn" type="Area2D" parent="Rooms"]
+disable_mode = 1
+collision_layer = 64
+collision_mask = 64
+script = ExtResource("22_yfoon")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Spawn"]
+z_index = 55
+position = Vector2(17, 45.5)
+shape = SubResource("RectangleShape2D_h1jk1")
+
+[node name="PathPlayer" type="AnimationPlayer" parent="Rooms/Spawn"]
+libraries = {
+"": SubResource("AnimationLibrary_oq3ep")
+}
+
+[node name="Path2D" type="Path2D" parent="Rooms/Spawn"]
+curve = SubResource("Curve2D_76fdv")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Rooms/Spawn/Path2D"]
+position = Vector2(-131, 23)
+rotation = -2.9442
+
+[node name="Mist" type="Node2D" parent="Rooms/Spawn"]
+z_index = 20
+
+[node name="Sprite2D" type="Sprite2D" parent="Rooms/Spawn/Mist"]
+modulate = Color(0.160784, 0.152941, 0.2, 1)
+light_mask = 0
+position = Vector2(16, 159)
+scale = Vector2(2.11719, 319)
+texture = SubResource("GradientTexture1D_a2dq2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Rooms/Spawn"]
+libraries = {
+"": SubResource("AnimationLibrary_3rs5v")
+}
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Rooms/Spawn"]
+navigation_polygon = SubResource("NavigationPolygon_7vbyg")
+
+[node name="NavigationLink2D" type="NavigationLink2D" parent="Rooms/Spawn"]
+start_position = Vector2(32, 126)
+end_position = Vector2(35, 265)
+
+[node name="Second" type="Area2D" parent="Rooms"]
+position = Vector2(51, 371)
+disable_mode = 1
+collision_layer = 64
+collision_mask = 64
+script = ExtResource("22_yfoon")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Second"]
+z_index = 75
+position = Vector2(-36.5, -17)
+shape = SubResource("RectangleShape2D_x4sy3")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Rooms/Second"]
+z_index = 60
+position = Vector2(425.5, 13)
+shape = SubResource("RectangleShape2D_k427i")
+
+[node name="PathPlayer" type="AnimationPlayer" parent="Rooms/Second"]
+libraries = {
+"": SubResource("AnimationLibrary_oq3ep")
+}
+
+[node name="Path2D" type="Path2D" parent="Rooms/Second"]
+curve = SubResource("Curve2D_76fdv")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Rooms/Second/Path2D"]
+position = Vector2(-131, 23)
+rotation = -2.9442
+
+[node name="Mist" type="Node2D" parent="Rooms/Second"]
+z_index = 20
+
+[node name="Sprite2D2" type="Sprite2D" parent="Rooms/Second/Mist"]
+modulate = Color(0.160784, 0.152941, 0.2, 1)
+light_mask = 0
+position = Vector2(-35.5, 146)
+scale = Vector2(2.11328, 293)
+texture = SubResource("GradientTexture1D_a2dq2")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Rooms/Second/Mist"]
+modulate = Color(0.160784, 0.152941, 0.2, 1)
+light_mask = 0
+position = Vector2(499, 211)
+scale = Vector2(2.11328, 293)
+texture = SubResource("GradientTexture1D_a2dq2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Rooms/Second"]
+libraries = {
+"": SubResource("AnimationLibrary_3rs5v")
+}
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Rooms/Second"]
+position = Vector2(17, -10)
+navigation_polygon = SubResource("NavigationPolygon_r8mfs")
+
+[node name="Armory" type="Area2D" parent="Rooms"]
+position = Vector2(481, 61)
+disable_mode = 1
+collision_layer = 64
+collision_mask = 64
+script = ExtResource("22_yfoon")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Armory"]
+position = Vector2(2, -37)
+shape = SubResource("RectangleShape2D_x4sy3")
+
+[node name="Mist" type="Node2D" parent="Rooms/Armory"]
+z_index = 20
+
+[node name="Sprite2D2" type="Sprite2D" parent="Rooms/Armory/Mist"]
+modulate = Color(0.160784, 0.152941, 0.2, 1)
+light_mask = 0
+position = Vector2(6, 157)
+scale = Vector2(1.50586, 384)
+texture = SubResource("GradientTexture1D_a2dq2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Rooms/Armory"]
+libraries = {
+"": SubResource("AnimationLibrary_3rs5v")
+}
+
 [node name="TileMap" type="TileMap" parent="."]
 light_mask = 33
 visibility_layer = 513
 z_index = 5
 y_sort_enabled = true
-texture_filter = 1
+texture_filter = 3
 texture_repeat = 1
 tile_set = SubResource("TileSet_ynwjn")
 cell_quadrant_size = 32
@@ -2041,11 +2173,11 @@ layer_1/modulate = Color(1, 1, 1, 1)
 layer_1/y_sort_enabled = true
 layer_1/y_sort_origin = 0
 layer_1/z_index = 0
-layer_1/tile_data = PackedInt32Array(2, 0, 9, 65532, 0, 9, 983050, 0, 9, 1048586, 0, 11, 1048593, 196608, 11, 983058, 262144, 10, 1048594, 262144, 11, -196616, 131072, 12, -196614, 131072, 12, -196613, 131072, 12, -196612, 131072, 12, -196611, 131072, 12, -196610, 131072, 12, -196609, 131072, 12, -262144, 131072, 12, -262143, 131072, 12, -262142, 131072, 12, -262141, 131072, 12, -262140, 131072, 12, -262139, 131072, 12, -262138, 131072, 12, -262137, 131072, 12, -262136, 131072, 12, -262135, 131072, 12, -262134, 131072, 12, -262133, 131072, 12, -262132, 131072, 12, -262131, 131072, 12, -262130, 131072, 12, -262129, 131072, 12, -262128, 131072, 12, -262127, 131072, 12, -262126, 131072, 12, -262125, 131072, 12, -262124, 131072, 12, -196615, 131072, 12, -196617, 131072, 12, -196618, 131072, 12, -196619, 131072, 12, -196620, 131072, 12, -196621, 131072, 12, -196622, 131072, 12, -196623, 131072, 12, -196624, 131072, 12, -196625, 131072, 12, -196626, 131072, 12, -196627, 131072, 12, -196628, 131072, 12, -196629, 131072, 12, -196630, 131072, 12, -196631, 131072, 12, -196632, 131072, 12, -196633, 131072, 12, -196634, 131072, 12, -196635, 131072, 12, -196636, 131072, 12, -196637, 131072, 12, -196638, 131072, 12, -196639, 131072, 12, -196640, 131072, 12, -196641, 131072, 12, -196642, 131072, 12, 524308, 131072, 16, 524307, 131072, 16, 524306, 131072, 16, 524305, 131072, 16, 524304, 131072, 16, 524303, 131072, 16, 524302, 131072, 16, 524301, 131072, 16, 524300, 131072, 16, 524299, 131072, 16, 524298, 131072, 16, 524297, 131072, 16, 458744, 131072, 16, 458745, 131072, 16, 458746, 131072, 16, 458747, 131072, 16, 458748, 131072, 16, 458749, 131072, 16, 458750, 131072, 16, 393224, 131072, 16, 393223, 131072, 16, 393222, 131072, 16, 393221, 131072, 16, 393220, 131072, 16, 393219, 131072, 16, 393218, 131072, 16, 458751, 131072, 16)
+layer_1/tile_data = PackedInt32Array(2, 0, 9, 65532, 0, 9, 983050, 0, 9, 1048586, 0, 11, 1048593, 196608, 11, 983058, 262144, 10, 1048594, 262144, 11, -196616, 131072, 12, -196614, 131072, 12, -196613, 131072, 12, -196612, 131072, 12, -196611, 131072, 12, -196610, 131072, 12, -196609, 131072, 12, -262144, 131072, 12, -262143, 131072, 12, -262142, 131072, 12, -262141, 131072, 12, -262140, 131072, 12, -262139, 131072, 12, -262138, 131072, 12, -262137, 131072, 12, -262136, 131072, 12, -262135, 131072, 12, -262134, 131072, 12, -262133, 131072, 12, -262132, 131072, 12, -262131, 131072, 12, -262130, 131072, 12, -262129, 131072, 12, -262128, 131072, 12, -262127, 131072, 12, -262126, 131072, 12, -262125, 131072, 12, -262124, 131072, 12, -196615, 131072, 12, -196617, 131072, 12, -196618, 131072, 12, -196619, 131072, 12, -196620, 131072, 12, -196621, 131072, 12, -196622, 131072, 12, -196623, 131072, 12, -196624, 131072, 12, -196625, 131072, 12, -196626, 131072, 12, -196627, 131072, 12, -196628, 131072, 12, -196629, 131072, 12, -196630, 131072, 12, -196631, 131072, 12, -196632, 131072, 12, -196633, 131072, 12, -196634, 131072, 12, -196635, 131072, 12, -196636, 131072, 12, -196637, 131072, 12, -196638, 131072, 12, -196639, 131072, 12, -196640, 131072, 12, -196641, 131072, 12, -196642, 131072, 12, 524308, 131072, 16, 524307, 131072, 16, 524306, 131072, 16, 524305, 131072, 16, 524301, 131072, 16, 524300, 131072, 16, 524299, 131072, 16, 524298, 131072, 16, 524297, 131072, 16, 458744, 131072, 16, 458745, 131072, 16, 458746, 131072, 16, 458747, 131072, 16, 458748, 131072, 16, 458749, 131072, 16, 458750, 131072, 16, 393224, 131072, 16, 393223, 131072, 16, 393222, 131072, 16, 393221, 131072, 16, 393220, 131072, 16, 393219, 131072, 16, 393218, 131072, 16, 458751, 131072, 16, 458743, 131072, 16, 458742, 131072, 16, 458741, 131072, 16, 458740, 131072, 16, 458739, 131072, 16, 458738, 131072, 16, 458735, 131072, 16, 458734, 131072, 16, 458733, 131072, 16, 458732, 131072, 16, 458731, 131072, 16, 458730, 131072, 16, 458729, 131072, 16, 458728, 131072, 16, 458727, 131072, 16, 458726, 131072, 16, 458725, 131072, 16, 458722, 131072, 16, 458721, 131072, 16, 458720, 131072, 16, 458719, 131072, 16, 458718, 131072, 16, 458717, 131072, 16, 458716, 131072, 16, 458715, 131072, 16, 458714, 131072, 16, 458713, 131072, 16, 524302, 131072, 16)
 layer_2/name = "Objects"
 layer_2/enabled = true
 layer_2/modulate = Color(1, 1, 1, 1)
-layer_2/y_sort_enabled = true
+layer_2/y_sort_enabled = false
 layer_2/y_sort_origin = 0
 layer_2/z_index = 0
 layer_2/tile_data = PackedInt32Array(262144, 131074, 7, 196607, 131074, 8, 131072, 196610, 8, 327680, 458754, 13, 393216, 458754, 13, 458752, 458754, 13, 524288, 458754, 12, 589824, 458754, 11, -65541, 786434, 6, -131072, 720898, 6, -131067, 720898, 6, -131066, 786434, 6, -131071, 786434, 6, -65542, 720898, 6, -65537, 851970, 5, -131068, 851970, 5, -131065, 851970, 5)
@@ -2076,14 +2208,14 @@ tile_set = SubResource("TileSet_dj4os")
 cell_quadrant_size = 32
 format = 2
 layer_0/name = "Collision"
-layer_0/tile_data = PackedInt32Array(458744, 131073, 7, 458745, 131073, 7, 458746, 131073, 7, 458747, 131073, 7, 458748, 131073, 7, 458749, 131073, 7, 458750, 131073, 7, 393218, 131073, 7, 393219, 131073, 7, 393220, 131073, 7, 393221, 131073, 7, 393222, 131073, 7, 393223, 131073, 7, 393224, 131073, 7, 327689, 262145, 9, 262153, 262145, 9, 196617, 262145, 9, 131081, 262145, 9, 65545, 262145, 9, 9, 262145, 9, -65527, 262145, 9, -131063, 262145, 9, -196599, 262145, 9, -262135, 262145, 9, -327671, 262145, 9, -393208, 131073, 7, -393209, 131073, 7, -393210, 131073, 7, -393211, 131073, 7, -393212, 131073, 7, -393213, 131073, 7, -393214, 131073, 7, -393215, 131073, 7, -393216, 131073, 7, -327681, 131073, 7, -327682, 131073, 7, -327683, 131073, 7, -327684, 131073, 7, -327685, 131073, 7, -327686, 131073, 7, -327687, 131073, 7, -327688, 131073, 7, -262153, 1, 9, -196617, 1, 9, -131081, 1, 9, -65545, 1, 9, -9, 1, 9, 65527, 1, 9, 131063, 1, 9, 196599, 1, 9, 262135, 1, 9, 327671, 1, 9, 393207, 1, 9, 458743, 1, 9, 524279, 1, 9, 589815, 1, 9, 851959, 1, 9, 917495, 1, 9, 983031, 1, 9, 1048568, 131073, 11, 1048569, 131073, 11, 1048570, 131073, 11, 1048571, 131073, 11, 1048572, 131073, 11, 1048573, 131073, 11, 1048574, 131073, 11, 1048575, 131073, 11, 983040, 131073, 11, 983041, 131073, 11, 983042, 131073, 11, 983043, 131073, 11, 983044, 131073, 11, 983045, 131073, 11, 983046, 131073, 11, 983047, 131073, 11, 983048, 131073, 11, 983049, 131073, 11, 983050, 131073, 11, 1048587, 131073, 11, 1048588, 131073, 11, 1048589, 131073, 11, 1048590, 131073, 11, 1048591, 131073, 11, 1048592, 131073, 11, 1048593, 131073, 11, 983058, 131073, 11, 983059, 131073, 11, 983060, 131073, 11, 917525, 262145, 9, 851989, 262145, 9, 786453, 262145, 9, 720917, 262145, 9, 655381, 262145, 9, 589845, 262145, 9, 524297, 131073, 7, 524298, 131073, 7, 524299, 131073, 7, 524300, 131073, 7, 524301, 131073, 7, 524302, 131073, 7, 524303, 131073, 7, 524304, 131073, 7, 524305, 131073, 7, 524306, 131073, 7, 524307, 131073, 7, 524308, 131073, 7, 393225, 262145, 9, 655351, 1, 9, 720887, 1, 9, 786423, 1, 9, 458754, 131073, 11, 458755, 131073, 11, 458756, 131073, 11, 458757, 131073, 11, 458758, 131073, 11, 458759, 131073, 11, 458760, 131073, 11, 524286, 131073, 11, 524285, 131073, 11, 524284, 131073, 11, 524283, 131073, 11, 524282, 131073, 11, 524281, 131073, 11, 524280, 131073, 11)
+layer_0/tile_data = PackedInt32Array(458744, 131073, 7, 458745, 131073, 7, 458746, 131073, 7, 458747, 131073, 7, 458748, 131073, 7, 458749, 131073, 7, 458750, 131073, 7, 393218, 131073, 7, 393219, 131073, 7, 393220, 131073, 7, 393221, 131073, 7, 393222, 131073, 7, 393223, 131073, 7, 393224, 131073, 7, 327689, 262145, 9, 262153, 262145, 9, 196617, 262145, 9, 131081, 262145, 9, 65545, 262145, 9, 9, 262145, 9, -65527, 262145, 9, -131063, 262145, 9, -196599, 262145, 9, -262135, 262145, 9, -327671, 262145, 9, -393208, 131073, 7, -393209, 131073, 7, -393210, 131073, 7, -393211, 131073, 7, -393212, 131073, 7, -393213, 131073, 7, -393214, 131073, 7, -393215, 131073, 7, -393216, 131073, 7, -327681, 131073, 7, -327682, 131073, 7, -327683, 131073, 7, -327684, 131073, 7, -327685, 131073, 7, -327686, 131073, 7, -327687, 131073, 7, -327688, 131073, 7, -262153, 1, 9, -196617, 1, 9, -131081, 1, 9, -65545, 1, 9, -9, 1, 9, 65527, 1, 9, 131063, 1, 9, 196599, 1, 9, 262135, 1, 9, 327671, 1, 9, 393207, 1, 9, 458743, 1, 9, 524279, 1, 9, 851959, 1, 9, 917495, 1, 9, 983031, 1, 9, 1048568, 131073, 11, 1048569, 131073, 11, 1048570, 131073, 11, 1048571, 131073, 11, 1048572, 131073, 11, 1048573, 131073, 11, 1048574, 131073, 11, 1048575, 131073, 11, 983040, 131073, 11, 983041, 131073, 11, 983042, 131073, 11, 983043, 131073, 11, 983044, 131073, 11, 983045, 131073, 11, 983046, 131073, 11, 983047, 131073, 11, 983048, 131073, 11, 983049, 131073, 11, 983050, 131073, 11, 1048587, 131073, 11, 1048588, 131073, 11, 1048589, 131073, 11, 1048590, 131073, 11, 1048591, 131073, 11, 1048592, 131073, 11, 1048593, 131073, 11, 983058, 131073, 11, 983059, 131073, 11, 983060, 131073, 11, 917525, 262145, 9, 851989, 262145, 9, 786453, 262145, 9, 720917, 262145, 9, 655381, 262145, 9, 589845, 262145, 9, 524297, 131073, 7, 524298, 131073, 7, 524299, 131073, 7, 524300, 131073, 7, 524301, 131073, 7, 524302, 131073, 7, 524305, 131073, 7, 524306, 131073, 7, 524307, 131073, 7, 524308, 131073, 7, 393225, 262145, 9, 458754, 131073, 11, 458755, 131073, 11, 458756, 131073, 11, 458757, 131073, 11, 458758, 131073, 11, 458759, 131073, 11, 458760, 131073, 11, 524286, 131073, 11, 524285, 131073, 11, 524284, 131073, 11, 524283, 131073, 11, 524282, 131073, 11, 524281, 131073, 11, 524280, 131073, 11)
 layer_1/name = "Collision2"
 layer_1/enabled = true
 layer_1/modulate = Color(1, 1, 1, 1)
 layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = 0
-layer_1/tile_data = PackedInt32Array(393225, 131073, 7, -131080, 131073, 7, -131079, 131073, 7, -131078, 131073, 7, -131077, 131073, 7, -131076, 131073, 7, -131075, 131073, 7, -196600, 131073, 7, -196601, 131073, 7, -196602, 131073, 7, -196603, 131073, 7, -196604, 131073, 7, -196605, 131073, 7, -196606, 131073, 7, -196607, 131073, 7, -196608, 131073, 7, -131073, 131073, 7, -131074, 131073, 7, 983050, 1, 9, 983058, 262145, 9, 524297, 262145, 9, 458761, 262145, 9, 458751, 131073, 7, 524287, 131073, 11, 589833, 131073, 11, 589834, 131073, 11, 589835, 131073, 11, 589836, 131073, 11, 589837, 131073, 11, 589838, 131073, 11, 589839, 131073, 11, 589840, 131073, 11, 589841, 131073, 11, 589842, 131073, 11, 589843, 131073, 11, 589844, 131073, 11)
+layer_1/tile_data = PackedInt32Array(393225, 131073, 7, -131080, 131073, 7, -131079, 131073, 7, -131078, 131073, 7, -131077, 131073, 7, -131076, 131073, 7, -131075, 131073, 7, -196600, 131073, 7, -196601, 131073, 7, -196602, 131073, 7, -196603, 131073, 7, -196604, 131073, 7, -196605, 131073, 7, -196606, 131073, 7, -196607, 131073, 7, -196608, 131073, 7, -131073, 131073, 7, -131074, 131073, 7, 983050, 1, 9, 983058, 262145, 9, 524297, 262145, 9, 458761, 262145, 9, 458751, 131073, 7, 524287, 131073, 11, 589833, 131073, 11, 589834, 131073, 11, 589835, 131073, 11, 589836, 131073, 11, 589837, 131073, 11, 589838, 131073, 11, 589841, 131073, 11, 589842, 131073, 11, 589843, 131073, 11, 589844, 131073, 11)
 script = ExtResource("7_u28pj")
 
 [node name="MapViewport" type="SubViewport" parent="."]
@@ -2092,10 +2224,12 @@ transparent_bg = true
 snap_2d_transforms_to_pixel = true
 snap_2d_vertices_to_pixel = true
 vrs_texture = SubResource("GradientTexture1D_gcavq")
-canvas_item_default_texture_filter = 0
-size = Vector2i(281, 272)
+size = Vector2i(256, 256)
+size_2d_override = Vector2i(256, 256)
+size_2d_override_stretch = true
 
 [node name="Camera" type="Camera2D" parent="MapViewport"]
+texture_filter = 3
 zoom = Vector2(0.063, 0.063)
 
 [node name="Background" type="Sprite2D" parent="MapViewport"]
@@ -2155,83 +2289,40 @@ self_modulate = Color(0.537255, 0.54902, 0.611765, 0.784314)
 scale = Vector2(8, 8)
 texture = ExtResource("7_2h0q1")
 
-[node name="CaptureViewport" type="SubViewport" parent="."]
-disable_3d = true
-transparent_bg = true
-snap_2d_transforms_to_pixel = true
-snap_2d_vertices_to_pixel = true
-vrs_texture = SubResource("GradientTexture1D_gcavq")
-canvas_item_default_texture_filter = 0
-size = Vector2i(96, 96)
+[node name="Zones" type="Node2D" parent="MapViewport"]
 
-[node name="Camera" type="Camera2D" parent="CaptureViewport"]
-zoom = Vector2(0.063, 0.063)
-
-[node name="Background" type="Sprite2D" parent="CaptureViewport"]
-modulate = Color(0.0588235, 0.0705882, 0.141176, 0.784314)
-position = Vector2(-18, 1)
-scale = Vector2(15, 15.926)
-texture = ExtResource("1_5ht6c")
-
-[node name="PlayerLine" type="Line2D" parent="CaptureViewport"]
-visible = false
-width = 16.0
-default_color = Color(0.537255, 0.54902, 0.611765, 0.784314)
-texture = ExtResource("6_aag6y")
-texture_mode = 1
-round_precision = 2
-antialiased = true
-
-[node name="CustomLine" type="Node2D" parent="CaptureViewport"]
-
-[node name="CustomPoint1" type="Sprite2D" parent="CaptureViewport/CustomLine"]
-self_modulate = Color(0.537255, 0.54902, 0.611765, 0.784314)
-scale = Vector2(8, 8)
-texture = ExtResource("7_2h0q1")
-
-[node name="CustomPoint2" type="Sprite2D" parent="CaptureViewport/CustomLine"]
-self_modulate = Color(0.537255, 0.54902, 0.611765, 0.784314)
-scale = Vector2(8, 8)
-texture = ExtResource("7_2h0q1")
-
-[node name="CustomPoint3" type="Sprite2D" parent="CaptureViewport/CustomLine"]
-self_modulate = Color(0.537255, 0.54902, 0.611765, 0.784314)
-scale = Vector2(8, 8)
-texture = ExtResource("7_2h0q1")
-
-[node name="CustomPoint4" type="Sprite2D" parent="CaptureViewport/CustomLine"]
-self_modulate = Color(0.537255, 0.54902, 0.611765, 0.784314)
-scale = Vector2(8, 8)
-texture = ExtResource("7_2h0q1")
-
-[node name="CustomPoint5" type="Sprite2D" parent="CaptureViewport/CustomLine"]
-self_modulate = Color(0.537255, 0.54902, 0.611765, 0.784314)
-scale = Vector2(8, 8)
-texture = ExtResource("7_2h0q1")
-
-[node name="CustomPoint6" type="Sprite2D" parent="CaptureViewport/CustomLine"]
-self_modulate = Color(0.537255, 0.54902, 0.611765, 0.784314)
-scale = Vector2(8, 8)
-texture = ExtResource("7_2h0q1")
-
-[node name="CustomPoint7" type="Sprite2D" parent="CaptureViewport/CustomLine"]
-self_modulate = Color(0.537255, 0.54902, 0.611765, 0.784314)
-scale = Vector2(8, 8)
-texture = ExtResource("7_2h0q1")
-
-[node name="CustomPoint8" type="Sprite2D" parent="CaptureViewport/CustomLine"]
-self_modulate = Color(0.537255, 0.54902, 0.611765, 0.784314)
-scale = Vector2(8, 8)
-texture = ExtResource("7_2h0q1")
-
-[node name="Slime" parent="." instance=ExtResource("8_dol0a")]
+[node name="Slime" parent="." node_paths=PackedStringArray("starting_zone") instance=ExtResource("8_dol0a")]
 z_index = 5
 position = Vector2(161, 118)
+behaviuor = 0
+starting_zone = NodePath("../Rooms/Spawn")
 
-[node name="NPS" parent="." instance=ExtResource("9_m85ul")]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Slime"]
+target_desired_distance = 30.0
+avoidance_enabled = true
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="Slime"]
+radius = 28.57
+
+[node name="NPS" parent="." node_paths=PackedStringArray("starting_zone") instance=ExtResource("9_m85ul")]
 z_index = 5
 y_sort_enabled = true
-position = Vector2(-83, 325)
+position = Vector2(279, 345)
+npc_name = "asd"
+behaviuor = 2
+fight_ai = SubResource("Resource_juo7t")
+interaction_list = Array[int]([1])
+starting_zone = NodePath("../Rooms/Second")
+static_items = Array[Resource("res://Scripts/Item_scripts/Item.gd")]([SubResource("Resource_e55hv")])
+SKILLS = Array[String](["Javelin"])
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="NPS"]
+target_desired_distance = 30.0
+avoidance_enabled = true
+radius = 30.0
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="NPS"]
+radius = 28.57
 
 [node name="Player" parent="." instance=ExtResource("10_je7pe")]
 light_mask = 33
@@ -2578,94 +2669,6 @@ explosiveness = 0.16
 randomness = 0.1
 visibility_rect = Rect2(-215.675, -255.845, 528.594, 522.844)
 
-[node name="Rooms" type="Node2D" parent="."]
-
-[node name="Spawn" type="Area2D" parent="Rooms"]
-disable_mode = 1
-collision_layer = 64
-collision_mask = 64
-script = ExtResource("22_yfoon")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Spawn"]
-position = Vector2(17, 45.5)
-shape = SubResource("RectangleShape2D_h1jk1")
-
-[node name="PathPlayer" type="AnimationPlayer" parent="Rooms/Spawn"]
-libraries = {
-"": SubResource("AnimationLibrary_oq3ep")
-}
-
-[node name="Path2D" type="Path2D" parent="Rooms/Spawn"]
-curve = SubResource("Curve2D_76fdv")
-
-[node name="PathFollow2D" type="PathFollow2D" parent="Rooms/Spawn/Path2D"]
-position = Vector2(-131, 23)
-rotation = -2.9442
-
-[node name="Mist" type="Node2D" parent="Rooms/Spawn"]
-z_index = 20
-
-[node name="Sprite2D" type="Sprite2D" parent="Rooms/Spawn/Mist"]
-modulate = Color(0.160784, 0.152941, 0.2, 1)
-light_mask = 0
-position = Vector2(16, 159)
-scale = Vector2(2.11719, 319)
-texture = SubResource("GradientTexture1D_a2dq2")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Rooms/Spawn"]
-libraries = {
-"": SubResource("AnimationLibrary_3rs5v")
-}
-
-[node name="Second" type="Area2D" parent="Rooms"]
-position = Vector2(51, 371)
-disable_mode = 1
-collision_layer = 64
-collision_mask = 64
-script = ExtResource("22_yfoon")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Second"]
-position = Vector2(-34, -20)
-shape = SubResource("RectangleShape2D_x4sy3")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Rooms/Second"]
-position = Vector2(428.5, 13)
-shape = SubResource("RectangleShape2D_k427i")
-
-[node name="PathPlayer" type="AnimationPlayer" parent="Rooms/Second"]
-libraries = {
-"": SubResource("AnimationLibrary_oq3ep")
-}
-
-[node name="Path2D" type="Path2D" parent="Rooms/Second"]
-curve = SubResource("Curve2D_76fdv")
-
-[node name="PathFollow2D" type="PathFollow2D" parent="Rooms/Second/Path2D"]
-position = Vector2(-131, 23)
-rotation = -2.9442
-
-[node name="Mist" type="Node2D" parent="Rooms/Second"]
-z_index = 20
-
-[node name="Sprite2D2" type="Sprite2D" parent="Rooms/Second/Mist"]
-modulate = Color(0.160784, 0.152941, 0.2, 1)
-light_mask = 0
-position = Vector2(-35.5, 146)
-scale = Vector2(2.11328, 293)
-texture = SubResource("GradientTexture1D_a2dq2")
-
-[node name="Sprite2D3" type="Sprite2D" parent="Rooms/Second/Mist"]
-modulate = Color(0.160784, 0.152941, 0.2, 1)
-light_mask = 0
-position = Vector2(499, 211)
-scale = Vector2(2.11328, 293)
-texture = SubResource("GradientTexture1D_a2dq2")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Rooms/Second"]
-libraries = {
-"": SubResource("AnimationLibrary_3rs5v")
-}
-
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -2714,10 +2717,10 @@ libraries = {
 }
 
 [node name="Objects" type="Node2D" parent="."]
+y_sort_enabled = true
 
 [node name="Chest" parent="Objects" instance=ExtResource("26_4wi0k")]
 light_mask = 32
-z_index = 5
 texture_filter = 1
 texture_repeat = 1
 random = true
@@ -2725,6 +2728,9 @@ random_items = 10
 chest_inventory = Array[Resource("res://Scripts/Item_scripts/Item.gd")]([])
 
 [node name="Door" type="StaticBody2D" parent="Objects"]
+visibility_layer = 33
+z_index = 5
+y_sort_enabled = true
 position = Vector2(32, 216)
 collision_layer = 513
 collision_mask = 513
@@ -2732,7 +2738,7 @@ script = ExtResource("29_2pequ")
 
 [node name="Sprite2D" type="Sprite2D" parent="Objects/Door"]
 light_mask = 32
-z_index = 9
+y_sort_enabled = true
 texture_filter = 1
 texture_repeat = 1
 position = Vector2(0, -24)
@@ -2743,7 +2749,6 @@ vframes = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/Door"]
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_gwitl")
-disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Objects/Door"]
 libraries = {
@@ -2826,6 +2831,114 @@ collision_layer = 256
 collision_mask = 256
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/Door/InteractionArea"]
+position = Vector2(0, -26.5)
+shape = SubResource("RectangleShape2D_i11hd")
+
+[node name="Door2" type="StaticBody2D" parent="Objects"]
+visibility_layer = 33
+z_index = 5
+y_sort_enabled = true
+position = Vector2(513, 280)
+collision_layer = 513
+collision_mask = 513
+script = ExtResource("29_2pequ")
+need_key = "dungeon_armory_key"
+
+[node name="Sprite2D" type="Sprite2D" parent="Objects/Door2"]
+light_mask = 32
+y_sort_enabled = true
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(0, -24)
+texture = ExtResource("29_ury1d")
+hframes = 4
+vframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/Door2"]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_gwitl")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Objects/Door2"]
+libraries = {
+"": SubResource("AnimationLibrary_0tata")
+}
+
+[node name="InteractionHint" type="Node2D" parent="Objects/Door2"]
+visible = false
+light_mask = 0
+z_index = 30
+material = SubResource("CanvasItemMaterial_be5ms")
+position = Vector2(25, -30)
+
+[node name="TextureRect" type="TextureRect" parent="Objects/Door2/InteractionHint"]
+self_modulate = Color(0.0784314, 0.231373, 0.427451, 0.666667)
+light_mask = 0
+use_parent_material = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -9.0
+offset_top = -9.0
+offset_right = 9.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(9, 9)
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture = SubResource("GradientTexture1D_y3h8i")
+
+[node name="InteractHint" type="TextureRect" parent="Objects/Door2/InteractionHint"]
+self_modulate = Color(1, 1, 1, 0.666667)
+light_mask = 0
+use_parent_material = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(8, 8)
+texture = SubResource("GradientTexture1D_5dee4")
+
+[node name="Label" type="Label" parent="Objects/Door2/InteractionHint"]
+self_modulate = Color(0.682353, 0.741176, 0.807843, 0.921569)
+light_mask = 0
+use_parent_material = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.5
+offset_top = -7.5
+offset_right = 7.5
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+text = " e"
+label_settings = SubResource("LabelSettings_mivoc")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Objects/Door2/InteractionHint"]
+libraries = {
+"": SubResource("AnimationLibrary_5aio4")
+}
+
+[node name="InteractionArea" type="Area2D" parent="Objects/Door2"]
+visible = false
+collision_layer = 256
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/Door2/InteractionArea"]
 position = Vector2(0, -26.5)
 shape = SubResource("RectangleShape2D_i11hd")
 

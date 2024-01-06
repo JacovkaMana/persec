@@ -14,7 +14,6 @@ var active_slot_rclick: BaseSlotUI = null
 var panel_hover = false
 var ItemButton = preload("res://Scenes/Inventory/ItemButton.tscn")
 @onready var tween = self.create_tween()
-var _item_inventory = null
 
 @onready var ui_settings = $"../.."
 @onready var hud_settings = $"../../HUD"
@@ -56,7 +55,7 @@ func _on_dialogue(with):
 	self.visible = true
 	#ui_settings.pause_game()
 	
-func _on_dialogue_continue(choice):
+func _on_dialogue_continue(_choice):
 	
 	var next_dialogue = dialogue_json.data['Talk'][current_id]['answers']
 	print(next_dialogue)
@@ -72,8 +71,7 @@ func _on_choice(actions, choices):
 		return 2
 		
 		
-	var i = 1
-	var tween = self.find_child('tween')
+	tween = self.find_child('tween')
 	if tween:
 		tween.kill()
 	tween = self.create_tween()

@@ -18,7 +18,7 @@ extends CanvasLayer
 func _ready():
 	InputManager.UI_Global = self
 	self.close_everything()
-	var bg_children = find_children("Background", "TextureRect", true, false)
+	var _bg_children = find_children("Background", "TextureRect", true, false)
 	#var Background_children = self.find_children("Background", "TextureRect", true, false)
 	player.connect("dialogue_started", dialogue_start)
 	player.connect("dialogue_ended", show_hud)
@@ -42,7 +42,7 @@ func close_for_dialogue():
 func hide_hud():
 	HUD_Control.visible = false
 	
-func dialogue_start(with, text):
+func dialogue_start(_with, _text):
 	self.hide_hud()
 
 func show_hud():
