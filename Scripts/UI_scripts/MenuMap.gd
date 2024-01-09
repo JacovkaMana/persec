@@ -24,14 +24,27 @@ func _ready():
 	
 #	tilemap_copy.visible = false
 #	for room in rooms.get_children():
-#		var new_mist = room.find_child('Mist')
-#		new_mist.modulate = Color8(240,240,240)
-#		capture_viewport.find_child('Zones').add_child(room.duplicate())
+#		var new_mist = room.find_child('Mist').duplicate()
+#		new_mist.modulate = Color8(166,255,255)
+#		new_mist.visible = true
+#		new_mist.position = room.position  
+#		capture_viewport.find_child('Zones').add_child(new_mist)
 
 		
 	display.texture.viewport_path = NodePath(capture_viewport.get_path())
 	viewport_camera.zoom = Vector2((1.0 / zoom_float),(1.0 / zoom_float))
 	#viewport_camera.global_position = player.global_position
+	
+	
+	
+	player_marker = marker_object.instantiate()
+	distance = player.global_position / zoom_float
+	player_marker.global_position = Vector2(player.global_position.x, player.global_position.y)
+	player_marker.scale = Vector2(zoom_float, zoom_float) 
+	player_marker.source_object = player
+	player_marker.set_color()
+	capture_viewport.add_child(player_marker)
+	
 	
 	var interactables = get_tree().get_nodes_in_group("interactable")
 	for object in interactables:
@@ -45,8 +58,10 @@ func _ready():
 		marker.set_color()
 		markers.append(marker)
 		capture_viewport.add_child(marker)
-	#print(interactables)
-	
+		
+		
+
+
 	var _timer = Timer.new()
 	_timer.set_wait_time(0.25)
 	_timer.set_one_shot(false)
@@ -56,6 +71,7 @@ func _ready():
 
 func _process(_delta):
 	viewport_camera.global_position = player.global_position
+	player_marker.global_position = player.global_position
 	for marker in markers:
 		if (is_instance_valid(marker)):
 			if (is_instance_valid(marker.source_object)):

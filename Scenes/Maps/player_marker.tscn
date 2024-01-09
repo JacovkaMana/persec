@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/UI_scripts/MiniMapMarker.gd" id="2_3g12h"]
 
 [node name="PlayerMarker" type="TextureRect"]
-self_modulate = Color(0.164706, 0.494118, 0.921569, 1)
+z_index = 30
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

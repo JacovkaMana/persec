@@ -1,4 +1,4 @@
-[gd_scene load_steps=232 format=3 uid="uid://b7d15i5cwex1y"]
+[gd_scene load_steps=230 format=3 uid="uid://b7d15i5cwex1y"]
 
 [ext_resource type="Script" path="res://Scripts/Global/GlobalUI.gd" id="1_7pbd5"]
 [ext_resource type="Texture2D" uid="uid://d0g2mydsmvops" path="res://Art/Masks/Circle95.png" id="2_mrqlk"]
@@ -8,8 +8,6 @@
 [ext_resource type="Theme" uid="uid://l3ac6jr0hvrq" path="res://Themes/ui_theme.tres" id="7_cnxmk"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/NotificationsUI.gd" id="8_atng3"]
 [ext_resource type="PackedScene" uid="uid://bqs52knrqlm2t" path="res://Scenes/Objects/notification.tscn" id="9_et4y1"]
-[ext_resource type="Texture2D" uid="uid://b3gwe4au6nb51" path="res://Art/UI/UI_QuestNotification.png" id="9_tj68y"]
-[ext_resource type="Texture2D" uid="uid://5b0l6p8myw21" path="res://Art/UI/UI_QuestNotificationPlates.png" id="10_jx4ek"]
 [ext_resource type="PackedScene" uid="uid://ydo3yobq6wp" path="res://Scenes/Objects/journal_quest.tscn" id="10_r63bw"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/HUD.gd" id="11_6uirc"]
 [ext_resource type="Material" uid="uid://yseo0hefxxp2" path="res://Art/Shaders/ShineShader.tres" id="12_mx1bf"]
@@ -921,81 +919,6 @@ theme_override_constants/separation = 1
 [node name="Notification" parent="Notifications/VBoxContainer" instance=ExtResource("9_et4y1")]
 visible = false
 layout_mode = 2
-
-[node name="QuestNotification" type="Control" parent="Notifications"]
-anchors_preset = 0
-offset_left = 401.0
-offset_top = 87.0
-offset_right = 441.0
-offset_bottom = 127.0
-
-[node name="Backplate" type="TextureRect" parent="Notifications/QuestNotification"]
-self_modulate = Color(1, 1, 1, 0.784314)
-layout_mode = 0
-offset_right = 120.0
-offset_bottom = 200.0
-texture = ExtResource("9_tj68y")
-
-[node name="Plates" type="TextureRect" parent="Notifications/QuestNotification"]
-layout_mode = 0
-offset_right = 120.0
-offset_bottom = 200.0
-texture = ExtResource("10_jx4ek")
-
-[node name="Name" type="Label" parent="Notifications/QuestNotification"]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 19.0
-offset_right = 111.0
-offset_bottom = 36.0
-theme = ExtResource("7_cnxmk")
-theme_override_colors/font_color = Color(0.0980392, 0.105882, 0.301961, 1)
-text = "Escape"
-horizontal_alignment = 1
-
-[node name="Type" type="RichTextLabel" parent="Notifications/QuestNotification"]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 5.0
-offset_right = 111.0
-offset_bottom = 22.0
-theme = ExtResource("7_cnxmk")
-bbcode_enabled = true
-text = "[center]Main Quest[/center]"
-
-[node name="Description" type="RichTextLabel" parent="Notifications/QuestNotification"]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 39.0
-offset_right = 111.0
-offset_bottom = 123.0
-theme = ExtResource("7_cnxmk")
-bbcode_enabled = true
-text = "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
-
-[node name="Target" type="RichTextLabel" parent="Notifications/QuestNotification"]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 126.0
-offset_right = 111.0
-offset_bottom = 154.0
-theme = ExtResource("7_cnxmk")
-bbcode_enabled = true
-text = "Target:
- Reach Armory"
-autowrap_mode = 2
-
-[node name="Location" type="RichTextLabel" parent="Notifications/QuestNotification"]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 155.0
-offset_right = 111.0
-offset_bottom = 183.0
-theme = ExtResource("7_cnxmk")
-bbcode_enabled = true
-text = "Location:
-Armory"
-autowrap_mode = 2
 
 [node name="Journal" type="Control" parent="."]
 visible = false
@@ -4385,12 +4308,14 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Dialogue" type="Control" parent="UI"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 640.0
 offset_bottom = 360.0
 mouse_filter = 1
 script = ExtResource("72_jfceo")
+action_choice = null
 
 [node name="Variant3" type="TextureRect" parent="UI/Dialogue"]
 layout_mode = 0
@@ -4571,7 +4496,6 @@ libraries = {
 }
 
 [node name="PauseMenu" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 640.0
@@ -5467,8 +5391,6 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 5.0
-offset_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2

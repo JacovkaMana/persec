@@ -18,3 +18,5 @@ func set_color():
 			self.self_modulate = Color8(0,255,0)
 		'Chest':
 			self.self_modulate = Color8(255, 215, 0)
+		_:
+			self.self_modulate = Color8(255, 255, 255)

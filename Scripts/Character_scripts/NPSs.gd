@@ -7,7 +7,7 @@ class_name NPS
 @export var fight_ai : BaseAI = BaseAI.new()
 @export var interaction_list: Array[Enums.ECharacterActions] = []
 
-
+@export var default_state: Enums.ECharacterState = Enums.ECharacterState.IDLE
 @export var starting_zone: ZoneScript
 
 
@@ -49,7 +49,7 @@ var vision
 
 @onready var nps_hud = $HUD
 
-var current_state : Enums.ECharacterState = Enums.ECharacterState.ROAMING
+var current_state : Enums.ECharacterState
 var start_pos: Vector2 = Vector2.ZERO
 var start_rotation: Vector2 = Vector2.from_angle( randi_range(0, 360) )
 var dialogue_number: int = 0
@@ -138,6 +138,8 @@ func _ready():
 	
 	self.nav_agent.target_position = self.starting_zone.get_random_pos()
 	self.nav_agent.connect("target_reached", self.fight_ai.set_roam_timer) 
+	
+	self.reset_state()
 	
 func _physics_process(_delta):
 	super(_delta)
@@ -231,7 +233,9 @@ func _on_mouse_exited():
 	nps_hud.visible = false
 	
 	
-	
+func reset_state():
+	self.current_state = self.default_state
+
 func _on_vision_enter(who):
 	match who.get_collider_type():
 		'Player':
@@ -312,9 +316,7 @@ func _on_anim_finished(_name):
 func interact():
 	if Enums.ECharacterActions.TALK in self.interaction_list:
 			#player.trigger_dialogue(self)
-			player.emit_signal("dialogue_started", self.npc_name)
-			player.player_state = Enums.EPlayerState.TALKING
-			self.current_state = Enums.ECharacterState.TALKING
+			player.emit_signal("dialogue_started", self)
 	return null
 
 func use_skill_id(id: int):

@@ -1,18 +1,17 @@
-[
-	{
-		"name": "",
+{
+	"Escape" : {
 		"description": "",
-		"completed": false,
-		"active": false,
-		"primary": false,
-		"type": "сделать enum",
+		"type": "sub",
 		"target": {
-			"description": "",
+			"type" : "area",
+			"name": "armory",
 			"count": 0,
 		},
 		"location": {
 			"level": "",
 			"coords": [123.0, 234.1]
 		}
-	}
-]
+	},
+
+
+}

@@ -5,9 +5,11 @@ extends Control
 @onready var desc_panel: Panel = $ItemDescPanel
 @onready var actions_panel: Panel = get_tree().get_root().find_child("ItemActionsPanel", true, false)
 
-@export var dialogue_choice = preload("res://Scenes/Objects/dialogue_choice.tscn")
+#@export var dialogue_choice = preload("res://Scenes/Objects/dialogue_choice.tscn")
 @export var action_choice = preload("res://Scenes/Objects/action_choice.tscn")
+
 @onready var choices_array = $Choices
+@onready var actions_array = $Actions
 
 var active_item_lclick: Item = null
 var active_slot_rclick: BaseSlotUI = null
@@ -21,19 +23,20 @@ var ItemButton = preload("res://Scenes/Inventory/ItemButton.tscn")
 @onready var shadow = $Shadow
 @onready var name_label = $Label
 @onready var text_label = $RichTextLabel
-# !!!!! При закрытии закрывается ItemActionsPanel, если она над этой менюшкой!!!
-# Called when the node enters the scene tree for the first time.
+
 
 var dialogue_path = "res://Data/Dialogues/%s.json"
 var dialogue_json = null
 var current_id = null
 var current_answers = null
+var current_with = null
 
 
 var fight_choice_icon = preload("res://Art/UI/choice_fight.png")
 var speak_choice_icon = preload("res://Art/UI/choice_speak.png")
 var trade_choice_icon = preload("res://Art/UI/choice_trade.png")
 
+var is_talking = false
 
 func _ready():
 	
@@ -44,15 +47,25 @@ func _ready():
 
 func _on_dialogue(with):
 	
-	dialogue_json = load(dialogue_path % with)
+	dialogue_json = load(dialogue_path % with.npc_name)
 	
-	current_id = 0
-	current_answers = dialogue_json.data['Talk'][current_id]['answers']
-	self._on_choice(dialogue_json.data.keys(), current_answers.keys())
-	ui_settings.close_for_dialogue()
-	text_label.text = dialogue_json.data['Talk'][current_id]['text']
-	name_label.text = ' ' + with + ' '
+	self.current_with = with
+	
+	self.player.player_state = Enums.EPlayerState.TALKING
+	self.current_with.current_state = Enums.ECharacterState.TALKING
+			
+			
+	self.current_id = 0
+	self.current_answers = dialogue_json.data['Talk'][current_id]['answers']
+	self._on_actions(dialogue_json.data.keys())#, current_answers.keys())
+
+	self.text_label.text = dialogue_json.data['Talk'][current_id]['text']
+	self.name_label.text = ' ' + with.npc_name + ' '
+	
+	
 	self.visible = true
+	
+	self.ui_settings.close_for_dialogue()
 	#ui_settings.pause_game()
 	
 func _on_dialogue_continue(_choice):
@@ -66,9 +79,11 @@ func _remove_choise():
 	for one in choices_array:
 		one.queue_free()
 
-func _on_choice(actions, choices):
-	if len(choices_array.get_children()) != 0:
-		return 2
+func _on_actions(actions):
+	
+	
+	for child in actions_array.get_children():
+		child.queue_free()
 		
 		
 	tween = self.find_child('tween')
@@ -89,45 +104,114 @@ func _on_choice(actions, choices):
 		
 		match one:
 			'Fight' : 
-				choise.get_child(1).texture = fight_choice_icon
+				choise.get_child(1).icon = fight_choice_icon
 				choise.get_child(0).visible = false
 				new_position =  Vector2(center_position.x, center_position.y - 34)
 
 			'Trade' : 
-				choise.get_child(1).texture = trade_choice_icon
+				choise.get_child(1).icon = trade_choice_icon
 				choise.get_child(0).visible = false
 				new_position = Vector2(center_position.x - 17, center_position.y - 17)
 			'Talk' : 
-				choise.get_child(1).texture = speak_choice_icon
+				choise.get_child(1).icon = speak_choice_icon
 				choise.get_child(0).visible = false
 				new_position = Vector2(center_position.x + 17, center_position.y - 17)
-				
-		choices_array.add_child(choise)
+		
+		
+		choise.get_child(1).text = ''
+		choise.get_child(1).get_child(0).visible = false
+		actions_array.add_child(choise)
+		choise.get_child(1).connect("pressed", choice_clicked.bind(choise))
+		choise.get_child(1).connect("mouse_entered", choice_hovered.bind(choise))
 		tween.tween_property(choise, "position", new_position , 0.2).set_trans(Tween.TRANS_SINE)
+
+
+		
+
+func _on_talking_choices(choices):
+	
+
+	for child in choices_array.get_children():
+		child.queue_free()
+		
+		
+	tween = self.find_child('tween')
+	if tween:
+		tween.kill()
+	tween = self.create_tween()
+	
+	var last_position = Vector2(170, 270 + 16)
+	var new_position =  Vector2(170, 270 + 16)
+	#var center_position = Vector2(104, 270)
+	var center_position = Vector2(170, 270)
+	
+	last_position = center_position
+
+	
 
 	for one in choices:
 		
-		var choise = dialogue_choice.instantiate()
-		choise.position = Vector2(170, 270)
-		choise.get_child(0).text = one
-		choise.get_child(0).visible = true
-		choise.get_child(0).get_child(0).visible = true
+		var choise = action_choice.instantiate()
+		choise.position = center_position
+		choise.get_child(1).icon = null
+		choise.get_child(1).text = one
+		choise.get_child(0).visible = false
+		choise.get_child(1).size.y = 0
+		#choise.get_child(0).get_child(0).visible = true
 		new_position =  Vector2(last_position.x, last_position.y - 16)
 		last_position = new_position
 				
 		choices_array.add_child(choise)
 		tween.tween_property(choise, "position", new_position , 0.2).set_trans(Tween.TRANS_SINE)
 		
-#		if (i % 2) == 0:
-#			new_position = Vector2(last_position.x - 17, last_position.y - 17)
-#			choise.get_child(0).global_position.x = 145 + 17
-#		else:
-#			new_position =  Vector2(last_position.x + 17, last_position.y - 17)
-#			choise.get_child(0).global_position.x = 145
+		choise.get_child(1).connect("pressed", action_clicked.bind(choise))
+		#choise.get_child(1).connect("mouse_entered", choice_hovered.bind(choise))
+		
+		#choise.position = new_position
+
+func choice_clicked(choice):
+	match choice.get_child(0).text:
+		"Fight":
+			self._on_dialogue_ended()
+		"Trade":
+			self._on_dialogue_ended()
+		"Talk":
+			print(current_answers)
+			self._on_talking_choices(current_answers.keys())
+			#self._on_dialogue_ended()
+
+func action_clicked(choice):
+	var next_dialogue = dialogue_json.data['Talk'][current_id]['answers'][choice.get_child(1).text]
+
+	print(next_dialogue)
+
+	if next_dialogue is float:
+		print('int')	
+		next_dialogue = int(next_dialogue)
+		current_id = next_dialogue
+		
+		## NEED SEPARATE
+		current_answers = dialogue_json.data['Talk'][current_id]['answers']
+		text_label.text = dialogue_json.data['Talk'][current_id]['text']
+		self._on_talking_choices(current_answers.keys())
+		
+	elif next_dialogue is String:
+		
+		match next_dialogue:
+			"Fight":
+				self._on_dialogue_ended()
+			"Trade":
+				self._on_dialogue_ended()
 			
-#		tween.tween_property(choise, "position", new_position , 0.2).set_trans(Tween.TRANS_SINE)
-#		last_position = new_position
-#		i += 1
+
+
+func choice_hovered(choice):
+	return 2
 
 func _on_dialogue_ended():
+	
+	player.reset_state()
+	current_with.reset_state()
+	
+	
 	self.visible = false

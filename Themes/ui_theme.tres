@@ -3,6 +3,10 @@
 [ext_resource type="FontFile" uid="uid://c0s1j1n8esy7x" path="res://Fonts/Minecraftia-Regular.ttf" id="1_2a0td"]
 
 [resource]
+Button/colors/font_color = Color(0.658824, 0.682353, 0.823529, 1)
+Button/colors/font_outline_color = Color(0.25098, 0.27451, 0.411765, 1)
+Button/font_sizes/font_size = 8
+Button/fonts/font = ExtResource("1_2a0td")
 Label/colors/font_color = Color(0.658824, 0.682353, 0.823529, 1)
 Label/colors/font_outline_color = Color(0.25098, 0.27451, 0.411765, 1)
 Label/constants/line_spacing = 0

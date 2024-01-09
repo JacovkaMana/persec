@@ -22,7 +22,6 @@ name = "ChestArmor"
 sprite = ExtResource("3_iac4y")
 description = "INITIALIZED"
 rarity = 1
-effects = null
 weight = 0.0
 base_cost = 0.0
 
@@ -37,7 +36,6 @@ name = "ChestBoots"
 sprite = ExtResource("5_uh7t7")
 description = "INITIALIZED"
 rarity = 1
-effects = null
 weight = 0.0
 base_cost = 0.0
 

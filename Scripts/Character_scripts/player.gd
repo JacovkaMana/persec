@@ -9,6 +9,7 @@ signal skill_used(skill_id: int)
 signal kill_confirmed(who: Actor)
 signal money_earned(much: int)
 
+signal new_quest(quest: Quest)
 
 var invincible_timer = null
 var player_state: Enums.EPlayerState = Enums.EPlayerState.ROAMING
@@ -21,6 +22,7 @@ var battle_timer = null
 @onready var MeleeTriggerArea: Area2D = $MeleeTriggerArea
 @onready var SceneManager = self.get_tree().get_root().find_child("SceneManager", true, false)
 
+var quests: QuestData#
 
 func save():
 	SceneManager.save_resource(self.data, 'user://player_data.res')
@@ -133,7 +135,14 @@ func _on_interaction_zone_exited(what: Area2D):
 	if what.get_parent() != self:
 		what.get_parent().off_interact_area()
 	
+func reset_state():
+	self.player_state =  Enums.EPlayerState.ROAMING
 
+func add_quest(quest_name: String):
+	var new_quest = self.quests.new_quest(quest_name)
+	if new_quest:
+		self.emit_signal("new_quest", new_quest)
+	
 func use_skill_id(id: int):
 	if id < data.skills.get_skills().size():
 		if (data.skills.get_skill_id(id).get_cost() <= data.stamina):

@@ -31,21 +31,21 @@ func _ready():
 	var json = JSON.parse_string(file.get_as_text())
 	for type in json:
 		
-			print('Type (Tree) - ' + type)
-			print('\n')
+#			print('Type (Tree) - ' + type)
+#			print('\n')
 			
 			for json_down in json[type]:
 				for subtype in json_down:
 					
-					print('Subtype (Branch) - ' + subtype)
-					print('\n')
+#					print('Subtype (Branch) - ' + subtype)
+#					print('\n')
 					
 					for skill_dict in json_down[subtype]:
 						for skill in skill_dict:
 							
-							print(skill)
-							print(skill_dict[skill]['description'])
-							print('\n')
+#							print(skill)
+#							print(skill_dict[skill]['description'])
+#							print('\n')
 					
 				#subtype = JSON.parse_string(subtype)
 				#print(subtype)

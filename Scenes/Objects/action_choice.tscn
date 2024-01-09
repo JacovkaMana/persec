@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://brwn02vxj6hba"]
 
 [ext_resource type="Theme" uid="uid://l3ac6jr0hvrq" path="res://Themes/ui_theme.tres" id="1_8idm3"]
-[ext_resource type="Texture2D" uid="uid://bgtg5vu2hb3gt" path="res://Art/UI/test_romb.png" id="2_dgs36"]
+[ext_resource type="Texture2D" uid="uid://b7nu5etemhiui" path="res://Art/UI/choice_fight.png" id="2_ol6l0"]
 
 [sub_resource type="Gradient" id="Gradient_1gbcx"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
@@ -23,10 +23,12 @@ layout_mode = 3
 anchors_preset = 0
 offset_left = 104.0
 offset_top = 239.0
-offset_right = 204.0
-offset_bottom = 270.0
+offset_right = 104.0
+offset_bottom = 239.0
+mouse_filter = 1
 
 [node name="Label" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_left = -4.0
 offset_top = 3.0
@@ -45,6 +47,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 9.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture1D_c421k")
@@ -59,9 +62,25 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture1D_na7hh")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="Button" parent="."]
 layout_mode = 0
 offset_top = 2.0
 offset_right = 31.0
 offset_bottom = 33.0
-texture = ExtResource("2_dgs36")
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_8idm3")
+text = "ssss"
+icon = ExtResource("2_ol6l0")
+flat = true
+alignment = 0
+
+[node name="ColorRect" type="ColorRect" parent="TextureRect"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.658824, 0.682353, 0.823529, 0.596078)
