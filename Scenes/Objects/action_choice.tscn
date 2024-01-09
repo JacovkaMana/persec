@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://brwn02vxj6hba"]
+[gd_scene load_steps=6 format=3 uid="uid://brwn02vxj6hba"]
 
 [ext_resource type="Theme" uid="uid://l3ac6jr0hvrq" path="res://Themes/ui_theme.tres" id="1_8idm3"]
-[ext_resource type="Texture2D" uid="uid://b7nu5etemhiui" path="res://Art/UI/choice_fight.png" id="2_ol6l0"]
 
 [sub_resource type="Gradient" id="Gradient_1gbcx"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
@@ -19,12 +18,15 @@ gradient = SubResource("Gradient_w77ne")
 width = 40
 
 [node name="DialogueChoice" type="Control"]
+custom_minimum_size = Vector2(11, 11)
 layout_mode = 3
 anchors_preset = 0
 offset_left = 104.0
-offset_top = 239.0
-offset_right = 104.0
-offset_bottom = 239.0
+offset_top = 242.0
+offset_right = 154.0
+offset_bottom = 256.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
 mouse_filter = 1
 
 [node name="Label" type="Label" parent="."]
@@ -64,22 +66,25 @@ texture = SubResource("GradientTexture1D_na7hh")
 
 [node name="TextureRect" type="Button" parent="."]
 layout_mode = 0
-offset_top = 2.0
-offset_right = 31.0
-offset_bottom = 33.0
+offset_right = 50.0
+offset_bottom = 22.0
 mouse_default_cursor_shape = 2
 theme = ExtResource("1_8idm3")
 text = "ssss"
-icon = ExtResource("2_ol6l0")
 flat = true
 alignment = 0
 
 [node name="ColorRect" type="ColorRect" parent="TextureRect"]
+visible = false
 show_behind_parent = true
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 14
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.5
+offset_top = -4.5
+offset_bottom = 5.5
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2

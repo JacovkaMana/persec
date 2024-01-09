@@ -28,15 +28,17 @@ var ItemButton = preload("res://Scenes/Inventory/ItemButton.tscn")
 var dialogue_path = "res://Data/Dialogues/%s.json"
 var dialogue_json = null
 var current_id = null
-var current_answers = null
+var current_answers = {}
 var current_with = null
-
+var current_text = null
+var current_text_progression = null
 
 var fight_choice_icon = preload("res://Art/UI/choice_fight.png")
 var speak_choice_icon = preload("res://Art/UI/choice_speak.png")
 var trade_choice_icon = preload("res://Art/UI/choice_trade.png")
 
 var is_talking = false
+var choices_visible = false
 
 func _ready():
 	
@@ -44,7 +46,25 @@ func _ready():
 	player.connect("dialogue_ended", _on_dialogue_ended)
 	player.connect("dialogue_continue", _on_dialogue_continue)
 
+	
+func _physics_process(_delta):
+	if self.text_label.visible_characters < self.text_label.get_total_character_count():
+		self.text_label.visible_characters += 1
+	elif not choices_visible:
+		self._on_talking_choices(current_answers.keys())
+		choices_visible = true
 
+
+func set_text_label(text):
+	
+	
+	self.text_label.text = text
+	self.text_label.visible_characters = 0	
+	self._remove_choise()
+	choices_visible = false
+	
+	
+	
 func _on_dialogue(with):
 	
 	dialogue_json = load(dialogue_path % with.npc_name)
@@ -56,28 +76,30 @@ func _on_dialogue(with):
 			
 			
 	self.current_id = 0
+	
+	
 	self.current_answers = dialogue_json.data['Talk'][current_id]['answers']
-	self._on_actions(dialogue_json.data.keys())#, current_answers.keys())
+	
+	self._on_actions(dialogue_json.data.keys())
 
-	self.text_label.text = dialogue_json.data['Talk'][current_id]['text']
+	self.set_text_label(dialogue_json.data['Talk'][current_id]['text'])
+	
 	self.name_label.text = ' ' + with.npc_name + ' '
 	
-	
 	self.visible = true
-	
 	self.ui_settings.close_for_dialogue()
-	#ui_settings.pause_game()
-	
+
+
+
 func _on_dialogue_continue(_choice):
 	
 	var next_dialogue = dialogue_json.data['Talk'][current_id]['answers']
 	print(next_dialogue)
-	#name_label.text = ' ' + with + ' '
-	#ui_settings.pause_game()
+
 	
 func _remove_choise():
-	for one in choices_array:
-		one.queue_free()
+	for child in choices_array.get_children():
+		child.queue_free()
 
 func _on_actions(actions):
 	
@@ -131,8 +153,7 @@ func _on_actions(actions):
 func _on_talking_choices(choices):
 	
 
-	for child in choices_array.get_children():
-		child.queue_free()
+	self._remove_choise()
 		
 		
 	tween = self.find_child('tween')
@@ -192,8 +213,8 @@ func action_clicked(choice):
 		
 		## NEED SEPARATE
 		current_answers = dialogue_json.data['Talk'][current_id]['answers']
-		text_label.text = dialogue_json.data['Talk'][current_id]['text']
-		self._on_talking_choices(current_answers.keys())
+		self.set_text_label( dialogue_json.data['Talk'][current_id]['text'])
+		
 		
 	elif next_dialogue is String:
 		
