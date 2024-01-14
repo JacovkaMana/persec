@@ -865,10 +865,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 57600.0
-offset_top = 32570.0
-offset_right = 58240.0
-offset_bottom = 32588.0
+offset_left = 57920.0
+offset_top = 32750.0
+offset_right = 58560.0
+offset_bottom = 32768.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(320, 9)
@@ -923,11 +923,12 @@ visible = false
 layout_mode = 2
 
 [node name="QuestNotification" type="Control" parent="Notifications"]
+visible = false
 anchors_preset = 0
-offset_left = 401.0
-offset_top = 87.0
-offset_right = 441.0
-offset_bottom = 127.0
+offset_left = 262.0
+offset_top = 68.0
+offset_right = 302.0
+offset_bottom = 108.0
 
 [node name="Backplate" type="TextureRect" parent="Notifications/QuestNotification"]
 self_modulate = Color(1, 1, 1, 0.784314)
@@ -4385,6 +4386,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Dialogue" type="Control" parent="UI"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 640.0
