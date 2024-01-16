@@ -246,7 +246,7 @@ nodes/walking/node = SubResource("AnimationNodeTransition_mirae")
 nodes/walking/position = Vector2(200, 200)
 nodes/walking_speed/node = SubResource("AnimationNodeTimeScale_e3t6g")
 nodes/walking_speed/position = Vector2(0, 260)
-node_connections = [&"output", 0, &"glow", &"death", 0, &"Animation 3", &"death", 1, &"walking", &"glow", 0, &"death", &"glow", 1, &"Animation 4", &"walking", 0, &"Animation", &"walking", 1, &"walking_speed", &"walking_speed", 0, &"Animation 2"]
+node_connections = [&"death", 0, &"Animation 3", &"death", 1, &"walking", &"glow", 0, &"death", &"glow", 1, &"Animation 4", &"output", 0, &"glow", &"walking", 0, &"Animation", &"walking", 1, &"walking_speed", &"walking_speed", 0, &"Animation 2"]
 
 [sub_resource type="Gradient" id="Gradient_q31vb"]
 offsets = PackedFloat32Array(0.296774)
@@ -358,21 +358,19 @@ colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0.815686)
 gradient = SubResource("Gradient_6ofee")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o45n4"]
+particle_flag_disable_z = true
 emission_shape = 3
 emission_box_extents = Vector3(14.974, 16.17, 1)
-particle_flag_disable_z = true
+angle_min = -90.0
+angle_max = 90.0
 direction = Vector3(0, -1, 0)
-gravity = Vector3(0, -30, 0)
 initial_velocity_min = 5.0
 initial_velocity_max = 10.0
 angular_velocity_min = -20.0
 angular_velocity_max = 20.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
+gravity = Vector3(0, -30, 0)
 linear_accel_max = 2.11
 radial_accel_max = 2.11
-angle_min = -90.0
-angle_max = 90.0
 scale_min = 0.7
 color = Color(1, 0.552941, 0.188235, 1)
 color_ramp = SubResource("GradientTexture1D_ojri6")
@@ -503,17 +501,19 @@ position = Vector2(-80, 17)
 texture = ExtResource("9_nue0d")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-method_call_mode = 1
+callback_mode_method = 1
 libraries = {
 "": SubResource("AnimationLibrary_ygp6v")
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+callback_mode_process = 0
+libraries = {
+"": SubResource("AnimationLibrary_ygp6v")
+}
 tree_root = SubResource("AnimationNodeBlendTree_hjofk")
-anim_player = NodePath("../AnimationPlayer")
 advance_expression_base_node = NodePath("..")
-active = true
-process_callback = 0
+anim_player = NodePath("../AnimationPlayer")
 parameters/death/current_state = "false"
 parameters/death/transition_request = ""
 parameters/death/current_index = 1

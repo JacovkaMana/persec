@@ -1,4 +1,4 @@
-[gd_scene load_steps=232 format=3 uid="uid://b7d15i5cwex1y"]
+[gd_scene load_steps=236 format=3 uid="uid://b7d15i5cwex1y"]
 
 [ext_resource type="Script" path="res://Scripts/Global/GlobalUI.gd" id="1_7pbd5"]
 [ext_resource type="Texture2D" uid="uid://d0g2mydsmvops" path="res://Art/Masks/Circle95.png" id="2_mrqlk"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" path="res://Scripts/UI_scripts/NotificationsUI.gd" id="8_atng3"]
 [ext_resource type="PackedScene" uid="uid://bqs52knrqlm2t" path="res://Scenes/Objects/notification.tscn" id="9_et4y1"]
 [ext_resource type="Texture2D" uid="uid://b3gwe4au6nb51" path="res://Art/UI/UI_QuestNotification.png" id="9_tj68y"]
+[ext_resource type="Shader" path="res://Art/Shaders/BgScript3.gdshader" id="9_yhbj2"]
+[ext_resource type="Texture2D" uid="uid://beib2qxkinve3" path="res://Art/UI/UI_QuestNotificationBG.png" id="10_bt02h"]
 [ext_resource type="Texture2D" uid="uid://5b0l6p8myw21" path="res://Art/UI/UI_QuestNotificationPlates.png" id="10_jx4ek"]
 [ext_resource type="PackedScene" uid="uid://ydo3yobq6wp" path="res://Scenes/Objects/journal_quest.tscn" id="10_r63bw"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/HUD.gd" id="11_6uirc"]
@@ -113,6 +115,23 @@
 [ext_resource type="Texture2D" uid="uid://27ha0akqqexa" path="res://Art/Animations/pipo-btleffect214_192.png" id="112_e6vge"]
 [ext_resource type="Shader" path="res://Art/Shaders/TimeStopShaderScript.gdshader" id="113_ceiu3"]
 [ext_resource type="Shader" path="res://Art/Shaders/CameraShader.gdshader" id="114_fc7c8"]
+
+[sub_resource type="Environment" id="Environment_j0k7u"]
+background_mode = 3
+background_color = Color(1, 0, 0, 1)
+background_canvas_max_layer = 225
+tonemap_white = 2.03
+glow_enabled = true
+glow_levels/3 = 1.9
+glow_levels/4 = 2.7
+glow_levels/5 = 2.62
+glow_levels/6 = 2.34
+glow_levels/7 = 2.7
+glow_normalized = true
+glow_intensity = 2.82
+glow_blend_mode = 1
+glow_hdr_threshold = 0.0
+fog_light_energy = 5.91
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_71ey8"]
 
@@ -232,6 +251,16 @@ _data = {
 "Fade": SubResource("Animation_31af4"),
 "RESET": SubResource("Animation_s4jx2")
 }
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oxhrg"]
+shader = ExtResource("9_yhbj2")
+shader_parameter/alpha = 100.0
+shader_parameter/background_color = Color(0, 0, 0, 1)
+shader_parameter/line_color = Color(0.537255, 0.54902, 0.611765, 1)
+shader_parameter/line_freq = 5.43
+shader_parameter/height = 0.64
+shader_parameter/speed = 0.8
+shader_parameter/scale = Vector2(2, 16)
 
 [sub_resource type="Gradient" id="Gradient_cxhlq"]
 offsets = PackedFloat32Array(0.0129032, 1)
@@ -802,6 +831,9 @@ script = ExtResource("1_7pbd5")
 ShadowColor = Color(0.282353, 0.45098, 0.666667, 1)
 BackgroundColor = Color(0.682353, 0.741176, 0.807843, 0.588235)
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_j0k7u")
+
 [node name="MinimapUI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -865,10 +897,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 57920.0
-offset_top = 32750.0
-offset_right = 58560.0
-offset_bottom = 32768.0
+offset_left = 60160.0
+offset_top = 34010.0
+offset_right = 60800.0
+offset_bottom = 34028.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(320, 9)
@@ -923,21 +955,29 @@ visible = false
 layout_mode = 2
 
 [node name="QuestNotification" type="Control" parent="Notifications"]
-visible = false
 anchors_preset = 0
 offset_left = 262.0
 offset_top = 68.0
 offset_right = 302.0
 offset_bottom = 108.0
 
+[node name="bg" type="TextureRect" parent="Notifications/QuestNotification"]
+self_modulate = Color(1, 1, 1, 0.101961)
+material = SubResource("ShaderMaterial_oxhrg")
+layout_mode = 0
+offset_right = 120.0
+offset_bottom = 200.0
+texture = ExtResource("10_bt02h")
+
 [node name="Backplate" type="TextureRect" parent="Notifications/QuestNotification"]
-self_modulate = Color(1, 1, 1, 0.784314)
+self_modulate = Color(1, 1, 1, 0.870588)
 layout_mode = 0
 offset_right = 120.0
 offset_bottom = 200.0
 texture = ExtResource("9_tj68y")
 
 [node name="Plates" type="TextureRect" parent="Notifications/QuestNotification"]
+self_modulate = Color(2, 2, 2, 1)
 layout_mode = 0
 offset_right = 120.0
 offset_bottom = 200.0
@@ -2573,8 +2613,17 @@ offset_bottom = 148.0
 grow_vertical = 2
 pivot_offset = Vector2(154, 0)
 
+[node name="Background" type="TextureRect" parent="UI/Character"]
+self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.784314)
+material = ExtResource("20_b37tm")
+layout_mode = 0
+offset_right = 176.0
+offset_bottom = 296.0
+texture = ExtResource("36_6xpaq")
+
 [node name="Shadow" type="TextureRect" parent="UI/Character"]
 visible = false
+modulate = Color(0.176471, 0.211765, 0.184314, 1)
 texture_filter = 1
 texture_repeat = 1
 material = ExtResource("20_b37tm")
@@ -2594,15 +2643,6 @@ offset_top = -2.0
 offset_right = 174.0
 offset_bottom = 294.0
 texture = ExtResource("35_pyfjg")
-
-[node name="Background" type="TextureRect" parent="UI/Character"]
-modulate = Color(0.0588235, 0.0705882, 0.141176, 0.784314)
-material = ExtResource("20_b37tm")
-layout_mode = 0
-offset_right = 176.0
-offset_bottom = 296.0
-theme = ExtResource("7_cnxmk")
-texture = ExtResource("36_6xpaq")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/Character"]
 layout_mode = 1
@@ -3794,7 +3834,6 @@ grow_vertical = 2
 script = ExtResource("67_cbpy0")
 
 [node name="Shadow" type="TextureRect" parent="UI/Inventory"]
-visible = false
 texture_filter = 1
 texture_repeat = 1
 material = ExtResource("20_b37tm")
@@ -4567,11 +4606,11 @@ expand_mode = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="LoadingBattle"]
 reset_on_save = false
-speed_scale = 1.5
-method_call_mode = 1
+callback_mode_method = 1
 libraries = {
 "": SubResource("AnimationLibrary_2fqvh")
 }
+speed_scale = 1.5
 
 [node name="PauseMenu" type="Control" parent="."]
 visible = false
@@ -5459,11 +5498,11 @@ label_settings = SubResource("LabelSettings_01sfh")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PauseMenu"]
 reset_on_save = false
-speed_scale = 1.1
-method_call_mode = 1
+callback_mode_method = 1
 libraries = {
 "": SubResource("AnimationLibrary_2fqvh")
 }
+speed_scale = 1.1
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
