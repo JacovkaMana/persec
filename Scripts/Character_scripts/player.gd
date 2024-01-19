@@ -97,6 +97,12 @@ func _ready():
 	reload_battle_timer()
 	
 	
+	if not quests:
+		quests = QuestData.new()
+		
+	#self.add_quest("Escape")
+	
+	
 func _physics_process(_delta):
 	super(_delta)
 	#print(battle_timer.time_left)
@@ -140,6 +146,7 @@ func reset_state():
 
 func add_quest(quest_name: String):
 	var new_quest = self.quests.new_quest(quest_name)
+	print('quest', new_quest)
 	if new_quest:
 		self.emit_signal("new_quest", new_quest)
 	
@@ -190,7 +197,7 @@ func interact_with_nearest():
 
 
 func kill_confirm(who):
-	self.viewer_manager.action_to_viewers(Enums.EViewerAction.SLAY, 1)
+	self.viewer_manager.action_to_viewers(Enums.EViewerAction.SLAY, 10)
 	emit_signal("kill_confirmed", who)
 	money_earn(20)
 	

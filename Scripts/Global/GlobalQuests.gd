@@ -10,17 +10,9 @@ func _ready():
 	for quest in json:
 		var jquest = json[quest]
 		
-#		_description, 
-#		_completed,
-#		_active,
-#		_type,
-#		_target_type,
-#		_target_name,
-#		_target_count,
-#		_level,
-#		_location,
-	
 		quests[quest] = Quest.new(
+		quest,
+		jquest['difficulty'], 
 		jquest['description'], 
 		false,
 		false,
@@ -28,6 +20,11 @@ func _ready():
 		jquest['target']['type'],
 		jquest['target']['name'],
 		jquest['target']['count'],
+		jquest['reward']['type'],
+		jquest['reward']['name'],
+		jquest['reward']['count'],
+		jquest['failure']['type'],
+		jquest['failure']['name'],
 		jquest['location']['level'],
 		jquest['location']['coords'],
 			)

@@ -41,7 +41,6 @@ text = "                  Trade"
 vertical_alignment = 1
 
 [node name="Bg" type="TextureRect" parent="Label"]
-visible = false
 self_modulate = Color(0.0588235, 0.0705882, 0.141176, 0.784314)
 show_behind_parent = true
 clip_children = 2
@@ -65,6 +64,7 @@ grow_vertical = 2
 texture = SubResource("GradientTexture1D_na7hh")
 
 [node name="TextureRect" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_right = 50.0
 offset_bottom = 22.0

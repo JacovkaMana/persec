@@ -98,6 +98,6 @@ void fragment() {
 	}
 	else {
 		COLOR.a = 1.0 - uv.y;
-		COLOR.rgb = c;
+		COLOR.rgb = c * (power / 100.0 + 1.0);
 	}
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=236 format=3 uid="uid://b7d15i5cwex1y"]
+[gd_scene load_steps=240 format=3 uid="uid://b7d15i5cwex1y"]
 
 [ext_resource type="Script" path="res://Scripts/Global/GlobalUI.gd" id="1_7pbd5"]
 [ext_resource type="Texture2D" uid="uid://d0g2mydsmvops" path="res://Art/Masks/Circle95.png" id="2_mrqlk"]
@@ -6,9 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://620p5t3jo6py" path="res://Art/UI/border97.png" id="5_0ouu2"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/ScreenLabel.gd" id="6_4yws3"]
 [ext_resource type="Theme" uid="uid://l3ac6jr0hvrq" path="res://Themes/ui_theme.tres" id="7_cnxmk"]
+[ext_resource type="Texture2D" uid="uid://yk0jl5axxxml" path="res://Art/UI/animation_corner.png" id="8_4w5av"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/NotificationsUI.gd" id="8_atng3"]
 [ext_resource type="PackedScene" uid="uid://bqs52knrqlm2t" path="res://Scenes/Objects/notification.tscn" id="9_et4y1"]
 [ext_resource type="Texture2D" uid="uid://b3gwe4au6nb51" path="res://Art/UI/UI_QuestNotification.png" id="9_tj68y"]
+[ext_resource type="Texture2D" uid="uid://bhwbl2fup8jjo" path="res://Art/UI/choice_quest.png" id="9_tnu8k"]
 [ext_resource type="Shader" path="res://Art/Shaders/BgScript3.gdshader" id="9_yhbj2"]
 [ext_resource type="Texture2D" uid="uid://beib2qxkinve3" path="res://Art/UI/UI_QuestNotificationBG.png" id="10_bt02h"]
 [ext_resource type="Texture2D" uid="uid://5b0l6p8myw21" path="res://Art/UI/UI_QuestNotificationPlates.png" id="10_jx4ek"]
@@ -121,14 +123,14 @@ background_mode = 3
 background_color = Color(1, 0, 0, 1)
 background_canvas_max_layer = 225
 tonemap_white = 2.03
-glow_enabled = true
+glow_levels/1 = 0.7
+glow_levels/2 = 1.44
 glow_levels/3 = 1.9
 glow_levels/4 = 2.7
 glow_levels/5 = 2.62
 glow_levels/6 = 2.34
 glow_levels/7 = 2.7
 glow_normalized = true
-glow_intensity = 2.82
 glow_blend_mode = 1
 glow_hdr_threshold = 0.0
 fog_light_energy = 5.91
@@ -254,13 +256,265 @@ _data = {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oxhrg"]
 shader = ExtResource("9_yhbj2")
-shader_parameter/alpha = 100.0
+shader_parameter/alpha = 255.0
 shader_parameter/background_color = Color(0, 0, 0, 1)
 shader_parameter/line_color = Color(0.537255, 0.54902, 0.611765, 1)
 shader_parameter/line_freq = 5.43
 shader_parameter/height = 0.64
 shader_parameter/speed = 0.8
-shader_parameter/scale = Vector2(2, 16)
+shader_parameter/scale = Vector2(2, 30)
+
+[sub_resource type="Animation" id="Animation_c2v4x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimCorners/DR:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(393, 241)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimCorners/DL:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(167, 241)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimCorners/UR:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(393, 56)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimCorners/UL:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(167, 56)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AnimCorners/ColorRect:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(258, 56)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AnimCorners/ColorRect:size")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(60, 39)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("QuestNotification:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("AnimCorners:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("RectButton:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("RectButton:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_13usr"]
+resource_name = "quest"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimCorners/DR:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(303, 81), Vector2(303, 241), Vector2(393, 241)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimCorners/DL:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(258, 80), Vector2(258, 241), Vector2(167, 241)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimCorners/UR:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(303, 56), Vector2(303, 56), Vector2(393, 56)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimCorners/UL:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(258, 56), Vector2(258, 56), Vector2(167, 56)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AnimCorners/ColorRect:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(258, 56), Vector2(258, 56), Vector2(167, 56)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AnimCorners/ColorRect:size")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(60, 39), Vector2(60, 200), Vector2(241, 200)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("QuestNotification:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("AnimCorners:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("RectButton:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("RectButton:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(2, 2, 2, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wmpax"]
+_data = {
+"RESET": SubResource("Animation_c2v4x"),
+"quest": SubResource("Animation_13usr")
+}
 
 [sub_resource type="Gradient" id="Gradient_cxhlq"]
 offsets = PackedFloat32Array(0.0129032, 1)
@@ -279,13 +533,9 @@ colors = PackedColorArray(1, 1, 1, 1)
 gradient = SubResource("Gradient_5q1je")
 width = 40
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5841r"]
-shader = ExtResource("13_dsmnk")
-shader_parameter/power = 1.0
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n22do"]
 shader = ExtResource("13_dsmnk")
-shader_parameter/power = 100.0
+shader_parameter/power = 5.0
 
 [sub_resource type="Gradient" id="Gradient_txmt1"]
 colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
@@ -880,6 +1130,7 @@ offset_bottom = 104.0
 texture = ExtResource("5_0ouu2")
 
 [node name="ScreenLabel" type="Control" parent="."]
+visible = false
 custom_minimum_size = Vector2(640, 360)
 layout_mode = 3
 anchors_preset = 0
@@ -897,10 +1148,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 60160.0
-offset_top = 34010.0
-offset_right = 60800.0
-offset_bottom = 34028.0
+offset_left = 61120.0
+offset_top = 34550.0
+offset_right = 61760.0
+offset_bottom = 34568.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(320, 9)
@@ -937,6 +1188,57 @@ offset_bottom = 360.0
 mouse_filter = 2
 script = ExtResource("8_atng3")
 
+[node name="AnimCorners" type="Control" parent="Notifications"]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="Notifications/AnimCorners"]
+self_modulate = Color(1, 1, 1, 0.784314)
+layout_mode = 0
+offset_left = 258.0
+offset_top = 56.0
+offset_right = 318.0
+offset_bottom = 95.0
+color = Color(0.0588235, 0.0705882, 0.141176, 1)
+
+[node name="UL" type="TextureRect" parent="Notifications/AnimCorners"]
+layout_mode = 0
+offset_left = 167.0
+offset_top = 56.0
+offset_right = 182.0
+offset_bottom = 71.0
+texture = ExtResource("8_4w5av")
+flip_h = true
+
+[node name="UR" type="TextureRect" parent="Notifications/AnimCorners"]
+layout_mode = 0
+offset_left = 393.0
+offset_top = 56.0
+offset_right = 408.0
+offset_bottom = 71.0
+texture = ExtResource("8_4w5av")
+
+[node name="DL" type="TextureRect" parent="Notifications/AnimCorners"]
+layout_mode = 0
+offset_left = 167.0
+offset_top = 241.0
+offset_right = 182.0
+offset_bottom = 256.0
+texture = ExtResource("8_4w5av")
+flip_h = true
+flip_v = true
+
+[node name="DR" type="TextureRect" parent="Notifications/AnimCorners"]
+layout_mode = 0
+offset_left = 393.0
+offset_top = 241.0
+offset_right = 408.0
+offset_bottom = 256.0
+texture = ExtResource("8_4w5av")
+flip_v = true
+
 [node name="VBoxContainer" type="VBoxContainer" parent="Notifications"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 1
@@ -954,12 +1256,23 @@ theme_override_constants/separation = 1
 visible = false
 layout_mode = 2
 
+[node name="RectButton" type="TextureRect" parent="Notifications"]
+visible = false
+layout_mode = 0
+offset_left = 272.0
+offset_top = 38.0
+offset_right = 303.0
+offset_bottom = 69.0
+mouse_filter = 0
+texture = ExtResource("9_tnu8k")
+
 [node name="QuestNotification" type="Control" parent="Notifications"]
+visible = false
 anchors_preset = 0
-offset_left = 262.0
-offset_top = 68.0
-offset_right = 302.0
-offset_bottom = 108.0
+offset_left = 153.0
+offset_top = 21.0
+offset_right = 193.0
+offset_bottom = 61.0
 
 [node name="bg" type="TextureRect" parent="Notifications/QuestNotification"]
 self_modulate = Color(1, 1, 1, 0.101961)
@@ -969,15 +1282,24 @@ offset_right = 120.0
 offset_bottom = 200.0
 texture = ExtResource("10_bt02h")
 
+[node name="bg2" type="TextureRect" parent="Notifications/QuestNotification"]
+self_modulate = Color(1, 1, 1, 0.101961)
+material = SubResource("ShaderMaterial_oxhrg")
+layout_mode = 0
+offset_left = 134.0
+offset_right = 269.0
+offset_bottom = 270.0
+texture = ExtResource("10_bt02h")
+flip_h = true
+
 [node name="Backplate" type="TextureRect" parent="Notifications/QuestNotification"]
-self_modulate = Color(1, 1, 1, 0.870588)
+self_modulate = Color(1, 1, 1, 0.882353)
 layout_mode = 0
 offset_right = 120.0
 offset_bottom = 200.0
 texture = ExtResource("9_tj68y")
 
 [node name="Plates" type="TextureRect" parent="Notifications/QuestNotification"]
-self_modulate = Color(2, 2, 2, 1)
 layout_mode = 0
 offset_right = 120.0
 offset_bottom = 200.0
@@ -985,58 +1307,78 @@ texture = ExtResource("10_jx4ek")
 
 [node name="Name" type="Label" parent="Notifications/QuestNotification"]
 layout_mode = 0
-offset_left = 8.0
-offset_top = 19.0
-offset_right = 111.0
-offset_bottom = 36.0
+offset_left = 144.0
+offset_top = 44.0
+offset_right = 247.0
+offset_bottom = 61.0
 theme = ExtResource("7_cnxmk")
-theme_override_colors/font_color = Color(0.0980392, 0.105882, 0.301961, 1)
 text = "Escape"
 horizontal_alignment = 1
 
-[node name="Type" type="RichTextLabel" parent="Notifications/QuestNotification"]
+[node name="Type" type="Label" parent="Notifications/QuestNotification"]
 layout_mode = 0
-offset_left = 8.0
-offset_top = 5.0
-offset_right = 111.0
-offset_bottom = 22.0
+offset_left = 19.0
+offset_top = 44.0
+offset_right = 122.0
+offset_bottom = 61.0
 theme = ExtResource("7_cnxmk")
-bbcode_enabled = true
-text = "[center]Main Quest[/center]"
+text = "Main Quest"
+horizontal_alignment = 1
 
 [node name="Description" type="RichTextLabel" parent="Notifications/QuestNotification"]
 layout_mode = 0
-offset_left = 8.0
-offset_top = 39.0
-offset_right = 111.0
-offset_bottom = 123.0
+offset_left = 23.0
+offset_top = 61.0
+offset_right = 126.0
+offset_bottom = 145.0
 theme = ExtResource("7_cnxmk")
 bbcode_enabled = true
 text = "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
 
-[node name="Target" type="RichTextLabel" parent="Notifications/QuestNotification"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Notifications/QuestNotification"]
 layout_mode = 0
-offset_left = 8.0
-offset_top = 126.0
-offset_right = 111.0
-offset_bottom = 154.0
+offset_left = 146.0
+offset_top = 63.0
+offset_right = 237.0
+offset_bottom = 231.0
+theme_override_constants/separation = 10
+
+[node name="Difficulty" type="RichTextLabel" parent="Notifications/QuestNotification/VBoxContainer"]
+layout_mode = 2
 theme = ExtResource("7_cnxmk")
 bbcode_enabled = true
-text = "Target:
- Reach Armory"
+text = "Difficulty: C"
+fit_content = true
 autowrap_mode = 2
 
-[node name="Location" type="RichTextLabel" parent="Notifications/QuestNotification"]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 155.0
-offset_right = 111.0
-offset_bottom = 183.0
+[node name="Target" type="RichTextLabel" parent="Notifications/QuestNotification/VBoxContainer"]
+layout_mode = 2
 theme = ExtResource("7_cnxmk")
 bbcode_enabled = true
-text = "Location:
-Armory"
+text = "Target:  Reach Armory"
+fit_content = true
 autowrap_mode = 2
+
+[node name="Reward" type="RichTextLabel" parent="Notifications/QuestNotification/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("7_cnxmk")
+bbcode_enabled = true
+text = "Reward: ???"
+fit_content = true
+autowrap_mode = 2
+
+[node name="Failure" type="RichTextLabel" parent="Notifications/QuestNotification/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("7_cnxmk")
+bbcode_enabled = true
+text = "Failure: ???"
+fit_content = true
+autowrap_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Notifications"]
+libraries = {
+"": SubResource("AnimationLibrary_wmpax")
+}
 
 [node name="Journal" type="Control" parent="."]
 visible = false
@@ -1099,7 +1441,6 @@ script = ExtResource("11_6uirc")
 full_material = ExtResource("12_mx1bf")
 
 [node name="SoundBar" type="Control" parent="HUD"]
-material = SubResource("ShaderMaterial_5841r")
 layout_mode = 3
 anchors_preset = 0
 offset_left = 240.0
@@ -5509,8 +5850,10 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 5.0
-offset_bottom = 5.0
+offset_left = -3.0
+offset_top = 2.0
+offset_right = -3.0
+offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2

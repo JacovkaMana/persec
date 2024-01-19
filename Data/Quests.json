@@ -1,11 +1,21 @@
 {
 	"Escape" : {
-		"description": "",
-		"type": "sub",
+		"difficulty" : "E",
+		"description": "Escape the dungeon before it collapses",
+		"type": "Main Quest",
 		"target": {
 			"type" : "area",
-			"name": "armory",
+			"name": "Main gate",
 			"count": 0,
+		},
+		"reward": {
+			"type" : "item",
+			"name": "Fusion reactor",
+			"count": 0,
+		},
+		"failure": {
+			"type" : "status",
+			"name": "Death",
 		},
 		"location": {
 			"level": "",

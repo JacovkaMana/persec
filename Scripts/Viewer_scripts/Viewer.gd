@@ -12,7 +12,7 @@ var max_satisfaction = 100
 func _init(_type: String, _loves):
 		self.type = _type
 		self.loves = _loves
-		self.satisfaction = 50
+		self.satisfaction = 10
 		
 func add_satisfaction(power):
 	if self.satisfaction + power >= 100:
