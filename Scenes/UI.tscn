@@ -1269,10 +1269,10 @@ texture = ExtResource("9_tnu8k")
 [node name="QuestNotification" type="Control" parent="Notifications"]
 visible = false
 anchors_preset = 0
-offset_left = 153.0
-offset_top = 21.0
-offset_right = 193.0
-offset_bottom = 61.0
+offset_left = 160.0
+offset_top = 37.0
+offset_right = 200.0
+offset_bottom = 77.0
 
 [node name="bg" type="TextureRect" parent="Notifications/QuestNotification"]
 self_modulate = Color(1, 1, 1, 0.101961)
@@ -1381,7 +1381,6 @@ libraries = {
 }
 
 [node name="Journal" type="Control" parent="."]
-visible = false
 custom_minimum_size = Vector2(106, 200)
 layout_mode = 3
 anchors_preset = 0
