@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Actor
 
+var process_delta_multiplier = 1.0
+
 @onready var animation_tree = $AnimationTree
 @onready var animation_player = $AnimationPlayer
 @onready var label = $HeadLabel
@@ -104,6 +106,8 @@ func update_animation_parameters (direction: Vector2, _velocity):
 
 	
 func _physics_process(_delta):
+	_delta *= process_delta_multiplier
+	
 	if freeze:
 		return 2
 		

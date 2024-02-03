@@ -40,17 +40,51 @@ var trade_choice_icon = preload("res://Art/UI/choice_trade.png")
 var is_talking = false
 var choices_visible = false
 
+@onready var audio_player = $AudioStreamPlayer2D
+
+var skip = false
+var skip_count = 0
+var odd = 0
+	
 func _ready():
 	
 	player.connect("dialogue_started", _on_dialogue)
 	player.connect("dialogue_ended", _on_dialogue_ended)
 	player.connect("dialogue_continue", _on_dialogue_continue)
+	
+	audio_player.bus = 'Dialogue'
+	audio_player.volume_db = -50.0
+	audio_player.set_stream(load("res://Sounds/sfx-blipmale.wav"))
 
 	
 func _physics_process(_delta):
+	var stop_symbols = {
+		'#' : 10,
+		'.' : 10,
+		',' : 10,
+		'?' : 10,
+		'!' : 10, 
+		' ' : 1
+		}
+	
+	
+	
 	if self.text_label.visible_characters < self.text_label.get_total_character_count():
-		self.text_label.visible_characters += 1
-	elif not choices_visible:
+		
+		if odd == 0:
+			if self.text_label.text[self.text_label.visible_characters] in stop_symbols.keys():
+				odd = stop_symbols[self.text_label.text[self.text_label.visible_characters]]
+				self.text_label.visible_characters += 1
+			else:
+				self.text_label.visible_characters += 1
+				audio_player.play()
+				odd = 3
+				
+				
+		odd -= 1
+				
+			
+	if not choices_visible:
 		self._on_talking_choices(current_answers.keys())
 		choices_visible = true
 
@@ -120,8 +154,12 @@ func _on_actions(actions):
 	
 	var _i = 2
 	for one in actions:
+		print(one)
 		var choise = action_choice.instantiate()
+		choise.visible = true
 		choise.position = Vector2(104, 270)
+		choise.get_child(0).visible = false
+		choise.get_child(1).visible = true
 		choise.get_child(0).text = one
 		
 		match one:
@@ -152,6 +190,7 @@ func _on_actions(actions):
 
 func _on_talking_choices(choices):
 	
+	print(choices)
 
 	self._remove_choise()
 		
@@ -176,7 +215,12 @@ func _on_talking_choices(choices):
 		choise.position = center_position
 		choise.get_child(1).icon = null
 		choise.get_child(1).text = one
+		
+		choise.visible = true
+		
+		choise.get_child(1).visible = true
 		choise.get_child(0).visible = false
+		
 		choise.get_child(1).size.y = 0
 		#choise.get_child(0).get_child(0).visible = true
 		new_position =  Vector2(last_position.x, last_position.y - 16)

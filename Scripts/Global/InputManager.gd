@@ -3,6 +3,7 @@ extends Node
 var player = null
 var UI_Global = null
 
+@onready var SceneManager = $"../SceneManager"
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -59,7 +60,10 @@ func player_movement(_event):
 	)
 
 func use_skills(_event):
-			
+
+		if _event.is_action_pressed("ability"):
+			SceneManager.timestop()
+		
 		if _event.is_action_pressed("skill1"):
 			player.use_skill_id(0)
 		if _event.is_action_pressed("skill2"):

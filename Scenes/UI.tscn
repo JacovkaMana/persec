@@ -1148,10 +1148,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 61120.0
-offset_top = 34550.0
-offset_right = 61760.0
-offset_bottom = 34568.0
+offset_left = 62720.0
+offset_top = 35450.0
+offset_right = 63360.0
+offset_bottom = 35468.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(320, 9)
@@ -4765,7 +4765,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Dialogue" type="Control" parent="UI"]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 640.0
@@ -4858,6 +4857,8 @@ offset_bottom = 40.0
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="UI/Dialogue"]
 
 [node name="TestText" type="Control" parent="."]
 visible = false

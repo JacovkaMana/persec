@@ -18,9 +18,11 @@ var melee_scene = null
 
 @onready var vfx_layer = null
 
+@onready var audio_stream = $AudioStreamPlayer2D
 var player = null
 var enemies = null
 
+var in_timestop = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#scene_animator.queue("RESET")
@@ -36,6 +38,11 @@ func _ready():
 	print(player.find_child('RemoteTransform2D').remote_path)
 
 	#main_camera.global_position = player.global_position
+	audio_stream.stream = load_mp3("res://Music/gamong.mp3")
+	audio_stream.stream.loop = true
+	audio_stream.volume_db = -20.01
+	
+	audio_stream.play()
 
 	
 	vfx_layer = next_scene.find_child("VFX", true, false)
@@ -149,3 +156,22 @@ func do_vfx(_where, _which, _color = NAN):
 	
 	
 	new_obj.get_child(1).queue('start')
+	
+func load_mp3(path):
+	var file = FileAccess.open(path, FileAccess.READ)
+	var sound = AudioStreamMP3.new()
+	sound.data = file.get_buffer(file.get_length())
+	return sound
+	
+func timestop():
+	self.in_timestop = not self.in_timestop
+	
+	if not self.in_timestop:
+		Engine.time_scale = 0.01
+		player.process_delta_multiplier = 1.0 / Engine.time_scale
+	
+	else:
+		Engine.time_scale = 1.0
+		player.process_delta_multiplier = 1.0 / Engine.time_scale
+		
+
