@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cn4a54ponraih"
-path="res://.godot/imported/testpanel.png-e988cc3ecc0e2a978ece034549c6ecc8.ctex"
+uid="uid://ds1106tc85os4"
+path="res://.godot/imported/BranchSwitch.png-3e6ab2e5e49ab25b80f9f284270c91d3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/UI/testpanel.png"
-dest_files=["res://.godot/imported/testpanel.png-e988cc3ecc0e2a978ece034549c6ecc8.ctex"]
+source_file="res://Art/UI/BranchSwitch.png"
+dest_files=["res://.godot/imported/BranchSwitch.png-3e6ab2e5e49ab25b80f9f284270c91d3.ctex"]
 
 [params]
 

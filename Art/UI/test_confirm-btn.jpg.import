@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmlj0ltk4p4u7"
-path="res://.godot/imported/Testchain1.png-dd9ad91cbbae5037186f3c40e4ea7888.ctex"
+uid="uid://bx5wk7y8qx31b"
+path="res://.godot/imported/test_confirm-btn.jpg-b456ae309f6bc1bbd4896798f63698ab.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/UI/Testchain1.png"
-dest_files=["res://.godot/imported/Testchain1.png-dd9ad91cbbae5037186f3c40e4ea7888.ctex"]
+source_file="res://Art/UI/test_confirm-btn.jpg"
+dest_files=["res://.godot/imported/test_confirm-btn.jpg-b456ae309f6bc1bbd4896798f63698ab.ctex"]
 
 [params]
 
