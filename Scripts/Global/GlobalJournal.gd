@@ -2,10 +2,16 @@ extends Node
 
 @onready var data = Journal.new()
 
-func save_resource(what, where):
-	var result = ResourceSaver.save(self.data, 'user://player_journal.res')
+func save_journal():
+	var result = ResourceSaver.save(self.data, 'user://journal.res')
 	assert(result == OK)
 	print(result)
+
+func load_journal():
+	if ResourceLoader.exists('user://journal.res'):
+		var object = ResourceLoader.load('user://journal.res')
+		return object
+	return null
 
 
 
