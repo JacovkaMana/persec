@@ -1,4 +1,4 @@
-[gd_scene load_steps=240 format=3 uid="uid://b7d15i5cwex1y"]
+[gd_scene load_steps=258 format=3 uid="uid://b7d15i5cwex1y"]
 
 [ext_resource type="Script" path="res://Scripts/Global/GlobalUI.gd" id="1_7pbd5"]
 [ext_resource type="Texture2D" uid="uid://d0g2mydsmvops" path="res://Art/Masks/Circle95.png" id="2_mrqlk"]
@@ -116,7 +116,21 @@
 [ext_resource type="Script" path="res://Scenes/Anim.gd" id="111_ctxxf"]
 [ext_resource type="Texture2D" uid="uid://27ha0akqqexa" path="res://Art/Animations/pipo-btleffect214_192.png" id="112_e6vge"]
 [ext_resource type="Shader" path="res://Art/Shaders/TimeStopShaderScript.gdshader" id="113_ceiu3"]
+[ext_resource type="Script" path="res://Scripts/UI_scripts/MenuSkillTreeButton.gd" id="114_a42eh"]
 [ext_resource type="Shader" path="res://Art/Shaders/CameraShader.gdshader" id="114_fc7c8"]
+[ext_resource type="Texture2D" uid="uid://ckpar51qny02r" path="res://Art/Icons/Skills/single_27.png" id="115_igmfo"]
+[ext_resource type="Texture2D" uid="uid://qp4uk0ea21xu" path="res://Art/Icons/Skills/single_41.png" id="115_o7fy4"]
+[ext_resource type="Texture2D" uid="uid://de1sd777km6hb" path="res://Art/Icons/Skills/single_43.png" id="116_b5nwl"]
+[ext_resource type="Texture2D" uid="uid://due63yxhqbtnc" path="res://Art/Icons/Skills/single_36.png" id="117_6twaw"]
+[ext_resource type="Texture2D" uid="uid://4b25sf7xi2xi" path="res://Art/Icons/Skills/single_78.png" id="118_q3l7i"]
+[ext_resource type="Texture2D" uid="uid://cedxf3fhx3m2b" path="res://Art/Icons/Skills/single_91.png" id="119_re1pl"]
+[ext_resource type="Texture2D" uid="uid://1wlflxkf18k0" path="res://Art/Icons/Skills/single_79.png" id="120_ig8du"]
+[ext_resource type="Texture2D" uid="uid://ddo6wgug2wvn6" path="res://Art/Icons/Skills/single_37.png" id="121_kaos6"]
+[ext_resource type="Texture2D" uid="uid://c8u62ufv7pdad" path="res://Art/Icons/Skills/single_45.png" id="122_kpoi3"]
+[ext_resource type="Texture2D" uid="uid://b0c7jviw5lwgw" path="res://Art/UI/SkilTreeSlotlSquare.png" id="122_kw1oo"]
+[ext_resource type="Texture2D" uid="uid://c3b6w7v3d3icn" path="res://Art/Icons/Skills/single_92.png" id="123_gsitb"]
+[ext_resource type="Texture2D" uid="uid://ds1106tc85os4" path="res://Art/UI/BranchSwitch.png" id="124_1ptf0"]
+[ext_resource type="Texture2D" uid="uid://cf7kxvkescl7s" path="res://Art/UI/test_textfield.png" id="126_k78vc"]
 
 [sub_resource type="Environment" id="Environment_j0k7u"]
 background_mode = 3
@@ -966,6 +980,21 @@ point_count = 2
 
 [sub_resource type="LabelSettings" id="LabelSettings_01sfh"]
 font = ExtResource("19_b0eix")
+
+[sub_resource type="LabelSettings" id="LabelSettings_6dg48"]
+font_size = 12
+
+[sub_resource type="Gradient" id="Gradient_67kkr"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bvfkt"]
+gradient = SubResource("Gradient_67kkr")
+width = 31
+height = 31
+
+[sub_resource type="LabelSettings" id="LabelSettings_pmwvf"]
+font_size = 12
 
 [sub_resource type="Animation" id="Animation_kppei"]
 length = 0.001
@@ -1861,7 +1890,6 @@ offset_bottom = 350.0
 script = ExtResource("18_h18b4")
 
 [node name="Item1" type="Control" parent="HUD/ItemsHotbar/ItemsContainer"]
-z_index = 1
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 anchors_preset = 0
@@ -1913,7 +1941,6 @@ horizontal_alignment = 2
 vertical_alignment = 2
 
 [node name="Item2" type="Control" parent="HUD/ItemsHotbar/ItemsContainer"]
-z_index = 1
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 anchors_preset = 0
@@ -1965,7 +1992,6 @@ horizontal_alignment = 2
 vertical_alignment = 2
 
 [node name="Item3" type="Control" parent="HUD/ItemsHotbar/ItemsContainer"]
-z_index = 1
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 anchors_preset = 0
@@ -2018,7 +2044,6 @@ horizontal_alignment = 2
 vertical_alignment = 2
 
 [node name="Item4" type="Control" parent="HUD/ItemsHotbar/ItemsContainer"]
-z_index = 1
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 anchors_preset = 0
@@ -4765,7 +4790,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Dialogue" type="Control" parent="UI"]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 640.0
@@ -4953,7 +4977,6 @@ libraries = {
 speed_scale = 1.5
 
 [node name="PauseMenu" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 640.0
@@ -4973,6 +4996,7 @@ texture = SubResource("GradientTexture2D_fvp6c")
 expand_mode = 2
 
 [node name="MenuContent" type="Control" parent="PauseMenu"]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -5594,13 +5618,13 @@ expand_mode = 1
 visible = false
 layout_mode = 2
 
-[node name="SkillsContent" type="Control" parent="PauseMenu"]
+[node name="SkillsMenu" type="Control" parent="PauseMenu"]
 visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="SkillContainer" type="Control" parent="PauseMenu/SkillsContent"]
+[node name="SkillContainer" type="Control" parent="PauseMenu/SkillsMenu"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -5614,7 +5638,7 @@ grow_vertical = 2
 pivot_offset = Vector2(320, 320)
 script = ExtResource("103_uohmd")
 
-[node name="SkillsBackground" type="TextureRect" parent="PauseMenu/SkillsContent/SkillContainer"]
+[node name="SkillsBackground" type="TextureRect" parent="PauseMenu/SkillsMenu/SkillContainer"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -5626,7 +5650,7 @@ grow_vertical = 2
 texture = ExtResource("104_dnsdu")
 stretch_mode = 2
 
-[node name="Connector" type="TextureRect" parent="PauseMenu/SkillsContent/SkillContainer"]
+[node name="Connector" type="TextureRect" parent="PauseMenu/SkillsMenu/SkillContainer"]
 layout_mode = 0
 offset_left = 169.0
 offset_top = 109.0
@@ -5635,14 +5659,14 @@ offset_bottom = 145.0
 texture = ExtResource("52_2415n")
 expand_mode = 1
 
-[node name="SkillBlock1" type="Control" parent="PauseMenu/SkillsContent/SkillContainer"]
+[node name="SkillBlock1" type="Control" parent="PauseMenu/SkillsMenu/SkillContainer"]
 anchors_preset = 0
 offset_left = 151.0
 offset_top = 144.0
 offset_right = 191.0
 offset_bottom = 184.0
 
-[node name="SkillButton" type="Button" parent="PauseMenu/SkillsContent/SkillContainer/SkillBlock1"]
+[node name="SkillButton" type="Button" parent="PauseMenu/SkillsMenu/SkillContainer/SkillBlock1"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -5651,7 +5675,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/normal = SubResource("StyleBoxTexture_u0fij")
 
-[node name="SkillBlock2" type="Control" parent="PauseMenu/SkillsContent/SkillContainer"]
+[node name="SkillBlock2" type="Control" parent="PauseMenu/SkillsMenu/SkillContainer"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 151.0
@@ -5659,7 +5683,7 @@ offset_top = 144.0
 offset_right = 191.0
 offset_bottom = 184.0
 
-[node name="SkillButton" type="Button" parent="PauseMenu/SkillsContent/SkillContainer/SkillBlock2"]
+[node name="SkillButton" type="Button" parent="PauseMenu/SkillsMenu/SkillContainer/SkillBlock2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -5670,71 +5694,71 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/normal = SubResource("StyleBoxTexture_u0fij")
 
-[node name="AnimatedParts" type="Control" parent="PauseMenu/SkillsContent/SkillContainer"]
+[node name="AnimatedParts" type="Control" parent="PauseMenu/SkillsMenu/SkillContainer"]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Line2D" type="Path2D" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts"]
+[node name="Line2D" type="Path2D" parent="PauseMenu/SkillsMenu/SkillContainer/AnimatedParts"]
 curve = SubResource("Curve2D_15hdv")
 script = ExtResource("106_56okk")
 
-[node name="LineFollow" type="PathFollow2D" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts/Line2D"]
+[node name="LineFollow" type="PathFollow2D" parent="PauseMenu/SkillsMenu/SkillContainer/AnimatedParts/Line2D"]
 position = Vector2(257.975, 320)
 rotation = 3.14159
 progress = 25.0432
 
-[node name="LineFollow2" type="PathFollow2D" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts/Line2D"]
+[node name="LineFollow2" type="PathFollow2D" parent="PauseMenu/SkillsMenu/SkillContainer/AnimatedParts/Line2D"]
 position = Vector2(257.975, 320)
 rotation = 3.14159
 progress = 25.0432
 
-[node name="LineFollow3" type="PathFollow2D" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts/Line2D"]
+[node name="LineFollow3" type="PathFollow2D" parent="PauseMenu/SkillsMenu/SkillContainer/AnimatedParts/Line2D"]
 position = Vector2(257.975, 320)
 rotation = 3.14159
 progress = 25.0432
 
-[node name="LineTexture" type="TextureRect" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts/Line2D"]
+[node name="LineTexture" type="TextureRect" parent="PauseMenu/SkillsMenu/SkillContainer/AnimatedParts/Line2D"]
 offset_left = 279.0
 offset_top = 318.0
 offset_right = 289.0
 offset_bottom = 328.0
 texture = ExtResource("107_7fdcq")
 
-[node name="LineTexture2" type="TextureRect" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts/Line2D"]
+[node name="LineTexture2" type="TextureRect" parent="PauseMenu/SkillsMenu/SkillContainer/AnimatedParts/Line2D"]
 offset_left = 279.0
 offset_top = 318.0
 offset_right = 289.0
 offset_bottom = 328.0
 texture = ExtResource("107_7fdcq")
 
-[node name="LineTexture3" type="TextureRect" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts/Line2D"]
+[node name="LineTexture3" type="TextureRect" parent="PauseMenu/SkillsMenu/SkillContainer/AnimatedParts/Line2D"]
 offset_left = 279.0
 offset_top = 318.0
 offset_right = 289.0
 offset_bottom = 328.0
 texture = ExtResource("107_7fdcq")
 
-[node name="Line2D2" type="Path2D" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts"]
+[node name="Line2D2" type="Path2D" parent="PauseMenu/SkillsMenu/SkillContainer/AnimatedParts"]
 curve = SubResource("Curve2D_mwewj")
 script = ExtResource("106_56okk")
 
-[node name="LineFollow" type="PathFollow2D" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts/Line2D2"]
+[node name="LineFollow" type="PathFollow2D" parent="PauseMenu/SkillsMenu/SkillContainer/AnimatedParts/Line2D2"]
 position = Vector2(184.378, 271.637)
 rotation = -2.68567
 progress = 110.0
 
-[node name="LineFollow2" type="PathFollow2D" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts/Line2D2"]
+[node name="LineFollow2" type="PathFollow2D" parent="PauseMenu/SkillsMenu/SkillContainer/AnimatedParts/Line2D2"]
 position = Vector2(184.378, 271.637)
 rotation = -2.68567
 progress = 110.0
 
-[node name="LineFollow3" type="PathFollow2D" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts/Line2D2"]
+[node name="LineFollow3" type="PathFollow2D" parent="PauseMenu/SkillsMenu/SkillContainer/AnimatedParts/Line2D2"]
 position = Vector2(184.378, 271.637)
 rotation = -2.68567
 progress = 110.0
 
-[node name="LineTexture" type="TextureRect" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts/Line2D2"]
+[node name="LineTexture" type="TextureRect" parent="PauseMenu/SkillsMenu/SkillContainer/AnimatedParts/Line2D2"]
 offset_left = 279.0
 offset_top = 314.0
 offset_right = 289.0
@@ -5742,7 +5766,7 @@ offset_bottom = 324.0
 texture = ExtResource("108_24bpd")
 flip_h = true
 
-[node name="LineTexture2" type="TextureRect" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts/Line2D2"]
+[node name="LineTexture2" type="TextureRect" parent="PauseMenu/SkillsMenu/SkillContainer/AnimatedParts/Line2D2"]
 offset_left = 279.0
 offset_top = 314.0
 offset_right = 289.0
@@ -5750,7 +5774,7 @@ offset_bottom = 324.0
 texture = ExtResource("108_24bpd")
 flip_h = true
 
-[node name="LineTexture3" type="TextureRect" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts/Line2D2"]
+[node name="LineTexture3" type="TextureRect" parent="PauseMenu/SkillsMenu/SkillContainer/AnimatedParts/Line2D2"]
 offset_left = 279.0
 offset_top = 314.0
 offset_right = 289.0
@@ -5758,47 +5782,47 @@ offset_bottom = 324.0
 texture = ExtResource("108_24bpd")
 flip_h = true
 
-[node name="Line2D3" type="Path2D" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts"]
+[node name="Line2D3" type="Path2D" parent="PauseMenu/SkillsMenu/SkillContainer/AnimatedParts"]
 curve = SubResource("Curve2D_5wqcm")
 script = ExtResource("106_56okk")
 
-[node name="LineFollow" type="PathFollow2D" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts/Line2D3"]
+[node name="LineFollow" type="PathFollow2D" parent="PauseMenu/SkillsMenu/SkillContainer/AnimatedParts/Line2D3"]
 position = Vector2(183.98, 367.606)
 rotation = 2.69345
 progress = 110.0
 
-[node name="LineFollow2" type="PathFollow2D" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts/Line2D3"]
+[node name="LineFollow2" type="PathFollow2D" parent="PauseMenu/SkillsMenu/SkillContainer/AnimatedParts/Line2D3"]
 position = Vector2(183.98, 367.606)
 rotation = 2.69345
 progress = 110.0
 
-[node name="LineFollow3" type="PathFollow2D" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts/Line2D3"]
+[node name="LineFollow3" type="PathFollow2D" parent="PauseMenu/SkillsMenu/SkillContainer/AnimatedParts/Line2D3"]
 position = Vector2(183.98, 367.606)
 rotation = 2.69345
 progress = 110.0
 
-[node name="LineTexture" type="TextureRect" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts/Line2D3"]
+[node name="LineTexture" type="TextureRect" parent="PauseMenu/SkillsMenu/SkillContainer/AnimatedParts/Line2D3"]
 offset_left = 279.0
 offset_top = 318.0
 offset_right = 289.0
 offset_bottom = 328.0
 texture = ExtResource("108_24bpd")
 
-[node name="LineTexture2" type="TextureRect" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts/Line2D3"]
+[node name="LineTexture2" type="TextureRect" parent="PauseMenu/SkillsMenu/SkillContainer/AnimatedParts/Line2D3"]
 offset_left = 279.0
 offset_top = 318.0
 offset_right = 289.0
 offset_bottom = 328.0
 texture = ExtResource("108_24bpd")
 
-[node name="LineTexture3" type="TextureRect" parent="PauseMenu/SkillsContent/SkillContainer/AnimatedParts/Line2D3"]
+[node name="LineTexture3" type="TextureRect" parent="PauseMenu/SkillsMenu/SkillContainer/AnimatedParts/Line2D3"]
 offset_left = 279.0
 offset_top = 318.0
 offset_right = 289.0
 offset_bottom = 328.0
 texture = ExtResource("108_24bpd")
 
-[node name="ZoomContainer" type="Control" parent="PauseMenu/SkillsContent"]
+[node name="ZoomContainer" type="Control" parent="PauseMenu/SkillsMenu"]
 anchors_preset = 0
 offset_left = 597.0
 offset_top = 68.0
@@ -5806,14 +5830,14 @@ offset_right = 637.0
 offset_bottom = 287.0
 script = ExtResource("109_ddq4o")
 
-[node name="TextureRect" type="TextureRect" parent="PauseMenu/SkillsContent/ZoomContainer"]
+[node name="TextureRect" type="TextureRect" parent="PauseMenu/SkillsMenu/ZoomContainer"]
 layout_mode = 0
 offset_left = 13.0
 offset_top = -10.0
 offset_right = 40.0
 offset_bottom = 235.0
 
-[node name="VSlider" type="VSlider" parent="PauseMenu/SkillsContent/ZoomContainer"]
+[node name="VSlider" type="VSlider" parent="PauseMenu/SkillsMenu/ZoomContainer"]
 layout_mode = 0
 offset_left = 15.0
 offset_top = -9.0
@@ -5827,7 +5851,7 @@ max_value = 3.0
 value = 1.0
 tick_count = 2
 
-[node name="Label" type="Label" parent="PauseMenu/SkillsContent/ZoomContainer"]
+[node name="Label" type="Label" parent="PauseMenu/SkillsMenu/ZoomContainer"]
 layout_mode = 0
 offset_left = 13.0
 offset_top = -35.0
@@ -5835,6 +5859,657 @@ offset_right = 40.0
 offset_bottom = -4.0
 text = "x1"
 label_settings = SubResource("LabelSettings_01sfh")
+
+[node name="SkillsMenuAlt" type="Control" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SkillTree" type="Control" parent="PauseMenu/SkillsMenuAlt"]
+anchors_preset = 0
+offset_left = 152.0
+offset_top = 14.0
+offset_right = 626.0
+offset_bottom = 280.0
+
+[node name="SkillsDisplay" type="Control" parent="PauseMenu/SkillsMenuAlt/SkillTree"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="PauseMenu/SkillsMenuAlt/SkillTree/SkillsDisplay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("59_bf6pt")
+expand_mode = 1
+
+[node name="MageSkillsContainer" type="Control" parent="PauseMenu/SkillsMenuAlt/SkillTree/SkillsDisplay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuSkillTreeButton2" type="TextureButton" parent="PauseMenu/SkillsMenuAlt/SkillTree/SkillsDisplay/MageSkillsContainer"]
+layout_mode = 0
+offset_left = 207.0
+offset_top = 94.0
+offset_right = 238.0
+offset_bottom = 125.0
+texture_normal = ExtResource("76_mnlpv")
+
+[node name="SkillRect" type="TextureRect" parent="PauseMenu/SkillsMenuAlt/SkillTree/SkillsDisplay/MageSkillsContainer/MenuSkillTreeButton2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -9.0
+offset_top = -9.0
+offset_right = 9.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("116_b5nwl")
+expand_mode = 1
+
+[node name="MenuSkillTreeButton3" type="TextureButton" parent="PauseMenu/SkillsMenuAlt/SkillTree/SkillsDisplay/MageSkillsContainer"]
+layout_mode = 0
+offset_left = 238.0
+offset_top = 93.0
+offset_right = 269.0
+offset_bottom = 124.0
+texture_normal = ExtResource("76_mnlpv")
+
+[node name="SkillRect" type="TextureRect" parent="PauseMenu/SkillsMenuAlt/SkillTree/SkillsDisplay/MageSkillsContainer/MenuSkillTreeButton3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -9.0
+offset_top = -9.0
+offset_right = 9.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("117_6twaw")
+expand_mode = 1
+
+[node name="MenuSkillTreeButton4" type="TextureButton" parent="PauseMenu/SkillsMenuAlt/SkillTree/SkillsDisplay/MageSkillsContainer"]
+layout_mode = 0
+offset_left = 208.0
+offset_top = 125.0
+offset_right = 239.0
+offset_bottom = 156.0
+texture_normal = ExtResource("76_mnlpv")
+
+[node name="SkillRect" type="TextureRect" parent="PauseMenu/SkillsMenuAlt/SkillTree/SkillsDisplay/MageSkillsContainer/MenuSkillTreeButton4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -9.0
+offset_top = -9.0
+offset_right = 9.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("118_q3l7i")
+expand_mode = 1
+
+[node name="MenuSkillTreeButton5" type="TextureButton" parent="PauseMenu/SkillsMenuAlt/SkillTree/SkillsDisplay/MageSkillsContainer"]
+layout_mode = 0
+offset_left = 239.0
+offset_top = 124.0
+offset_right = 270.0
+offset_bottom = 155.0
+texture_normal = ExtResource("76_mnlpv")
+
+[node name="SkillRect" type="TextureRect" parent="PauseMenu/SkillsMenuAlt/SkillTree/SkillsDisplay/MageSkillsContainer/MenuSkillTreeButton5"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -9.0
+offset_top = -9.0
+offset_right = 9.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("119_re1pl")
+expand_mode = 1
+
+[node name="MenuSkillTreeButton6" type="TextureButton" parent="PauseMenu/SkillsMenuAlt/SkillTree/SkillsDisplay/MageSkillsContainer"]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 110.0
+offset_right = 223.0
+offset_bottom = 141.0
+texture_normal = ExtResource("76_mnlpv")
+
+[node name="SkillRect" type="TextureRect" parent="PauseMenu/SkillsMenuAlt/SkillTree/SkillsDisplay/MageSkillsContainer/MenuSkillTreeButton6"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -9.0
+offset_top = -9.0
+offset_right = 9.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("120_ig8du")
+expand_mode = 1
+
+[node name="MenuSkillTreeButton7" type="TextureButton" parent="PauseMenu/SkillsMenuAlt/SkillTree/SkillsDisplay/MageSkillsContainer"]
+layout_mode = 0
+offset_left = 254.0
+offset_top = 108.0
+offset_right = 285.0
+offset_bottom = 139.0
+texture_normal = ExtResource("76_mnlpv")
+
+[node name="SkillRect" type="TextureRect" parent="PauseMenu/SkillsMenuAlt/SkillTree/SkillsDisplay/MageSkillsContainer/MenuSkillTreeButton7"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -9.0
+offset_top = -9.0
+offset_right = 9.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("121_kaos6")
+expand_mode = 1
+
+[node name="MenuSkillTreeButton8" type="TextureButton" parent="PauseMenu/SkillsMenuAlt/SkillTree/SkillsDisplay/MageSkillsContainer"]
+layout_mode = 0
+offset_left = 222.0
+offset_top = 78.0
+offset_right = 253.0
+offset_bottom = 109.0
+texture_normal = ExtResource("76_mnlpv")
+
+[node name="SkillRect" type="TextureRect" parent="PauseMenu/SkillsMenuAlt/SkillTree/SkillsDisplay/MageSkillsContainer/MenuSkillTreeButton8"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -9.0
+offset_top = -9.0
+offset_right = 9.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("122_kpoi3")
+expand_mode = 1
+
+[node name="MenuSkillTreeButton9" type="TextureButton" parent="PauseMenu/SkillsMenuAlt/SkillTree/SkillsDisplay/MageSkillsContainer"]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 141.0
+offset_right = 255.0
+offset_bottom = 172.0
+texture_normal = ExtResource("76_mnlpv")
+
+[node name="SkillRect" type="TextureRect" parent="PauseMenu/SkillsMenuAlt/SkillTree/SkillsDisplay/MageSkillsContainer/MenuSkillTreeButton9"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -9.0
+offset_top = -9.0
+offset_right = 9.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("123_gsitb")
+expand_mode = 1
+
+[node name="MenuSkillTreeButton" type="TextureButton" parent="PauseMenu/SkillsMenuAlt/SkillTree/SkillsDisplay/MageSkillsContainer"]
+layout_mode = 0
+offset_left = 223.0
+offset_top = 124.0
+offset_right = 245.0
+offset_bottom = 146.0
+rotation = -0.785398
+texture_normal = ExtResource("122_kw1oo")
+script = ExtResource("114_a42eh")
+SkillName = "fireball"
+
+[node name="SkillRect" type="TextureRect" parent="PauseMenu/SkillsMenuAlt/SkillTree/SkillsDisplay/MageSkillsContainer/MenuSkillTreeButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1.10053
+offset_top = -11.0
+offset_right = 16.8995
+offset_bottom = 6.99998
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.785398
+texture = ExtResource("115_o7fy4")
+expand_mode = 1
+
+[node name="BranchSwitcher" type="Control" parent="PauseMenu/SkillsMenuAlt/SkillTree"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 30.0
+grow_horizontal = 2
+
+[node name="LeftButton" type="TextureButton" parent="PauseMenu/SkillsMenuAlt/SkillTree/BranchSwitcher"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 148.0
+offset_top = -15.0
+offset_right = 178.0
+offset_bottom = 15.0
+grow_vertical = 2
+texture_normal = ExtResource("124_1ptf0")
+
+[node name="RightButton" type="TextureButton" parent="PauseMenu/SkillsMenuAlt/SkillTree/BranchSwitcher"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 296.0
+offset_top = -15.0
+offset_right = 326.0
+offset_bottom = 15.0
+grow_vertical = 2
+texture_normal = ExtResource("124_1ptf0")
+flip_h = true
+
+[node name="BranchName" type="Control" parent="PauseMenu/SkillsMenuAlt/SkillTree/BranchSwitcher"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -15.0
+offset_right = 60.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BranchNameBackground" type="TextureRect" parent="PauseMenu/SkillsMenuAlt/SkillTree/BranchSwitcher/BranchName"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("62_t3x8x")
+expand_mode = 1
+
+[node name="BranchNameLabel" type="Label" parent="PauseMenu/SkillsMenuAlt/SkillTree/BranchSwitcher/BranchName"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.5
+offset_right = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_cnxmk")
+theme_override_font_sizes/font_size = 16
+text = "Mage"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SkillDescription" type="Control" parent="PauseMenu/SkillsMenuAlt"]
+anchors_preset = 0
+offset_left = 9.0
+offset_top = 24.0
+offset_right = 141.0
+offset_bottom = 192.0
+
+[node name="ActiveSkillsBackground" type="TextureRect" parent="PauseMenu/SkillsMenuAlt/SkillDescription"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("59_bf6pt")
+
+[node name="SkillDescriptionHeader" type="Control" parent="PauseMenu/SkillsMenuAlt/SkillDescription"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -45.0
+offset_top = -10.0
+offset_right = 45.0
+offset_bottom = 10.0
+grow_horizontal = 2
+
+[node name="SkillDescriptionBackground" type="TextureRect" parent="PauseMenu/SkillsMenuAlt/SkillDescription/SkillDescriptionHeader"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("62_t3x8x")
+
+[node name="SkillDescriptionLabel" type="Label" parent="PauseMenu/SkillsMenuAlt/SkillDescription/SkillDescriptionHeader"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -3.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_cnxmk")
+theme_override_font_sizes/font_size = 16
+text = "Description"
+label_settings = SubResource("LabelSettings_6dg48")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="SkillName" type="Label" parent="PauseMenu/SkillsMenuAlt/SkillDescription"]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 16.0
+offset_right = 123.0
+offset_bottom = 44.0
+theme = ExtResource("7_cnxmk")
+theme_override_font_sizes/font_size = 16
+text = "Slash"
+
+[node name="SkillDescriptionText" type="Label" parent="PauseMenu/SkillsMenuAlt/SkillDescription"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 48.0
+offset_right = 129.0
+offset_bottom = 104.0
+theme = ExtResource("7_cnxmk")
+theme_override_font_sizes/font_size = 8
+text = "Melee attack
+10 slash DMG"
+
+[node name="CharacterSkillButton3" type="TextureButton" parent="PauseMenu/SkillsMenuAlt/SkillDescription"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = 6.0
+offset_top = 14.0
+offset_right = 37.0
+offset_bottom = 45.0
+toggle_mode = true
+button_group = SubResource("ButtonGroup_3mc1x")
+texture_normal = SubResource("GradientTexture2D_bvfkt")
+texture_pressed = ExtResource("62_t3x8x")
+
+[node name="CharacterSkillRect" type="TextureRect" parent="PauseMenu/SkillsMenuAlt/SkillDescription/CharacterSkillButton3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.5
+offset_top = -11.5
+offset_right = 10.5
+offset_bottom = 10.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("115_igmfo")
+
+[node name="ActiveSkills" type="Control" parent="PauseMenu/SkillsMenuAlt"]
+anchors_preset = 0
+offset_left = 9.0
+offset_top = 200.0
+offset_right = 144.0
+offset_bottom = 342.0
+
+[node name="ActiveSkillsBackground" type="TextureRect" parent="PauseMenu/SkillsMenuAlt/ActiveSkills"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("59_bf6pt")
+
+[node name="ActiveSkillsHeader" type="Control" parent="PauseMenu/SkillsMenuAlt/ActiveSkills"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -45.0
+offset_top = -10.0
+offset_right = 45.0
+offset_bottom = 10.0
+grow_horizontal = 2
+
+[node name="ActiveSkillsBackground" type="TextureRect" parent="PauseMenu/SkillsMenuAlt/ActiveSkills/ActiveSkillsHeader"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("62_t3x8x")
+
+[node name="ActiveSkillsLabel" type="Label" parent="PauseMenu/SkillsMenuAlt/ActiveSkills/ActiveSkillsHeader"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_cnxmk")
+theme_override_font_sizes/font_size = 16
+text = "Active Skills"
+label_settings = SubResource("LabelSettings_pmwvf")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="CharacterSkillButton1" type="TextureButton" parent="PauseMenu/SkillsMenuAlt/ActiveSkills"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = 10.0
+offset_top = 14.0
+offset_right = 41.0
+offset_bottom = 45.0
+toggle_mode = true
+button_group = SubResource("ButtonGroup_3mc1x")
+texture_normal = SubResource("GradientTexture2D_bvfkt")
+texture_pressed = ExtResource("62_t3x8x")
+
+[node name="CharacterSkillRect" type="TextureRect" parent="PauseMenu/SkillsMenuAlt/ActiveSkills/CharacterSkillButton1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.5
+offset_top = -10.5
+offset_right = 11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("115_igmfo")
+
+[node name="CharacterSkillButton2" type="TextureButton" parent="PauseMenu/SkillsMenuAlt/ActiveSkills"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = 51.0
+offset_top = 15.0
+offset_right = 82.0
+offset_bottom = 46.0
+toggle_mode = true
+button_group = SubResource("ButtonGroup_3mc1x")
+texture_normal = SubResource("GradientTexture2D_bvfkt")
+texture_pressed = ExtResource("62_t3x8x")
+
+[node name="CharacterSkillRect" type="TextureRect" parent="PauseMenu/SkillsMenuAlt/ActiveSkills/CharacterSkillButton2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.5
+offset_top = -10.5
+offset_right = 11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("115_igmfo")
+
+[node name="CharacterSkillButton3" type="TextureButton" parent="PauseMenu/SkillsMenuAlt/ActiveSkills"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = 89.0
+offset_top = 16.0
+offset_right = 120.0
+offset_bottom = 47.0
+toggle_mode = true
+button_group = SubResource("ButtonGroup_3mc1x")
+texture_normal = SubResource("GradientTexture2D_bvfkt")
+texture_pressed = ExtResource("62_t3x8x")
+
+[node name="CharacterSkillRect" type="TextureRect" parent="PauseMenu/SkillsMenuAlt/ActiveSkills/CharacterSkillButton3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.5
+offset_top = -10.5
+offset_right = 11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("115_igmfo")
+
+[node name="CharacterSkillButton4" type="TextureButton" parent="PauseMenu/SkillsMenuAlt/ActiveSkills"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 0
+offset_left = 12.0
+offset_top = 58.0
+offset_right = 43.0
+offset_bottom = 89.0
+toggle_mode = true
+button_group = SubResource("ButtonGroup_3mc1x")
+texture_normal = SubResource("GradientTexture2D_bvfkt")
+texture_pressed = ExtResource("62_t3x8x")
+
+[node name="CharacterSkillRect" type="TextureRect" parent="PauseMenu/SkillsMenuAlt/ActiveSkills/CharacterSkillButton4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.5
+offset_top = -10.5
+offset_right = 11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("115_igmfo")
+
+[node name="ConfirmBox" type="Control" parent="PauseMenu/SkillsMenuAlt"]
+anchors_preset = 0
+offset_left = 153.0
+offset_top = 289.0
+offset_right = 625.0
+offset_bottom = 345.0
+
+[node name="ActiveSkillsBackground" type="TextureRect" parent="PauseMenu/SkillsMenuAlt/ConfirmBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("59_bf6pt")
+
+[node name="GetSkillButton" type="TextureButton" parent="PauseMenu/SkillsMenuAlt/ConfirmBox"]
+layout_mode = 0
+offset_left = 309.0
+offset_top = 9.0
+offset_right = 442.0
+offset_bottom = 44.0
+texture_normal = ExtResource("126_k78vc")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="GetSkillLabel" type="Label" parent="PauseMenu/SkillsMenuAlt/ConfirmBox/GetSkillButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Acquire"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextLabel" type="Label" parent="PauseMenu/SkillsMenuAlt/ConfirmBox"]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 15.0
+offset_right = 126.0
+offset_bottom = 38.0
+theme = ExtResource("7_cnxmk")
+theme_override_font_sizes/font_size = 16
+text = "Cost:"
+
+[node name="CostLabel" type="Label" parent="PauseMenu/SkillsMenuAlt/ConfirmBox"]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 16.0
+offset_right = 294.0
+offset_bottom = 44.0
+theme = ExtResource("7_cnxmk")
+theme_override_font_sizes/font_size = 16
+text = "200 points"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PauseMenu"]
 reset_on_save = false
@@ -5845,6 +6520,7 @@ libraries = {
 speed_scale = 1.1
 
 [node name="Control" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

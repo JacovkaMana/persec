@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bt0ci40i4p7jk"
-path="res://.godot/imported/Testchain2.png-0743adb4b6b4f3d3477514aa89e90381.ctex"
+uid="uid://b0c7jviw5lwgw"
+path="res://.godot/imported/SkilTreeSlotlSquare.png-d2f85d4f3cb14a121f8bcc066939c0d6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/UI/Testchain2.png"
-dest_files=["res://.godot/imported/Testchain2.png-0743adb4b6b4f3d3477514aa89e90381.ctex"]
+source_file="res://Art/UI/SkilTreeSlotlSquare.png"
+dest_files=["res://.godot/imported/SkilTreeSlotlSquare.png-d2f85d4f3cb14a121f8bcc066939c0d6.ctex"]
 
 [params]
 
