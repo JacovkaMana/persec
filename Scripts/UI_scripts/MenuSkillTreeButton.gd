@@ -1,10 +1,10 @@
-extends TextureButton
+extends TextureRect
 
 @export var SkillName: String
 @onready var SkillDescription = $"../../../../SkillDescription/SkillName"
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	self.connect("pressed", change_description)
+	self.get_child(0).connect("pressed", change_description)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

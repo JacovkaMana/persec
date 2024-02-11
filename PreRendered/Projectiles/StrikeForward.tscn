@@ -1,8 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://djoaiesde0wqm"]
+[gd_scene load_steps=17 format=3 uid="uid://djoaiesde0wqm"]
 
 [ext_resource type="Script" path="res://Scripts/Projectile.gd" id="1_dxb3w"]
 [ext_resource type="Texture2D" uid="uid://5tdgmlx4mu5c" path="res://Art/Masks/Strike_forward.png" id="2_ixrww"]
-[ext_resource type="Texture2D" uid="uid://bmw2s4ps8kfm8" path="res://Art/Textures/particle_examples/floaty_32.png" id="4_3waww"]
 [ext_resource type="Texture2D" uid="uid://2cp3s2mm2x5b" path="res://Art/Masks/Spear_mask.png" id="5_0juv5"]
 [ext_resource type="Texture2D" uid="uid://l72iu1ipn60t" path="res://Art/UI/HugeProbe.png" id="6_om2tb"]
 
@@ -56,6 +55,42 @@ tracks/3/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Particles:process_material:emission_shape_offset")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(3.32, 0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Particles:process_material:direction")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -10, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Line2D:points")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [PackedVector2Array(-38, -12)]
+}
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gjxtk"]
 radius = 3.5
@@ -63,6 +98,7 @@ radius = 3.5
 [sub_resource type="Animation" id="Animation_x1df3"]
 resource_name = "Start"
 length = 0.5
+step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -70,10 +106,10 @@ tracks/0/path = NodePath("Bullet:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.22, 0.24, 0.26),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [4, 3, 2, 1]
+"values": [5, 4, 3, 2, 1]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -113,27 +149,63 @@ tracks/3/keys = {
 }
 tracks/4/type = "value"
 tracks/4/imported = false
-tracks/4/enabled = true
+tracks/4/enabled = false
 tracks/4/path = NodePath("Particles:emitting")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.4),
+"times": PackedFloat32Array(0, 0.26),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
-tracks/5/enabled = true
+tracks/5/enabled = false
 tracks/5/path = NodePath("Particles:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.4),
+"times": PackedFloat32Array(0, 0.26),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Particles:process_material:emission_shape_offset")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.22, 0.24, 0.26),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(3.32, 0, 0), Vector3(-6.68, 31.375, 0), Vector3(-35.5, 31.375, 0), Vector3(-48.95, 31.375, 0), Vector3(-58.615, 31.375, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Particles:process_material:direction")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.22),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -10, 0), Vector3(10, -10, 0), Vector3(10, 0, 0)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Line2D:points")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.22, 0.24, 0.26, 0.3, 0.35, 0.4, 0.45, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(-38, -12), PackedVector2Array(-39, -11, -43, -32, -38, -43, -26, -55), PackedVector2Array(-39, -11, -43, -32, -38, -43, -26, -55, -12, -58, 5, -58), PackedVector2Array(-39, -11, -43, -32, -38, -43, -26, -55, -12, -58, 5, -58, 15, -58), PackedVector2Array(-39, -11, -43, -32, -38, -43, -26, -55, -12, -58, 5, -58, 15, -58, 26, -58), PackedVector2Array(-43, -32, -38, -43, -26, -55, -12, -58, 5, -58, 15, -58, 26, -58), PackedVector2Array(-38, -43, -26, -55, -12, -58, 5, -58, 15, -58, 26, -58), PackedVector2Array(-26, -55, -12, -58, 5, -58, 15, -58, 26, -58), PackedVector2Array(-12, -58, 5, -58, 15, -58, 26, -58), PackedVector2Array(5, -58, 15, -58, 26, -58)]
 }
 
 [sub_resource type="Animation" id="Animation_gx0sp"]
@@ -159,12 +231,12 @@ _data = {
 "delete": SubResource("Animation_gx0sp")
 }
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7kovn"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_husja"]
 blend_mode = 1
 particles_animation = true
-particles_anim_h_frames = 7
-particles_anim_v_frames = 7
-particles_anim_loop = false
+particles_anim_h_frames = 1
+particles_anim_v_frames = 6
+particles_anim_loop = true
 
 [sub_resource type="Gradient" id="Gradient_crfqd"]
 offsets = PackedFloat32Array(0.137652, 0.88664)
@@ -174,21 +246,16 @@ colors = PackedColorArray(0.44, 0.240827, 0.0132, 1, 0.88, 0.6336, 0.1408, 1)
 gradient = SubResource("Gradient_crfqd")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_iv13n"]
-emission_shape = 6
-emission_ring_axis = Vector3(0, -3, 1)
-emission_ring_height = 1.0
-emission_ring_radius = 4.0
-emission_ring_inner_radius = 4.0
-particle_flag_rotate_y = true
 particle_flag_disable_z = true
-direction = Vector3(0, -40, 0)
-spread = 180.0
-flatness = 0.56
+emission_shape_offset = Vector3(3.32, 0, 0)
+emission_shape = 3
+emission_box_extents = Vector3(11, 11.81, 1)
+direction = Vector3(0, -10, 0)
+spread = 0.0
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
 gravity = Vector3(0, 0, 0)
-initial_velocity_min = 40.0
-initial_velocity_max = 60.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
+attractor_interaction_enabled = false
 color_ramp = SubResource("GradientTexture1D_hlpu8")
 hue_variation_min = -0.01
 hue_variation_max = 0.01
@@ -197,7 +264,15 @@ turbulence_noise_speed = Vector3(0.4, 1, 0.4)
 turbulence_noise_speed_random = 0.24
 turbulence_influence_min = 1.0
 turbulence_influence_max = 1.0
-attractor_interaction_enabled = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w8ha2"]
+
+[sub_resource type="Curve" id="Curve_ijp0g"]
+_data = [Vector2(0, 0), 0.0, 0.845107, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_lxjxu"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [node name="Projectile" type="StaticBody2D"]
 z_index = 20
@@ -206,13 +281,30 @@ collision_layer = 24
 collision_mask = 24
 script = ExtResource("1_dxb3w")
 move_speed = 200.0
-always_show_particles = true
 pierce_throught = true
+flip_instead_of_rotate = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_y0yx3")
 }
+
+[node name="Particles" type="GPUParticles2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.352941)
+z_index = 4
+z_as_relative = false
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_husja")
+position = Vector2(-49, -20)
+rotation = -3.14159
+emitting = false
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_iv13n")
+texture = ExtResource("2_ixrww")
+lifetime = 0.1
+interpolate = false
+visibility_rect = Rect2(-242.172, -244.044, 484.904, 485.585)
 
 [node name="Bullet" type="Sprite2D" parent="."]
 self_modulate = Color(0.478431, 0.168627, 0, 1)
@@ -221,25 +313,7 @@ z_index = 4
 z_as_relative = false
 position = Vector2(0, -49)
 texture = ExtResource("2_ixrww")
-vframes = 5
-
-[node name="Particles" type="GPUParticles2D" parent="."]
-z_index = 4
-z_as_relative = false
-texture_filter = 1
-texture_repeat = 2
-material = SubResource("CanvasItemMaterial_7kovn")
-position = Vector2(0, -66)
-emitting = false
-amount = 40
-process_material = SubResource("ParticleProcessMaterial_iv13n")
-texture = ExtResource("4_3waww")
-lifetime = 0.5
-one_shot = true
-speed_scale = 2.0
-explosiveness = 1.0
-interpolate = false
-visibility_rect = Rect2(-226.097, -228.15, 452.912, 461.388)
+vframes = 6
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0, -60)
@@ -269,3 +343,10 @@ shadow_filter_smooth = 44.0
 shadow_item_cull_mask = 3
 texture = ExtResource("6_om2tb")
 texture_scale = 0.2
+
+[node name="Line2D" type="Line2D" parent="."]
+material = SubResource("ShaderMaterial_w8ha2")
+points = PackedVector2Array(-38, -12)
+width = 5.0
+width_curve = SubResource("Curve_ijp0g")
+gradient = SubResource("Gradient_lxjxu")

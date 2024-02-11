@@ -1,4 +1,4 @@
-[gd_scene load_steps=258 format=3 uid="uid://b7d15i5cwex1y"]
+[gd_scene load_steps=264 format=3 uid="uid://b7d15i5cwex1y"]
 
 [ext_resource type="Script" path="res://Scripts/Global/GlobalUI.gd" id="1_7pbd5"]
 [ext_resource type="Texture2D" uid="uid://d0g2mydsmvops" path="res://Art/Masks/Circle95.png" id="2_mrqlk"]
@@ -101,11 +101,16 @@
 [ext_resource type="Texture2D" uid="uid://cf4ln0lyvqoni" path="res://Art/UI/UI_OptionBackground__Hover.png" id="96_wjdwq"]
 [ext_resource type="Texture2D" uid="uid://bjgctcmwdgfi2" path="res://Art/UI/QuestButton.png" id="97_8juio"]
 [ext_resource type="Texture2D" uid="uid://bacaetveesl1q" path="res://Art/UI/QuestButton__Focus.png" id="98_jyp4w"]
-[ext_resource type="Texture2D" uid="uid://cehc4f3ddfrto" path="res://Art/UI/ExclamationMark_1.png" id="99_n640e"]
+[ext_resource type="Texture2D" uid="uid://ud38ovmb7o71" path="res://Art/UI/PauseMenu/QuestHeadInner.png" id="100_0mi1g"]
 [ext_resource type="Texture2D" uid="uid://c53udeq4dvj0n" path="res://Art/UI/QuestionMark.png" id="100_5m3ti"]
 [ext_resource type="Texture2D" uid="uid://dij1tqsvqnk42" path="res://Art/UI/Journal_Tab__Active.png" id="101_h0wl3"]
+[ext_resource type="Texture2D" uid="uid://qqy6tx6nvfkk" path="res://Art/UI/PauseMenu/QuestHeadBorder.png" id="101_n06jg"]
+[ext_resource type="Texture2D" uid="uid://b2sltvqhs8cn5" path="res://Art/UI/PauseMenu/QuestSingleInner.png" id="102_5k0ss"]
+[ext_resource type="Texture2D" uid="uid://ewgxpb751mpu" path="res://Art/UI/PauseMenu/QuestActiveInner.png" id="102_ty3ro"]
 [ext_resource type="Texture2D" uid="uid://lrk1mocsvbjq" path="res://Art/UI/Journal_Tab__Inactive.png" id="102_vjpr1"]
+[ext_resource type="Texture2D" uid="uid://cikpd5d0e6j28" path="res://Art/UI/PauseMenu/QuestSingleBorder.png" id="103_q3hwd"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/SkillContainer.gd" id="103_uohmd"]
+[ext_resource type="Texture2D" uid="uid://v7ufod4441i6" path="res://Art/UI/PauseMenu/QuestActiveBorder.png" id="103_w4fep"]
 [ext_resource type="Texture2D" uid="uid://cvqjk8rpglwpk" path="res://Art/UI/test_skilltree.png" id="104_dnsdu"]
 [ext_resource type="Texture2D" uid="uid://blflx073tr8sg" path="res://Art/UI/circle15.png" id="105_wr1ih"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/SkillAnimatedLine.gd" id="106_56okk"]
@@ -116,16 +121,15 @@
 [ext_resource type="Script" path="res://Scenes/Anim.gd" id="111_ctxxf"]
 [ext_resource type="Texture2D" uid="uid://27ha0akqqexa" path="res://Art/Animations/pipo-btleffect214_192.png" id="112_e6vge"]
 [ext_resource type="Shader" path="res://Art/Shaders/TimeStopShaderScript.gdshader" id="113_ceiu3"]
-[ext_resource type="Script" path="res://Scripts/UI_scripts/MenuSkillTreeButton.gd" id="114_a42eh"]
 [ext_resource type="Shader" path="res://Art/Shaders/CameraShader.gdshader" id="114_fc7c8"]
 [ext_resource type="Texture2D" uid="uid://ckpar51qny02r" path="res://Art/Icons/Skills/single_27.png" id="115_igmfo"]
 [ext_resource type="Texture2D" uid="uid://qp4uk0ea21xu" path="res://Art/Icons/Skills/single_41.png" id="115_o7fy4"]
 [ext_resource type="Texture2D" uid="uid://de1sd777km6hb" path="res://Art/Icons/Skills/single_43.png" id="116_b5nwl"]
 [ext_resource type="Texture2D" uid="uid://due63yxhqbtnc" path="res://Art/Icons/Skills/single_36.png" id="117_6twaw"]
 [ext_resource type="Texture2D" uid="uid://4b25sf7xi2xi" path="res://Art/Icons/Skills/single_78.png" id="118_q3l7i"]
+[ext_resource type="PackedScene" uid="uid://dn38qi7yepuy0" path="res://Scenes/Menu/SkilTreeButton.tscn" id="119_mb6q1"]
 [ext_resource type="Texture2D" uid="uid://cedxf3fhx3m2b" path="res://Art/Icons/Skills/single_91.png" id="119_re1pl"]
 [ext_resource type="Texture2D" uid="uid://1wlflxkf18k0" path="res://Art/Icons/Skills/single_79.png" id="120_ig8du"]
-[ext_resource type="Texture2D" uid="uid://ddo6wgug2wvn6" path="res://Art/Icons/Skills/single_37.png" id="121_kaos6"]
 [ext_resource type="Texture2D" uid="uid://c8u62ufv7pdad" path="res://Art/Icons/Skills/single_45.png" id="122_kpoi3"]
 [ext_resource type="Texture2D" uid="uid://b0c7jviw5lwgw" path="res://Art/UI/SkilTreeSlotlSquare.png" id="122_kw1oo"]
 [ext_resource type="Texture2D" uid="uid://c3b6w7v3d3icn" path="res://Art/Icons/Skills/single_92.png" id="123_gsitb"]
@@ -916,9 +920,17 @@ texture = ExtResource("96_wjdwq")
 line_spacing = 0.0
 font = ExtResource("19_b0eix")
 
+[sub_resource type="Gradient" id="Gradient_vajnq"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rdxjb"]
+gradient = SubResource("Gradient_vajnq")
+width = 81
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_khpm7"]
 content_margin_left = 7.0
-texture = ExtResource("97_8juio")
+texture = ExtResource("100_0mi1g")
 modulate_color = Color(0.160784, 0.160784, 0.160784, 0.721569)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ymnkd"]
@@ -932,6 +944,7 @@ texture = ExtResource("98_jyp4w")
 
 [sub_resource type="LabelSettings" id="LabelSettings_cuem3"]
 font = ExtResource("19_b0eix")
+font_size = 8
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7qtyr"]
 content_margin_left = 7.0
@@ -1177,10 +1190,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 62720.0
-offset_top = 35450.0
-offset_right = 63360.0
-offset_bottom = 35468.0
+offset_left = 65280.0
+offset_top = 36890.0
+offset_right = 65920.0
+offset_bottom = 36908.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(320, 9)
@@ -1410,6 +1423,7 @@ libraries = {
 }
 
 [node name="Journal" type="Control" parent="."]
+visible = false
 custom_minimum_size = Vector2(106, 200)
 layout_mode = 3
 anchors_preset = 0
@@ -4790,6 +4804,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Dialogue" type="Control" parent="UI"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 640.0
@@ -4998,7 +5013,6 @@ texture = SubResource("GradientTexture2D_fvp6c")
 expand_mode = 2
 
 [node name="MenuContent" type="Control" parent="PauseMenu"]
-visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -5303,6 +5317,7 @@ offset_bottom = 22.0
 texture = ExtResource("31_pfv51")
 
 [node name="HideableContent" type="Control" parent="PauseMenu/MenuContent"]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -5520,19 +5535,19 @@ label_settings = SubResource("LabelSettings_ohj1x")
 horizontal_alignment = 1
 
 [node name="JournalContent" type="Control" parent="PauseMenu/MenuContent"]
-visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="JournalBackground" type="TextureRect" parent="PauseMenu/MenuContent/JournalContent"]
-modulate = Color(0.607843, 0.619608, 0.74902, 0.623529)
+visible = false
+modulate = Color(0.0588235, 0.0705882, 0.141176, 0.780392)
 layout_mode = 2
 offset_left = 31.0
 offset_top = 74.0
 offset_right = 259.0
 offset_bottom = 294.0
-texture = ExtResource("94_fokhw")
+texture = SubResource("GradientTexture1D_rdxjb")
 
 [node name="Journal" type="VBoxContainer" parent="PauseMenu/MenuContent/JournalContent"]
 layout_mode = 0
@@ -5540,31 +5555,278 @@ offset_left = 31.0
 offset_top = 74.0
 offset_right = 258.0
 offset_bottom = 294.0
-theme_override_constants/separation = 1
+theme_override_constants/separation = 71
 
 [node name="QuestBlock" type="Control" parent="PauseMenu/MenuContent/JournalContent/Journal"]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
+[node name="Inner" type="TextureRect" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock"]
+modulate = Color(1, 1, 1, 0.784314)
+layout_mode = 0
+offset_right = 227.0
+offset_bottom = 25.0
+texture = ExtResource("100_0mi1g")
+
+[node name="Border" type="TextureRect" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock"]
+layout_mode = 0
+offset_right = 227.0
+offset_bottom = 25.0
+texture = ExtResource("101_n06jg")
+
 [node name="Button" type="Button" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock"]
 layout_mode = 0
 offset_right = 225.0
 offset_bottom = 25.0
-theme_override_styles/normal = SubResource("StyleBoxTexture_khpm7")
-theme_override_styles/hover = SubResource("StyleBoxTexture_ymnkd")
-theme_override_styles/focus = SubResource("StyleBoxTexture_3j25y")
-icon = ExtResource("99_n640e")
+theme = ExtResource("7_cnxmk")
 
-[node name="Label" type="Label" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock"]
+[node name="Label" type="RichTextLabel" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock"]
 layout_mode = 0
-offset_left = 11.0
+offset_left = 1.0
+offset_top = 5.0
+offset_right = 226.0
+offset_bottom = 20.0
+theme = ExtResource("7_cnxmk")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[center]Primary missions"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock"]
+layout_mode = 0
+offset_top = 24.0
+offset_right = 225.0
+offset_bottom = 64.0
+theme_override_constants/separation = -3
+
+[node name="Quest" type="Control" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock/VBoxContainer/Quest"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_right = 2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0588235, 0.0705882, 0.141176, 0.784314)
+
+[node name="Inner" type="TextureRect" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock/VBoxContainer/Quest"]
+modulate = Color(1, 1, 1, 0.784314)
 offset_right = 227.0
-offset_bottom = 31.0
-text = "Primary mission"
-label_settings = SubResource("LabelSettings_cuem3")
-horizontal_alignment = 1
+offset_bottom = 25.0
+texture = ExtResource("102_ty3ro")
+
+[node name="Border" type="TextureRect" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock/VBoxContainer/Quest"]
+offset_right = 227.0
+offset_bottom = 25.0
+texture = ExtResource("103_w4fep")
+
+[node name="Label" type="RichTextLabel" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock/VBoxContainer/Quest"]
+offset_left = 3.0
+offset_top = 5.0
+offset_right = 228.0
+offset_bottom = 20.0
+theme = ExtResource("7_cnxmk")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "First mission"
+
+[node name="Quest2" type="Control" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock/VBoxContainer/Quest2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_right = 2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0588235, 0.0705882, 0.141176, 0.784314)
+
+[node name="Inner" type="TextureRect" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock/VBoxContainer/Quest2"]
+modulate = Color(1, 1, 1, 0.784314)
+offset_right = 227.0
+offset_bottom = 25.0
+texture = ExtResource("102_5k0ss")
+
+[node name="Border" type="TextureRect" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock/VBoxContainer/Quest2"]
+offset_right = 227.0
+offset_bottom = 25.0
+texture = ExtResource("103_q3hwd")
+
+[node name="Label" type="RichTextLabel" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock/VBoxContainer/Quest2"]
+offset_left = 3.0
+offset_top = 5.0
+offset_right = 228.0
+offset_bottom = 20.0
+theme = ExtResource("7_cnxmk")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "Second mission"
+
+[node name="Quest3" type="Control" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock/VBoxContainer/Quest3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_right = 2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0588235, 0.0705882, 0.141176, 0.784314)
+
+[node name="Inner" type="TextureRect" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock/VBoxContainer/Quest3"]
+modulate = Color(1, 1, 1, 0.784314)
+offset_right = 227.0
+offset_bottom = 25.0
+texture = ExtResource("102_5k0ss")
+
+[node name="Border" type="TextureRect" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock/VBoxContainer/Quest3"]
+offset_right = 227.0
+offset_bottom = 25.0
+texture = ExtResource("103_q3hwd")
+
+[node name="Label" type="RichTextLabel" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock/VBoxContainer/Quest3"]
+offset_left = 3.0
+offset_top = 5.0
+offset_right = 228.0
+offset_bottom = 20.0
+theme = ExtResource("7_cnxmk")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "Thrid mission"
+
+[node name="QuestBlock3" type="Control" parent="PauseMenu/MenuContent/JournalContent/Journal"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="Inner" type="TextureRect" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock3"]
+modulate = Color(1, 1, 1, 0.784314)
+layout_mode = 0
+offset_right = 227.0
+offset_bottom = 25.0
+texture = ExtResource("100_0mi1g")
+
+[node name="Border" type="TextureRect" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock3"]
+layout_mode = 0
+offset_right = 227.0
+offset_bottom = 25.0
+texture = ExtResource("101_n06jg")
+
+[node name="Button" type="Button" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock3"]
+layout_mode = 0
+offset_right = 225.0
+offset_bottom = 25.0
+theme = ExtResource("7_cnxmk")
+
+[node name="Label" type="RichTextLabel" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock3"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 5.0
+offset_right = 226.0
+offset_bottom = 20.0
+theme = ExtResource("7_cnxmk")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[center]Primary missions"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock3"]
+layout_mode = 0
+offset_top = 24.0
+offset_right = 225.0
+offset_bottom = 64.0
+theme_override_constants/separation = -3
+
+[node name="Quest" type="Control" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock3/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="Inner" type="TextureRect" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock3/VBoxContainer/Quest"]
+modulate = Color(1, 1, 1, 0.784314)
+offset_right = 227.0
+offset_bottom = 25.0
+texture = ExtResource("102_ty3ro")
+
+[node name="Border" type="TextureRect" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock3/VBoxContainer/Quest"]
+offset_right = 227.0
+offset_bottom = 25.0
+texture = ExtResource("103_w4fep")
+
+[node name="Label" type="RichTextLabel" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock3/VBoxContainer/Quest"]
+offset_left = 3.0
+offset_top = 5.0
+offset_right = 228.0
+offset_bottom = 20.0
+theme = ExtResource("7_cnxmk")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "First mission"
+
+[node name="Quest2" type="Control" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock3/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="Inner" type="TextureRect" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock3/VBoxContainer/Quest2"]
+modulate = Color(1, 1, 1, 0.784314)
+offset_right = 227.0
+offset_bottom = 25.0
+texture = ExtResource("102_5k0ss")
+
+[node name="Border" type="TextureRect" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock3/VBoxContainer/Quest2"]
+offset_right = 227.0
+offset_bottom = 25.0
+texture = ExtResource("103_q3hwd")
+
+[node name="Label" type="RichTextLabel" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock3/VBoxContainer/Quest2"]
+offset_left = 3.0
+offset_top = 5.0
+offset_right = 228.0
+offset_bottom = 20.0
+theme = ExtResource("7_cnxmk")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "Second mission"
+
+[node name="Quest3" type="Control" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock3/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="Inner" type="TextureRect" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock3/VBoxContainer/Quest3"]
+modulate = Color(1, 1, 1, 0.784314)
+offset_right = 227.0
+offset_bottom = 25.0
+texture = ExtResource("102_5k0ss")
+
+[node name="Border" type="TextureRect" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock3/VBoxContainer/Quest3"]
+offset_right = 227.0
+offset_bottom = 25.0
+texture = ExtResource("103_q3hwd")
+
+[node name="Label" type="RichTextLabel" parent="PauseMenu/MenuContent/JournalContent/Journal/QuestBlock3/VBoxContainer/Quest3"]
+offset_left = 3.0
+offset_top = 5.0
+offset_right = 228.0
+offset_bottom = 20.0
+theme = ExtResource("7_cnxmk")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "Thrid mission"
 
 [node name="QuestBlock2" type="Control" parent="PauseMenu/MenuContent/JournalContent/Journal"]
+visible = false
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
@@ -5863,6 +6125,7 @@ text = "x1"
 label_settings = SubResource("LabelSettings_01sfh")
 
 [node name="SkillsMenuAlt" type="Control" parent="PauseMenu"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -6024,29 +6287,12 @@ grow_vertical = 2
 texture = ExtResource("120_ig8du")
 expand_mode = 1
 
-[node name="MenuSkillTreeButton7" type="TextureButton" parent="PauseMenu/SkillsMenuAlt/SkillTree/SkillsDisplay/MageSkillsContainer"]
+[node name="MenuSkillTreeButton7" parent="PauseMenu/SkillsMenuAlt/SkillTree/SkillsDisplay/MageSkillsContainer" instance=ExtResource("119_mb6q1")]
 layout_mode = 0
-offset_left = 254.0
+offset_left = 255.0
 offset_top = 108.0
-offset_right = 285.0
+offset_right = 286.0
 offset_bottom = 139.0
-texture_normal = ExtResource("76_mnlpv")
-
-[node name="SkillRect" type="TextureRect" parent="PauseMenu/SkillsMenuAlt/SkillTree/SkillsDisplay/MageSkillsContainer/MenuSkillTreeButton7"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -9.0
-offset_top = -9.0
-offset_right = 9.0
-offset_bottom = 9.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("121_kaos6")
-expand_mode = 1
 
 [node name="MenuSkillTreeButton8" type="TextureButton" parent="PauseMenu/SkillsMenuAlt/SkillTree/SkillsDisplay/MageSkillsContainer"]
 layout_mode = 0
@@ -6104,8 +6350,6 @@ offset_right = 245.0
 offset_bottom = 146.0
 rotation = -0.785398
 texture_normal = ExtResource("122_kw1oo")
-script = ExtResource("114_a42eh")
-SkillName = "fireball"
 
 [node name="SkillRect" type="TextureRect" parent="PauseMenu/SkillsMenuAlt/SkillTree/SkillsDisplay/MageSkillsContainer/MenuSkillTreeButton"]
 layout_mode = 1

@@ -23,6 +23,7 @@ var animation_tree: AnimationTree = null
 @export var magic: bool = false
 @export var always_show_particles: bool = false
 @export var pierce_throught: bool = false
+@export var flip_instead_of_rotate: bool = false
 var projectile_owner = null
 var hitboxes_hit = []
 var skill = null

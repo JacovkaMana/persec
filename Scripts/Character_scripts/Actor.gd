@@ -163,6 +163,7 @@ func shoot_projectile(skill: Skill, at: CharacterBody2D = null) -> void:
 		'Projectile':
 			#var bullet = proj.instantiate()
 			var bullet_rotation
+
 			if (at):
 				bullet_rotation = ( at.global_position - self.global_position ).normalized()
 			else:
@@ -186,7 +187,13 @@ func shoot_projectile(skill: Skill, at: CharacterBody2D = null) -> void:
 			
 			bullet.change_sprite(damage_type, skill_type)		
 			bullet.global_position = self.global_position
+			
+			if bullet.flip_instead_of_rotate:
+				if bullet_rotation.x < 0:
+					bullet.sprite.flip_h = not bullet.sprite.flip_h
+					
 			bullet.rotation = bullet_rotation.angle() + PI/2
+			
 			if (bullet.moving_projectile):
 				bullet.shoot(bullet_rotation, true, self)
 			else:
